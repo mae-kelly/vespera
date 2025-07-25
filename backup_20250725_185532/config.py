@@ -64,31 +64,3 @@ def validate_config():
 GPU_AVAILABLE = setup_gpu_fallback()
 
 print(f"✅ Config loaded - Mode: {MODE}, GPU: {GPU_AVAILABLE}, Assets: {ASSETS}")
-
-# macOS/Apple Silicon detection
-import platform
-
-def setup_macos_compatibility():
-    """Setup macOS and Apple Silicon compatibility"""
-    system = platform.system()
-    machine = platform.machine()
-    
-    if system == "Darwin":  # macOS
-        print(f"🍎 macOS detected: {platform.mac_ver()[0]} on {machine}")
-        
-        if machine == "arm64":  # Apple Silicon
-            print("🚀 Apple Silicon detected - enabling MPS acceleration")
-            if torch.backends.mps.is_available() and torch.backends.mps.is_built():
-                print("✅ MPS backend available for GPU acceleration")
-                return True
-            else:
-                print("⚠️ MPS not available, using CPU")
-                return False
-        else:  # Intel Mac
-            print("💻 Intel Mac detected")
-            return setup_gpu_fallback()  # Use existing GPU detection
-    else:
-        return setup_gpu_fallback()  # Use existing GPU detection
-
-# Override GPU detection for macOS
-MACOS_COMPATIBLE = setup_macos_compatibility()

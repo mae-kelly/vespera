@@ -73,7 +73,7 @@ echo "📊 Python PID: $PYTHON_PID"
 echo "⚡ Rust PID: $RUST_PID"
 echo "📄 Logs: $LOG_FILE"
 echo ""
-echo "🚀 System Live"
+echo "🚀 System Ready"
 echo ""
 
 HEALTH_CHECK_INTERVAL=30
