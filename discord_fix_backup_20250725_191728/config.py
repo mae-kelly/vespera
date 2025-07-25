@@ -2,7 +2,7 @@ import os
 import torch
 
 # PRODUCTION CONFIGURATION - NO SIMULATION MODE
-LIVE_MODE = True  # ALWAYS live mode for production
+LIVE_MODE = False # ALWAYS live mode for production
 ASSETS = ["BTC", "ETH", "SOL"]
 
 # Trading parameters for REAL money
@@ -19,9 +19,9 @@ OKX_API_LIMITS = {
     "max_position_size": 50000  # USD
 }
 
-# Discord configuration (BETTER than Telegram!)
-DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
-DISCORD_USER_ID = os.getenv("DISCORD_USER_ID")  # Optional for mentions
+# Telegram configuration for REAL alerts
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
 # GPU detection with fallback
 def setup_gpu_fallback():
@@ -54,7 +54,7 @@ def validate_config():
         errors.append("ASSETS list cannot be empty")
     
     # Check for required environment variables
-    required_env = ["OKX_API_KEY", "OKX_SECRET_KEY", "OKX_PASSPHRASE", "DISCORD_WEBHOOK_URL"]
+    required_env = ["OKX_API_KEY", "OKX_SECRET_KEY", "OKX_PASSPHRASE"]
     for env_var in required_env:
         if not os.getenv(env_var):
             errors.append(f"Missing required environment variable: {env_var}")

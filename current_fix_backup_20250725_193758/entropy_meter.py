@@ -3,7 +3,7 @@ import logging
 from typing import Dict, List
 from collections import deque
 import torch
-import cupy_fallback as cupy_fallback as cp
+import cupy as cp
 import signal_engine
 import config
 

@@ -3,7 +3,7 @@ import requests
 import time
 from typing import Dict, List
 import torch
-import cupy_fallback as cupy_fallback as cp
+import cupy as cp
 import config
 
 def get_btc_dominance() -> float:

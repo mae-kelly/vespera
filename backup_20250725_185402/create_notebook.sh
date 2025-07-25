@@ -1458,7 +1458,7 @@ import os
 import torch
 
 # Core configuration
-LIVE_MODE = True  # Can be overridden by command line
+LIVE_MODE = False  # Can be overridden by command line
 MODE = "dry"  # Will be set by main.py
 ASSETS = ["BTC", "ETH", "SOL"]
 

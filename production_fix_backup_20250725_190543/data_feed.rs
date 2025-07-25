@@ -17,14 +17,27 @@ pub struct TickData {
 pub struct DataFeed {
     tick_data: Arc<Mutex<HashMap<String, TickData>>>,
     position_data: Arc<Mutex<HashMap<String, Value>>>,
+    mode: String,
+    ws_url: String,
     is_running: Arc<Mutex<bool>>,
 }
 
 impl DataFeed {
     pub async fn new() -> Result<Self, Box<dyn std::error::Error + Send + Sync>> {
+        let mode = std::env::var("MODE").unwrap_or_else(|_| "dry".to_string());
+        let testnet = std::env::var("OKX_TESTNET").unwrap_or_else(|_| "true".to_string()) == "true";
+        
+        let ws_url = if testnet {
+            "wss://ws.okx.com:8443/ws/v5/public".to_string()
+        } else {
+            "wss://ws.okx.com:8443/ws/v5/public".to_string()
+        };
+        
         Ok(DataFeed {
             tick_data: Arc::new(Mutex::new(HashMap::new())),
             position_data: Arc::new(Mutex::new(HashMap::new())),
+            mode,
+            ws_url,
             is_running: Arc::new(Mutex::new(false)),
         })
     }
@@ -37,48 +50,94 @@ impl DataFeed {
         *is_running = true;
         drop(is_running);
         
-        // ALWAYS use real WebSocket - no simulation mode
-        self.start_real_websocket().await?;
+        if self.mode == "dry" {
+            self.start_simulation().await?;
+        } else {
+            self.start_websocket().await?;
+        }
         
         Ok(())
     }
     
-    async fn start_real_websocket(&self) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+    async fn start_simulation(&self) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
         let tick_data = Arc::clone(&self.tick_data);
-        let position_data = Arc::clone(&self.position_data);
         let is_running = Arc::clone(&self.is_running);
         
         tokio::spawn(async move {
+            let mut base_prices = HashMap::new();
+            base_prices.insert("BTC".to_string(), 45000.0);
+            base_prices.insert("ETH".to_string(), 2500.0);
+            base_prices.insert("SOL".to_string(), 100.0);
+            
             while *is_running.lock().unwrap() {
-                match Self::real_websocket_connection(&tick_data, &position_data).await {
+                let current_time = SystemTime::now()
+                    .duration_since(UNIX_EPOCH)
+                    .unwrap()
+                    .as_secs();
+                
+                for (symbol, &base_price) in &base_prices {
+                    let volatility = match symbol.as_str() {
+                        "BTC" => 0.002,
+                        "ETH" => 0.003,
+                        "SOL" => 0.005,
+                        _ => 0.002,
+                    };
+                    
+                    let noise: f64 = rand::random::<f64>() * 2.0 - 1.0;
+                    let price = base_price * (1.0 + noise * volatility);
+                    let volume = 1000000.0 + (rand::random::<f64>() * 500000.0);
+                    
+                    let tick = TickData {
+                        symbol: symbol.clone(),
+                        price,
+                        volume,
+                        timestamp: current_time,
+                    };
+                    
+                    tick_data.lock().unwrap().insert(symbol.clone(), tick);
+                }
+                
+                tokio::time::sleep(tokio::time::Duration::from_secs(1)).await;
+            }
+        });
+        
+        log::info!("Simulation data feed started");
+        Ok(())
+    }
+    
+    async fn start_websocket(&self) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+        let tick_data = Arc::clone(&self.tick_data);
+        let position_data = Arc::clone(&self.position_data);
+        let is_running = Arc::clone(&self.is_running);
+        let ws_url = self.ws_url.clone();
+        
+        tokio::spawn(async move {
+            while *is_running.lock().unwrap() {
+                match Self::websocket_connection(&ws_url, &tick_data, &position_data).await {
                     Ok(_) => {
-                        log::info!("Real WebSocket connection ended normally");
+                        log::info!("WebSocket connection ended normally");
                     }
                     Err(e) => {
-                        log::error!("Real WebSocket error: {}", e);
-                        log::info!("Reconnecting to real data feed in 5 seconds...");
+                        log::error!("WebSocket error: {}", e);
                         tokio::time::sleep(tokio::time::Duration::from_secs(5)).await;
                     }
                 }
             }
         });
         
-        log::info!("REAL market data feed started");
+        log::info!("WebSocket data feed started");
         Ok(())
     }
     
-    async fn real_websocket_connection(
+    async fn websocket_connection(
+        ws_url: &str,
         tick_data: &Arc<Mutex<HashMap<String, TickData>>>,
         position_data: &Arc<Mutex<HashMap<String, Value>>>,
     ) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
         
-        // Use OKX REAL WebSocket
-        let ws_url = "wss://ws.okx.com:8443/ws/v5/public";
-        
         let (ws_stream, _) = connect_async(ws_url).await?;
         let (mut write, mut read) = ws_stream.split();
         
-        // Subscribe to REAL market data
         let subscribe_msg = json!({
             "op": "subscribe",
             "args": [
@@ -89,17 +148,16 @@ impl DataFeed {
         });
         
         write.send(Message::Text(subscribe_msg.to_string())).await?;
-        log::info!("Subscribed to REAL OKX market data");
         
         while let Some(message) = read.next().await {
             match message? {
                 Message::Text(text) => {
                     if let Ok(data) = serde_json::from_str::<Value>(&text) {
-                        Self::process_real_market_data(&data, tick_data, position_data).await?;
+                        Self::process_websocket_message(&data, tick_data, position_data).await?;
                     }
                 }
                 Message::Close(_) => {
-                    log::info!("Real WebSocket connection closed");
+                    log::info!("WebSocket connection closed");
                     break;
                 }
                 _ => {}
@@ -109,7 +167,7 @@ impl DataFeed {
         Ok(())
     }
     
-    async fn process_real_market_data(
+    async fn process_websocket_message(
         data: &Value,
         tick_data: &Arc<Mutex<HashMap<String, TickData>>>,
         _position_data: &Arc<Mutex<HashMap<String, Value>>>,
@@ -131,7 +189,6 @@ impl DataFeed {
                         };
                         
                         tick_data.lock().unwrap().insert(symbol.to_string(), tick);
-                        log::debug!("Real price update: {} = ${:.2}", symbol, last_price);
                     }
                 }
             }
@@ -159,6 +216,34 @@ impl DataFeed {
             .collect()
     }
     
+    pub async fn monitor_positions(&self, positions: &[Value]) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+        for position in positions {
+            if let Some(asset) = position.get("asset").and_then(|v| v.as_str()) {
+                if let Some(current_price) = self.get_current_price(asset) {
+                    let entry_price = position.get("entry_price").and_then(|v| v.as_f64()).unwrap_or(0.0);
+                    let quantity = position.get("quantity").and_then(|v| v.as_f64()).unwrap_or(0.0);
+                    
+                    let unrealized_pnl = if entry_price > 0.0 {
+                        (entry_price - current_price) * quantity
+                    } else {
+                        0.0
+                    };
+                    
+                    let position_update = json!({
+                        "asset": asset,
+                        "current_price": current_price,
+                        "unrealized_pnl": unrealized_pnl,
+                        "timestamp": SystemTime::now().duration_since(UNIX_EPOCH)?.as_secs()
+                    });
+                    
+                    self.position_data.lock().unwrap().insert(asset.to_string(), position_update);
+                }
+            }
+        }
+        
+        Ok(())
+    }
+    
     pub async fn write_fills_to_file(&self, fill_data: &Value) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
         let fills_content = std::fs::read_to_string("/tmp/fills.json")
             .unwrap_or_else(|_| "[]".to_string());
@@ -176,12 +261,12 @@ impl DataFeed {
         
         std::fs::write("/tmp/fills.json", serde_json::to_string_pretty(&fills_array)?)?;
         
-        log::info!("REAL fill data written: {}", fill_data.get("asset").and_then(|v| v.as_str()).unwrap_or("unknown"));
+        log::info!("Fill data written to file: {}", fill_data.get("asset").and_then(|v| v.as_str()).unwrap_or("unknown"));
         Ok(())
     }
     
     pub fn stop(&self) {
         *self.is_running.lock().unwrap() = false;
-        log::info!("Real data feed stopped");
+        log::info!("Data feed stopped");
     }
 }

@@ -12,7 +12,7 @@ from typing import Dict, List
 import argparse
 
 import torch
-import cupy_fallback as cupy_fallback as cp
+import cupy as cp
 
 import signal_engine
 import entropy_meter

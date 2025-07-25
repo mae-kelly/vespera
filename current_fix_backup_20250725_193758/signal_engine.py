@@ -6,7 +6,7 @@ import json
 import threading
 from collections import deque
 import torch
-import cupy_fallback as cupy_fallback as cp
+import cupy as cp
 import config
 import requests
 
