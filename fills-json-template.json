@@ -1,0 +1,30 @@
+[
+    {
+      "timestamp": 1703875260,
+      "asset": "BTC",
+      "side": "sell",
+      "entry_price": 44850.00,
+      "quantity": 0.0223,
+      "confidence": 0.85,
+      "mode": "dry",
+      "status": "simulated_fill",
+      "order_id": "sim_a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+      "stop_loss": 45523.75,
+      "take_profit": 44177.25,
+      "slippage": 4.485
+    },
+    {
+      "timestamp": 1703875320,
+      "asset": "ETH", 
+      "side": "sell",
+      "entry_price": 2485.50,
+      "quantity": 0.4019,
+      "confidence": 0.72,
+      "mode": "dry",
+      "status": "simulated_fill",
+      "order_id": "sim_b2c3d4e5-f6g7-8901-bcde-f23456789012",
+      "stop_loss": 2522.79,
+      "take_profit": 2448.19,
+      "slippage": 0.2486
+    }
+  ]
