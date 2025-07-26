@@ -1,0 +1,92 @@
+{
+  "wallets": [
+    {
+      "address": "0x8ba1f109551bD432803012645Hac136c22C85B",
+      "avg_multiplier": 127.5,
+      "avg_hold_time": 4200,
+      "trades_per_day": 3.2,
+      "success_rate": 0.89,
+      "total_profits_eth": 245.7,
+      "largest_win_multiplier": 450.0,
+      "risk_score": 0.82
+    },
+    {
+      "address": "0x3cd751E6b0078be393132286c442345e5DC49699",
+      "avg_multiplier": 89.3,
+      "avg_hold_time": 7800,
+      "trades_per_day": 1.8,
+      "success_rate": 0.94,
+      "total_profits_eth": 189.2,
+      "largest_win_multiplier": 320.0,
+      "risk_score": 0.91
+    },
+    {
+      "address": "0x47ac0Fb4F2D84898e4D9E7b4DaB3C24507a6D503",
+      "avg_multiplier": 156.8,
+      "avg_hold_time": 2100,
+      "trades_per_day": 5.7,
+      "success_rate": 0.76,
+      "total_profits_eth": 312.4,
+      "largest_win_multiplier": 890.0,
+      "risk_score": 0.73
+    },
+    {
+      "address": "0xF977814e90dA44bFA03b6295A0616a897441aceC",
+      "avg_multiplier": 203.2,
+      "avg_hold_time": 1800,
+      "trades_per_day": 8.1,
+      "success_rate": 0.68,
+      "total_profits_eth": 456.8,
+      "largest_win_multiplier": 1200.0,
+      "risk_score": 0.65
+    },
+    {
+      "address": "0x28C6c06298d514Db089934071355E5743bf21d60",
+      "avg_multiplier": 78.9,
+      "avg_hold_time": 9600,
+      "trades_per_day": 1.2,
+      "success_rate": 0.97,
+      "total_profits_eth": 167.3,
+      "largest_win_multiplier": 180.0,
+      "risk_score": 0.96
+    },
+    {
+      "address": "0x220866B1A2219f40e72f5c628B65D54268cA3A9D",
+      "avg_multiplier": 298.7,
+      "avg_hold_time": 900,
+      "trades_per_day": 12.4,
+      "success_rate": 0.61,
+      "total_profits_eth": 723.1,
+      "largest_win_multiplier": 2100.0,
+      "risk_score": 0.58
+    },
+    {
+      "address": "0x5041ed759Dd4aFc3a72b8192C143F72f4724081A",
+      "avg_multiplier": 67.4,
+      "avg_hold_time": 14400,
+      "trades_per_day": 0.8,
+      "success_rate": 0.98,
+      "total_profits_eth": 134.7,
+      "largest_win_multiplier": 120.0,
+      "risk_score": 0.99
+    },
+    {
+      "address": "0x6262998Ced04146cA2c10db9e13b8D2AFCF17E91",
+      "avg_multiplier": 189.6,
+      "avg_hold_time": 3600,
+      "trades_per_day": 4.3,
+      "success_rate": 0.84,
+      "total_profits_eth": 387.2,
+      "largest_win_multiplier": 670.0,
+      "risk_score": 0.81
+    }
+  ],
+  "metadata": {
+    "last_updated": 1703891200,
+    "data_source": "ethereum_mainnet",
+    "min_success_rate": 0.60,
+    "tracking_period_days": 30,
+    "total_wallets_analyzed": 2847,
+    "selected_wallets": 8
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "a1b2c3d4e5f6789a": "uniswap_v2_pair",
+  "b2c3d4e5f6789ab1": "standard_erc20",
+  "c3d4e5f6789ab1b2": "deflationary_token",
+  "d4e5f6789ab1b2c3": "liquidity_locker"
+}
