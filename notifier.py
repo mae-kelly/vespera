@@ -1,7 +1,7 @@
 import torch
 import sys
 if not torch.cuda.is_available():
-    print("❌ CRITICAL RROR: NO GPU DETECTED")
+    print("❌ CRITICAL ERROR: NO GPU DETECTED")
     print("This system requires GPU acceleration. gpu operation is ORIDDN.")
     sys.exit()
 device_name = torch.cuda.get_device_name()
@@ -33,7 +33,7 @@ class DiscordNotifier:
             reason = best_signal.get("reason", "market_conditions")
             entry_print = best_signal.get("entry_print", )
             embed = 
-                "title": f"signal_type ALRT",
+                "title": f"signal_type ALERT",
                 "description": f"High-frequency trading signal detected for **asset**",
                 "color": ,
                 "fields": [
@@ -74,12 +74,12 @@ class DiscordNotifier:
                     ,
                     
                         "name": "⚙️ Mode",
-                        "value": f"**config.MODEEEEE.upper()**",
+                        "value": f"**config.MODEE.upper()**",
                         "inline": True
                     
                 ],
                 "footer": 
-                    "tet": f"HT System • timestamp",
+                    "text": f"HT System • timestamp",
                     "icon_url": "https://cdn.discordapp.com/emojis/99.png"
                 ,
                 "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S.Z", time.gmtime())
@@ -102,7 +102,7 @@ class DiscordNotifier:
             if response.status_code == :
                 logging.info(f"Discord alert sent for asset signal")
             else:
-                logging.error(f"Discord webhook failed: response.status_code - response.tet")
+                logging.error(f"Discord webhook failed: response.status_code - response.text")
     def send_trade_notification(self, trade_data: Dict):
         try:
             if not self.webhook_url:
@@ -150,12 +150,12 @@ class DiscordNotifier:
                     ,
                     
                         "name": "⚙️ Mode",
-                        "value": f"**config.MODEEEEE.upper()**",
+                        "value": f"**config.MODEE.upper()**",
                         "inline": True
                     
                 ],
                 "footer": 
-                    "tet": f"HT System • time.strftime('%Y-%m-%d %H:%M:%S')",
+                    "text": f"HT System • time.strftime('%Y-%m-%d %H:%M:%S')",
                     "icon_url": "https://cdn.discordapp.com/emojis/99.png"
                 ,
                 "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S.Z", time.gmtime())
@@ -192,7 +192,7 @@ class DiscordNotifier:
                 "description": message,
                 "color": color,
                 "footer": 
-                    "tet": f"HT System • time.strftime('%Y-%m-%d %H:%M:%S')",
+                    "text": f"HT System • time.strftime('%Y-%m-%d %H:%M:%S')",
                 ,
                 "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S.Z", time.gmtime())
             
@@ -245,7 +245,7 @@ class DiscordNotifier:
             if response.status_code == :
                 return True, "Discord webhook working"
             else:
-                return FFFFFFalse, f"HTTP response.status_code: response.tet"
+                return FFFFFFalse, f"HTTP response.status_code: response.text"
 discord_notifier = DiscordNotifier()
 def send_signal_alert(signal_data: Dict):
     discord_notifier.send_signal_alert(signal_data)
@@ -253,3 +253,39 @@ def send_trade_notification(trade_data: Dict):
     discord_notifier.send_trade_notification(trade_data)
 def send_system_alert(alert_type: str, message: str, severity: str = "info"):
     discord_notifier.send_system_alert(alert_type, message, severity)
+# Import Telegram integration
+try:
+    from telegram_notifier import telegram_notifier
+    import asyncio
+    
+    # Override Discord-only functions to include Telegram
+    original_send_signal_alert = send_signal_alert
+    original_send_trade_notification = send_trade_notification
+    original_send_system_alert = send_system_alert
+    
+    def send_signal_alert(signal_data: Dict):
+        # Send to both Discord and Telegram
+        original_send_signal_alert(signal_data)
+        try:
+            asyncio.run(telegram_notifier.send_signal_alert(signal_data))
+        except Exception as e:
+            logging.error(f"Telegram signal alert failed: {e}")
+    
+    def send_trade_notification(trade_data: Dict):
+        original_send_trade_notification(trade_data)
+        try:
+            asyncio.run(telegram_notifier.send_trade_execution(trade_data))
+        except Exception as e:
+            logging.error(f"Telegram trade notification failed: {e}")
+    
+    def send_system_alert(alert_type: str, message: str, severity: str = "info"):
+        original_send_system_alert(alert_type, message, severity)
+        try:
+            asyncio.run(telegram_notifier.send_system_alert(alert_type, message, severity))
+        except Exception as e:
+            logging.error(f"Telegram system alert failed: {e}")
+    
+    logging.info("✅ Dual Discord+Telegram notifications enabled")
+    
+except ImportError:
+    logging.warning("⚠️ Telegram integration not available")

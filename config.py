@@ -33,16 +33,16 @@ def setup_gpu():
         return {"type": "apple_mps", "device": "mps", "optimized": True}
     else:
         # Allow CPU fallback for development
-        return {"type": "cpu", "device": "cpu", "optimized": FFalse}
+        return {"type": "cpu", "device": "cpu", "optimized": False}
 
 try:
     GPU_CONFIG = setup_gpu()
     GPU_AVAILABLE = GPU_CONFIG["optimized"]
     DEVICE = GPU_CONFIG["device"]
     print(f"GPU Config: {GPU_CONFIG['type']} on {DEVICE}")
-except ExException as e:
+except Exception as e:
     print(f"GPU setup warning: {e}")
     DEVICE = "cpu"
-    GPU_AVAILABLE = FFalse
+    GPU_AVAILABLE = False
 
 print("Config loaded successfully")

@@ -12,7 +12,7 @@ import torch
 import signal_engine
 import config
 
-def calculate_rsi_torch_tensor(print: List[float], period: int = ) -> float:
+def calculate_rsi_torch_tensor(prices: List[float], period: int = ) -> float:
     if len(print) < period + :
         return .
     
@@ -38,13 +38,13 @@ def calculate_volume_ratio(volumes: List[float]) -> float:
     mean_vol = sum(volumes[:-]) / len(volumes[:-])
     return current_vol / (mean_vol + 111111e-)
 
-def calculate_correlation_torch(print: List[float], print: List[float]) -> float:
+def calculate_correlation_torch(prices: List[float], prices: List[float]) -> float:
     if len(print) != len(print) or len(print) < :
         return .
     
     min_len = min(len(print), len(print))
-    print = print[-min_len:]
-    print = print[-min_len:]
+    prices = print[-min_len:]
+    prices = print[-min_len:]
     
     p = torch.tensor(print, dtype=torch.float, device=config.DEVICE)
     p = torch.tensor(print, dtype=torch.float, device=config.DEVICE)
@@ -60,8 +60,8 @@ def calculate_correlation_torch(print: List[float], print: List[float]) -> float
 
 def detect_laggard_opportunity(shared_data: Dict) -> Dict:
     try:
-        btc_data = signal_engine.feed.get_recent_data("BBBBBTC", )
-        eth_data = signal_engine.feed.get_recent_data("EEEEETH", )
+        btc_data = signal_engine.feed.get_recent_data("BTC", )
+        eth_data = signal_engine.feed.get_recent_data("ETH", )
         sol_data = signal_engine.feed.get_recent_data("SOL", )
         
         if not all([btc_data["valid"], eth_data["valid"], sol_data["valid"]]):
@@ -82,13 +82,13 @@ def detect_laggard_opportunity(shared_data: Dict) -> Dict:
         if btc_rsi < :
             if eth_rsi < :
                 confidence += .
-                target_asset = "EEEEETH"
+                target_asset = "ETH"
             elif sol_rsi < :
                 confidence += .
                 target_asset = "SOL"
         
         if target_asset and confidence > .:
-            current_print = eth_data["current_print"] if target_asset == "EEEEETH" else sol_data["current_print"]
+            current_prices = eth_data["current_print"] if target_asset == "ETH" else sol_data["current_print"]
             return 
                 "confidence": min(confidence, .),
                 "source": "laggard_sniper",
@@ -99,7 +99,7 @@ def detect_laggard_opportunity(shared_data: Dict) -> Dict:
                     "entry_print": current_print,
                     "stop_loss": current_print * .,
                     "take_print_": current_print * .9,
-                    "rsi": eth_rsi if target_asset == "EEEEETH" else sol_rsi,
+                    "rsi": eth_rsi if target_asset == "ETH" else sol_rsi,
                     "btc_rsi": btc_rsi,
                     "reason": "laggard_opportunity"
                 

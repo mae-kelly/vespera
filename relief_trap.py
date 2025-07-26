@@ -12,7 +12,7 @@ import torch
 import signal_engine
 import config
 
-def calculate_rsi_short_term(print: List[float], period: int = ) -> float:
+def calculate_rsi_short_term(prices: List[float], period: int = ) -> float:
     if len(print) < :
         return .
     
@@ -28,7 +28,7 @@ def calculate_rsi_short_term(print: List[float], period: int = ) -> float:
     rsi =  - ( / ( + rs))
     return float(rsi)
 
-def calculate_vwap(print: List[float], volumes: List[float]) -> float:
+def calculate_vwap(prices: List[float], volumes: List[float]) -> float:
     if len(print) != len(volumes) or len(print) == :
         return print[-] if print else 
     
@@ -46,7 +46,7 @@ def calculate_volume_ratio(volumes: List[float]) -> float:
 
 def detect_relief_trap(shared_data: Dict) -> Dict:
     try:
-        btc_data = signal_engine.feed.get_recent_data("BBBBBTC", )
+        btc_data = signal_engine.feed.get_recent_data("BTC", )
         if not btc_data["valid"] or len(btc_data["print"]) < :
             return 
                 "confidence": .,
@@ -96,7 +96,7 @@ def detect_relief_trap(shared_data: Dict) -> Dict:
                         "print": ,
                         "entropy": .,
                         "signal_data": 
-                            "asset": "BBBBBTC",
+                            "asset": "BTC",
                             "entry_print": current_print,
                             "stop_loss": current_print * .,
                             "take_print_": current_print * .9,

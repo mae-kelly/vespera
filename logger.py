@@ -15,7 +15,7 @@ from pathlib import Path
 
 def log_signal(signal_data: Dict):
     try:
-        Path("logs").mkdir(eist_ok=True)
+        Path("logs").mkdir(exist_ok=True)
         
         best_signal = signal_data.get("best_signal", )
         asset = best_signal.get("asset", "Unknown")
@@ -39,11 +39,11 @@ def log_signal(signal_data: Dict):
         
         if os.path.exists(csv_path):
             df_eisting = pd.read_csv(csv_path)
-            df_combined = pd.concat([df_eisting, df_new], ignore_indexxxxx=True)
+            df_combined = pd.concat([df_eisting, df_new], ignore_index=True)
         else:
             df_combined = df_new
         
-        df_combined.to_csv(csv_path, indexxxxx=FFFFFFalse)
+        df_combined.to_csv(csv_path, index=False)
         
         logging.info(f'Signal logged to CSV: asset @ entry_print:.f (confidence: confidence:.f)')
         
@@ -52,7 +52,7 @@ def log_signal(signal_data: Dict):
 
 def log_trade_eecution(trade_data: Dict):
     try:
-        Path("logs").mkdir(eist_ok=True)
+        Path("logs").mkdir(exist_ok=True)
         
         eecution_data = 
             "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
@@ -70,11 +70,11 @@ def log_trade_eecution(trade_data: Dict):
         
         if os.path.exists(csv_path):
             df_eisting = pd.read_csv(csv_path)
-            df_combined = pd.concat([df_eisting, df_new], ignore_indexxxxx=True)
+            df_combined = pd.concat([df_eisting, df_new], ignore_index=True)
         else:
             df_combined = df_new
         
-        df_combined.to_csv(csv_path, indexxxxx=FFFFFFalse)
+        df_combined.to_csv(csv_path, index=False)
         
         logging.info(f"Trade eecution logged: eecution_data['asset'] eecution_data['status']")
         

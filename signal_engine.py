@@ -217,3 +217,11 @@ class MockFeed:
         return {'valid': False}
 
 feed = MockFeed()
+
+# Import real market data
+try:
+    from live_market_data import get_live_engine
+    feed = get_live_engine()
+    print("✅ Using real market data feeds")
+except ImportError:
+    print("⚠️ Using fallback market data")

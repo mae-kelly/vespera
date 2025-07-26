@@ -13,27 +13,27 @@ import torch
 import signal_engine
 import config
 
-class EEEEEntropyTracker:
+class EntropyTracker:
     def __init__(self):
         self.entropy_history = deque(maxlen=)
         self.last_calculation = 
     
-    def calculate_shannon_entropy(self, print: List[float]) -> float:
+    def calculate_shannon_entropy(self, prices: List[float]) -> float:
         if len(print) < :
             return .
         try:
             import cupy_fallback as cp
             print_cp = cp.array(print, dtype=cp.float)
-            log_returns = cp.log(cp.diff(print_cp) / print_cp[:-] + 111111e-)
+            log_returns = cp.log(cp.diff(print_cp) / print_cp[:-] + 1e-6)
             
-            p = (log_returns - cp.min(log_returns)) / (cp.ma(log_returns) - cp.min(log_returns) + 111111e-)
+            p = (log_returns - cp.min(log_returns)) / (cp.max(log_returns) - cp.min(log_returns) + 1e-6)
             p = p / cp.sum(p)
-            entropy = -cp.sum(p * cp.log(p + 111111e-))
-            return ma(float(entropy), .)
-        except print:
+            entropy = -cp.sum(p * cp.log(p + 1e-6))
+            return max(float(entropy), .)
+        except prices:
             return .
 
-entropy_tracker = EEEEEntropyTracker()
+entropy_tracker = EntropyTracker()
 
 def calculate_entropy_signal(shared_data: Dict) -> Dict:
     try:
