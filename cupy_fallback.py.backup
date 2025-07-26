@@ -1,0 +1,129 @@
+import torch
+import warnings
+import platform
+
+warnings.filterwarnings("ignore", category=UserWarning)
+
+def get_optimal_device():
+    system = platform.system()
+    
+    if torch.cuda.is_available():
+        return 'cuda'
+    elif system == "Darwin":
+        if torch.backends.mps.is_available() and torch.backends.mps.is_built():
+            return 'mps'
+        else:
+            print("⚠️ Metal Performance Shaders not available on this Mac")
+            return 'cpu'
+    else:
+        return 'cpu'
+
+DEVICE = get_optimal_device()
+
+def array(data, dtype=None):
+    """Create tensor from data on optimal device"""
+    if isinstance(data, (list, tuple)):
+        tensor_data = torch.tensor(data, dtype=torch.float32 if dtype is None else dtype)
+    else:
+        tensor_data = torch.as_tensor(data, dtype=torch.float32 if dtype is None else dtype)
+    
+    return tensor_data.to(DEVICE)
+
+def zeros(shape, dtype=torch.float32):
+    """Create zero tensor on optimal device"""
+    return torch.zeros(shape, dtype=dtype, device=DEVICE)
+
+def ones(shape, dtype=torch.float32):
+    """Create ones tensor on optimal device"""
+    return torch.ones(shape, dtype=dtype, device=DEVICE)
+
+def log(x):
+    return torch.log(x)
+
+def diff(x, n=1):
+    return torch.diff(x, n=n)
+
+def sum(x, axis=None):
+    if axis is None:
+        return torch.sum(x)
+    else:
+        return torch.sum(x, dim=axis)
+
+def min(x, axis=None):
+    if axis is None:
+        return torch.min(x)
+    else:
+        return torch.min(x, dim=axis)[0]
+
+def max(x, axis=None):
+    if axis is None:
+        return torch.max(x)
+    else:
+        return torch.max(x, dim=axis)[0]
+
+def mean(x, axis=None):
+    if axis is None:
+        return torch.mean(x)
+    else:
+        return torch.mean(x, dim=axis)
+
+def where(condition, x, y):
+    return torch.where(condition, x, y)
+
+def all(x):
+    return torch.all(x)
+
+def any(x):
+    return torch.any(x)
+
+class RandomModule:
+    @staticmethod
+    def normal(mean=0.0, std=1.0, size=None):
+        if size is None:
+            return torch.normal(mean, std, size=(1,), device=DEVICE).item()
+        else:
+            return torch.normal(mean, std, size=size, device=DEVICE)
+    
+    @staticmethod
+    def exponential(scale=1.0, size=None):
+        if size is None:
+            return torch.exponential(torch.tensor([scale], device=DEVICE)).item()
+        else:
+            return torch.exponential(torch.full(size, scale, device=DEVICE))
+
+random = RandomModule()
+
+def get_default_memory_pool():
+    class DummyMemoryPool:
+        def set_limit(self, size):
+            pass
+        def free_all_blocks(self):
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+            elif DEVICE == 'mps':
+                torch.mps.empty_cache() if hasattr(torch.mps, 'empty_cache') else None
+    return DummyMemoryPool()
+
+class cuda:
+    class Device:
+        def __init__(self, device_id=0):
+            self.device_id = device_id
+        
+        def use(self):
+            if torch.cuda.is_available():
+                torch.cuda.set_device(self.device_id)
+            elif DEVICE == 'mps':
+                pass
+
+def fuse():
+    def decorator(func):
+        return func
+    return decorator
+
+device_info = {
+    'cuda': 'CUDA GPU',
+    'mps': f'Apple {"Silicon" if platform.machine() == "arm64" else "Intel"} Metal GPU (MPS)',
+    'cpu': 'CPU (Metal GPU not available)'
+}
+
+print(f"✅ Optimized PyTorch fallback loaded - Using: {device_info[DEVICE]}")
