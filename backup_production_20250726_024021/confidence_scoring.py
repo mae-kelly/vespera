@@ -1,7 +1,7 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
-Real Confidence Scoring for HFT System
-ZERO MOCK DATA - Only processes signals from live market feeds
+Real Confidence Scoring for HT System
+ZRO MOCK DATA - Only processes signals from live market feeds
 """
 
 import torch
@@ -13,12 +13,12 @@ def merge_signals(signals: List[Dict]) -> Dict:
     """Merge signals from live data sources only"""
     try:
         if not signals:
-            logging.error("❌ NO SIGNALS TO MERGE - Live data required")
-            return {
-                "confidence": 0.0,
+            logging.error("❌ NO SIGNALS TO MRG - Live data required")
+            return 
+                "confidence": .,
                 "signals": [],
-                "error": "NO_LIVE_SIGNALS"
-            }
+                "error": "NO_LIV_SIGNALS"
+            
         
         # Validate all signals are from live sources
         live_signals = []
@@ -27,116 +27,116 @@ def merge_signals(signals: List[Dict]) -> Dict:
             if source == "real_signal_engine":
                 live_signals.append(signal)
             else:
-                logging.warning(f"⚠️ Rejecting non-live signal from: {source}")
+                logging.warning(f"⚠️ Rejecting non-live signal from: source")
         
         if not live_signals:
-            logging.error("❌ NO LIVE SIGNALS FOUND - All signals rejected")
-            return {
-                "confidence": 0.0,
+            logging.error("❌ NO LIV SIGNALS OUND - All signals rejected")
+            return 
+                "confidence": .,
                 "signals": signals,
-                "error": "NO_LIVE_SIGNALS_VALIDATED"
-            }
+                "error": "NO_LIV_SIGNALS_VALIDATD"
+            
         
         # Process only the best live signal
-        best_signal = max(live_signals, key=lambda s: s.get("confidence", 0))
-        best_confidence = best_signal.get("confidence", 0)
+        best_signal = ma(live_signals, key=lambda s: s.get("confidence", ))
+        best_confidence = best_signal.get("confidence", )
         
-        if best_confidence < 0.3:
-            logging.warning(f"⚠️ Best signal confidence too low: {best_confidence:.3f}")
-            return {
-                "confidence": 0.0,
+        if best_confidence < .:
+            logging.warning(f"⚠️ est signal confidence too low: best_confidence:.f")
+            return 
+                "confidence": .,
                 "signals": live_signals,
-                "error": "INSUFFICIENT_CONFIDENCE"
-            }
+                "error": "INSUICINT_CONIDNC"
+            
         
         # Get signal data from the best signal
         signal_data = best_signal.get("signal_data")
         if not signal_data:
             logging.error("❌ No signal data in best signal")
-            return {
-                "confidence": 0.0,
+            return 
+                "confidence": .,
                 "signals": live_signals,
                 "error": "NO_SIGNAL_DATA"
-            }
+            
         
         # GPU-accelerated confidence adjustment
         adjusted_confidence = _adjust_confidence_gpu(best_confidence, signal_data)
         
-        result = {
+        result = 
             "confidence": adjusted_confidence,
             "signals": live_signals,
             "best_signal": signal_data,
-            "system_health": best_signal.get("system_health", {}),
-            "data_sources": best_signal.get("data_sources", {}),
+            "system_health": best_signal.get("system_health", ),
+            "data_sources": best_signal.get("data_sources", ),
             "signal_count": len(live_signals),
             "live_data_validated": True,
-            "timestamp": best_signal.get("timestamp", 0)
-        }
+            "timestamp": best_signal.get("timestamp", )
         
-        logging.info(f"🎯 LIVE SIGNAL MERGED: {signal_data['asset']} confidence={adjusted_confidence:.3f}")
+        
+        logging.info(f"🎯 LIV SIGNAL MRGD: signal_data['asset'] confidence=adjusted_confidence:.f")
         
         return result
         
-    except Exception as e:
-        logging.error(f"Signal merging error: {e}")
-        return {
-            "confidence": 0.0,
+    ecept ception as e:
+        logging.error(f"Signal merging error: e")
+        return 
+            "confidence": .,
             "signals": signals,
-            "error": f"MERGE_ERROR: {str(e)}"
-        }
+            "error": f"MRG_RROR: str(e)"
+        
 
 def _adjust_confidence_gpu(base_confidence: float, signal_data: Dict) -> float:
     """Adjust confidence using GPU acceleration and live market conditions"""
     try:
         with torch.no_grad():
             # Convert to tensors for GPU processing
-            confidence_tensor = torch.tensor(base_confidence, device=config.DEVICE)
+            confidence_tensor = torch.tensor(base_confidence, device=config.DVIC)
             
             # Adjustment factors based on live market data
             adjustments = []
             
             # RSI factor
-            rsi = signal_data.get("rsi", 50)
-            if rsi < 30:
-                adjustments.append(0.1)  # Boost for oversold
-            elif rsi > 70:
-                adjustments.append(-0.1)  # Reduce for overbought
+            rsi = signal_data.get("rsi", )
+            if rsi < :
+                adjustments.append(.)  # oost for oversold
+            elif rsi > :
+                adjustments.append(-.)  # Reduce for overbought
             
             # VWAP deviation factor
-            vwap_dev = signal_data.get("vwap_deviation", 0)
-            if abs(vwap_dev) > 2:
-                adjustments.append(0.05)  # Boost for significant VWAP deviation
+            vwap_dev = signal_data.get("vwap_deviation", )
+            if abs(vwap_dev) > :
+                adjustments.append(.)  # oost for significant VWAP deviation
             
             # Volume anomaly factor
-            if signal_data.get("volume_anomaly", False):
-                adjustments.append(0.08)  # Boost for volume spikes
+            if signal_data.get("volume_anomaly", alse):
+                adjustments.append(.)  # oost for volume spikes
             
             # Price change factor
-            change_24h = signal_data.get("price_change_24h", 0)
-            if change_24h < -5:
-                adjustments.append(0.12)  # Boost for significant declines
+            change_h = signal_data.get("price_change_h", )
+            if change_h < -:
+                adjustments.append(.)  # oost for significant declines
             
             # Data quality factor
-            history_length = signal_data.get("price_history_length", 0)
-            if history_length >= 50:
-                adjustments.append(0.03)  # Boost for sufficient data
-            elif history_length < 20:
-                adjustments.append(-0.05)  # Reduce for insufficient data
+            history_length = signal_data.get("price_history_length", )
+            if history_length >= :
+                adjustments.append(.)  # oost for sufficient data
+            elif history_length < :
+                adjustments.append(-.)  # Reduce for insufficient data
             
             # Apply adjustments using GPU
             if adjustments:
-                adjustment_tensor = torch.tensor(adjustments, device=config.DEVICE)
+                adjustment_tensor = torch.tensor(adjustments, device=config.DVIC)
                 total_adjustment = torch.sum(adjustment_tensor).item()
                 
                 adjusted_confidence = confidence_tensor + total_adjustment
-                adjusted_confidence = torch.clamp(adjusted_confidence, 0.0, 1.0)
+                adjusted_confidence = torch.clamp(adjusted_confidence, ., .)
                 
                 return adjusted_confidence.item()
             else:
                 return base_confidence
             
-    except Exception as e:
-        logging.error(f"GPU confidence adjustment error: {e}")
+    ecept ception as e:
+        logging.error(f"GPU confidence adjustment error: e")
         return base_confidence
 
 def validate_live_signal(signal_data: Dict) -> bool:
@@ -148,19 +148,19 @@ def validate_live_signal(signal_data: Dict) -> bool:
     
     for field in required_fields:
         if field not in signal_data:
-            logging.warning(f"⚠️ Missing required field in signal: {field}")
-            return False
+            logging.warning(f"⚠️ Missing required field in signal: field")
+            return alse
     
     # Validate data source is live
     data_source = signal_data.get("data_source", "")
     if data_source not in ["binance", "coinbase"]:
-        logging.warning(f"⚠️ Invalid data source: {data_source}")
-        return False
+        logging.warning(f"⚠️ Invalid data source: data_source")
+        return alse
     
     # Validate price history length
-    history_length = signal_data.get("price_history_length", 0)
-    if history_length < 10:
-        logging.warning(f"⚠️ Insufficient price history: {history_length}")
-        return False
+    history_length = signal_data.get("price_history_length", )
+    if history_length < :
+        logging.warning(f"⚠️ Insufficient price history: history_length")
+        return alse
     
     return True

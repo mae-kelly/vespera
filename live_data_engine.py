@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
-Unrestricted Live Market Data Engine
+Unrestricted Live Market Data ngine
 Uses APIs with no geographic restrictions
 """
 
@@ -14,30 +14,30 @@ from collections import deque
 from typing import Dict, List, Optional
 import ssl
 
-class UnrestrictedLiveEngine:
+class UnrestrictedLivengine:
     def __init__(self):
-        self.live_prices = {}
-        self.price_history = {
-            "BTC": deque(maxlen=200),
-            "ETH": deque(maxlen=200), 
-            "SOL": deque(maxlen=200)
-        }
-        self.volume_history = {
-            "BTC": deque(maxlen=200),
-            "ETH": deque(maxlen=200),
-            "SOL": deque(maxlen=200)
-        }
-        self.websockets = {}
+        self.live_prices = 
+        self.price_history = 
+            "TC": deque(malen=),
+            "TH": deque(malen=), 
+            "SOL": deque(malen=)
+        
+        self.volume_history = 
+            "TC": deque(malen=),
+            "TH": deque(malen=),
+            "SOL": deque(malen=)
+        
+        self.websockets = 
         self.running = True
         self.data_lock = threading.Lock()
-        self.last_update = {}
+        self.last_update = 
         
         # Start multiple unrestricted feeds
         self._start_coinbase_feed()
         self._start_kraken_feed()
         self._start_rest_api_backup()
         
-        logging.info("🌍 UNRESTRICTED LIVE ENGINE STARTED")
+        logging.info("🌍 UNRSTRICTD LIV NGIN STARTD")
     
     def _start_coinbase_feed(self):
         """Coinbase Pro WebSocket - No geographic restrictions"""
@@ -48,65 +48,65 @@ class UnrestrictedLiveEngine:
                 if data.get('type') == 'ticker':
                     product_id = data.get('product_id', '')
                     
-                    symbol_map = {
-                        'BTC-USD': 'BTC',
-                        'ETH-USD': 'ETH', 
+                    symbol_map = 
+                        'TC-USD': 'TC',
+                        'TH-USD': 'TH', 
                         'SOL-USD': 'SOL'
-                    }
+                    
                     
                     symbol = symbol_map.get(product_id)
                     if symbol:
-                        price = float(data.get('price', 0))
-                        volume = float(data.get('volume_24h', 0))
+                        price = float(data.get('price', ))
+                        volume = float(data.get('volume_h', ))
                         
-                        if price > 0:
+                        if price > :
                             with self.data_lock:
-                                self.live_prices[symbol] = {
+                                self.live_prices[symbol] = 
                                     'price': price,
                                     'volume': volume,
                                     'source': 'coinbase',
                                     'timestamp': time.time(),
-                                    'high_24h': float(data.get('high_24h', price)),
-                                    'low_24h': float(data.get('low_24h', price)),
-                                    'open_24h': float(data.get('open_24h', price))
-                                }
+                                    'high_h': float(data.get('high_h', price)),
+                                    'low_h': float(data.get('low_h', price)),
+                                    'open_h': float(data.get('open_h', price))
                                 
-                                # Calculate 24h change
-                                open_price = self.live_prices[symbol]['open_24h']
-                                if open_price > 0:
-                                    change_24h = ((price - open_price) / open_price) * 100
-                                    self.live_prices[symbol]['change_24h'] = change_24h
+                                
+                                # Calculate h change
+                                open_price = self.live_prices[symbol]['open_h']
+                                if open_price > :
+                                    change_h = ((price - open_price) / open_price) * 
+                                    self.live_prices[symbol]['change_h'] = change_h
                                 
                                 self.price_history[symbol].append(price)
                                 self.volume_history[symbol].append(volume)
                                 self.last_update[symbol] = time.time()
                                 
-                            logging.info(f"🟢 LIVE {symbol}: ${price:,.2f} (Coinbase)")
+                            logging.info(f"🟢 LIV symbol: $price:,.f (Coinbase)")
                 
-            except Exception as e:
-                logging.error(f"Coinbase message error: {e}")
+            ecept ception as e:
+                logging.error(f"Coinbase message error: e")
         
         def on_error(ws, error):
-            logging.error(f"Coinbase WebSocket error: {error}")
+            logging.error(f"Coinbase WebSocket error: error")
         
         def on_close(ws, close_status_code, close_msg):
             logging.warning("Coinbase WebSocket closed, reconnecting...")
-            time.sleep(5)
+            time.sleep()
             if self.running:
                 self._start_coinbase_feed()
         
         def on_open(ws):
             logging.info("🟢 Coinbase WebSocket connected")
-            subscribe_msg = {
+            subscribe_msg = 
                 "type": "subscribe",
-                "product_ids": ["BTC-USD", "ETH-USD", "SOL-USD"],
+                "product_ids": ["TC-USD", "TH-USD", "SOL-USD"],
                 "channels": ["ticker"]
-            }
+            
             ws.send(json.dumps(subscribe_msg))
         
         def run_coinbase():
             ws = websocket.WebSocketApp(
-                "wss://ws-feed.exchange.coinbase.com",
+                "wss://ws-feed.echange.coinbase.com",
                 on_message=on_message,
                 on_error=on_error,
                 on_close=on_close,
@@ -126,75 +126,75 @@ class UnrestrictedLiveEngine:
                 data = json.loads(message)
                 
                 # Kraken sends arrays for ticker data
-                if isinstance(data, list) and len(data) >= 4:
-                    channel_info = data[2] if len(data) > 2 else ""
+                if isinstance(data, list) and len(data) >= :
+                    channel_info = data[] if len(data) >  else ""
                     if "ticker" in str(channel_info):
-                        ticker_data = data[1]
-                        pair = data[3] if len(data) > 3 else ""
+                        ticker_data = data[]
+                        pair = data[] if len(data) >  else ""
                         
                         # Map Kraken pairs to our symbols
-                        pair_map = {
-                            'XBT/USD': 'BTC',
-                            'ETH/USD': 'ETH',
+                        pair_map = 
+                            'XT/USD': 'TC',
+                            'TH/USD': 'TH',
                             'SOL/USD': 'SOL'
-                        }
+                        
                         
                         symbol = pair_map.get(pair)
                         if symbol and isinstance(ticker_data, dict):
-                            # Kraken ticker format: c = [price, lot_volume], v = [volume_today, volume_24h]
-                            price_data = ticker_data.get('c', ['0', '0'])
-                            volume_data = ticker_data.get('v', ['0', '0'])
+                            # Kraken ticker format: c = [price, lot_volume], v = [volume_today, volume_h]
+                            price_data = ticker_data.get('c', ['', ''])
+                            volume_data = ticker_data.get('v', ['', ''])
                             
-                            price = float(price_data[0]) if price_data and len(price_data) > 0 else 0
-                            volume = float(volume_data[1]) if volume_data and len(volume_data) > 1 else 0
+                            price = float(price_data[]) if price_data and len(price_data) >  else 
+                            volume = float(volume_data[]) if volume_data and len(volume_data) >  else 
                             
-                            if price > 0:
+                            if price > :
                                 with self.data_lock:
                                     # Only update if no fresher Coinbase data
                                     if (symbol not in self.live_prices or 
                                         self.live_prices[symbol].get('source') != 'coinbase' or
-                                        time.time() - self.live_prices[symbol].get('timestamp', 0) > 5):
+                                        time.time() - self.live_prices[symbol].get('timestamp', ) > ):
                                         
-                                        # Calculate 24h change if we have previous data
-                                        change_24h = 0
+                                        # Calculate h change if we have previous data
+                                        change_h = 
                                         if symbol in self.live_prices:
                                             old_price = self.live_prices[symbol].get('price', price)
-                                            if old_price > 0:
-                                                change_24h = ((price - old_price) / old_price) * 100
+                                            if old_price > :
+                                                change_h = ((price - old_price) / old_price) * 
                                         
-                                        self.live_prices[symbol] = {
+                                        self.live_prices[symbol] = 
                                             'price': price,
                                             'volume': volume,
                                             'source': 'kraken',
                                             'timestamp': time.time(),
-                                            'change_24h': change_24h
-                                        }
+                                            'change_h': change_h
+                                        
                                         
                                         self.price_history[symbol].append(price)
                                         self.volume_history[symbol].append(volume)
                                         self.last_update[symbol] = time.time()
                                         
-                                logging.info(f"🔵 LIVE {symbol}: ${price:,.2f} (Kraken)")
+                                logging.info(f"🔵 LIV symbol: $price:,.f (Kraken)")
                 
-            except Exception as e:
-                logging.error(f"Kraken message error: {e}")
+            ecept ception as e:
+                logging.error(f"Kraken message error: e")
         
         def on_error(ws, error):
-            logging.error(f"Kraken WebSocket error: {error}")
+            logging.error(f"Kraken WebSocket error: error")
         
         def on_close(ws, close_status_code, close_msg):
             logging.warning("Kraken WebSocket closed, reconnecting...")
-            time.sleep(5)
+            time.sleep()
             if self.running:
                 self._start_kraken_feed()
         
         def on_open(ws):
             logging.info("🔵 Kraken WebSocket connected")
-            subscribe_msg = {
+            subscribe_msg = 
                 "event": "subscribe",
-                "pair": ["XBT/USD", "ETH/USD", "SOL/USD"],
-                "subscription": {"name": "ticker"}
-            }
+                "pair": ["XT/USD", "TH/USD", "SOL/USD"],
+                "subscription": "name": "ticker"
+            
             ws.send(json.dumps(subscribe_msg))
         
         def run_kraken():
@@ -213,109 +213,109 @@ class UnrestrictedLiveEngine:
         kraken_thread.start()
     
     def _start_rest_api_backup(self):
-        """REST API backup using multiple free sources"""
+        """RST API backup using multiple free sources"""
         def backup_updater():
             while self.running:
                 try:
-                    # Try multiple REST APIs as backup
+                    # Try multiple RST APIs as backup
                     self._update_from_coinbase_rest()
-                    time.sleep(2)
+                    time.sleep()
                     self._update_from_coingecko_minimal()
-                    time.sleep(3)
+                    time.sleep()
                     
-                except Exception as e:
-                    logging.error(f"REST backup error: {e}")
+                ecept ception as e:
+                    logging.error(f"RST backup error: e")
                 
-                time.sleep(10)  # Update every 10 seconds
+                time.sleep()  # Update every  seconds
         
         backup_thread = threading.Thread(target=backup_updater, daemon=True)
         backup_thread.start()
     
     def _update_from_coinbase_rest(self):
-        """Coinbase REST API backup"""
+        """Coinbase RST API backup"""
         try:
-            symbols = ['BTC', 'ETH', 'SOL']
+            symbols = ['TC', 'TH', 'SOL']
             for symbol in symbols:
-                url = f"https://api.coinbase.com/v2/exchange-rates?currency={symbol}"
-                response = requests.get(url, timeout=5)
+                url = f"https://api.coinbase.com/v/echange-rates?currency=symbol"
+                response = requests.get(url, timeout=)
                 
-                if response.status_code == 200:
+                if response.status_code == :
                     data = response.json()
-                    rates = data.get('data', {}).get('rates', {})
-                    price = float(rates.get('USD', 0))
+                    rates = data.get('data', ).get('rates', )
+                    price = float(rates.get('USD', ))
                     
-                    if price > 0:
+                    if price > :
                         with self.data_lock:
                             # Only use as backup if no WebSocket data
                             if (symbol not in self.live_prices or 
-                                time.time() - self.live_prices[symbol].get('timestamp', 0) > 30):
+                                time.time() - self.live_prices[symbol].get('timestamp', ) > ):
                                 
-                                self.live_prices[symbol] = {
+                                self.live_prices[symbol] = 
                                     'price': price,
-                                    'volume': price * 50000,  # Estimated
+                                    'volume': price * ,  # stimated
                                     'source': 'coinbase_rest',
                                     'timestamp': time.time(),
-                                    'change_24h': 0
-                                }
+                                    'change_h': 
+                                
                                 
                                 self.price_history[symbol].append(price)
-                                self.volume_history[symbol].append(price * 50000)
+                                self.volume_history[symbol].append(price * )
                                 self.last_update[symbol] = time.time()
                                 
-                                logging.info(f"🟡 REST {symbol}: ${price:,.2f} (Coinbase REST)")
+                                logging.info(f"🟡 RST symbol: $price:,.f (Coinbase RST)")
                 
-        except Exception as e:
-            logging.error(f"Coinbase REST error: {e}")
+        ecept ception as e:
+            logging.error(f"Coinbase RST error: e")
     
     def _update_from_coingecko_minimal(self):
         """Very minimal CoinGecko usage to avoid rate limits"""
         try:
             # Only update one symbol at a time to avoid rate limits
-            symbols = ['BTC', 'ETH', 'SOL']
+            symbols = ['TC', 'TH', 'SOL']
             coin_ids = ['bitcoin', 'ethereum', 'solana']
             
             # Rotate through symbols
-            index = int(time.time() / 15) % len(symbols)  # Change every 15 seconds
-            symbol = symbols[index]
-            coin_id = coin_ids[index]
+            inde = int(time.time() / ) % len(symbols)  # Change every  seconds
+            symbol = symbols[inde]
+            coin_id = coin_ids[inde]
             
-            url = f"https://api.coingecko.com/api/v3/simple/price?ids={coin_id}&vs_currencies=usd&include_24hr_change=true"
+            url = f"https://api.coingecko.com/api/v/simple/price?ids=coin_id&vs_currencies=usd&include_hr_change=true"
             
-            response = requests.get(url, timeout=5, headers={
-                'User-Agent': 'HFT-Backup/1.0'
-            })
+            response = requests.get(url, timeout=, headers=
+                'User-Agent': 'HT-ackup/.'
+            )
             
-            if response.status_code == 200:
+            if response.status_code == :
                 data = response.json()
-                coin_data = data.get(coin_id, {})
-                price = coin_data.get('usd', 0)
-                change_24h = coin_data.get('usd_24h_change', 0)
+                coin_data = data.get(coin_id, )
+                price = coin_data.get('usd', )
+                change_h = coin_data.get('usd_h_change', )
                 
-                if price > 0:
+                if price > :
                     with self.data_lock:
                         # Only use if no fresher data available
                         if (symbol not in self.live_prices or 
-                            time.time() - self.live_prices[symbol].get('timestamp', 0) > 60):
+                            time.time() - self.live_prices[symbol].get('timestamp', ) > ):
                             
-                            self.live_prices[symbol] = {
+                            self.live_prices[symbol] = 
                                 'price': price,
-                                'volume': price * 75000,  # Estimated
+                                'volume': price * ,  # stimated
                                 'source': 'coingecko_backup',
                                 'timestamp': time.time(),
-                                'change_24h': change_24h or 0
-                            }
+                                'change_h': change_h or 
+                            
                             
                             self.price_history[symbol].append(price)
-                            self.volume_history[symbol].append(price * 75000)
+                            self.volume_history[symbol].append(price * )
                             self.last_update[symbol] = time.time()
                             
-                            logging.info(f"🟠 BACKUP {symbol}: ${price:,.2f} (CoinGecko)")
+                            logging.info(f"🟠 ACKUP symbol: $price:,.f (CoinGecko)")
             
-        except Exception as e:
-            logging.error(f"CoinGecko backup error: {e}")
+        ecept ception as e:
+            logging.error(f"CoinGecko backup error: e")
     
     def get_live_price(self, symbol: str) -> Optional[Dict]:
-        """Get current live price - NO FALLBACK, NO MOCK DATA"""
+        """Get current live price - NO ALLACK, NO MOCK DATA"""
         with self.data_lock:
             if symbol not in self.live_prices:
                 return None
@@ -323,45 +323,45 @@ class UnrestrictedLiveEngine:
             data = self.live_prices[symbol].copy()
             
             # Check data freshness
-            age = time.time() - data.get('timestamp', 0)
-            if age > 120:  # Relaxed to 2 minutes for global access
-                logging.warning(f"⚠️ Stale data for {symbol} ({age:.1f}s old)")
+            age = time.time() - data.get('timestamp', )
+            if age > :  # Relaed to  minutes for global access
+                logging.warning(f"⚠️ Stale data for symbol (age:.fs old)")
                 return None
             
             return data
     
-    def get_price_history(self, symbol: str, length: int = 50) -> List[float]:
-        """Get recent price history - REAL DATA ONLY"""
+    def get_price_history(self, symbol: str, length: int = ) -> List[float]:
+        """Get recent price history - RAL DATA ONLY"""
         with self.data_lock:
             history = list(self.price_history[symbol])
             
-            if len(history) < 5:
-                logging.warning(f"⚠️ Insufficient price history for {symbol}: {len(history)} points")
+            if len(history) < :
+                logging.warning(f"⚠️ Insufficient price history for symbol: len(history) points")
                 return []
             
             return history[-length:] if len(history) >= length else history
     
-    def get_volume_history(self, symbol: str, length: int = 50) -> List[float]:
-        """Get recent volume history - REAL DATA ONLY"""
+    def get_volume_history(self, symbol: str, length: int = ) -> List[float]:
+        """Get recent volume history - RAL DATA ONLY"""
         with self.data_lock:
             history = list(self.volume_history[symbol])
             
-            if len(history) < 5:
-                logging.warning(f"⚠️ Insufficient volume history for {symbol}: {len(history)} points")
+            if len(history) < :
+                logging.warning(f"⚠️ Insufficient volume history for symbol: len(history) points")
                 return []
             
             return history[-length:] if len(history) >= length else history
     
-    def calculate_rsi(self, symbol: str, period: int = 14) -> Optional[float]:
-        """Calculate RSI from REAL price data only"""
-        prices = self.get_price_history(symbol, period + 10)
+    def calculate_rsi(self, symbol: str, period: int = ) -> Optional[float]:
+        """Calculate RSI from RAL price data only"""
+        prices = self.get_price_history(symbol, period + )
         
-        if len(prices) < period + 1:
+        if len(prices) < period + :
             return None
         
-        changes = [prices[i] - prices[i-1] for i in range(1, len(prices))]
-        gains = [change if change > 0 else 0 for change in changes]
-        losses = [-change if change < 0 else 0 for change in changes]
+        changes = [prices[i] - prices[i-] for i in range(, len(prices))]
+        gains = [change if change >  else  for change in changes]
+        losses = [-change if change <  else  for change in changes]
         
         if len(gains) < period:
             return None
@@ -369,20 +369,20 @@ class UnrestrictedLiveEngine:
         avg_gain = sum(gains[-period:]) / period
         avg_loss = sum(losses[-period:]) / period
         
-        if avg_loss == 0:
-            return 100.0
+        if avg_loss == :
+            return .
         
         rs = avg_gain / avg_loss
-        rsi = 100 - (100 / (1 + rs))
+        rsi =  - ( / ( + rs))
         
         return rsi
     
     def calculate_vwap(self, symbol: str) -> Optional[float]:
-        """Calculate VWAP from REAL data only"""
-        prices = self.get_price_history(symbol, 20)
-        volumes = self.get_volume_history(symbol, 20)
+        """Calculate VWAP from RAL data only"""
+        prices = self.get_price_history(symbol, )
+        volumes = self.get_volume_history(symbol, )
         
-        if len(prices) < 5 or len(volumes) < 5:
+        if len(prices) <  or len(volumes) < :
             return None
         
         min_len = min(len(prices), len(volumes))
@@ -392,7 +392,7 @@ class UnrestrictedLiveEngine:
         total_pv = sum(p * v for p, v in zip(prices, volumes))
         total_volume = sum(volumes)
         
-        if total_volume == 0:
+        if total_volume == :
             return None
         
         return total_pv / total_volume
@@ -400,54 +400,54 @@ class UnrestrictedLiveEngine:
     def is_data_live(self, symbol: str) -> bool:
         """Check if we have fresh live data"""
         if symbol not in self.last_update:
-            return False
+            return alse
         
         age = time.time() - self.last_update[symbol]
-        return age < 120  # More relaxed for global access
+        return age <   # More relaed for global access
     
     def get_system_health(self) -> Dict:
         """Get system health"""
         with self.data_lock:
-            health = {}
+            health = 
             
-            for symbol in ['BTC', 'ETH', 'SOL']:
+            for symbol in ['TC', 'TH', 'SOL']:
                 live_data = self.get_live_price(symbol)
                 price_history_len = len(self.price_history[symbol])
                 is_live = self.is_data_live(symbol)
                 
-                health[symbol] = {
+                health[symbol] = 
                     'has_live_data': live_data is not None,
                     'price_history_length': price_history_len,
                     'is_live': is_live,
                     'last_price': live_data['price'] if live_data else None,
                     'source': live_data['source'] if live_data else None,
-                    'data_age_seconds': time.time() - self.last_update.get(symbol, 0)
-                }
+                    'data_age_seconds': time.time() - self.last_update.get(symbol, )
+                
             
             all_live = all(health[s]['is_live'] for s in health)
-            sufficient_history = all(health[s]['price_history_length'] >= 5 for s in health)
+            sufficient_history = all(health[s]['price_history_length'] >=  for s in health)
             
-            health['system'] = {
+            health['system'] = 
                 'all_symbols_live': all_live,
                 'sufficient_history': sufficient_history,
                 'websocket_connections': len(self.websockets),
-                'status': 'LIVE' if all_live and sufficient_history else 'WARMING_UP'
-            }
+                'status': 'LIV' if all_live and sufficient_history else 'WARMING_UP'
+            
             
             return health
     
     def stop(self):
         """Stop all connections"""
-        self.running = False
+        self.running = alse
         
         for name, ws in self.websockets.items():
             try:
                 ws.close()
-                logging.info(f"Closed {name} WebSocket")
-            except:
+                logging.info(f"Closed name WebSocket")
+            ecept:
                 pass
         
-        logging.info("🌍 Unrestricted Live Engine stopped")
+        logging.info("🌍 Unrestricted Live ngine stopped")
 
 # Global instance
 unrestricted_engine = None
@@ -456,19 +456,19 @@ def initialize_unrestricted_engine():
     """Initialize the unrestricted live engine"""
     global unrestricted_engine
     if unrestricted_engine is None:
-        unrestricted_engine = UnrestrictedLiveEngine()
+        unrestricted_engine = UnrestrictedLivengine()
         
         # Wait for initial data
         logging.info("⏳ Waiting for unrestricted live data...")
-        for i in range(60):  # Wait up to 60 seconds
+        for i in range():  # Wait up to  seconds
             health = unrestricted_engine.get_system_health()
-            if health['system']['status'] == 'LIVE':
-                logging.info("🌍 UNRESTRICTED LIVE DATA READY")
+            if health['system']['status'] == 'LIV':
+                logging.info("🌍 UNRSTRICTD LIV DATA RADY")
                 break
-            elif i > 30 and health['system']['sufficient_history']:
-                logging.info("🌍 UNRESTRICTED DATA WARMING UP - Proceeding")
+            elif i >  and health['system']['sufficient_history']:
+                logging.info("🌍 UNRSTRICTD DATA WARMING UP - Proceeding")
                 break
-            time.sleep(1)
+            time.sleep()
         else:
             logging.warning("⚠️ Limited data available - proceeding with available feeds")
     

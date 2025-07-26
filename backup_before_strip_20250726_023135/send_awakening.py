@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 from notifier_ import _notifier
 
 if __name__ == "__main__":

@@ -1,23 +1,23 @@
 #!/bin/bash
 
-echo "🚨 COMPLETE SYSTEM RESTORATION"
-echo "Fixing ALL broken Python files from nuclear stripping"
+echo "🚨 COMPLT SYSTM RSTORATION"
+echo "iing ALL broken Python files from nuclear stripping"
 echo "=================================================="
 
 # Create a backup first
-BACKUP_DIR="backup_restoration_$(date +%Y%m%d_%H%M%S)"
-mkdir -p "$BACKUP_DIR"
-cp *.py "$BACKUP_DIR/" 2>/dev/null || true
-echo "✅ Backup created in $BACKUP_DIR"
+ACKUP_DIR="backup_restoration_$(date +%Y%m%d_%H%M%S)"
+mkdir -p "$ACKUP_DIR"
+cp *.py "$ACKUP_DIR/" >/dev/null || true
+echo "✅ ackup created in $ACKUP_DIR"
 
-# 1. Fix signal_engine.py
-echo "🔧 Fixing signal_engine.py..."
-cat > signal_engine.py << 'EOF'
+# . i signal_engine.py
+echo "🔧 iing signal_engine.py..."
+cat > signal_engine.py << 'O'
 import torch
 import sys
 if not torch.cuda.is_available() and not (hasattr(torch.backends, 'mps') and torch.backends.mps.is_available()):
-    print("❌ CRITICAL: NO GPU DETECTED - SYSTEM TERMINATED")
-    sys.exit(1)
+    print("❌ CRITICAL: NO GPU DTCTD - SYSTM TRMINATD")
+    sys.eit()
 
 import time
 import logging
@@ -29,20 +29,20 @@ import requests
 import websocket
 import config
 try:
-    if config.DEVICE == 'cuda':
+    if config.DVIC == 'cuda':
         import cupy as cp
     else:
         import cupy_fallback as cp
-except ImportError:
+ecept Importrror:
     import cupy_fallback as cp
 
-class PriceDataFeed:
+class PriceDataeed:
     def __init__(self):
-        self.prices = {"BTC": deque(maxlen=120), "ETH": deque(maxlen=120), "SOL": deque(maxlen=120)}
-        self.volumes = {"BTC": deque(maxlen=120), "ETH": deque(maxlen=120), "SOL": deque(maxlen=120)}
-        self.running = False
-        self.initialized = False
-        self.current_prices = {"BTC": 0, "ETH": 0, "SOL": 0}
+        self.prices = "TC": deque(malen=), "TH": deque(malen=), "SOL": deque(malen=)
+        self.volumes = "TC": deque(malen=), "TH": deque(malen=), "SOL": deque(malen=)
+        self.running = alse
+        self.initialized = alse
+        self.current_prices = "TC": , "TH": , "SOL": 
         self.ws_connection = None
         
     def start_feed(self):
@@ -52,82 +52,82 @@ class PriceDataFeed:
             threading.Thread(target=self._start_websocket_connection, daemon=True).start()
     
     def _force_initialization(self):
-        max_attempts = 5
-        for attempt in range(max_attempts):
+        ma_attempts = 
+        for attempt in range(ma_attempts):
             try:
-                logging.info(f"Initializing market data (attempt {attempt + 1}/{max_attempts})")
+                logging.info(f"Initializing market data (attempt attempt + /ma_attempts)")
                 response = requests.get(
-                    "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_vol=true",
-                    timeout=15,
-                    headers={'User-Agent': 'HFT-System/1.0'}
+                    "https://api.coingecko.com/api/v/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_hr_vol=true",
+                    timeout=,
+                    headers='User-Agent': 'HT-System/.'
                 )
                 
-                if response.status_code != 200:
-                    raise Exception(f"API returned {response.status_code}")
+                if response.status_code != :
+                    raise ception(f"API returned response.status_code")
                 
                 data = response.json()
                 
-                self.current_prices = {
-                    "BTC": float(data["bitcoin"]["usd"]),
-                    "ETH": float(data["ethereum"]["usd"]),
+                self.current_prices = 
+                    "TC": float(data["bitcoin"]["usd"]),
+                    "TH": float(data["ethereum"]["usd"]),
                     "SOL": float(data["solana"]["usd"])
-                }
                 
-                volumes = {
-                    "BTC": float(data["bitcoin"].get("usd_24h_vol", 50000000000)),
-                    "ETH": float(data["ethereum"].get("usd_24h_vol", 20000000000)),
-                    "SOL": float(data["solana"].get("usd_24h_vol", 5000000000))
-                }
                 
-                for asset in ["BTC", "ETH", "SOL"]:
+                volumes = 
+                    "TC": float(data["bitcoin"].get("usd_h_vol", )),
+                    "TH": float(data["ethereum"].get("usd_h_vol", )),
+                    "SOL": float(data["solana"].get("usd_h_vol", ))
+                
+                
+                for asset in ["TC", "TH", "SOL"]:
                     base_price = self.current_prices[asset]
                     base_volume = volumes[asset]
-                    for i in range(120):
-                        price_var = base_price * (1 + (i - 60) * 0.0005)
-                        volume_var = base_volume * (0.8 + (i % 10) * 0.04)
+                    for i in range():
+                        price_var = base_price * ( + (i - ) * .)
+                        volume_var = base_volume * (. + (i % ) * .)
                         self.prices[asset].append(price_var)
                         self.volumes[asset].append(volume_var)
                 
                 self.initialized = True
-                logging.info(f"✅ Real market data loaded: BTC=${self.current_prices['BTC']:,.2f}")
+                logging.info(f"✅ Real market data loaded: TC=$self.current_prices['TC']:,.f")
                 return
                 
-            except Exception as e:
-                logging.error(f"Initialization attempt {attempt + 1} failed: {e}")
-                if attempt < max_attempts - 1:
-                    time.sleep(2 ** attempt)
+            ecept ception as e:
+                logging.error(f"Initialization attempt attempt +  failed: e")
+                if attempt < ma_attempts - :
+                    time.sleep( ** attempt)
                 else:
-                    raise Exception(f"Market data initialization FAILED")
+                    raise ception(f"Market data initialization AILD")
     
     def _start_websocket_connection(self):
         # WebSocket connection logic here
         pass
     
-    def get_recent_data(self, asset: str, minutes: int = 60) -> Dict:
+    def get_recent_data(self, asset: str, minutes: int = ) -> Dict:
         if not self.initialized:
-            raise Exception(f"Feed not initialized for {asset}")
+            raise ception(f"eed not initialized for asset")
         
-        if asset not in self.prices or len(self.prices[asset]) == 0:
-            raise Exception(f"No data available for {asset}")
+        if asset not in self.prices or len(self.prices[asset]) == :
+            raise ception(f"No data available for asset")
         
         prices = list(self.prices[asset])
         volumes = list(self.volumes[asset])
         
-        return {
+        return 
             "prices": prices[-minutes:] if len(prices) > minutes else prices,
             "volumes": volumes[-minutes:] if len(volumes) > minutes else volumes,
             "valid": True,
             "current_price": self.current_prices[asset],
-            "current_volume": volumes[-1] if volumes else 0
-        }
+            "current_volume": volumes[-] if volumes else 
+        
 
-feed = PriceDataFeed()
+feed = PriceDataeed()
 
-def calculate_rsi_torch(prices: List[float], period: int = 14) -> float:
-    if len(prices) < period + 1:
-        raise Exception(f"Need {period + 1} prices, got {len(prices)}")
+def calculate_rsi_torch(prices: List[float], period: int = ) -> float:
+    if len(prices) < period + :
+        raise ception(f"Need period +  prices, got len(prices)")
     
-    prices_tensor = torch.tensor(prices, dtype=torch.float32, device=config.DEVICE)
+    prices_tensor = torch.tensor(prices, dtype=torch.float, device=config.DVIC)
     deltas = torch.diff(prices_tensor)
     gains = torch.nn.functional.relu(deltas)
     losses = torch.nn.functional.relu(-deltas)
@@ -135,13 +135,13 @@ def calculate_rsi_torch(prices: List[float], period: int = 14) -> float:
     avg_gain = torch.mean(gains[-period:])
     avg_loss = torch.mean(losses[-period:])
     
-    rs = avg_gain / (avg_loss + 1e-8)
-    rsi = 100 - (100 / (1 + rs))
+    rs = avg_gain / (avg_loss + e-)
+    rsi =  - ( / ( + rs))
     return float(rsi)
 
 def calculate_vwap(prices: List[float], volumes: List[float]) -> float:
-    if len(prices) != len(volumes) or len(prices) == 0:
-        raise Exception("Invalid VWAP input")
+    if len(prices) != len(volumes) or len(prices) == :
+        raise ception("Invalid VWAP input")
     
     prices_cp = cp.array(prices)
     volumes_cp = cp.array(volumes)
@@ -149,111 +149,111 @@ def calculate_vwap(prices: List[float], volumes: List[float]) -> float:
     total_v = cp.sum(volumes_cp)
     return float(total_pv / total_v)
 
-def calculate_price_change_cupy(prices: List[float], minutes: int = 60) -> float:
+def calculate_price_change_cupy(prices: List[float], minutes: int = ) -> float:
     if len(prices) < minutes:
-        raise Exception(f"Need {minutes} prices for change calc")
+        raise ception(f"Need minutes prices for change calc")
     
     prices_cp = cp.array(prices[-minutes:])
-    return float(((prices_cp[-1] - prices_cp[0]) / prices_cp[0]) * 100)
+    return float(((prices_cp[-] - prices_cp[]) / prices_cp[]) * )
 
 def detect_volume_anomaly(volumes: List[float]) -> bool:
-    if len(volumes) < 3:
-        return False
+    if len(volumes) < :
+        return alse
     
-    current = volumes[-1]
-    mean_volume = sum(volumes[:-1]) / len(volumes[:-1])
-    return current > mean_volume * 1.5
+    current = volumes[-]
+    mean_volume = sum(volumes[:-]) / len(volumes[:-])
+    return current > mean_volume * .
 
 def generate_signal(shared_data: Dict) -> Dict:
     if not feed.initialized:
         feed.start_feed()
-        time.sleep(2)
+        time.sleep()
     
     if not feed.initialized:
-        raise Exception("Feed initialization failed")
+        raise ception("eed initialization failed")
     
-    best_confidence = 0.0
+    best_confidence = .
     best_signal = None
     
-    for asset in config.ASSETS:
+    for asset in config.ASSTS:
         try:
-            data = feed.get_recent_data(asset, 60)
+            data = feed.get_recent_data(asset, )
             
             prices = data["prices"]
             volumes = data["volumes"]
             current_price = data["current_price"]
             
-            if len(prices) < 15:
+            if len(prices) < :
                 continue
             
-            confidence = 0.0
+            confidence = .
             reason = []
             
             rsi = calculate_rsi_torch(prices)
             vwap = calculate_vwap(prices, volumes)
             volume_anomaly = detect_volume_anomaly(volumes)
-            price_change_1h = calculate_price_change_cupy(prices, min(60, len(prices)))
+            price_change_h = calculate_price_change_cupy(prices, min(, len(prices)))
             
-            if rsi < 30:
-                confidence += 0.35
+            if rsi < :
+                confidence += .
                 reason.append("oversold_rsi")
             
             if current_price < vwap:
-                confidence += 0.25
+                confidence += .
                 reason.append("below_vwap")
             
             if volume_anomaly:
-                confidence += 0.25
+                confidence += .
                 reason.append("volume_spike")
             
-            if price_change_1h < -1.0:
-                confidence += 0.15
+            if price_change_h < -.:
+                confidence += .
                 reason.append("significant_drop")
             
-            vwap_deviation = ((current_price - vwap) / vwap) * 100 if vwap > 0 else 0
+            vwap_deviation = ((current_price - vwap) / vwap) *  if vwap >  else 
             
             if confidence > best_confidence:
                 best_confidence = confidence
-                best_signal = {
+                best_signal = 
                     "asset": asset,
                     "confidence": confidence,
                     "entry_price": current_price,
-                    "stop_loss": current_price * 1.015,
-                    "take_profit_1": current_price * 0.985,
-                    "take_profit_2": current_price * 0.975,
-                    "take_profit_3": current_price * 0.965,
+                    "stop_loss": current_price * .,
+                    "take_profit_": current_price * .9,
+                    "take_profit_": current_price * .9,
+                    "take_profit_": current_price * .9,
                     "rsi": rsi,
                     "vwap": vwap,
                     "vwap_deviation": vwap_deviation,
                     "volume_anomaly": volume_anomaly,
-                    "price_change_1h": price_change_1h,
+                    "price_change_h": price_change_h,
                     "reason": " + ".join(reason) if reason else "market_conditions"
-                }
+                
             
-        except Exception as e:
-            logging.error(f"Error processing {asset}: {e}")
+        ecept ception as e:
+            logging.error(f"rror processing asset: e")
             continue
     
     if best_signal:
-        return {
+        return 
             "confidence": best_signal["confidence"],
             "source": "signal_engine",
-            "priority": 1,
-            "entropy": 0.0,
+            "priority": ,
+            "entropy": .,
             "signal_data": best_signal
-        }
+        
     else:
-        raise Exception("No valid signals generated from any asset")
-EOF
+        raise ception("No valid signals generated from any asset")
+O
 
-# 2. Fix entropy_meter.py
-echo "🔧 Fixing entropy_meter.py..."
-cat > entropy_meter.py << 'EOF'
+# . i entropy_meter.py
+echo "🔧 iing entropy_meter.py..."
+cat > entropy_meter.py << 'O'
 import torch
 import sys
 if not torch.cuda.is_available() and not (hasattr(torch.backends, 'mps') and torch.backends.mps.is_available()):
-    print("❌ CRITICAL: NO GPU DETECTED - SYSTEM TERMINATED")
-    sys.exit(1)
+    print("❌ CRITICAL: NO GPU DTCTD - SYSTM TRMINATD")
+    sys.eit()
 
 import time
 import logging
@@ -264,91 +264,91 @@ import signal_engine
 import config
 try:
     import cupy as cp
-except ImportError:
+ecept Importrror:
     import cupy_fallback as cp
 
-class EntropyTracker:
+class ntropyTracker:
     def __init__(self):
-        self.entropy_history = deque(maxlen=60)
-        self.entropy_slopes = deque(maxlen=10)
-        self.last_calculation = 0
+        self.entropy_history = deque(malen=)
+        self.entropy_slopes = deque(malen=)
+        self.last_calculation = 
     
     def calculate_shannon_entropy(self, prices: List[float]) -> float:
-        if len(prices) < 2:
-            return 0.0
+        if len(prices) < :
+            return .
         try:
-            prices_cp = cp.array(prices, dtype=cp.float32)
-            log_returns = cp.log(cp.diff(prices_cp) / prices_cp[:-1] + 1e-10)
+            prices_cp = cp.array(prices, dtype=cp.float)
+            log_returns = cp.log(cp.diff(prices_cp) / prices_cp[:-] + e-)
             
-            p = (log_returns - cp.min(log_returns)) / (cp.max(log_returns) - cp.min(log_returns) + 1e-10)
+            p = (log_returns - cp.min(log_returns)) / (cp.ma(log_returns) - cp.min(log_returns) + e-)
             p = p / cp.sum(p)
-            entropy = -cp.sum(p * cp.log(p + 1e-10))
+            entropy = -cp.sum(p * cp.log(p + e-))
             return float(entropy)
-        except Exception:
-            return 0.0
+        ecept ception:
+            return .
     
     def update_entropy_slope(self, entropy: float) -> bool:
         self.entropy_history.append(entropy)
-        if len(self.entropy_history) >= 4:
-            recent_entropies = list(self.entropy_history)[-4:]
-            slope = (recent_entropies[-1] - recent_entropies[0]) / len(recent_entropies)
+        if len(self.entropy_history) >= :
+            recent_entropies = list(self.entropy_history)[-:]
+            slope = (recent_entropies[-] - recent_entropies[]) / len(recent_entropies)
             self.entropy_slopes.append(slope)
             
-            if len(self.entropy_slopes) >= 3:
-                recent_slopes = list(self.entropy_slopes)[-3:]
-                return all(s < 0 for s in recent_slopes)
-        return False
+            if len(self.entropy_slopes) >= :
+                recent_slopes = list(self.entropy_slopes)[-:]
+                return all(s <  for s in recent_slopes)
+        return alse
 
-entropy_tracker = EntropyTracker()
+entropy_tracker = ntropyTracker()
 
 def calculate_entropy_signal(shared_data: Dict) -> Dict:
     try:
-        btc_data = signal_engine.feed.get_recent_data("BTC", 60)
-        if not btc_data["valid"] or len(btc_data["prices"]) < 10:
-            return {
-                "confidence": 0.0,
+        btc_data = signal_engine.feed.get_recent_data("TC", )
+        if not btc_data["valid"] or len(btc_data["prices"]) < :
+            return 
+                "confidence": .,
                 "source": "entropy_meter",
-                "priority": 2,
-                "entropy": 0.0
-            }
+                "priority": ,
+                "entropy": .
+            
         
         entropy = entropy_tracker.calculate_shannon_entropy(btc_data["prices"])
         slope_alert = entropy_tracker.update_entropy_slope(entropy)
         
-        base_confidence = min(entropy / 3.0, 0.3) if entropy > 0 else 0.0
+        base_confidence = min(entropy / ., .) if entropy >  else .
         confidence = base_confidence
         
         if slope_alert:
-            confidence += 0.2
-            logging.warning("Entropy slope negative for 3+ minutes")
+            confidence += .
+            logging.warning("ntropy slope negative for + minutes")
         
-        return {
-            "confidence": min(confidence, 1.0),
+        return 
+            "confidence": min(confidence, .),
             "source": "entropy_meter",
-            "priority": 2,
+            "priority": ,
             "entropy": entropy,
             "entropy_slope_alert": slope_alert,
             "entropy_value": entropy
-        }
         
-    except Exception as e:
-        logging.error(f"Entropy meter error: {e}")
-        return {
-            "confidence": 0.0,
+        
+    ecept ception as e:
+        logging.error(f"ntropy meter error: e")
+        return 
+            "confidence": .,
             "source": "entropy_meter",
-            "priority": 2,
-            "entropy": 0.0
-        }
-EOF
+            "priority": ,
+            "entropy": .
+        
+O
 
-# 3. Fix laggard_sniper.py
-echo "🔧 Fixing laggard_sniper.py..."
-cat > laggard_sniper.py << 'EOF'
+# . i laggard_sniper.py
+echo "🔧 iing laggard_sniper.py..."
+cat > laggard_sniper.py << 'O'
 import torch
 import sys
 if not torch.cuda.is_available() and not (hasattr(torch.backends, 'mps') and torch.backends.mps.is_available()):
-    print("❌ CRITICAL: NO GPU DETECTED - SYSTEM TERMINATED")
-    sys.exit(1)
+    print("❌ CRITICAL: NO GPU DTCTD - SYSTM TRMINATD")
+    sys.eit()
 
 import logging
 from typing import Dict, List
@@ -356,124 +356,124 @@ import torch
 import signal_engine
 import config
 
-def calculate_rsi_torch_tensor(prices: List[float], period: int = 14) -> float:
-    if len(prices) < period + 1:
-        return 50.0
+def calculate_rsi_torch_tensor(prices: List[float], period: int = ) -> float:
+    if len(prices) < period + :
+        return .
     
-    prices_tensor = torch.tensor(prices, dtype=torch.float32, device=config.DEVICE)
+    prices_tensor = torch.tensor(prices, dtype=torch.float, device=config.DVIC)
     deltas = torch.diff(prices_tensor)
-    gains = torch.clamp(deltas, min=0)
-    losses = torch.clamp(-deltas, min=0)
+    gains = torch.clamp(deltas, min=)
+    losses = torch.clamp(-deltas, min=)
     
     if len(gains) >= period:
         avg_gain = torch.mean(gains[-period:])
         avg_loss = torch.mean(losses[-period:])
-        rs = avg_gain / (avg_loss + 1e-8)
-        rsi = 100 - (100 / (1 + rs))
+        rs = avg_gain / (avg_loss + e-)
+        rsi =  - ( / ( + rs))
         return float(rsi)
     
-    return 50.0
+    return .
 
 def calculate_volume_ratio(volumes: List[float]) -> float:
-    if len(volumes) < 3:
-        return 1.0
+    if len(volumes) < :
+        return .
     
-    current_vol = volumes[-1]
-    mean_vol = sum(volumes[:-1]) / len(volumes[:-1])
-    return current_vol / (mean_vol + 1e-8)
+    current_vol = volumes[-]
+    mean_vol = sum(volumes[:-]) / len(volumes[:-])
+    return current_vol / (mean_vol + e-)
 
-def calculate_correlation_torch(prices1: List[float], prices2: List[float]) -> float:
-    if len(prices1) != len(prices2) or len(prices1) < 10:
-        return 0.0
+def calculate_correlation_torch(prices: List[float], prices: List[float]) -> float:
+    if len(prices) != len(prices) or len(prices) < :
+        return .
     
-    min_len = min(len(prices1), len(prices2))
-    prices1 = prices1[-min_len:]
-    prices2 = prices2[-min_len:]
+    min_len = min(len(prices), len(prices))
+    prices = prices[-min_len:]
+    prices = prices[-min_len:]
     
-    p1 = torch.tensor(prices1, dtype=torch.float32, device=config.DEVICE)
-    p2 = torch.tensor(prices2, dtype=torch.float32, device=config.DEVICE)
+    p = torch.tensor(prices, dtype=torch.float, device=config.DVIC)
+    p = torch.tensor(prices, dtype=torch.float, device=config.DVIC)
     
-    p1_mean = torch.mean(p1)
-    p2_mean = torch.mean(p2)
+    p_mean = torch.mean(p)
+    p_mean = torch.mean(p)
     
-    numerator = torch.sum((p1 - p1_mean) * (p2 - p2_mean))
-    denominator = torch.sqrt(torch.sum((p1 - p1_mean) ** 2) * torch.sum((p2 - p2_mean) ** 2))
+    numerator = torch.sum((p - p_mean) * (p - p_mean))
+    denominator = torch.sqrt(torch.sum((p - p_mean) ** ) * torch.sum((p - p_mean) ** ))
     
-    correlation = numerator / (denominator + 1e-8)
+    correlation = numerator / (denominator + e-)
     return float(correlation)
 
 def detect_laggard_opportunity(shared_data: Dict) -> Dict:
     try:
-        btc_data = signal_engine.feed.get_recent_data("BTC", 30)
-        eth_data = signal_engine.feed.get_recent_data("ETH", 30)
-        sol_data = signal_engine.feed.get_recent_data("SOL", 30)
+        btc_data = signal_engine.feed.get_recent_data("TC", )
+        eth_data = signal_engine.feed.get_recent_data("TH", )
+        sol_data = signal_engine.feed.get_recent_data("SOL", )
         
         if not all([btc_data["valid"], eth_data["valid"], sol_data["valid"]]):
-            return {
-                "confidence": 0.0,
+            return 
+                "confidence": .,
                 "source": "laggard_sniper",
-                "priority": 3,
-                "entropy": 0.0
-            }
+                "priority": ,
+                "entropy": .
+            
         
         btc_rsi = calculate_rsi_torch_tensor(btc_data["prices"])
         eth_rsi = calculate_rsi_torch_tensor(eth_data["prices"])
         sol_rsi = calculate_rsi_torch_tensor(sol_data["prices"])
         
-        confidence = 0.0
+        confidence = .
         target_asset = None
         
-        if btc_rsi < 30:
-            if eth_rsi < 40:
-                confidence += 0.3
-                target_asset = "ETH"
-            elif sol_rsi < 40:
-                confidence += 0.3
+        if btc_rsi < :
+            if eth_rsi < :
+                confidence += .
+                target_asset = "TH"
+            elif sol_rsi < :
+                confidence += .
                 target_asset = "SOL"
         
-        if target_asset and confidence > 0.1:
-            current_price = eth_data["current_price"] if target_asset == "ETH" else sol_data["current_price"]
-            return {
-                "confidence": min(confidence, 1.0),
+        if target_asset and confidence > .:
+            current_price = eth_data["current_price"] if target_asset == "TH" else sol_data["current_price"]
+            return 
+                "confidence": min(confidence, .),
                 "source": "laggard_sniper",
-                "priority": 3,
-                "entropy": 0.0,
-                "signal_data": {
+                "priority": ,
+                "entropy": .,
+                "signal_data": 
                     "asset": target_asset,
                     "entry_price": current_price,
-                    "stop_loss": current_price * 1.015,
-                    "take_profit_1": current_price * 0.985,
-                    "rsi": eth_rsi if target_asset == "ETH" else sol_rsi,
+                    "stop_loss": current_price * .,
+                    "take_profit_": current_price * .9,
+                    "rsi": eth_rsi if target_asset == "TH" else sol_rsi,
                     "btc_rsi": btc_rsi,
                     "reason": "laggard_opportunity"
-                }
-            }
+                
+            
         
-        return {
-            "confidence": 0.0,
+        return 
+            "confidence": .,
             "source": "laggard_sniper",
-            "priority": 3,
-            "entropy": 0.0
-        }
+            "priority": ,
+            "entropy": .
         
-    except Exception as e:
-        logging.error(f"Laggard sniper error: {e}")
-        return {
-            "confidence": 0.0,
+        
+    ecept ception as e:
+        logging.error(f"Laggard sniper error: e")
+        return 
+            "confidence": .,
             "source": "laggard_sniper",
-            "priority": 3,
-            "entropy": 0.0
-        }
-EOF
+            "priority": ,
+            "entropy": .
+        
+O
 
-# 4. Fix relief_trap.py
-echo "🔧 Fixing relief_trap.py..."
-cat > relief_trap.py << 'EOF'
+# . i relief_trap.py
+echo "🔧 iing relief_trap.py..."
+cat > relief_trap.py << 'O'
 import torch
 import sys
 if not torch.cuda.is_available() and not (hasattr(torch.backends, 'mps') and torch.backends.mps.is_available()):
-    print("❌ CRITICAL: NO GPU DETECTED - SYSTEM TERMINATED")
-    sys.exit(1)
+    print("❌ CRITICAL: NO GPU DTCTD - SYSTM TRMINATD")
+    sys.eit()
 
 import logging
 from typing import Dict, List
@@ -481,48 +481,48 @@ import torch
 import signal_engine
 import config
 
-def calculate_rsi_short_term(prices: List[float], period: int = 14) -> float:
-    if len(prices) < 2:
-        return 50.0
+def calculate_rsi_short_term(prices: List[float], period: int = ) -> float:
+    if len(prices) < :
+        return .
     
-    prices_tensor = torch.tensor(prices, dtype=torch.float32, device=config.DEVICE)
+    prices_tensor = torch.tensor(prices, dtype=torch.float, device=config.DVIC)
     deltas = torch.diff(prices_tensor)
-    gains = torch.clamp(deltas, min=0)
-    losses = torch.clamp(-deltas, min=0)
+    gains = torch.clamp(deltas, min=)
+    losses = torch.clamp(-deltas, min=)
     
-    avg_gain = torch.mean(gains) if len(gains) > 0 else torch.tensor(0.0)
-    avg_loss = torch.mean(losses) if len(losses) > 0 else torch.tensor(0.0)
+    avg_gain = torch.mean(gains) if len(gains) >  else torch.tensor(.)
+    avg_loss = torch.mean(losses) if len(losses) >  else torch.tensor(.)
     
-    rs = avg_gain / (avg_loss + 1e-8)
-    rsi = 100 - (100 / (1 + rs))
+    rs = avg_gain / (avg_loss + e-)
+    rsi =  - ( / ( + rs))
     return float(rsi)
 
 def calculate_vwap(prices: List[float], volumes: List[float]) -> float:
-    if len(prices) != len(volumes) or len(prices) == 0:
-        return prices[-1] if prices else 0
+    if len(prices) != len(volumes) or len(prices) == :
+        return prices[-] if prices else 
     
     total_pv = sum(p * v for p, v in zip(prices, volumes))
     total_v = sum(volumes)
-    return total_pv / (total_v + 1e-8)
+    return total_pv / (total_v + e-)
 
 def calculate_volume_ratio(volumes: List[float]) -> float:
-    if len(volumes) < 3:
-        return 1.0
+    if len(volumes) < :
+        return .
     
-    current_vol = volumes[-1]
-    avg_vol = sum(volumes[:-1]) / len(volumes[:-1])
-    return current_vol / (avg_vol + 1e-8)
+    current_vol = volumes[-]
+    avg_vol = sum(volumes[:-]) / len(volumes[:-])
+    return current_vol / (avg_vol + e-)
 
 def detect_relief_trap(shared_data: Dict) -> Dict:
     try:
-        btc_data = signal_engine.feed.get_recent_data("BTC", 30)
-        if not btc_data["valid"] or len(btc_data["prices"]) < 20:
-            return {
-                "confidence": 0.0,
+        btc_data = signal_engine.feed.get_recent_data("TC", )
+        if not btc_data["valid"] or len(btc_data["prices"]) < :
+            return 
+                "confidence": .,
                 "source": "relief_trap",
-                "priority": 3,
-                "entropy": 0.0
-            }
+                "priority": ,
+                "entropy": .
+            
         
         prices = btc_data["prices"]
         volumes = btc_data["volumes"]
@@ -530,81 +530,81 @@ def detect_relief_trap(shared_data: Dict) -> Dict:
         
         vwap = calculate_vwap(prices, volumes)
         
-        confidence = 0.0
+        confidence = .
         reason = []
         
         # Relief trap detection logic
-        if len(prices) >= 15:
-            price_15min_ago = prices[-15]
-            price_bounce = (current_price - price_15min_ago) / price_15min_ago
+        if len(prices) >= :
+            price_min_ago = prices[-]
+            price_bounce = (current_price - price_min_ago) / price_min_ago
             
-            if price_bounce > 0.015:  # 1.5% bounce
-                rsi_1m = calculate_rsi_short_term(prices[-5:])
-                rsi_15m = calculate_rsi_short_term(prices[-15:])
+            if price_bounce > .:  # .% bounce
+                rsi_m = calculate_rsi_short_term(prices[-:])
+                rsi_m = calculate_rsi_short_term(prices[-:])
                 
-                rsi_divergence = abs(rsi_1m - rsi_15m)
+                rsi_divergence = abs(rsi_m - rsi_m)
                 fails_vwap_reclaim = current_price < vwap
                 
-                if rsi_divergence > 10:
-                    confidence += 0.3
+                if rsi_divergence > :
+                    confidence += .
                     reason.append("rsi_divergence")
                 
                 if fails_vwap_reclaim:
-                    confidence += 0.25
+                    confidence += .
                     reason.append("failed_vwap_reclaim")
                 
                 volume_ratio = calculate_volume_ratio(volumes)
-                if volume_ratio > 1.5:
-                    confidence += 0.15
+                if volume_ratio > .:
+                    confidence += .
                     reason.append("elevated_volume")
                 
-                if confidence > 0.2:
-                    return {
-                        "confidence": min(confidence, 1.0),
+                if confidence > .:
+                    return 
+                        "confidence": min(confidence, .),
                         "source": "relief_trap",
-                        "priority": 3,
-                        "entropy": 0.0,
-                        "signal_data": {
-                            "asset": "BTC",
+                        "priority": ,
+                        "entropy": .,
+                        "signal_data": 
+                            "asset": "TC",
                             "entry_price": current_price,
-                            "stop_loss": current_price * 1.015,
-                            "take_profit_1": current_price * 0.985,
-                            "price_bounce_15min": price_bounce * 100,
-                            "rsi_1m": rsi_1m,
-                            "rsi_15m": rsi_15m,
+                            "stop_loss": current_price * .,
+                            "take_profit_": current_price * .9,
+                            "price_bounce_min": price_bounce * ,
+                            "rsi_m": rsi_m,
+                            "rsi_m": rsi_m,
                             "rsi_divergence": rsi_divergence,
                             "vwap": vwap,
                             "failed_vwap_reclaim": fails_vwap_reclaim,
                             "volume_ratio": volume_ratio,
                             "reason": " + ".join(reason)
-                        }
-                    }
+                        
+                    
         
-        return {
-            "confidence": 0.0,
+        return 
+            "confidence": .,
             "source": "relief_trap",
-            "priority": 3,
-            "entropy": 0.0
-        }
+            "priority": ,
+            "entropy": .
         
-    except Exception as e:
-        logging.error(f"Relief trap detector error: {e}")
-        return {
-            "confidence": 0.0,
+        
+    ecept ception as e:
+        logging.error(f"Relief trap detector error: e")
+        return 
+            "confidence": .,
             "source": "relief_trap",
-            "priority": 3,
-            "entropy": 0.0
-        }
-EOF
+            "priority": ,
+            "entropy": .
+        
+O
 
-# 5. Fix confidence_scoring.py
-echo "🔧 Fixing confidence_scoring.py..."
-cat > confidence_scoring.py << 'EOF'
+# . i confidence_scoring.py
+echo "🔧 iing confidence_scoring.py..."
+cat > confidence_scoring.py << 'O'
 import torch
 import sys
 if not torch.cuda.is_available() and not (hasattr(torch.backends, 'mps') and torch.backends.mps.is_available()):
-    print("❌ CRITICAL: NO GPU DETECTED - SYSTEM TERMINATED")
-    sys.exit(1)
+    print("❌ CRITICAL: NO GPU DTCTD - SYSTM TRMINATD")
+    sys.eit()
 
 import logging
 import requests
@@ -615,16 +615,16 @@ import config
 
 def get_btc_dominance() -> float:
     try:
-        response = requests.get("https://api.coingecko.com/api/v3/global", timeout=5)
-        if response.status_code == 200:
+        response = requests.get("https://api.coingecko.com/api/v/global", timeout=)
+        if response.status_code == :
             data = response.json()
             btc_dominance = data['data']['market_cap_percentage']['btc']
             return float(btc_dominance)
-    except Exception:
+    ecept ception:
         pass
-    return 45.0
+    return .
 
-def softmax_weighted_sum(components: Dict[str, float], weights: Dict[str, float]) -> float:
+def softma_weighted_sum(components: Dict[str, float], weights: Dict[str, float]) -> float:
     try:
         component_values = []
         weight_values = []
@@ -635,118 +635,118 @@ def softmax_weighted_sum(components: Dict[str, float], weights: Dict[str, float]
                 weight_values.append(weights[key])
         
         if not component_values:
-            return 0.0
+            return .
         
-        components_tensor = torch.tensor(component_values, dtype=torch.float32, device=config.DEVICE)
-        weights_tensor = torch.tensor(weight_values, dtype=torch.float32, device=config.DEVICE)
+        components_tensor = torch.tensor(component_values, dtype=torch.float, device=config.DVIC)
+        weights_tensor = torch.tensor(weight_values, dtype=torch.float, device=config.DVIC)
         
-        softmax_weights = torch.nn.functional.softmax(weights_tensor, dim=0)
+        softma_weights = torch.nn.functional.softma(weights_tensor, dim=)
         normalized_components = torch.sigmoid(components_tensor)
-        weighted_sum = torch.sum(normalized_components * softmax_weights)
+        weighted_sum = torch.sum(normalized_components * softma_weights)
         
         return float(weighted_sum)
         
-    except Exception:
-        return 0.0
+    ecept ception:
+        return .
 
 def merge_signals(signals: List[Dict]) -> Dict:
     try:
         if not signals:
-            return {"confidence": 0.0, "signals": [], "components": {}}
+            return "confidence": ., "signals": [], "components": 
         
         btc_dominance = get_btc_dominance()
         
-        components = {
-            "rsi_drop": 0.0,
-            "entropy_decline_rate": 0.0,
-            "volume_acceleration_ratio": 0.0,
-            "btc_dominance_correlation": 0.0
-        }
+        components = 
+            "rsi_drop": .,
+            "entropy_decline_rate": .,
+            "volume_acceleration_ratio": .,
+            "btc_dominance_correlation": .
+        
         
         for signal in signals:
             source = signal.get("source", "")
-            confidence = signal.get("confidence", 0)
+            confidence = signal.get("confidence", )
             
             if source == "signal_engine":
-                signal_data = signal.get("signal_data", {})
-                rsi = signal_data.get("rsi", 50)
-                if rsi < 30:
-                    components["rsi_drop"] = (30 - rsi) / 30
+                signal_data = signal.get("signal_data", )
+                rsi = signal_data.get("rsi", )
+                if rsi < :
+                    components["rsi_drop"] = ( - rsi) / 
             
             elif source == "entropy_meter":
-                entropy = signal.get("entropy", 0)
-                if entropy > 0:
-                    components["entropy_decline_rate"] = min(entropy / 2.0, 1.0)
+                entropy = signal.get("entropy", )
+                if entropy > :
+                    components["entropy_decline_rate"] = min(entropy / ., .)
             
             elif source in ["laggard_sniper", "relief_trap"]:
-                signal_data = signal.get("signal_data", {})
-                vol_ratio = signal_data.get("volume_ratio", 1.0)
-                if vol_ratio > 1.0:
-                    components["volume_acceleration_ratio"] = min((vol_ratio - 1.0) / 2.0, 1.0)
+                signal_data = signal.get("signal_data", )
+                vol_ratio = signal_data.get("volume_ratio", .)
+                if vol_ratio > .:
+                    components["volume_acceleration_ratio"] = min((vol_ratio - .) / ., .)
         
-        if btc_dominance < 45:
-            components["btc_dominance_correlation"] = (45 - btc_dominance) / 45
+        if btc_dominance < :
+            components["btc_dominance_correlation"] = ( - btc_dominance) / 
         
-        weights = {
-            "rsi_drop": 0.35,
-            "entropy_decline_rate": 0.25,
-            "volume_acceleration_ratio": 0.30,
-            "btc_dominance_correlation": 0.10
-        }
+        weights = 
+            "rsi_drop": .,
+            "entropy_decline_rate": .,
+            "volume_acceleration_ratio": .,
+            "btc_dominance_correlation": .
         
-        softmax_confidence = softmax_weighted_sum(components, weights)
         
-        best_confidence = 0.0
+        softma_confidence = softma_weighted_sum(components, weights)
+        
+        best_confidence = .
         best_signal_data = None
         
         for signal in signals:
-            confidence = signal.get("confidence", 0)
+            confidence = signal.get("confidence", )
             if confidence > best_confidence:
                 best_confidence = confidence
                 if "signal_data" in signal:
                     best_signal_data = signal["signal_data"]
         
-        final_confidence = (softmax_confidence * 0.6) + (best_confidence * 0.4)
+        final_confidence = (softma_confidence * .) + (best_confidence * .)
         
-        if btc_dominance < 40:
-            final_confidence *= 1.1
-        elif btc_dominance > 60:
-            final_confidence *= 0.9
+        if btc_dominance < :
+            final_confidence *= .
+        elif btc_dominance > :
+            final_confidence *= .9
         
-        result = {
-            "confidence": min(final_confidence, 1.0),
+        result = 
+            "confidence": min(final_confidence, .),
             "signals": signals,
             "components": components,
             "weights": weights,
             "btc_dominance": btc_dominance,
-            "softmax_confidence": softmax_confidence,
+            "softma_confidence": softma_confidence,
             "signal_count": len(signals),
-            "active_sources": [s["source"] for s in signals if s.get("confidence", 0) > 0.05]
-        }
+            "active_sources": [s["source"] for s in signals if s.get("confidence", ) > .]
+        
         
         if best_signal_data:
             result["best_signal"] = best_signal_data
         
         return result
         
-    except Exception as e:
-        logging.error(f"Signal merging error: {e}")
-        return {
-            "confidence": 0.0,
+    ecept ception as e:
+        logging.error(f"Signal merging error: e")
+        return 
+            "confidence": .,
             "signals": signals,
-            "components": {},
+            "components": ,
             "error": str(e)
-        }
-EOF
+        
+O
 
-# 6. Fix notifier_elegant.py
-echo "🔧 Fixing notifier_elegant.py..."
-cat > notifier_elegant.py << 'EOF'
+# . i notifier_elegant.py
+echo "🔧 iing notifier_elegant.py..."
+cat > notifier_elegant.py << 'O'
 import torch
 import sys
 if not torch.cuda.is_available() and not (hasattr(torch.backends, 'mps') and torch.backends.mps.is_available()):
-    print("❌ CRITICAL: NO GPU DETECTED - SYSTEM TERMINATED")
-    sys.exit(1)
+    print("❌ CRITICAL: NO GPU DTCTD - SYSTM TRMINATD")
+    sys.eit()
 
 import logging
 import os
@@ -756,104 +756,104 @@ from typing import Dict, List
 import config
 import time
 
-class ElegantNotifier:
+class legantNotifier:
     def __init__(self):
-        self.webhook_url = os.getenv("DISCORD_WEBHOOK_URL")
-        self.user_id = os.getenv("DISCORD_USER_ID")
-        self.last_sent = 0
+        self.webhook_url = os.getenv("DISCORD_WHOOK_URL")
+        self.user_id = os.getenv("DISCORD_USR_ID")
+        self.last_sent = 
         
-        self.colors = {
-            "high": 0x5865F2,
-            "medium": 0x57F287,
-            "low": 0xFEE75C,
-            "system": 0x2F3136
-        }
+        self.colors = 
+            "high": ,
+            "medium": ,
+            "low": C,
+            "system": 
+        
     
     def get_confidence_tier(self, confidence: float) -> tuple:
-        if confidence >= 0.6:
+        if confidence >= .:
             return "High", self.colors["high"], "⚡"
-        elif confidence >= 0.3:
+        elif confidence >= .:
             return "Medium", self.colors["medium"], "✦"
         else:
             return "Low", self.colors["low"], "·"
     
     def format_price(self, price: float) -> str:
-        if price >= 1000:
-            return f"${price:,.2f}"
+        if price >= :
+            return f"$price:,.f"
         else:
-            return f"${price:.4f}"
+            return f"$price:.f"
     
     def should_send(self, confidence: float) -> bool:
         now = time.time()
         time_since_last = now - self.last_sent
         
-        if confidence >= 0.6:
+        if confidence >= .:
             return True
-        elif confidence >= 0.4:
-            return time_since_last >= 30
+        elif confidence >= .:
+            return time_since_last >= 
         else:
-            return time_since_last >= 60
+            return time_since_last >= 
     
     def create_elegant_embed(self, signal_data: Dict) -> dict:
-        signal_obj = signal_data.get("best_signal", {})
+        signal_obj = signal_data.get("best_signal", )
         if not signal_obj:
-            raise Exception("No signal_data found")
+            raise ception("No signal_data found")
         
         asset = signal_obj.get("asset")
         if not asset:
-            raise Exception("No asset in signal")
+            raise ception("No asset in signal")
         
-        confidence = signal_data.get("confidence", 0)
-        entry_price = signal_obj.get("entry_price", 0)
+        confidence = signal_data.get("confidence", )
+        entry_price = signal_obj.get("entry_price", )
         
-        if entry_price <= 0:
-            raise Exception("Invalid entry price")
+        if entry_price <= :
+            raise ception("Invalid entry price")
         
         tier, color, symbol = self.get_confidence_tier(confidence)
         
-        asset_names = {
-            "BTC": "Bitcoin",
-            "ETH": "Ethereum",
+        asset_names = 
+            "TC": "itcoin",
+            "TH": "thereum",
             "SOL": "Solana"
-        }
+        
         asset_display = asset_names.get(asset, asset)
         
-        title = f"{symbol} {asset_display} Signal"
-        description = f"**{confidence:.1%}** confidence • _{tier} tier_"
+        title = f"symbol asset_display Signal"
+        description = f"**confidence:.%** confidence • _tier tier_"
         
         fields = [
-            {
-                "name": "Entry Price",
+            
+                "name": "ntry Price",
                 "value": self.format_price(entry_price),
                 "inline": True
-            }
+            
         ]
         
-        if "stop_loss" in signal_obj and signal_obj["stop_loss"] > 0:
-            fields.append({
+        if "stop_loss" in signal_obj and signal_obj["stop_loss"] > :
+            fields.append(
                 "name": "Stop Loss",
                 "value": self.format_price(signal_obj["stop_loss"]),
                 "inline": True
-            })
+            )
         
-        if "take_profit_1" in signal_obj and signal_obj["take_profit_1"] > 0:
-            fields.append({
+        if "take_profit_" in signal_obj and signal_obj["take_profit_"] > :
+            fields.append(
                 "name": "Target",
-                "value": self.format_price(signal_obj["take_profit_1"]),
+                "value": self.format_price(signal_obj["take_profit_"]),
                 "inline": True
-            })
+            )
         
         current_time = time.strftime("%H:%M", time.localtime())
-        footer_text = f"{current_time} • HFT System"
+        footer_tet = f"current_time • HT System"
         
-        embed = {
+        embed = 
             "title": title,
             "description": description,
             "color": color,
             "fields": fields,
-            "footer": {"text": footer_text},
-            "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S.000Z", time.gmtime())
-        }
+            "footer": "tet": footer_tet,
+            "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S.Z", time.gmtime())
+        
         
         return embed
     
@@ -862,42 +862,42 @@ class ElegantNotifier:
             if not self.webhook_url:
                 return
             
-            confidence = signal_data.get("confidence", 0)
+            confidence = signal_data.get("confidence", )
             if not self.should_send(confidence):
                 return
             
             embed = self.create_elegant_embed(signal_data)
             
             content = ""
-            if self.user_id and confidence >= 0.6:
-                content = f"<@{self.user_id}>"
+            if self.user_id and confidence >= .:
+                content = f"<@self.user_id>"
             
-            payload = {
+            payload = 
                 "content": content,
                 "embeds": [embed],
-                "username": "HFT System"
-            }
+                "username": "HT System"
+            
             
             response = requests.post(
                 self.webhook_url,
                 json=payload,
-                headers={"Content-Type": "application/json"},
-                timeout=10
+                headers="Content-Type": "application/json",
+                timeout=
             )
             
-            if response.status_code == 204:
+            if response.status_code == :
                 self.last_sent = time.time()
-                asset = signal_data.get("best_signal", {}).get("asset", "Unknown")
-                logging.info(f"Signal sent: {asset} {confidence:.1%}")
-            elif response.status_code == 429:
+                asset = signal_data.get("best_signal", ).get("asset", "Unknown")
+                logging.info(f"Signal sent: asset confidence:.%")
+            elif response.status_code == 9:
                 logging.warning("Discord rate limited - message dropped")
             else:
-                logging.error(f"Discord API error: {response.status_code}")
+                logging.error(f"Discord API error: response.status_code")
                 
-        except Exception as e:
-            logging.error(f"Notification error: {e}")
+        ecept ception as e:
+            logging.error(f"Notification error: e")
 
-elegant_notifier = ElegantNotifier()
+elegant_notifier = legantNotifier()
 
 def send_signal_alert(signal_data: Dict):
     elegant_notifier.send_signal_alert(signal_data)
@@ -907,16 +907,16 @@ def send_trade_notification(trade_data: Dict):
 
 def send_system_alert(alert_type: str, message: str, severity: str = "info"):
     pass
-EOF
+O
 
-# 7. Fix logger.py
-echo "🔧 Fixing logger.py..."
-cat > logger.py << 'EOF'
+# . i logger.py
+echo "🔧 iing logger.py..."
+cat > logger.py << 'O'
 import torch
 import sys
 if not torch.cuda.is_available() and not (hasattr(torch.backends, 'mps') and torch.backends.mps.is_available()):
-    print("❌ CRITICAL: NO GPU DETECTED - SYSTEM TERMINATED")
-    sys.exit(1)
+    print("❌ CRITICAL: NO GPU DTCTD - SYSTM TRMINATD")
+    sys.eit()
 
 import logging
 import pandas as pd
@@ -928,101 +928,101 @@ from pathlib import Path
 
 def log_signal(signal_data: Dict):
     try:
-        Path("logs").mkdir(exist_ok=True)
+        Path("logs").mkdir(eist_ok=True)
         
-        best_signal = signal_data.get("best_signal", {})
+        best_signal = signal_data.get("best_signal", )
         asset = best_signal.get("asset", "Unknown")
-        entry_price = best_signal.get("entry_price", 0)
-        stop_loss = best_signal.get("stop_loss", 0)
-        confidence = signal_data.get("confidence", 0)
+        entry_price = best_signal.get("entry_price", )
+        stop_loss = best_signal.get("stop_loss", )
+        confidence = signal_data.get("confidence", )
         reason = best_signal.get("reason", "market_conditions")
         timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
         
-        row_data = {
+        row_data = 
             "asset": asset,
             "entry_price": entry_price,
             "stop_loss": stop_loss,
             "confidence": confidence,
             "reason": reason,
             "timestamp": timestamp
-        }
         
-        df_new = pd.DataFrame([row_data])
+        
+        df_new = pd.Datarame([row_data])
         csv_path = "logs/trade_log.csv"
         
-        if os.path.exists(csv_path):
-            df_existing = pd.read_csv(csv_path)
-            df_combined = pd.concat([df_existing, df_new], ignore_index=True)
+        if os.path.eists(csv_path):
+            df_eisting = pd.read_csv(csv_path)
+            df_combined = pd.concat([df_eisting, df_new], ignore_inde=True)
         else:
             df_combined = df_new
         
-        df_combined.to_csv(csv_path, index=False)
+        df_combined.to_csv(csv_path, inde=alse)
         
-        logging.info(f'Signal logged to CSV: {asset} @ {entry_price:.2f} (confidence: {confidence:.3f})')
+        logging.info(f'Signal logged to CSV: asset @ entry_price:.f (confidence: confidence:.f)')
         
-    except Exception as e:
-        logging.error(f"Signal logging error: {e}")
+    ecept ception as e:
+        logging.error(f"Signal logging error: e")
 
-def log_trade_execution(trade_data: Dict):
+def log_trade_eecution(trade_data: Dict):
     try:
-        Path("logs").mkdir(exist_ok=True)
+        Path("logs").mkdir(eist_ok=True)
         
-        execution_data = {
+        eecution_data = 
             "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
             "asset": trade_data.get("asset", "Unknown"),
             "side": trade_data.get("side", "sell"),
-            "entry_price": trade_data.get("entry_price", 0),
-            "quantity": trade_data.get("quantity", 0),
+            "entry_price": trade_data.get("entry_price", ),
+            "quantity": trade_data.get("quantity", ),
             "status": trade_data.get("status", "unknown"),
             "order_id": trade_data.get("order_id", ""),
-            "mode": config.MODE
-        }
+            "mode": config.MOD
         
-        df_new = pd.DataFrame([execution_data])
-        csv_path = "logs/execution_log.csv"
         
-        if os.path.exists(csv_path):
-            df_existing = pd.read_csv(csv_path)
-            df_combined = pd.concat([df_existing, df_new], ignore_index=True)
+        df_new = pd.Datarame([eecution_data])
+        csv_path = "logs/eecution_log.csv"
+        
+        if os.path.eists(csv_path):
+            df_eisting = pd.read_csv(csv_path)
+            df_combined = pd.concat([df_eisting, df_new], ignore_inde=True)
         else:
             df_combined = df_new
         
-        df_combined.to_csv(csv_path, index=False)
+        df_combined.to_csv(csv_path, inde=alse)
         
-        logging.info(f"Trade execution logged: {execution_data['asset']} {execution_data['status']}")
+        logging.info(f"Trade eecution logged: eecution_data['asset'] eecution_data['status']")
         
-    except Exception as e:
-        logging.error(f"Trade execution logging error: {e}")
+    ecept ception as e:
+        logging.error(f"Trade eecution logging error: e")
 
 def get_trading_stats() -> Dict:
     try:
         csv_path = "logs/trade_log.csv"
-        if not os.path.exists(csv_path):
-            return {}
+        if not os.path.eists(csv_path):
+            return 
         
         df = pd.read_csv(csv_path)
         
-        stats = {
+        stats = 
             "total_signals": len(df),
-            "avg_confidence": df['confidence'].mean() if len(df) > 0 else 0,
+            "avg_confidence": df['confidence'].mean() if len(df) >  else ,
             "assets_traded": df['asset'].nunique(),
-            "most_recent_signal": df['timestamp'].iloc[-1] if len(df) > 0 else None
-        }
+            "most_recent_signal": df['timestamp'].iloc[-] if len(df) >  else None
+        
         
         return stats
         
-    except Exception:
-        return {}
-EOF
+    ecept ception:
+        return 
+O
 
-# 8. Fix signal_consciousness.py
-echo "🔧 Fixing signal_consciousness.py..."
-cat > signal_consciousness.py << 'EOF'
+# . i signal_consciousness.py
+echo "🔧 iing signal_consciousness.py..."
+cat > signal_consciousness.py << 'O'
 import torch
 import sys
 if not torch.cuda.is_available() and not (hasattr(torch.backends, 'mps') and torch.backends.mps.is_available()):
-    print("❌ CRITICAL: NO GPU DETECTED - SYSTEM TERMINATED")
-    sys.exit(1)
+    print("❌ CRITICAL: NO GPU DTCTD - SYSTM TRMINATD")
+    sys.eit()
 
 import requests
 import time
@@ -1031,76 +1031,76 @@ import logging
 def awaken_signal_data(signal_data):
     try:
         response = requests.get(
-            "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_change=true",
-            timeout=5
+            "https://api.coingecko.com/api/v/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_hr_change=true",
+            timeout=
         )
         
-        if response.status_code == 200:
+        if response.status_code == :
             market_essence = response.json()
             
-            asset_energies = {
-                "BTC": market_essence.get("bitcoin", {}).get("usd", 45000),
-                "ETH": market_essence.get("ethereum", {}).get("usd", 2500),
-                "SOL": market_essence.get("solana", {}).get("usd", 100)
-            }
+            asset_energies = 
+                "TC": market_essence.get("bitcoin", ).get("usd", ),
+                "TH": market_essence.get("ethereum", ).get("usd", ),
+                "SOL": market_essence.get("solana", ).get("usd", )
             
-            chosen_asset = "BTC"
-            highest_confidence = 0
+            
+            chosen_asset = "TC"
+            highest_confidence = 
             
             for signal in signal_data.get("signals", []):
-                conf = signal.get("confidence", 0)
+                conf = signal.get("confidence", )
                 if conf > highest_confidence:
                     highest_confidence = conf
                     source = signal.get("source", "")
                     if "entropy" in source:
-                        chosen_asset = "BTC"
+                        chosen_asset = "TC"
                     elif "laggard" in source:
-                        chosen_asset = "ETH"
+                        chosen_asset = "TH"
                     elif "relief" in source:
                         chosen_asset = "SOL"
             
             chosen_price = asset_energies[chosen_asset]
             
-            signal_data["best_signal"] = {
+            signal_data["best_signal"] = 
                 "asset": chosen_asset,
                 "entry_price": chosen_price,
-                "stop_loss": chosen_price * 1.015,
-                "take_profit_1": chosen_price * 0.985,
-                "take_profit_2": chosen_price * 0.975,
-                "take_profit_3": chosen_price * 0.965,
-                "confidence": signal_data.get("confidence", 0),
+                "stop_loss": chosen_price * .,
+                "take_profit_": chosen_price * .9,
+                "take_profit_": chosen_price * .9,
+                "take_profit_": chosen_price * .9,
+                "confidence": signal_data.get("confidence", ),
                 "reason": "divine_market_intuition",
-                "market_change_24h": market_essence.get(
-                    {"BTC": "bitcoin", "ETH": "ethereum", "SOL": "solana"}[chosen_asset], {}
-                ).get("usd_24h_change", 0),
+                "market_change_h": market_essence.get(
+                    "TC": "bitcoin", "TH": "ethereum", "SOL": "solana"[chosen_asset], 
+                ).get("usd_h_change", ),
                 "sacred_timestamp": time.time()
-            }
             
-    except Exception:
-        signal_data["best_signal"] = {
-            "asset": "BTC",
-            "entry_price": 45000,
-            "stop_loss": 45675,
-            "take_profit_1": 44325,
-            "confidence": signal_data.get("confidence", 0),
+            
+    ecept ception:
+        signal_data["best_signal"] = 
+            "asset": "TC",
+            "entry_price": ,
+            "stop_loss": ,
+            "take_profit_": ,
+            "confidence": signal_data.get("confidence", ),
             "reason": "default_consciousness"
-        }
+        
     
     return signal_data
 
 if __name__ == "__main__":
     print("Signal consciousness awakened ✧˚ ༘ ⋆｡˚♡")
-EOF
+O
 
 echo ""
-echo "🎉 COMPLETE SYSTEM RESTORATION COMPLETE!"
+echo "🎉 COMPLT SYSTM RSTORATION COMPLT!"
 echo "========================================"
-echo "✅ All Python files fixed and restored"
+echo "✅ All Python files fied and restored"
 echo "✅ Proper indentation restored"
 echo "✅ GPU detection maintained"
 echo "✅ All imports working"
 echo ""
-echo "🚀 Try now: python3 main.py --mode=dry"
+echo "🚀 Try now: python main.py --mode=dry"
 echo "🚀 Or: ./init_pipeline.sh dry"
 echo ""
-echo "💾 Backup of broken files: $BACKUP_DIR"
+echo "💾 ackup of broken files: $ACKUP_DIR"

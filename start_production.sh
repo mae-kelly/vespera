@@ -1,57 +1,57 @@
 #!/bin/bash
-# Start production HFT system
+# Start production HT system
 
-echo "🔴 STARTING PRODUCTION HFT SYSTEM"
+echo "🔴 STARTING PRODUCTION HT SYSTM"
 echo "================================="
 
 # Check for emergency stop
-if [ -f "/tmp/EMERGENCY_STOP" ]; then
-    echo "❌ EMERGENCY STOP DETECTED"
-    echo "Remove /tmp/EMERGENCY_STOP to proceed"
-    exit 1
+if [ -f "/tmp/MRGNCY_STOP" ]; then
+    echo "❌ MRGNCY STOP DTCTD"
+    echo "Remove /tmp/MRGNCY_STOP to proceed"
+    eit 
 fi
 
 # Verify production environment
-./setup_production_env.sh || exit 1
+./setup_production_env.sh || eit 
 
 # GPU check
-python3 -c "
+python -c "
 import torch
 if not torch.cuda.is_available() and not (hasattr(torch.backends, 'mps') and torch.backends.mps.is_available()):
     print('❌ CRITICAL: GPU required for production')
-    exit(1)
+    eit()
 print('✅ GPU available for production')
 "
 
 # Start Python signal generation
 echo "🐍 Starting Python signal generator..."
-python3 main.py &
+python main.py &
 PYTHON_PID=$!
 
 # Wait for signal file to be created
 echo "⏳ Waiting for signal generation..."
-sleep 10
+sleep 
 
-# Start Rust executor
-echo "🦀 Starting Rust executor..."
+# Start Rust eecutor
+echo "🦀 Starting Rust eecutor..."
 cargo run --release &
 RUST_PID=$!
 
 # Monitor both processes
-echo "🔴 PRODUCTION SYSTEM RUNNING"
+echo "🔴 PRODUCTION SYSTM RUNNING"
 echo "Python PID: $PYTHON_PID"
 echo "Rust PID: $RUST_PID"
 
-# Function to cleanup on exit
-cleanup() {
-    echo "🔴 STOPPING PRODUCTION SYSTEM"
-    kill $PYTHON_PID 2>/dev/null
-    kill $RUST_PID 2>/dev/null
+# unction to cleanup on eit
+cleanup() 
+    echo "🔴 STOPPING PRODUCTION SYSTM"
+    kill $PYTHON_PID >/dev/null
+    kill $RUST_PID >/dev/null
     wait
     echo "✅ Production system stopped"
-}
 
-trap cleanup EXIT
 
-# Wait for either process to exit
+trap cleanup XIT
+
+# Wait for either process to eit
 wait

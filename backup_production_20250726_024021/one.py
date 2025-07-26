@@ -1,7 +1,7 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
-HFT System Performance Test Suite
-Comprehensive testing for signal generation, execution timing, and system health
+HT System Performance Test Suite
+Comprehensive testing for signal generation, eecution timing, and system health
 """
 
 import sys
@@ -14,46 +14,46 @@ import statistics
 import psutil
 from pathlib import Path
 from typing import Dict, List, Tuple
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolecutor, as_completed
 import requests
 
-class HFTPerformanceTester:
+class HTPerformanceTester:
     def __init__(self):
-        self.test_results = {}
-        self.system_metrics = {}
+        self.test_results = 
+        self.system_metrics = 
         self.start_time = time.time()
         
     def run_all_tests(self):
         """Run comprehensive test suite"""
-        print("🚀 HFT SYSTEM PERFORMANCE TEST SUITE")
-        print("=" * 50)
+        print("🚀 HT SYSTM PRORMANC TST SUIT")
+        print("=" * )
         
         tests = [
             ("GPU Detection", self.test_gpu_detection),
             ("Module Imports", self.test_module_imports),
             ("Signal Generation Speed", self.test_signal_generation_speed),
             ("Signal Quality", self.test_signal_quality),
-            ("File I/O Performance", self.test_file_io_performance),
+            ("ile I/O Performance", self.test_file_io_performance),
             ("Memory Usage", self.test_memory_usage),
             ("Concurrent Processing", self.test_concurrent_processing),
-            ("Rust Executor", self.test_rust_executor),
-            ("End-to-End Latency", self.test_end_to_end_latency),
+            ("Rust ecutor", self.test_rust_eecutor),
+            ("nd-to-nd Latency", self.test_end_to_end_latency),
             ("System Stability", self.test_system_stability),
-            ("Fallback Mechanisms", self.test_fallback_mechanisms)
+            ("allback Mechanisms", self.test_fallback_mechanisms)
         ]
         
         for test_name, test_func in tests:
-            print(f"\n🧪 Testing: {test_name}")
+            print(f"n🧪 Testing: test_name")
             try:
                 result = test_func()
                 self.test_results[test_name] = result
-                if result.get("passed", False):
-                    print(f"✅ {test_name}: PASSED")
+                if result.get("passed", alse):
+                    print(f"✅ test_name: PASSD")
                 else:
-                    print(f"❌ {test_name}: FAILED - {result.get('error', 'Unknown error')}")
-            except Exception as e:
-                print(f"💥 {test_name}: CRASHED - {e}")
-                self.test_results[test_name] = {"passed": False, "error": str(e)}
+                    print(f"❌ test_name: AILD - result.get('error', 'Unknown error')")
+            ecept ception as e:
+                print(f"💥 test_name: CRASHD - e")
+                self.test_results[test_name] = "passed": alse, "error": str(e)
         
         self.generate_report()
     
@@ -63,26 +63,26 @@ class HFTPerformanceTester:
             import torch
             
             if torch.cuda.is_available():
-                gpu_name = torch.cuda.get_device_name(0)
-                gpu_memory = torch.cuda.get_device_properties(0).total_memory / 1024**3
-                return {
+                gpu_name = torch.cuda.get_device_name()
+                gpu_memory = torch.cuda.get_device_properties().total_memory / **
+                return 
                     "passed": True,
                     "gpu_type": "CUDA",
                     "device_name": gpu_name,
-                    "memory_gb": round(gpu_memory, 2)
-                }
+                    "memory_gb": round(gpu_memory, )
+                
             elif hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
-                return {
+                return 
                     "passed": True,
                     "gpu_type": "Apple MPS",
                     "device_name": "Apple Silicon",
                     "memory_gb": "N/A"
-                }
-            else:
-                return {"passed": False, "error": "No GPU detected"}
                 
-        except Exception as e:
-            return {"passed": False, "error": f"GPU test failed: {e}"}
+            else:
+                return "passed": alse, "error": "No GPU detected"
+                
+        ecept ception as e:
+            return "passed": alse, "error": f"GPU test failed: e"
     
     def test_module_imports(self) -> Dict:
         """Test all module imports and initialization"""
@@ -92,24 +92,24 @@ class HFTPerformanceTester:
             'logger', 'notifier_elegant'
         ]
         
-        import_times = {}
+        import_times = 
         failed_imports = []
         
         for module in modules:
             start = time.time()
             try:
                 __import__(module)
-                import_times[module] = (time.time() - start) * 1000  # ms
-            except Exception as e:
-                failed_imports.append(f"{module}: {e}")
+                import_times[module] = (time.time() - start) *   # ms
+            ecept ception as e:
+                failed_imports.append(f"module: e")
         
-        return {
-            "passed": len(failed_imports) == 0,
+        return 
+            "passed": len(failed_imports) == ,
             "import_times_ms": import_times,
             "failed_imports": failed_imports,
             "total_modules": len(modules),
-            "avg_import_time_ms": statistics.mean(import_times.values()) if import_times else 0
-        }
+            "avg_import_time_ms": statistics.mean(import_times.values()) if import_times else 
+        
     
     def test_signal_generation_speed(self) -> Dict:
         """Test signal generation speed and consistency"""
@@ -120,34 +120,34 @@ class HFTPerformanceTester:
             times = []
             signals = []
             
-            for i in range(100):
+            for i in range():
                 start = time.time()
                 
-                shared_data = {
+                shared_data = 
                     "timestamp": time.time(),
                     "mode": "dry",
                     "iteration": i,
                     "gpu_available": True
-                }
+                
                 
                 signal = signal_engine.generate_signal(shared_data)
-                execution_time = (time.time() - start) * 1000000  # microseconds
-                times.append(execution_time)
+                eecution_time = (time.time() - start) *   # microseconds
+                times.append(eecution_time)
                 signals.append(signal)
             
-            return {
+            return 
                 "passed": True,
-                "iterations": 100,
+                "iterations": ,
                 "avg_time_us": statistics.mean(times),
                 "min_time_us": min(times),
-                "max_time_us": max(times),
+                "ma_time_us": ma(times),
                 "std_dev_us": statistics.stdev(times),
-                "p95_time_us": sorted(times)[94],  # 95th percentile
-                "signals_generated": len([s for s in signals if s.get("confidence", 0) > 0])
-            }
+                "p9_time_us": sorted(times)[9],  # 9th percentile
+                "signals_generated": len([s for s in signals if s.get("confidence", ) > ])
             
-        except Exception as e:
-            return {"passed": False, "error": f"Signal generation test failed: {e}"}
+            
+        ecept ception as e:
+            return "passed": alse, "error": f"Signal generation test failed: e"
     
     def test_signal_quality(self) -> Dict:
         """Test signal quality and consistency"""
@@ -158,8 +158,8 @@ class HFTPerformanceTester:
             signals = []
             confidences = []
             
-            for i in range(50):
-                shared_data = {"timestamp": time.time(), "mode": "dry"}
+            for i in range():
+                shared_data = "timestamp": time.time(), "mode": "dry"
                 signal = signal_engine.generate_signal(shared_data)
                 
                 if signal.get("confidence"):
@@ -167,69 +167,69 @@ class HFTPerformanceTester:
                     signals.append(signal)
             
             if not confidences:
-                return {"passed": False, "error": "No signals with confidence generated"}
+                return "passed": alse, "error": "No signals with confidence generated"
             
             # Test signal merging
-            merged = confidence_scoring.merge_signals(signals[:10])
+            merged = confidence_scoring.merge_signals(signals[:])
             
-            return {
+            return 
                 "passed": True,
                 "total_signals": len(signals),
                 "avg_confidence": statistics.mean(confidences),
-                "confidence_range": [min(confidences), max(confidences)],
+                "confidence_range": [min(confidences), ma(confidences)],
                 "signals_with_data": len([s for s in signals if "signal_data" in s]),
-                "merged_confidence": merged.get("confidence", 0),
-                "signal_consistency": statistics.stdev(confidences) < 0.1
-            }
+                "merged_confidence": merged.get("confidence", ),
+                "signal_consistency": statistics.stdev(confidences) < .
             
-        except Exception as e:
-            return {"passed": False, "error": f"Signal quality test failed: {e}"}
+            
+        ecept ception as e:
+            return "passed": alse, "error": f"Signal quality test failed: e"
     
     def test_file_io_performance(self) -> Dict:
         """Test file I/O performance for signal writing"""
         try:
-            test_signal = {
+            test_signal = 
                 "timestamp": time.time(),
-                "confidence": 0.85,
-                "best_signal": {
-                    "asset": "BTC",
-                    "entry_price": 45000,
-                    "stop_loss": 45675,
-                    "take_profit_1": 44325
-                }
-            }
+                "confidence": .,
+                "best_signal": 
+                    "asset": "TC",
+                    "entry_price": ,
+                    "stop_loss": ,
+                    "take_profit_": 
+                
+            
             
             write_times = []
             read_times = []
             
-            for i in range(100):
+            for i in range():
                 # Write test
                 start = time.time()
-                with open(f"/tmp/test_signal_{i}.json", "w") as f:
+                with open(f"/tmp/test_signal_i.json", "w") as f:
                     json.dump(test_signal, f)
-                write_times.append((time.time() - start) * 1000000)  # microseconds
+                write_times.append((time.time() - start) * )  # microseconds
                 
                 # Read test
                 start = time.time()
-                with open(f"/tmp/test_signal_{i}.json", "r") as f:
+                with open(f"/tmp/test_signal_i.json", "r") as f:
                     json.load(f)
-                read_times.append((time.time() - start) * 1000000)
+                read_times.append((time.time() - start) * )
                 
                 # Cleanup
-                os.remove(f"/tmp/test_signal_{i}.json")
+                os.remove(f"/tmp/test_signal_i.json")
             
-            return {
+            return 
                 "passed": True,
                 "avg_write_time_us": statistics.mean(write_times),
                 "avg_read_time_us": statistics.mean(read_times),
-                "max_write_time_us": max(write_times),
-                "max_read_time_us": max(read_times),
-                "p95_write_time_us": sorted(write_times)[94],
-                "p95_read_time_us": sorted(read_times)[94]
-            }
+                "ma_write_time_us": ma(write_times),
+                "ma_read_time_us": ma(read_times),
+                "p9_write_time_us": sorted(write_times)[9],
+                "p9_read_time_us": sorted(read_times)[9]
             
-        except Exception as e:
-            return {"passed": False, "error": f"File I/O test failed: {e}"}
+            
+        ecept ception as e:
+            return "passed": alse, "error": f"ile I/O test failed: e"
     
     def test_memory_usage(self) -> Dict:
         """Test memory usage and leaks"""
@@ -238,33 +238,33 @@ class HFTPerformanceTester:
             import torch
             
             process = psutil.Process()
-            initial_memory = process.memory_info().rss / 1024 / 1024  # MB
+            initial_memory = process.memory_info().rss /  /   # M
             
             # Generate many signals to test for memory leaks
-            for i in range(1000):
-                shared_data = {"timestamp": time.time(), "mode": "dry"}
+            for i in range():
+                shared_data = "timestamp": time.time(), "mode": "dry"
                 signal_engine.generate_signal(shared_data)
                 
-                if i % 100 == 0:
-                    # Force garbage collection
+                if i %  == :
+                    # orce garbage collection
                     import gc
                     gc.collect()
                     if torch.cuda.is_available():
                         torch.cuda.empty_cache()
             
-            final_memory = process.memory_info().rss / 1024 / 1024  # MB
+            final_memory = process.memory_info().rss /  /   # M
             memory_increase = final_memory - initial_memory
             
-            return {
-                "passed": memory_increase < 100,  # Less than 100MB increase is acceptable
-                "initial_memory_mb": round(initial_memory, 2),
-                "final_memory_mb": round(final_memory, 2),
-                "memory_increase_mb": round(memory_increase, 2),
-                "memory_leak_detected": memory_increase > 100
-            }
+            return 
+                "passed": memory_increase < ,  # Less than M increase is acceptable
+                "initial_memory_mb": round(initial_memory, ),
+                "final_memory_mb": round(final_memory, ),
+                "memory_increase_mb": round(memory_increase, ),
+                "memory_leak_detected": memory_increase > 
             
-        except Exception as e:
-            return {"passed": False, "error": f"Memory test failed: {e}"}
+            
+        ecept ception as e:
+            return "passed": alse, "error": f"Memory test failed: e"
     
     def test_concurrent_processing(self) -> Dict:
         """Test concurrent signal processing"""
@@ -273,79 +273,79 @@ class HFTPerformanceTester:
             
             def generate_signal_worker(worker_id):
                 start_time = time.time()
-                shared_data = {
+                shared_data = 
                     "timestamp": time.time(),
                     "mode": "dry",
                     "worker_id": worker_id
-                }
+                
                 signal = signal_engine.generate_signal(shared_data)
-                return {
+                return 
                     "worker_id": worker_id,
-                    "execution_time": (time.time() - start_time) * 1000,
-                    "confidence": signal.get("confidence", 0)
-                }
+                    "eecution_time": (time.time() - start_time) * ,
+                    "confidence": signal.get("confidence", )
+                
             
-            with ThreadPoolExecutor(max_workers=10) as executor:
-                futures = [executor.submit(generate_signal_worker, i) for i in range(50)]
+            with ThreadPoolecutor(ma_workers=) as eecutor:
+                futures = [eecutor.submit(generate_signal_worker, i) for i in range()]
                 results = [future.result() for future in as_completed(futures)]
             
-            execution_times = [r["execution_time"] for r in results]
-            confidences = [r["confidence"] for r in results if r["confidence"] > 0]
+            eecution_times = [r["eecution_time"] for r in results]
+            confidences = [r["confidence"] for r in results if r["confidence"] > ]
             
-            return {
-                "passed": len(results) == 50 and len(confidences) > 0,
-                "concurrent_workers": 50,
-                "successful_executions": len(results),
-                "avg_execution_time_ms": statistics.mean(execution_times),
-                "max_execution_time_ms": max(execution_times),
+            return 
+                "passed": len(results) ==  and len(confidences) > ,
+                "concurrent_workers": ,
+                "successful_eecutions": len(results),
+                "avg_eecution_time_ms": statistics.mean(eecution_times),
+                "ma_eecution_time_ms": ma(eecution_times),
                 "signals_with_confidence": len(confidences),
-                "concurrent_performance_ok": max(execution_times) < 1000  # Less than 1 second
-            }
+                "concurrent_performance_ok": ma(eecution_times) <   # Less than  second
             
-        except Exception as e:
-            return {"passed": False, "error": f"Concurrent processing test failed: {e}"}
+            
+        ecept ception as e:
+            return "passed": alse, "error": f"Concurrent processing test failed: e"
     
-    def test_rust_executor(self) -> Dict:
-        """Test Rust executor compilation and basic functionality"""
+    def test_rust_eecutor(self) -> Dict:
+        """Test Rust eecutor compilation and basic functionality"""
         try:
-            # Check if Rust executor compiles
+            # Check if Rust eecutor compiles
             result = subprocess.run(
                 ["cargo", "check"],
                 capture_output=True,
-                text=True,
-                timeout=30
+                tet=True,
+                timeout=
             )
             
-            compile_success = result.returncode == 0
+            compile_success = result.returncode == 
             
             # Test basic signal file processing
-            test_signal = {
+            test_signal = 
                 "timestamp": time.time(),
-                "confidence": 0.8,
-                "best_signal": {
-                    "asset": "BTC",
-                    "entry_price": 45000,
-                    "stop_loss": 45675,
-                    "take_profit_1": 44325
-                }
-            }
+                "confidence": .,
+                "best_signal": 
+                    "asset": "TC",
+                    "entry_price": ,
+                    "stop_loss": ,
+                    "take_profit_": 
+                
+            
             
             with open("/tmp/signal.json", "w") as f:
                 json.dump(test_signal, f)
             
-            return {
+            return 
                 "passed": compile_success,
                 "compilation_output": result.stderr if not compile_success else "OK",
-                "signal_file_created": os.path.exists("/tmp/signal.json"),
+                "signal_file_created": os.path.eists("/tmp/signal.json"),
                 "rust_toolchain_available": True
-            }
             
-        except subprocess.TimeoutExpired:
-            return {"passed": False, "error": "Rust compilation timed out"}
-        except FileNotFoundError:
-            return {"passed": False, "error": "Cargo/Rust not found"}
-        except Exception as e:
-            return {"passed": False, "error": f"Rust executor test failed: {e}"}
+            
+        ecept subprocess.Timeoutpired:
+            return "passed": alse, "error": "Rust compilation timed out"
+        ecept ileNotoundrror:
+            return "passed": alse, "error": "Cargo/Rust not found"
+        ecept ception as e:
+            return "passed": alse, "error": f"Rust eecutor test failed: e"
     
     def test_end_to_end_latency(self) -> Dict:
         """Test complete end-to-end system latency"""
@@ -355,40 +355,40 @@ class HFTPerformanceTester:
             
             latencies = []
             
-            for i in range(20):
+            for i in range():
                 start_time = time.time()
                 
                 # Complete signal generation pipeline
-                shared_data = {"timestamp": time.time(), "mode": "dry"}
+                shared_data = "timestamp": time.time(), "mode": "dry"
                 signal = signal_engine.generate_signal(shared_data)
                 
-                if signal.get("confidence", 0) > 0:
+                if signal.get("confidence", ) > :
                     merged = confidence_scoring.merge_signals([signal])
                     
                     # Write to file (simulating real workflow)
                     with open("/tmp/test_signal.json", "w") as f:
                         json.dump(merged, f)
                 
-                end_to_end_time = (time.time() - start_time) * 1000  # milliseconds
+                end_to_end_time = (time.time() - start_time) *   # milliseconds
                 latencies.append(end_to_end_time)
             
             # Cleanup
-            if os.path.exists("/tmp/test_signal.json"):
+            if os.path.eists("/tmp/test_signal.json"):
                 os.remove("/tmp/test_signal.json")
             
-            return {
+            return 
                 "passed": True,
                 "iterations": len(latencies),
                 "avg_latency_ms": statistics.mean(latencies),
                 "min_latency_ms": min(latencies),
-                "max_latency_ms": max(latencies),
-                "p95_latency_ms": sorted(latencies)[18],  # 95th percentile
-                "sub_millisecond_count": len([l for l in latencies if l < 1.0]),
-                "target_latency_met": statistics.mean(latencies) < 10.0  # Under 10ms average
-            }
+                "ma_latency_ms": ma(latencies),
+                "p9_latency_ms": sorted(latencies)[],  # 9th percentile
+                "sub_millisecond_count": len([l for l in latencies if l < .]),
+                "target_latency_met": statistics.mean(latencies) < .  # Under ms average
             
-        except Exception as e:
-            return {"passed": False, "error": f"End-to-end latency test failed: {e}"}
+            
+        ecept ception as e:
+            return "passed": alse, "error": f"nd-to-end latency test failed: e"
     
     def test_system_stability(self) -> Dict:
         """Test system stability under load"""
@@ -397,36 +397,36 @@ class HFTPerformanceTester:
             
             start_time = time.time()
             errors = []
-            successful_iterations = 0
+            successful_iterations = 
             
-            # Run for 30 seconds
-            while time.time() - start_time < 30:
+            # Run for  seconds
+            while time.time() - start_time < :
                 try:
-                    shared_data = {"timestamp": time.time(), "mode": "dry"}
+                    shared_data = "timestamp": time.time(), "mode": "dry"
                     signal = signal_engine.generate_signal(shared_data)
                     
-                    if signal.get("confidence", 0) > 0:
-                        successful_iterations += 1
+                    if signal.get("confidence", ) > :
+                        successful_iterations += 
                         
-                    time.sleep(0.01)  # 10ms cycle
+                    time.sleep(.)  # ms cycle
                     
-                except Exception as e:
+                ecept ception as e:
                     errors.append(str(e))
             
             total_time = time.time() - start_time
             
-            return {
-                "passed": len(errors) == 0,
-                "test_duration_seconds": round(total_time, 2),
+            return 
+                "passed": len(errors) == ,
+                "test_duration_seconds": round(total_time, ),
                 "successful_iterations": successful_iterations,
                 "errors_encountered": len(errors),
-                "error_rate": len(errors) / successful_iterations if successful_iterations > 0 else 1,
+                "error_rate": len(errors) / successful_iterations if successful_iterations >  else ,
                 "iterations_per_second": successful_iterations / total_time,
-                "stability_score": (successful_iterations / (successful_iterations + len(errors))) * 100
-            }
+                "stability_score": (successful_iterations / (successful_iterations + len(errors))) * 
             
-        except Exception as e:
-            return {"passed": False, "error": f"Stability test failed: {e}"}
+            
+        ecept ception as e:
+            return "passed": alse, "error": f"Stability test failed: e"
     
     def test_fallback_mechanisms(self) -> Dict:
         """Test system fallback mechanisms"""
@@ -438,122 +438,122 @@ class HFTPerformanceTester:
             
             # Test with malformed signals
             bad_signals = [
-                {"confidence": "invalid"},
-                {"source": "test"},
-                {}
+                "confidence": "invalid",
+                "source": "test",
+                
             ]
             bad_result = confidence_scoring.merge_signals(bad_signals)
             
             # Test file writing fallback
-            os.makedirs("/tmp", exist_ok=True)
-            fallback_signal = {
-                "confidence": 0.72,
-                "best_signal": {
-                    "asset": "BTC",
-                    "entry_price": 67500,
+            os.makedirs("/tmp", eist_ok=True)
+            fallback_signal = 
+                "confidence": .,
+                "best_signal": 
+                    "asset": "TC",
+                    "entry_price": ,
                     "reason": "fallback_test"
-                }
-            }
+                
+            
             
             with open("/tmp/fallback_test.json", "w") as f:
                 json.dump(fallback_signal, f)
             
-            return {
+            return 
                 "passed": True,
-                "empty_signals_handled": empty_result.get("confidence", 0) > 0,
-                "bad_signals_handled": bad_result.get("confidence", 0) > 0,
-                "fallback_confidence": empty_result.get("confidence", 0),
-                "file_fallback_works": os.path.exists("/tmp/fallback_test.json"),
+                "empty_signals_handled": empty_result.get("confidence", ) > ,
+                "bad_signals_handled": bad_result.get("confidence", ) > ,
+                "fallback_confidence": empty_result.get("confidence", ),
+                "file_fallback_works": os.path.eists("/tmp/fallback_test.json"),
                 "graceful_degradation": True
-            }
             
-        except Exception as e:
-            return {"passed": False, "error": f"Fallback test failed: {e}"}
+            
+        ecept ception as e:
+            return "passed": alse, "error": f"allback test failed: e"
     
     def generate_report(self):
         """Generate comprehensive test report"""
-        print("\n" + "=" * 60)
-        print("📊 PERFORMANCE TEST REPORT")
-        print("=" * 60)
+        print("n" + "=" * )
+        print("📊 PRORMANC TST RPORT")
+        print("=" * )
         
-        passed_tests = sum(1 for result in self.test_results.values() if result.get("passed", False))
+        passed_tests = sum( for result in self.test_results.values() if result.get("passed", alse))
         total_tests = len(self.test_results)
         
-        print(f"Tests Passed: {passed_tests}/{total_tests} ({(passed_tests/total_tests)*100:.1f}%)")
-        print(f"Total Test Time: {time.time() - self.start_time:.2f} seconds")
+        print(f"Tests Passed: passed_tests/total_tests ((passed_tests/total_tests)*:.f%)")
+        print(f"Total Test Time: time.time() - self.start_time:.f seconds")
         
         # Performance highlights
-        print("\n🚀 PERFORMANCE HIGHLIGHTS:")
+        print("n🚀 PRORMANC HIGHLIGHTS:")
         
         if "Signal Generation Speed" in self.test_results:
             speed_result = self.test_results["Signal Generation Speed"]
             if speed_result.get("passed"):
-                print(f"  • Signal Generation: {speed_result.get('avg_time_us', 0):.0f}μs average")
-                print(f"  • P95 Latency: {speed_result.get('p95_time_us', 0):.0f}μs")
+                print(f"  • Signal Generation: speed_result.get('avg_time_us', ):.fμs average")
+                print(f"  • P9 Latency: speed_result.get('p9_time_us', ):.fμs")
         
-        if "End-to-End Latency" in self.test_results:
-            latency_result = self.test_results["End-to-End Latency"]
+        if "nd-to-nd Latency" in self.test_results:
+            latency_result = self.test_results["nd-to-nd Latency"]
             if latency_result.get("passed"):
-                print(f"  • End-to-End: {latency_result.get('avg_latency_ms', 0):.2f}ms average")
-                print(f"  • Sub-millisecond: {latency_result.get('sub_millisecond_count', 0)} operations")
+                print(f"  • nd-to-nd: latency_result.get('avg_latency_ms', ):.fms average")
+                print(f"  • Sub-millisecond: latency_result.get('sub_millisecond_count', ) operations")
         
         if "Memory Usage" in self.test_results:
             memory_result = self.test_results["Memory Usage"]
             if memory_result.get("passed"):
-                print(f"  • Memory Usage: {memory_result.get('memory_increase_mb', 0):.1f}MB increase")
+                print(f"  • Memory Usage: memory_result.get('memory_increase_mb', ):.fM increase")
         
         if "System Stability" in self.test_results:
             stability_result = self.test_results["System Stability"]
             if stability_result.get("passed"):
-                print(f"  • Stability: {stability_result.get('stability_score', 0):.1f}% uptime")
-                print(f"  • Throughput: {stability_result.get('iterations_per_second', 0):.1f} ops/sec")
+                print(f"  • Stability: stability_result.get('stability_score', ):.f% uptime")
+                print(f"  • Throughput: stability_result.get('iterations_per_second', ):.f ops/sec")
         
-        # Failed tests
+        # ailed tests
         failed_tests = [name for name, result in self.test_results.items() 
-                       if not result.get("passed", False)]
+                       if not result.get("passed", alse)]
         
         if failed_tests:
-            print(f"\n❌ FAILED TESTS:")
+            print(f"n❌ AILD TSTS:")
             for test_name in failed_tests:
                 error = self.test_results[test_name].get("error", "Unknown error")
-                print(f"  • {test_name}: {error}")
+                print(f"  • test_name: error")
         
         # Recommendations
-        print(f"\n💡 RECOMMENDATIONS:")
+        print(f"n💡 RCOMMNDATIONS:")
         
         if "GPU Detection" in self.test_results:
             gpu_result = self.test_results["GPU Detection"]
             if gpu_result.get("passed"):
                 gpu_type = gpu_result.get("gpu_type", "Unknown")
-                print(f"  • GPU ({gpu_type}) detected and working")
+                print(f"  • GPU (gpu_type) detected and working")
             else:
                 print("  • ⚠️ No GPU detected - performance will be limited")
         
         if passed_tests == total_tests:
             print("  • 🎉 All tests passed! System is ready for production")
-        elif passed_tests >= total_tests * 0.8:
+        elif passed_tests >= total_tests * .:
             print("  • ✅ Most tests passed - system is functional with minor issues")
         else:
             print("  • ⚠️ Multiple test failures - review system configuration")
         
         # Save detailed results
         with open("logs/performance_test_results.json", "w") as f:
-            json.dump({
+            json.dump(
                 "timestamp": time.time(),
                 "test_results": self.test_results,
-                "summary": {
+                "summary": 
                     "passed_tests": passed_tests,
                     "total_tests": total_tests,
-                    "success_rate": (passed_tests/total_tests)*100,
+                    "success_rate": (passed_tests/total_tests)*,
                     "test_duration": time.time() - self.start_time
-                }
-            }, f, indent=2)
+                
+            , f, indent=)
         
-        print(f"\n📁 Detailed results saved to: logs/performance_test_results.json")
+        print(f"n📁 Detailed results saved to: logs/performance_test_results.json")
 
 if __name__ == "__main__":
-    # Ensure logs directory exists
-    Path("logs").mkdir(exist_ok=True)
+    # nsure logs directory eists
+    Path("logs").mkdir(eist_ok=True)
     
-    tester = HFTPerformanceTester()
+    tester = HTPerformanceTester()
     tester.run_all_tests()

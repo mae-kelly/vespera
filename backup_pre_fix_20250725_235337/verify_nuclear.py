@@ -7,14 +7,14 @@ def verify_no_cpu():
             try:
                 with open(file, 'r') as f:
                     content = f.read()
-                if any(bad in content.lower() for bad in ['device="cpu"', "device='cpu'", '.cpu()', 'import numpy', 'np.', 'except:']):
+                if any(bad in content.lower() for bad in ['device="cpu"', "device='cpu'", '.cpu()', 'import numpy', 'np.', 'ecept:']):
                     violations.append(file)
-            except: pass
+            ecept: pass
     return violations
 violations = verify_no_cpu()
 if violations:
-    print(f"❌ Files with violations: {violations}")
-    exit(1)
-print("🔥 NUCLEAR VERIFICATION PASSED")
-print("⚡ ZERO CPU FALLBACKS DETECTED")
-print("🎯 GPU-ONLY ENFORCEMENT CONFIRMED")
+    print(f"❌ iles with violations: violations")
+    eit()
+print("🔥 NUCLAR VRIICATION PASSD")
+print("⚡ ZRO CPU ALLACKS DTCTD")
+print("🎯 GPU-ONLY NORCMNT CONIRMD")

@@ -1,150 +1,150 @@
 #!/bin/bash
-# Rust Executor Performance Test Suite
-# Tests compilation, execution speed, and memory efficiency
+# Rust ecutor Performance Test Suite
+# Tests compilation, eecution speed, and memory efficiency
 
 set -e
 
-echo "🦀 RUST EXECUTOR PERFORMANCE TESTS"
+echo "🦀 RUST XCUTOR PRORMANC TSTS"
 echo "=================================="
 
 # Colors for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
+RD='[;m'
+GRN='[;m'
+YLLOW='[;m'
+LU='[;m'
+NC='[m' # No Color
 
 # Test results
-PASSED_TESTS=0
-TOTAL_TESTS=0
+PASSD_TSTS=
+TOTAL_TSTS=
 
-# Function to run a test
-run_test() {
-    local test_name="$1"
-    local test_function="$2"
+# unction to run a test
+run_test() 
+    local test_name="$"
+    local test_function="$"
     
-    echo -e "\n${BLUE}🧪 Testing: $test_name${NC}"
-    TOTAL_TESTS=$((TOTAL_TESTS + 1))
+    echo -e "n$LU🧪 Testing: $test_name$NC"
+    TOTAL_TSTS=$((TOTAL_TSTS + ))
     
     if $test_function; then
-        echo -e "${GREEN}✅ $test_name: PASSED${NC}"
-        PASSED_TESTS=$((PASSED_TESTS + 1))
-        return 0
+        echo -e "$GRN✅ $test_name: PASSD$NC"
+        PASSD_TSTS=$((PASSD_TSTS + ))
+        return 
     else
-        echo -e "${RED}❌ $test_name: FAILED${NC}"
-        return 1
+        echo -e "$RD❌ $test_name: AILD$NC"
+        return 
     fi
-}
 
-# Test 1: Rust toolchain availability
-test_rust_toolchain() {
+
+# Test : Rust toolchain availability
+test_rust_toolchain() 
     if command -v cargo &> /dev/null && command -v rustc &> /dev/null; then
         local rust_version=$(rustc --version)
         local cargo_version=$(cargo --version)
         echo "  Rust: $rust_version"
         echo "  Cargo: $cargo_version"
-        return 0
+        return 
     else
-        echo "  Error: Rust toolchain not found"
-        return 1
+        echo "  rror: Rust toolchain not found"
+        return 
     fi
-}
 
-# Test 2: Project compilation speed
-test_compilation_speed() {
+
+# Test : Project compilation speed
+test_compilation_speed() 
     echo "  Cleaning previous builds..."
-    cargo clean > /dev/null 2>&1
+    cargo clean > /dev/null >&
     
     echo "  Running cargo check..."
     local start_time=$(date +%s.%N)
-    if cargo check > /dev/null 2>&1; then
+    if cargo check > /dev/null >&; then
         local end_time=$(date +%s.%N)
-        local duration=$(echo "$end_time - $start_time" | bc -l 2>/dev/null || echo "0")
-        echo "  Compilation time: ${duration}s"
-        return 0
+        local duration=$(echo "$end_time - $start_time" | bc -l >/dev/null || echo "")
+        echo "  Compilation time: $durations"
+        return 
     else
         echo "  Compilation failed"
         cargo check
-        return 1
+        return 
     fi
-}
 
-# Test 3: Release build optimization
-test_release_build() {
-    echo "  Building release version..."
+
+# Test : Release build optimization
+test_release_build() 
+    echo "  uilding release version..."
     local start_time=$(date +%s.%N)
-    if cargo build --release > /dev/null 2>&1; then
+    if cargo build --release > /dev/null >&; then
         local end_time=$(date +%s.%N)
-        local duration=$(echo "$end_time - $start_time" | bc -l 2>/dev/null || echo "0")
-        echo "  Release build time: ${duration}s"
+        local duration=$(echo "$end_time - $start_time" | bc -l >/dev/null || echo "")
+        echo "  Release build time: $durations"
         
-        # Check if binary exists and get size
-        if [ -f "target/release/hft_executor" ]; then
-            local size=$(ls -lh target/release/hft_executor | awk '{print $5}')
-            echo "  Binary size: $size"
-            return 0
+        # Check if binary eists and get size
+        if [ -f "target/release/hft_eecutor" ]; then
+            local size=$(ls -lh target/release/hft_eecutor | awk 'print $')
+            echo "  inary size: $size"
+            return 
         else
             echo "  Release binary not found"
-            return 1
+            return 
         fi
     else
         echo "  Release build failed"
-        return 1
+        return 
     fi
-}
 
-# Test 4: Basic functionality
-test_basic_functionality() {
+
+# Test : asic functionality
+test_basic_functionality() 
     echo "  Testing basic functionality..."
     
     # Create test signal file
-    cat > /tmp/signal.json << 'EOF'
-{
-    "timestamp": 1234567890,
-    "confidence": 0.8,
-    "best_signal": {
-        "asset": "BTC",
-        "entry_price": 45000,
-        "stop_loss": 45675,
-        "take_profit_1": 44325
-    }
-}
-EOF
+    cat > /tmp/signal.json << 'O'
+
+    "timestamp": 9,
+    "confidence": .,
+    "best_signal": 
+        "asset": "TC",
+        "entry_price": ,
+        "stop_loss": ,
+        "take_profit_": 
+    
+
+O
     
     # Set dry run mode
-    export MODE=dry
+    eport MOD=dry
     
-    echo "  ✅ Basic functionality test completed"
-    return 0
-}
+    echo "  ✅ asic functionality test completed"
+    return 
+
 
 # Run all tests
 echo "Starting Rust performance test suite..."
 
 run_test "Rust Toolchain" test_rust_toolchain
 run_test "Compilation Speed" test_compilation_speed
-run_test "Release Build" test_release_build
-run_test "Basic Functionality" test_basic_functionality
+run_test "Release uild" test_release_build
+run_test "asic unctionality" test_basic_functionality
 
 # Generate report
 echo ""
 echo "=================================="
-echo "📊 RUST PERFORMANCE TEST REPORT"
+echo "📊 RUST PRORMANC TST RPORT"
 echo "=================================="
-echo -e "Tests Passed: ${GREEN}$PASSED_TESTS${NC}/${TOTAL_TESTS} ($(( PASSED_TESTS * 100 / TOTAL_TESTS ))%)"
+echo -e "Tests Passed: $GRN$PASSD_TSTS$NC/$TOTAL_TSTS ($(( PASSD_TSTS *  / TOTAL_TSTS ))%)"
 
-if [ $PASSED_TESTS -eq $TOTAL_TESTS ]; then
-    echo -e "${GREEN}🎉 All Rust tests passed! Executor is ready for production.${NC}"
-    exit_code=0
-elif [ $PASSED_TESTS -ge $(( TOTAL_TESTS * 3 / 4 )) ]; then
-    echo -e "${YELLOW}✅ Most tests passed. Rust executor is functional with minor issues.${NC}"
-    exit_code=0
+if [ $PASSD_TSTS -eq $TOTAL_TSTS ]; then
+    echo -e "$GRN🎉 All Rust tests passed! ecutor is ready for production.$NC"
+    eit_code=
+elif [ $PASSD_TSTS -ge $(( TOTAL_TSTS *  /  )) ]; then
+    echo -e "$YLLOW✅ Most tests passed. Rust eecutor is functional with minor issues.$NC"
+    eit_code=
 else
-    echo -e "${RED}⚠️ Multiple test failures. Review Rust executor configuration.${NC}"
-    exit_code=1
+    echo -e "$RD⚠️ Multiple test failures. Review Rust eecutor configuration.$NC"
+    eit_code=
 fi
 
 echo ""
-echo "🦀 Rust executor performance testing complete!"
+echo "🦀 Rust eecutor performance testing complete!"
 
-exit $exit_code
+eit $eit_code

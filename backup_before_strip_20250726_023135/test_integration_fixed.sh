@@ -1,20 +1,20 @@
 #!/bin/bash
-echo "🔄 TESTING SYSTEM INTEGRATION"
+echo "🔄 TSTING SYSTM INTGRATION"
 echo "============================="
 
 # Setup
 mkdir -p /tmp logs
-export MODE=dry
+eport MOD=dry
 
 echo "Testing Python signal generation..."
-python3 -c "
+python -c "
 import signal_engine
 import confidence_scoring  
 import json
 import time
 
 # Generate signal
-shared_data = {'timestamp': time.time(), 'mode': 'dry'}
+shared_data = 'timestamp': time.time(), 'mode': 'dry'
 signal = signal_engine.generate_signal(shared_data)
 merged = confidence_scoring.merge_signals([signal])
 
@@ -23,11 +23,11 @@ with open('/tmp/signal.json', 'w') as f:
     json.dump(merged, f)
 
 print('✅ Signal generation successful')
-print(f'Confidence: {merged[\"confidence\"]:.3f}')
+print(f'Confidence: merged["confidence"]:.f')
 "
 
 echo "Testing signal file validation..."
-python3 -c "
+python -c "
 import json
 with open('/tmp/signal.json') as f:
     signal = json.load(f)

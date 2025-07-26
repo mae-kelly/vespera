@@ -3,8 +3,8 @@
 
 echo "📦 Installing WebSocket dependencies..."
 
-pip install websocket-client>=1.6.0
-pip install websockets>=11.0.0
+pip install websocket-client>=..
+pip install websockets>=..
 
 echo "✅ WebSocket dependencies installed"
 echo "🔴 Ready for live market data feeds"

@@ -1,28 +1,28 @@
 #!/bin/bash
-echo "🧪 TESTING PYTHON MODULES"
+echo "🧪 TSTING PYTHON MODULS"
 echo "=========================="
 
-TOTAL_TESTS=0
-PASSED_TESTS=0
-FAILED_TESTS=0
+TOTAL_TSTS=
+PASSD_TSTS=
+AILD_TSTS=
 
-run_test() {
-    echo -e "\nTesting: $1"
-    TOTAL_TESTS=$((TOTAL_TESTS + 1))
+run_test() 
+    echo -e "nTesting: $"
+    TOTAL_TSTS=$((TOTAL_TSTS + ))
     
-    if eval "$2" >/dev/null 2>&1; then
-        echo -e "✅ PASS: $1"
-        PASSED_TESTS=$((PASSED_TESTS + 1))
+    if eval "$" >/dev/null >&; then
+        echo -e "✅ PASS: $"
+        PASSD_TSTS=$((PASSD_TSTS + ))
     else
-        echo -e "❌ FAIL: $1"
-        FAILED_TESTS=$((FAILED_TESTS + 1))
+        echo -e "❌ AIL: $"
+        AILD_TSTS=$((AILD_TSTS + ))
     fi
-}
 
-# Fixed tests
-run_test "Config Module Import" "python3 -c 'import config'"
-run_test "Signal Engine Import" "python3 -c 'import signal_engine'"
-run_test "Confidence Scoring Import" "python3 -c 'import confidence_scoring'"
-run_test "Signal Generation" "python3 -c 'import signal_engine, time; s=signal_engine.generate_signal({\"timestamp\":time.time(),\"mode\":\"dry\"}); print(f\"Confidence: {s.get(\"confidence\",0)}\")'"
 
-echo -e "\nPython Tests: $PASSED_TESTS/$TOTAL_TESTS passed"
+# ied tests
+run_test "Config Module Import" "python -c 'import config'"
+run_test "Signal ngine Import" "python -c 'import signal_engine'"
+run_test "Confidence Scoring Import" "python -c 'import confidence_scoring'"
+run_test "Signal Generation" "python -c 'import signal_engine, time; s=signal_engine.generate_signal("timestamp":time.time(),"mode":"dry"); print(f"Confidence: s.get("confidence",)")'"
+
+echo -e "nPython Tests: $PASSD_TSTS/$TOTAL_TSTS passed"

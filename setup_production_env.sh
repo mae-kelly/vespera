@@ -1,36 +1,36 @@
 #!/bin/bash
 # Setup production environment variables
 
-echo "🔴 SETTING UP PRODUCTION ENVIRONMENT"
+echo "🔴 STTING UP PRODUCTION NVIRONMNT"
 
-# Force production mode
-export MODE=live
-export OKX_TESTNET=false
+# orce production mode
+eport MOD=live
+eport OKX_TSTNT=false
 
 # Check for required API keys
-if [ -z "$OKX_API_KEY" ]; then
-    echo "❌ CRITICAL: OKX_API_KEY must be set for production"
-    echo "export OKX_API_KEY=your_api_key"
-    exit 1
+if [ -z "$OKX_API_KY" ]; then
+    echo "❌ CRITICAL: OKX_API_KY must be set for production"
+    echo "eport OKX_API_KY=your_api_key"
+    eit 
 fi
 
-if [ -z "$OKX_SECRET_KEY" ]; then
-    echo "❌ CRITICAL: OKX_SECRET_KEY must be set for production"
-    echo "export OKX_SECRET_KEY=your_secret_key"
-    exit 1
+if [ -z "$OKX_SCRT_KY" ]; then
+    echo "❌ CRITICAL: OKX_SCRT_KY must be set for production"
+    echo "eport OKX_SCRT_KY=your_secret_key"
+    eit 
 fi
 
-if [ -z "$OKX_PASSPHRASE" ]; then
-    echo "❌ CRITICAL: OKX_PASSPHRASE must be set for production"
-    echo "export OKX_PASSPHRASE=your_passphrase"
-    exit 1
+if [ -z "$OKX_PASSPHRAS" ]; then
+    echo "❌ CRITICAL: OKX_PASSPHRAS must be set for production"
+    echo "eport OKX_PASSPHRAS=your_passphrase"
+    eit 
 fi
 
 # Optional Discord notifications
-if [ -z "$DISCORD_WEBHOOK_URL" ]; then
+if [ -z "$DISCORD_WHOOK_URL" ]; then
     echo "⚠️  WARNING: Discord webhook not configured"
-    echo "export DISCORD_WEBHOOK_URL=your_webhook (optional)"
+    echo "eport DISCORD_WHOOK_URL=your_webhook (optional)"
 fi
 
 echo "✅ Production environment validated"
-echo "🔴 LIVE TRADING MODE ACTIVE"
+echo "🔴 LIV TRADING MOD ACTIV"

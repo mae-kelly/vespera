@@ -1,95 +1,95 @@
 #!/bin/bash
 
-echo "🔄 TESTING SYSTEM INTEGRATION"
+echo "🔄 TSTING SYSTM INTGRATION"
 echo "============================="
 echo "Starting comprehensive integration tests..."
 
 # Colors for output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-PURPLE='\033[0;35m'
-NC='\033[0m' # No Color
+RD='[;m'
+GRN='[;m'
+YLLOW='[;m'
+LU='[;m'
+PURPL='[;m'
+NC='[m' # No Color
 
 # Test counters
-TOTAL_TESTS=0
-PASSED_TESTS=0
-FAILED_TESTS=0
+TOTAL_TSTS=
+PASSD_TSTS=
+AILD_TSTS=
 
-# Function to run a test
-run_test() {
-    local test_name="$1"
-    local test_command="$2"
-    local timeout_duration="${3:-30}"
+# unction to run a test
+run_test() 
+    local test_name="$"
+    local test_command="$"
+    local timeout_duration="$:-"
     
-    echo -e "\nTesting: $test_name"
-    TOTAL_TESTS=$((TOTAL_TESTS + 1))
+    echo -e "nTesting: $test_name"
+    TOTAL_TSTS=$((TOTAL_TSTS + ))
     
-    if timeout "$timeout_duration" bash -c "$test_command" 2>/dev/null; then
+    if timeout "$timeout_duration" bash -c "$test_command" >/dev/null; then
         echo -e "✅ PASS: $test_name"
-        PASSED_TESTS=$((PASSED_TESTS + 1))
-        return 0
+        PASSD_TSTS=$((PASSD_TSTS + ))
+        return 
     else
-        echo -e "❌ FAIL: $test_name"
-        FAILED_TESTS=$((FAILED_TESTS + 1))
-        return 1
+        echo -e "❌ AIL: $test_name"
+        AILD_TSTS=$((AILD_TSTS + ))
+        return 
     fi
-}
 
-echo -e "${PURPLE}Setting up test environment...${NC}"
+
+echo -e "$PURPLSetting up test environment...$NC"
 # Create necessary directories
 mkdir -p /tmp logs data
 
 # Set environment variables for dry run
-export MODE=dry
-export OKX_TESTNET=true
-export DISCORD_WEBHOOK_URL=""
-export DISCORD_USER_ID=""
+eport MOD=dry
+eport OKX_TSTNT=true
+eport DISCORD_WHOOK_URL=""
+eport DISCORD_USR_ID=""
 
-# Clean any existing signal files
+# Clean any eisting signal files
 rm -f /tmp/signal.json /tmp/fills.json
 echo "✓ Test environment setup complete"
 
 # Test Python signal generation workflow
 python_signal_test='
 import sys, time, json, logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.INO)
 try:
     import config, signal_engine, confidence_scoring
     print("✓ All modules imported successfully")
     
-    shared_data = {
+    shared_data = 
         "timestamp": time.time(),
         "mode": "dry", 
-        "iteration": 1,
-        "gpu_available": getattr(config, "GPU_AVAILABLE", True)
-    }
+        "iteration": ,
+        "gpu_available": getattr(config, "GPU_AVAILAL", True)
+    
     
     signals = []
     signal = signal_engine.generate_signal(shared_data)
-    if signal and signal.get("confidence", 0) > 0:
+    if signal and signal.get("confidence", ) > :
         signals.append(signal)
-        print(f"✓ Signal engine: confidence={signal[\"confidence\"]:.3f}")
+        print(f"✓ Signal engine: confidence=signal["confidence"]:.f")
     
     if signals:
         merged = confidence_scoring.merge_signals(signals)
         merged["timestamp"] = time.time()
         
         with open("/tmp/signal.json", "w") as f:
-            json.dump(merged, f, indent=2)
+            json.dump(merged, f, indent=)
         
-        print(f"✓ Signal generated and written: confidence={merged[\"confidence\"]:.3f}")
+        print(f"✓ Signal generated and written: confidence=merged["confidence"]:.f")
         print("✓ Python signal generation successful")
     else:
         print("✗ No signals generated")
-        sys.exit(1)
-except Exception as e:
-    print(f"✗ Python signal generation failed: {e}")
-    sys.exit(1)
+        sys.eit()
+ecept ception as e:
+    print(f"✗ Python signal generation failed: e")
+    sys.eit()
 '
 
-run_test "Python Signal Generation" "python3 -c '$python_signal_test'" 30
+run_test "Python Signal Generation" "python -c '$python_signal_test'" 
 
 # Test signal file validation
 signal_validation_test='
@@ -100,26 +100,26 @@ try:
     
     required_fields = ["confidence", "timestamp", "best_signal"]
     for field in required_fields:
-        assert field in signal, f"Missing field: {field}"
+        assert field in signal, f"Missing field: field"
     
     best_signal = signal["best_signal"]
     assert "asset" in best_signal, "Missing asset in best_signal"
     assert "entry_price" in best_signal, "Missing entry_price in best_signal"
-    assert 0 <= signal["confidence"] <= 1, "Invalid confidence range"
-    assert best_signal["entry_price"] > 0, "Invalid entry price"
+    assert  <= signal["confidence"] <= , "Invalid confidence range"
+    assert best_signal["entry_price"] > , "Invalid entry price"
     
     print(f"✓ Signal file validation passed")
-    print(f"  - Asset: {best_signal[\"asset\"]}")
-    print(f"  - Entry: {best_signal[\"entry_price\"]}")
-    print(f"  - Confidence: {signal[\"confidence\"]:.3f}")
-except Exception as e:
-    print(f"✗ Signal validation failed: {e}")
+    print(f"  - Asset: best_signal["asset"]")
+    print(f"  - ntry: best_signal["entry_price"]")
+    print(f"  - Confidence: signal["confidence"]:.f")
+ecept ception as e:
+    print(f"✗ Signal validation failed: e")
     raise
 '
 
-run_test "Signal File Validation" "python3 -c '$signal_validation_test'" 10
+run_test "Signal ile Validation" "python -c '$signal_validation_test'" 
 
-# Test Rust executor simulation
+# Test Rust eecutor simulation
 rust_simulation_test='
 import json, time, uuid
 try:
@@ -127,43 +127,43 @@ try:
         signal = json.load(f)
     
     best_signal = signal["best_signal"]
-    execution_result = {
-        "order_id": f"sim_{uuid.uuid4()}",
+    eecution_result = 
+        "order_id": f"sim_uuid.uuid()",
         "asset": best_signal["asset"],
         "side": "sell",
-        "quantity": 0.01,
+        "quantity": .,
         "entry_price": best_signal["entry_price"],
-        "stop_loss": best_signal.get("stop_loss", best_signal["entry_price"] * 1.015),
-        "take_profit_1": best_signal.get("take_profit_1", best_signal["entry_price"] * 0.985),
+        "stop_loss": best_signal.get("stop_loss", best_signal["entry_price"] * .),
+        "take_profit_": best_signal.get("take_profit_", best_signal["entry_price"] * .9),
         "status": "simulated_fill",
         "timestamp": time.time(),
         "mode": "dry"
-    }
+    
     
     with open("/tmp/fills.json", "w") as f:
-        json.dump([execution_result], f, indent=2)
+        json.dump([eecution_result], f, indent=)
     
-    print("✓ Rust executor simulation successful")
-    print(f"  - Order ID: {execution_result[\"order_id\"]}")
-    print(f"  - Status: {execution_result[\"status\"]}")
-except Exception as e:
-    print(f"✗ Rust executor simulation failed: {e}")
+    print("✓ Rust eecutor simulation successful")
+    print(f"  - Order ID: eecution_result["order_id"]")
+    print(f"  - Status: eecution_result["status"]")
+ecept ception as e:
+    print(f"✗ Rust eecutor simulation failed: e")
     raise
 '
 
-run_test "Rust Executor Simulation" "python3 -c '$rust_simulation_test'" 15
+run_test "Rust ecutor Simulation" "python -c '$rust_simulation_test'" 
 
 # Test logging functionality
 logging_test='
 import logging, os
 from pathlib import Path
 try:
-    Path("logs").mkdir(exist_ok=True)
+    Path("logs").mkdir(eist_ok=True)
     logging.basicConfig(
-        level=logging.INFO,
+        level=logging.INO,
         format="%(asctime)s [%(levelname)s] %(message)s",
         handlers=[
-            logging.FileHandler("logs/test.log"),
+            logging.ileHandler("logs/test.log"),
             logging.StreamHandler()
         ]
     )
@@ -171,23 +171,23 @@ try:
     logging.info("Test log message")
     logging.warning("Test warning message")
     
-    if os.path.exists("logs/test.log"):
+    if os.path.eists("logs/test.log"):
         with open("logs/test.log", "r") as f:
             content = f.read()
             if "Test log message" in content:
                 print("✓ Logging functionality working")
             else:
-                raise Exception("Log content validation failed")
+                raise ception("Log content validation failed")
     else:
-        raise Exception("Log file creation failed")
+        raise ception("Log file creation failed")
     
     os.remove("logs/test.log")
-except Exception as e:
-    print(f"✗ Logging test failed: {e}")
+ecept ception as e:
+    print(f"✗ Logging test failed: e")
     raise
 '
 
-run_test "Logging Functionality" "python3 -c '$logging_test'" 10
+run_test "Logging unctionality" "python -c '$logging_test'" 
 
 # Test performance metrics
 performance_test='
@@ -198,59 +198,59 @@ try:
     import_time = time.time() - start_time
     
     start_signal = time.time()
-    shared_data = {"timestamp": time.time(), "mode": "dry"}
+    shared_data = "timestamp": time.time(), "mode": "dry"
     signal = signal_engine.generate_signal(shared_data)
     signal_time = time.time() - start_signal
     
     print(f"✓ Performance metrics:")
-    print(f"  - Import time: {import_time:.3f}s")
-    print(f"  - Signal generation: {signal_time:.3f}s")
+    print(f"  - Import time: import_time:.fs")
+    print(f"  - Signal generation: signal_time:.fs")
     
-    if import_time > 5.0:
-        print("⚠️  Import time slower than expected")
-    if signal_time > 1.0:
-        print("⚠️  Signal generation slower than expected")
+    if import_time > .:
+        print("⚠️  Import time slower than epected")
+    if signal_time > .:
+        print("⚠️  Signal generation slower than epected")
     
     print("✓ Performance test completed")
-except Exception as e:
-    print(f"✗ Performance test failed: {e}")
+ecept ception as e:
+    print(f"✗ Performance test failed: e")
     raise
 '
 
-run_test "Performance Metrics" "python3 -c '$performance_test'" 20
+run_test "Performance Metrics" "python -c '$performance_test'" 
 
 # Cleanup
-echo -e "${PURPLE}Cleaning up test environment...${NC}"
+echo -e "$PURPLCleaning up test environment...$NC"
 rm -f /tmp/signal.json /tmp/fills.json
 rm -f logs/test.log
-pkill -f "python3 main.py" 2>/dev/null || true
-pkill -f "hft-executor" 2>/dev/null || true
+pkill -f "python main.py" >/dev/null || true
+pkill -f "hft-eecutor" >/dev/null || true
 echo "✓ Cleanup complete"
 
 # Summary
-echo -e "\n${BLUE}================================${NC}"
-echo -e "${BLUE}INTEGRATION TEST SUMMARY${NC}"
-echo -e "${BLUE}================================${NC}"
-echo -e "Total Tests: ${TOTAL_TESTS}"
-echo -e "${GREEN}Passed: ${PASSED_TESTS}${NC}"
-echo -e "${RED}Failed: ${FAILED_TESTS}${NC}"
+echo -e "n$LU================================$NC"
+echo -e "$LUINTGRATION TST SUMMARY$NC"
+echo -e "$LU================================$NC"
+echo -e "Total Tests: $TOTAL_TSTS"
+echo -e "$GRNPassed: $PASSD_TSTS$NC"
+echo -e "$RDailed: $AILD_TSTS$NC"
 
 # Calculate success rate
-if [ $TOTAL_TESTS -gt 0 ]; then
-    SUCCESS_RATE=$((PASSED_TESTS * 100 / TOTAL_TESTS))
-    echo -e "Success Rate: ${SUCCESS_RATE}%"
+if [ $TOTAL_TSTS -gt  ]; then
+    SUCCSS_RAT=$((PASSD_TSTS *  / TOTAL_TSTS))
+    echo -e "Success Rate: $SUCCSS_RAT%"
 fi
 
-if [ $FAILED_TESTS -eq 0 ]; then
-    echo -e "\n${GREEN}🎉 ALL INTEGRATION TESTS PASSED!${NC}"
-    echo -e "${GREEN}🚀 Complete system is ready for deployment${NC}"
-    exit 0
-elif [ $SUCCESS_RATE -ge 80 ]; then
-    echo -e "\n${YELLOW}⚠️  Most integration tests passed (${SUCCESS_RATE}%)${NC}"
-    echo -e "${YELLOW}🚀 System is mostly functional${NC}"
-    exit 0
+if [ $AILD_TSTS -eq  ]; then
+    echo -e "n$GRN🎉 ALL INTGRATION TSTS PASSD!$NC"
+    echo -e "$GRN🚀 Complete system is ready for deployment$NC"
+    eit 
+elif [ $SUCCSS_RAT -ge  ]; then
+    echo -e "n$YLLOW⚠️  Most integration tests passed ($SUCCSS_RAT%)$NC"
+    echo -e "$YLLOW🚀 System is mostly functional$NC"
+    eit 
 else
-    echo -e "\n${RED}❌ Integration tests failed${NC}"
-    echo -e "${YELLOW}⚠️  Check system configuration and dependencies${NC}"
-    exit 1
+    echo -e "n$RD❌ Integration tests failed$NC"
+    echo -e "$YLLOW⚠️  Check system configuration and dependencies$NC"
+    eit 
 fi

@@ -1,8 +1,8 @@
 import torch
 import sys
 if not torch.cuda.is_available() and not (hasattr(torch.backends, 'mps') and torch.backends.mps.is_available()):
-    print("❌ CRITICAL: NO GPU DETECTED - SYSTEM TERMINATED")
-    sys.exit(1)
+    print("❌ CRITICAL: NO GPU DTCTD - SYSTM TRMINATD")
+    sys.eit()
 
 import logging
 from typing import Dict, List
@@ -10,48 +10,48 @@ import torch
 import signal_engine
 import config
 
-def calculate_rsi_short_term(prices: List[float], period: int = 14) -> float:
-    if len(prices) < 2:
-        return 50.0
+def calculate_rsi_short_term(prices: List[float], period: int = ) -> float:
+    if len(prices) < :
+        return .
     
-    prices_tensor = torch.tensor(prices, dtype=torch.float32, device=config.DEVICE)
+    prices_tensor = torch.tensor(prices, dtype=torch.float, device=config.DVIC)
     deltas = torch.diff(prices_tensor)
-    gains = torch.clamp(deltas, min=0)
-    losses = torch.clamp(-deltas, min=0)
+    gains = torch.clamp(deltas, min=)
+    losses = torch.clamp(-deltas, min=)
     
-    avg_gain = torch.mean(gains) if len(gains) > 0 else torch.tensor(0.0)
-    avg_loss = torch.mean(losses) if len(losses) > 0 else torch.tensor(0.0)
+    avg_gain = torch.mean(gains) if len(gains) >  else torch.tensor(.)
+    avg_loss = torch.mean(losses) if len(losses) >  else torch.tensor(.)
     
-    rs = avg_gain / (avg_loss + 1e-8)
-    rsi = 100 - (100 / (1 + rs))
+    rs = avg_gain / (avg_loss + e-)
+    rsi =  - ( / ( + rs))
     return float(rsi)
 
 def calculate_vwap(prices: List[float], volumes: List[float]) -> float:
-    if len(prices) != len(volumes) or len(prices) == 0:
-        return prices[-1] if prices else 0
+    if len(prices) != len(volumes) or len(prices) == :
+        return prices[-] if prices else 
     
     total_pv = sum(p * v for p, v in zip(prices, volumes))
     total_v = sum(volumes)
-    return total_pv / (total_v + 1e-8)
+    return total_pv / (total_v + e-)
 
 def calculate_volume_ratio(volumes: List[float]) -> float:
-    if len(volumes) < 3:
-        return 1.0
+    if len(volumes) < :
+        return .
     
-    current_vol = volumes[-1]
-    avg_vol = sum(volumes[:-1]) / len(volumes[:-1])
-    return current_vol / (avg_vol + 1e-8)
+    current_vol = volumes[-]
+    avg_vol = sum(volumes[:-]) / len(volumes[:-])
+    return current_vol / (avg_vol + e-)
 
 def detect_relief_trap(shared_data: Dict) -> Dict:
     try:
-        btc_data = signal_engine.feed.get_recent_data("BTC", 30)
-        if not btc_data["valid"] or len(btc_data["prices"]) < 20:
-            return {
-                "confidence": 0.0,
+        btc_data = signal_engine.feed.get_recent_data("TC", )
+        if not btc_data["valid"] or len(btc_data["prices"]) < :
+            return 
+                "confidence": .,
                 "source": "relief_trap",
-                "priority": 3,
-                "entropy": 0.0
-            }
+                "priority": ,
+                "entropy": .
+            
         
         prices = btc_data["prices"]
         volumes = btc_data["volumes"]
@@ -59,68 +59,68 @@ def detect_relief_trap(shared_data: Dict) -> Dict:
         
         vwap = calculate_vwap(prices, volumes)
         
-        confidence = 0.0
+        confidence = .
         reason = []
         
         # Relief trap detection logic
-        if len(prices) >= 15:
-            price_15min_ago = prices[-15]
-            price_bounce = (current_price - price_15min_ago) / price_15min_ago
+        if len(prices) >= :
+            price_min_ago = prices[-]
+            price_bounce = (current_price - price_min_ago) / price_min_ago
             
-            if price_bounce > 0.015:  # 1.5% bounce
-                rsi_1m = calculate_rsi_short_term(prices[-5:])
-                rsi_15m = calculate_rsi_short_term(prices[-15:])
+            if price_bounce > .:  # .% bounce
+                rsi_m = calculate_rsi_short_term(prices[-:])
+                rsi_m = calculate_rsi_short_term(prices[-:])
                 
-                rsi_divergence = abs(rsi_1m - rsi_15m)
+                rsi_divergence = abs(rsi_m - rsi_m)
                 fails_vwap_reclaim = current_price < vwap
                 
-                if rsi_divergence > 10:
-                    confidence += 0.3
+                if rsi_divergence > :
+                    confidence += .
                     reason.append("rsi_divergence")
                 
                 if fails_vwap_reclaim:
-                    confidence += 0.25
+                    confidence += .
                     reason.append("failed_vwap_reclaim")
                 
                 volume_ratio = calculate_volume_ratio(volumes)
-                if volume_ratio > 1.5:
-                    confidence += 0.15
+                if volume_ratio > .:
+                    confidence += .
                     reason.append("elevated_volume")
                 
-                if confidence > 0.2:
-                    return {
-                        "confidence": min(confidence, 1.0),
+                if confidence > .:
+                    return 
+                        "confidence": min(confidence, .),
                         "source": "relief_trap",
-                        "priority": 3,
-                        "entropy": 0.0,
-                        "signal_data": {
-                            "asset": "BTC",
+                        "priority": ,
+                        "entropy": .,
+                        "signal_data": 
+                            "asset": "TC",
                             "entry_price": current_price,
-                            "stop_loss": current_price * 1.015,
-                            "take_profit_1": current_price * 0.985,
-                            "price_bounce_15min": price_bounce * 100,
-                            "rsi_1m": rsi_1m,
-                            "rsi_15m": rsi_15m,
+                            "stop_loss": current_price * .,
+                            "take_profit_": current_price * .9,
+                            "price_bounce_min": price_bounce * ,
+                            "rsi_m": rsi_m,
+                            "rsi_m": rsi_m,
                             "rsi_divergence": rsi_divergence,
                             "vwap": vwap,
                             "failed_vwap_reclaim": fails_vwap_reclaim,
                             "volume_ratio": volume_ratio,
                             "reason": " + ".join(reason)
-                        }
-                    }
+                        
+                    
         
-        return {
-            "confidence": 0.0,
+        return 
+            "confidence": .,
             "source": "relief_trap",
-            "priority": 3,
-            "entropy": 0.0
-        }
+            "priority": ,
+            "entropy": .
         
-    except Exception as e:
-        logging.error(f"Relief trap detector error: {e}")
-        return {
-            "confidence": 0.0,
+        
+    ecept ception as e:
+        logging.error(f"Relief trap detector error: e")
+        return 
+            "confidence": .,
             "source": "relief_trap",
-            "priority": 3,
-            "entropy": 0.0
-        }
+            "priority": ,
+            "entropy": .
+        

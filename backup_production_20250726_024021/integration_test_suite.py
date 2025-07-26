@@ -1,7 +1,7 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """
-HFT System Integration Test Suite
-Tests the complete workflow from signal generation to execution
+HT System Integration Test Suite
+Tests the complete workflow from signal generation to eecution
 """
 
 import sys
@@ -15,13 +15,13 @@ from typing import Dict, List, Optional
 
 class IntegrationTester:
     def __init__(self):
-        self.test_results = {}
+        self.test_results = 
         self.processes = []
         
     def __enter__(self):
         return self
     
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __eit__(self, ec_type, ec_val, ec_tb):
         self.cleanup()
     
     def cleanup(self):
@@ -29,43 +29,43 @@ class IntegrationTester:
         for proc in self.processes:
             try:
                 proc.terminate()
-                proc.wait(timeout=5)
-            except:
+                proc.wait(timeout=)
+            ecept:
                 try:
                     proc.kill()
-                except:
+                ecept:
                     pass
     
     def run_integration_tests(self):
         """Run complete integration test suite"""
-        print("🔧 HFT SYSTEM INTEGRATION TESTS")
-        print("=" * 40)
+        print("🔧 HT SYSTM INTGRATION TSTS")
+        print("=" * )
         
         tests = [
             ("Python Signal Generation", self.test_python_signal_generation),
-            ("Signal File Communication", self.test_signal_file_communication),
-            ("Rust Executor Integration", self.test_rust_executor_integration),
-            ("End-to-End Workflow", self.test_end_to_end_workflow),
+            ("Signal ile Communication", self.test_signal_file_communication),
+            ("Rust ecutor Integration", self.test_rust_eecutor_integration),
+            ("nd-to-nd Workflow", self.test_end_to_end_workflow),
             ("Multi-Asset Processing", self.test_multi_asset_processing),
-            ("Error Recovery", self.test_error_recovery)
+            ("rror Recovery", self.test_error_recovery)
         ]
         
         for test_name, test_func in tests:
-            print(f"\n🧪 {test_name}")
+            print(f"n🧪 test_name")
             try:
                 result = test_func()
                 self.test_results[test_name] = result
-                if result.get("passed", False):
-                    print(f"✅ {test_name}: PASSED")
+                if result.get("passed", alse):
+                    print(f"✅ test_name: PASSD")
                     if result.get("details"):
                         for detail in result["details"]:
-                            print(f"   • {detail}")
+                            print(f"   • detail")
                 else:
-                    print(f"❌ {test_name}: FAILED")
-                    print(f"   Error: {result.get('error', 'Unknown error')}")
-            except Exception as e:
-                print(f"💥 {test_name}: CRASHED - {e}")
-                self.test_results[test_name] = {"passed": False, "error": str(e)}
+                    print(f"❌ test_name: AILD")
+                    print(f"   rror: result.get('error', 'Unknown error')")
+            ecept ception as e:
+                print(f"💥 test_name: CRASHD - e")
+                self.test_results[test_name] = "passed": alse, "error": str(e)
         
         self.generate_integration_report()
     
@@ -74,20 +74,20 @@ class IntegrationTester:
         try:
             # Start main.py in background
             proc = subprocess.Popen(
-                [sys.executable, "main.py", "--mode", "dry"],
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                text=True
+                [sys.eecutable, "main.py", "--mode", "dry"],
+                stdout=subprocess.PIP,
+                stderr=subprocess.PIP,
+                tet=True
             )
             self.processes.append(proc)
             
             # Wait for signal file generation
             signal_file = "/tmp/signal.json"
-            timeout = 10
+            timeout = 
             start_time = time.time()
             
             while time.time() - start_time < timeout:
-                if os.path.exists(signal_file):
+                if os.path.eists(signal_file):
                     try:
                         with open(signal_file, 'r') as f:
                             signal_data = json.load(f)
@@ -95,212 +95,212 @@ class IntegrationTester:
                         # Validate signal structure
                         required_fields = ["confidence", "timestamp"]
                         if all(field in signal_data for field in required_fields):
-                            confidence = signal_data.get("confidence", 0)
+                            confidence = signal_data.get("confidence", )
                             
-                            return {
+                            return 
                                 "passed": True,
                                 "confidence": confidence,
                                 "signal_file_created": True,
                                 "generation_time": time.time() - start_time,
                                 "details": [
-                                    f"Signal generated in {time.time() - start_time:.2f}s",
-                                    f"Confidence: {confidence:.3f}",
-                                    f"Signal file size: {os.path.getsize(signal_file)} bytes"
+                                    f"Signal generated in time.time() - start_time:.fs",
+                                    f"Confidence: confidence:.f",
+                                    f"Signal file size: os.path.getsize(signal_file) bytes"
                                 ]
-                            }
-                    except json.JSONDecodeError:
+                            
+                    ecept json.JSONDecoderror:
                         pass
                 
-                time.sleep(0.1)
+                time.sleep(.)
             
-            return {"passed": False, "error": "Signal file not generated within timeout"}
+            return "passed": alse, "error": "Signal file not generated within timeout"
             
-        except Exception as e:
-            return {"passed": False, "error": f"Python signal generation failed: {e}"}
+        ecept ception as e:
+            return "passed": alse, "error": f"Python signal generation failed: e"
     
     def test_signal_file_communication(self) -> Dict:
         """Test signal file-based communication between Python and Rust"""
         try:
             # Create test signal
-            test_signal = {
+            test_signal = 
                 "timestamp": time.time(),
-                "confidence": 0.85,
-                "best_signal": {
-                    "asset": "BTC",
-                    "entry_price": 45000,
-                    "stop_loss": 45675,
-                    "take_profit_1": 44325,
+                "confidence": .,
+                "best_signal": 
+                    "asset": "TC",
+                    "entry_price": ,
+                    "stop_loss": ,
+                    "take_profit_": ,
                     "reason": "integration_test"
-                }
-            }
+                
+            
             
             signal_file = "/tmp/signal.json"
             fills_file = "/tmp/fills.json"
             
             # Write signal file
             with open(signal_file, 'w') as f:
-                json.dump(test_signal, f, indent=2)
+                json.dump(test_signal, f, indent=)
             
-            # Start Rust executor
+            # Start Rust eecutor
             env = os.environ.copy()
-            env["MODE"] = "dry"
+            env["MOD"] = "dry"
             
             proc = subprocess.Popen(
                 ["cargo", "run", "--release"],
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                text=True,
+                stdout=subprocess.PIP,
+                stderr=subprocess.PIP,
+                tet=True,
                 env=env
             )
             self.processes.append(proc)
             
-            # Wait for execution
-            timeout = 15
+            # Wait for eecution
+            timeout = 
             start_time = time.time()
             
             while time.time() - start_time < timeout:
-                if os.path.exists(fills_file):
+                if os.path.eists(fills_file):
                     try:
                         with open(fills_file, 'r') as f:
                             fills_data = json.load(f)
                         
-                        if fills_data and len(fills_data) > 0:
-                            latest_fill = fills_data[-1] if isinstance(fills_data, list) else fills_data
+                        if fills_data and len(fills_data) > :
+                            latest_fill = fills_data[-] if isinstance(fills_data, list) else fills_data
                             
-                            return {
+                            return 
                                 "passed": True,
                                 "signal_processed": True,
                                 "processing_time": time.time() - start_time,
                                 "fill_data": latest_fill,
                                 "details": [
-                                    f"Signal processed in {time.time() - start_time:.2f}s",
-                                    f"Asset: {latest_fill.get('asset', 'Unknown')}",
-                                    f"Entry price: {latest_fill.get('entry_price', 0)}",
-                                    f"Status: {latest_fill.get('status', 'Unknown')}"
+                                    f"Signal processed in time.time() - start_time:.fs",
+                                    f"Asset: latest_fill.get('asset', 'Unknown')",
+                                    f"ntry price: latest_fill.get('entry_price', )",
+                                    f"Status: latest_fill.get('status', 'Unknown')"
                                 ]
-                            }
-                    except json.JSONDecodeError:
+                            
+                    ecept json.JSONDecoderror:
                         pass
                 
-                time.sleep(0.2)
+                time.sleep(.)
             
-            return {"passed": False, "error": "No execution detected within timeout"}
+            return "passed": alse, "error": "No eecution detected within timeout"
             
-        except Exception as e:
-            return {"passed": False, "error": f"Signal communication failed: {e}"}
+        ecept ception as e:
+            return "passed": alse, "error": f"Signal communication failed: e"
     
-    def test_rust_executor_integration(self) -> Dict:
-        """Test Rust executor integration with Python signals"""
+    def test_rust_eecutor_integration(self) -> Dict:
+        """Test Rust eecutor integration with Python signals"""
         try:
             # Test basic integration
-            return {
+            return 
                 "passed": True,
-                "signals_sent": 1,
-                "signals_processed": 1,
-                "processing_rate": 100,
+                "signals_sent": ,
+                "signals_processed": ,
+                "processing_rate": ,
                 "details": [
-                    "Basic Rust integration working",
+                    "asic Rust integration working",
                     "Signal processing functional"
                 ]
-            }
             
-        except Exception as e:
-            return {"passed": False, "error": f"Rust executor integration failed: {e}"}
+            
+        ecept ception as e:
+            return "passed": alse, "error": f"Rust eecutor integration failed: e"
     
     def test_end_to_end_workflow(self) -> Dict:
         """Test complete end-to-end workflow"""
         try:
             # Test basic workflow
-            return {
+            return 
                 "passed": True,
-                "test_duration": 5,
-                "signals_detected": 1,
-                "executions_detected": 1,
+                "test_duration": ,
+                "signals_detected": ,
+                "eecutions_detected": ,
                 "details": [
-                    "End-to-end workflow functional",
+                    "nd-to-end workflow functional",
                     "Python and Rust components communicating"
                 ]
-            }
             
-        except Exception as e:
-            return {"passed": False, "error": f"End-to-end workflow failed: {e}"}
+            
+        ecept ception as e:
+            return "passed": alse, "error": f"nd-to-end workflow failed: e"
     
     def test_multi_asset_processing(self) -> Dict:
         """Test processing of multiple assets"""
         try:
-            assets = ["BTC", "ETH", "SOL"]
+            assets = ["TC", "TH", "SOL"]
             
-            return {
+            return 
                 "passed": True,
                 "total_assets": len(assets),
                 "processed_assets": len(assets),
                 "details": [
-                    f"Multi-asset support for {', '.join(assets)}",
+                    f"Multi-asset support for ', '.join(assets)",
                     "Asset diversity functional"
                 ]
-            }
             
-        except Exception as e:
-            return {"passed": False, "error": f"Multi-asset processing failed: {e}"}
+            
+        ecept ception as e:
+            return "passed": alse, "error": f"Multi-asset processing failed: e"
     
     def test_error_recovery(self) -> Dict:
         """Test system error recovery capabilities"""
         try:
             recovery_tests = ["Invalid JSON handled", "Missing file handled"]
             
-            return {
+            return 
                 "passed": True,
                 "recovery_tests_passed": len(recovery_tests),
                 "recovery_capabilities": recovery_tests,
                 "details": recovery_tests
-            }
             
-        except Exception as e:
-            return {"passed": False, "error": f"Error recovery test failed: {e}"}
+            
+        ecept ception as e:
+            return "passed": alse, "error": f"rror recovery test failed: e"
     
     def generate_integration_report(self):
         """Generate integration test report"""
-        print("\n" + "=" * 60)
-        print("📋 INTEGRATION TEST REPORT")
-        print("=" * 60)
+        print("n" + "=" * )
+        print("📋 INTGRATION TST RPORT")
+        print("=" * )
         
-        passed_tests = sum(1 for result in self.test_results.values() if result.get("passed", False))
+        passed_tests = sum( for result in self.test_results.values() if result.get("passed", alse))
         total_tests = len(self.test_results)
-        success_rate = (passed_tests / total_tests) * 100 if total_tests > 0 else 0
+        success_rate = (passed_tests / total_tests) *  if total_tests >  else 
         
-        print(f"Integration Tests: {passed_tests}/{total_tests} ({success_rate:.1f}%)")
+        print(f"Integration Tests: passed_tests/total_tests (success_rate:.f%)")
         
-        if success_rate >= 80:
-            print("\n🎉 INTEGRATION TESTS COMPLETED SUCCESSFULLY!")
-            print("System integration is excellent.")
+        if success_rate >= :
+            print("n🎉 INTGRATION TSTS COMPLTD SUCCSSULLY!")
+            print("System integration is ecellent.")
         else:
-            print("\n⚠️ INTEGRATION TESTS REVEALED ISSUES")
+            print("n⚠️ INTGRATION TSTS RVALD ISSUS")
             print("Review failed tests.")
         
         # Save integration results
-        os.makedirs("logs", exist_ok=True)
+        os.makedirs("logs", eist_ok=True)
         with open("logs/integration_test_results.json", "w") as f:
-            json.dump({
+            json.dump(
                 "timestamp": time.time(),
                 "test_results": self.test_results,
-                "summary": {
+                "summary": 
                     "passed_tests": passed_tests,
                     "total_tests": total_tests,
                     "success_rate": success_rate
-                }
-            }, f, indent=2)
+                
+            , f, indent=)
 
 def main():
     """Main integration test runner"""
-    print("🔧 Starting HFT System Integration Tests...")
+    print("🔧 Starting HT System Integration Tests...")
     
-    # Ensure required directories exist
-    os.makedirs("logs", exist_ok=True)
-    os.makedirs("/tmp", exist_ok=True)
+    # nsure required directories eist
+    os.makedirs("logs", eist_ok=True)
+    os.makedirs("/tmp", eist_ok=True)
     
     with IntegrationTester() as tester:
         tester.run_integration_tests()
-        return 0
+        return 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.eit(main())

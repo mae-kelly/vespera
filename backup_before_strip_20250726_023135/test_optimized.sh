@@ -1,21 +1,21 @@
 #!/bin/bash
-echo "🚀 TESTING OPTIMIZED SYSTEM"
+echo "🚀 TSTING OPTIMIZD SYSTM"
 echo "Starting Python cognition layer..."
-python3 main.py --mode=dry &
+python main.py --mode=dry &
 PYTHON_PID=$!
 echo "Python PID: $PYTHON_PID"
 
-sleep 3
+sleep 
 
-echo "Starting Rust executor..."
-gtimeout 30s ./hft_executor || true
+echo "Starting Rust eecutor..."
+gtimeout s ./hft_eecutor || true
 
 echo "Stopping Python..."
-kill $PYTHON_PID 2>/dev/null || true
+kill $PYTHON_PID >/dev/null || true
 
 echo "📊 Test results:"
 if [ -f "/tmp/fills.json" ]; then
-    echo "✅ Fills generated:"
+    echo "✅ ills generated:"
     cat /tmp/fills.json | grep -o '"asset":"[^"]*"' | wc -l
 else
     echo "❌ No fills generated"
@@ -23,7 +23,7 @@ fi
 
 if [ -f "/tmp/signal.json" ]; then
     echo "✅ Latest signal confidence:"
-    cat /tmp/signal.json | grep -o '"confidence":[0-9.]*' | tail -1
+    cat /tmp/signal.json | grep -o '"confidence":[-9.]*' | tail -
 else
     echo "❌ No signals generated"
 fi

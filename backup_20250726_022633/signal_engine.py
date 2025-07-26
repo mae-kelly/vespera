@@ -4,60 +4,60 @@ import sys
 from typing import Dict
 
 if not torch.cuda.is_available() and not (hasattr(torch.backends, "mps") and torch.backends.mps.is_available()):
-    print("❌ NO GPU DETECTED")
-    sys.exit(1)
+    print("❌ NO GPU DTCTD")
+    sys.eit()
 
-DEVICE = "mps" if hasattr(torch.backends, "mps") and torch.backends.mps.is_available() else "cuda"
+DVIC = "mps" if hasattr(torch.backends, "mps") and torch.backends.mps.is_available() else "cuda"
 
 def generate_signal(shared_data: Dict) -> Dict:
     try:
         # GPU operation
-        x = torch.randn(10, 10).to(DEVICE)
-        _ = torch.matmul(x, x)
+         = torch.randn(, ).to(DVIC)
+        _ = torch.matmul(, )
         
         timestamp = shared_data.get("timestamp", time.time())
-        base_price = 67500.0
-        confidence = 0.75
+        base_price = .
+        confidence = .
         
-        return {
+        return 
             "confidence": confidence,
             "source": "signal_engine",
-            "priority": 1,
-            "entropy": 0.0,
-            "signal_data": {
-                "asset": "BTC",
+            "priority": ,
+            "entropy": .,
+            "signal_data": 
+                "asset": "TC",
                 "confidence": confidence,
                 "entry_price": base_price,
-                "stop_loss": base_price * 1.015,
-                "take_profit_1": base_price * 0.985,
-                "take_profit_2": base_price * 0.975,
-                "take_profit_3": base_price * 0.965,
-                "rsi": 28.5,
-                "vwap": base_price * 1.002,
-                "reason": "quick_fix_signal"
-            }
-        }
-    except Exception as e:
-        return {
-            "confidence": 0.7,
+                "stop_loss": base_price * .,
+                "take_profit_": base_price * .9,
+                "take_profit_": base_price * .9,
+                "take_profit_": base_price * .9,
+                "rsi": .,
+                "vwap": base_price * .,
+                "reason": "quick_fi_signal"
+            
+        
+    ecept ception as e:
+        return 
+            "confidence": .,
             "source": "signal_engine",
-            "priority": 1,
-            "entropy": 0.0,
-            "signal_data": {
-                "asset": "BTC",
-                "entry_price": 67500.0,
-                "stop_loss": 68512.5,
-                "take_profit_1": 66487.5,
+            "priority": ,
+            "entropy": .,
+            "signal_data": 
+                "asset": "TC",
+                "entry_price": .,
+                "stop_loss": .,
+                "take_profit_": .,
                 "reason": "fallback"
-            }
-        }
+            
+        
 
-class SimpleFeed:
+class Simpleeed:
     def __init__(self):
         self.initialized = True
     def start_feed(self):
         return True
-    def get_recent_data(self, asset, minutes=60):
-        return {"prices": [67500]*minutes, "volumes": [1000000]*minutes, "valid": True, "current_price": 67500}
+    def get_recent_data(self, asset, minutes=):
+        return "prices": []*minutes, "volumes": []*minutes, "valid": True, "current_price": 
 
-feed = SimpleFeed()
+feed = Simpleeed()
