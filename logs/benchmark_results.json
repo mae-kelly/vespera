@@ -1,0 +1,35 @@
+{
+  "timestamp": 1753510833.9520671,
+  "benchmark_results": {
+    "Signal Generation Throughput": {
+      "throughput": 3476.7685140668777,
+      "total_time": 0.028762340545654297,
+      "passed": true
+    },
+    "Memory Efficiency": {
+      "initial_memory_mb": 194.65625,
+      "final_memory_mb": 194.65625,
+      "memory_growth_mb": 0.0,
+      "memory_efficient": true,
+      "passed": true
+    },
+    "Latency Distribution": {
+      "avg_latency_us": 326.84803009033203,
+      "p50_latency_us": 301.12266540527344,
+      "p95_latency_us": 499.0100860595703,
+      "latency_target_met": true,
+      "passed": true
+    },
+    "System Stability": {
+      "test_duration_seconds": 30.03943181037903,
+      "signals_generated": 285,
+      "errors_encountered": 0,
+      "signals_per_second": 9.487529650994553,
+      "error_rate": 0.0,
+      "uptime_score": 100.0,
+      "system_stable": true,
+      "passed": true
+    }
+  },
+  "overall_score": 100.0
+}

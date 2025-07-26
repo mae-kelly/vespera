@@ -1,0 +1,108 @@
+{
+  "timestamp": 1753510693.877853,
+  "test_results": {
+    "GPU Detection": {
+      "passed": true,
+      "gpu_type": "Apple MPS",
+      "device_name": "Apple Silicon",
+      "memory_gb": "N/A"
+    },
+    "Module Imports": {
+      "passed": true,
+      "import_times_ms": {
+        "config": 0.4761219024658203,
+        "signal_engine": 0.3046989440917969,
+        "confidence_scoring": 0.3151893615722656,
+        "entropy_meter": 0.23889541625976562,
+        "laggard_sniper": 0.21195411682128906,
+        "relief_trap": 0.1971721649169922,
+        "logger": 258.33892822265625,
+        "notifier_elegant": 0.3008842468261719
+      },
+      "failed_imports": [],
+      "total_modules": 8,
+      "avg_import_time_ms": 32.547980546951294
+    },
+    "Signal Generation Speed": {
+      "passed": true,
+      "iterations": 50,
+      "avg_time_us": 1479.1011810302734,
+      "min_time_us": 254.15420532226562,
+      "max_time_us": 59993.26705932617,
+      "std_dev_us": 8444.300114854428,
+      "p95_time_us": 414.84832763671875,
+      "signals_generated": 50
+    },
+    "Signal Quality": {
+      "passed": true,
+      "total_signals": 10,
+      "avg_confidence": 0.75,
+      "confidence_range": [
+        0.75,
+        0.75
+      ],
+      "signals_with_data": 10,
+      "signal_consistency": true
+    },
+    "File I/O Performance": {
+      "passed": true,
+      "avg_write_time_us": 95.22438049316406,
+      "avg_read_time_us": 29.134750366210938,
+      "max_write_time_us": 282.04917907714844,
+      "max_read_time_us": 55.789947509765625,
+      "p95_write_time_us": 186.2049102783203,
+      "p95_read_time_us": 53.882598876953125
+    },
+    "Memory Usage": {
+      "passed": true,
+      "initial_memory_mb": 227.09,
+      "final_memory_mb": 227.09,
+      "memory_increase_mb": 0.0,
+      "memory_leak_detected": false
+    },
+    "Concurrent Processing": {
+      "passed": true,
+      "concurrent_workers": 10,
+      "successful_executions": 10,
+      "avg_execution_time_ms": 1.5954017639160156,
+      "max_execution_time_ms": 1.7809867858886719,
+      "signals_with_confidence": 10,
+      "concurrent_performance_ok": true
+    },
+    "Rust Executor": {
+      "passed": true,
+      "compilation_output": "OK",
+      "signal_file_created": true,
+      "rust_toolchain_available": true
+    },
+    "End-to-End Latency": {
+      "passed": true,
+      "iterations": 5,
+      "avg_latency_ms": 0.5303859710693359,
+      "min_latency_ms": 0.3528594970703125,
+      "max_latency_ms": 1.1739730834960938,
+      "sub_millisecond_count": 4,
+      "target_latency_met": true
+    },
+    "System Stability": {
+      "passed": true,
+      "test_duration_seconds": 10.05,
+      "successful_iterations": 182,
+      "errors_encountered": 0,
+      "error_rate": 0.0,
+      "iterations_per_second": 18.104124587594956,
+      "stability_score": 100.0
+    },
+    "Fallback Mechanisms": {
+      "passed": true,
+      "file_fallback_works": true,
+      "graceful_degradation": true
+    }
+  },
+  "summary": {
+    "passed_tests": 11,
+    "total_tests": 11,
+    "success_rate": 100.0,
+    "test_duration": 11.75942873954773
+  }
+}

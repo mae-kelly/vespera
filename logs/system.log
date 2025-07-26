@@ -1,16 +1,16 @@
-[2025-07-26 02:00:49] 🔍 Checking multi-WebSocket prerequisites...
-[2025-07-26 02:00:50] ✅ All multi-WebSocket prerequisites satisfied
-[2025-07-26 02:00:50] ⚙️ Setting up multi-feed environment...
-[2025-07-26 02:00:50] ✅ Environment variables loaded
-[2025-07-26 02:00:50] ✅ Multi-feed environment configured for dry mode
-[2025-07-26 02:00:50] 🧠 Starting Python multi-WebSocket cognition layer...
-[2025-07-26 02:00:53] ✅ Python multi-feed cognition layer running (PID: 36529)
-[2025-07-26 02:00:53] 🚀 Multi-WebSocket System Live - Enhanced startup complete
-[2025-07-26 02:00:53] 📊 Feed monitoring: OKX + Binance + Kraken + Coinbase
-[2025-07-26 02:00:53] 🦀 Starting OKX-focused Rust execution layer...
-[2025-07-26 02:00:53] ⚡ Sub-500μs execution targeting enabled
-[2025-07-26 02:01:03] 🔴 Shutdown signal received
-[2025-07-26 02:01:03] Stopping Python multi-feed layer (PID: 36529)
-[2025-07-26 02:01:03] ✅ Multi-feed system shutdown complete
-[2025-07-26 02:01:03] 🔴 Shutdown signal received
-[2025-07-26 02:01:03] ✅ Multi-feed system shutdown complete
+[2025-07-26 02:24:24] 🔍 Checking multi-WebSocket prerequisites...
+[2025-07-26 02:24:25] ✅ All multi-WebSocket prerequisites satisfied
+[2025-07-26 02:24:25] ⚙️ Setting up multi-feed environment...
+[2025-07-26 02:24:25] ✅ Environment variables loaded
+[2025-07-26 02:24:25] ✅ Multi-feed environment configured for dry mode
+[2025-07-26 02:24:25] 🧠 Starting Python multi-WebSocket cognition layer...
+[2025-07-26 02:24:29] ✅ Python multi-feed cognition layer running (PID: 42980)
+[2025-07-26 02:24:29] 🚀 Multi-WebSocket System Live - Enhanced startup complete
+[2025-07-26 02:24:29] 📊 Feed monitoring: OKX + Binance + Kraken + Coinbase
+[2025-07-26 02:24:29] 🦀 Starting OKX-focused Rust execution layer...
+[2025-07-26 02:24:29] ⚡ Sub-500μs execution targeting enabled
+[2025-07-26 02:26:26] 🔴 Shutdown signal received
+[2025-07-26 02:26:26] Stopping Python multi-feed layer (PID: 42980)
+[2025-07-26 02:26:26] ✅ Multi-feed system shutdown complete
+[2025-07-26 02:26:26] 🔴 Shutdown signal received
+[2025-07-26 02:26:26] ✅ Multi-feed system shutdown complete

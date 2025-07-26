@@ -1,0 +1,85 @@
+{
+  "timestamp": 1753510783.125074,
+  "test_results": {
+    "Python Signal Generation": {
+      "passed": true,
+      "confidence": 0.75,
+      "signal_file_created": true,
+      "generation_time": 0.00017309188842773438,
+      "details": [
+        "Signal generated in 0.00s",
+        "Confidence: 0.750",
+        "Signal file size: 1932 bytes"
+      ]
+    },
+    "Signal File Communication": {
+      "passed": true,
+      "signal_processed": true,
+      "processing_time": 0.0005171298980712891,
+      "fill_data": {
+        "asset": "BTC",
+        "confidence": 0.75,
+        "entry_price": 117503.7492,
+        "execution_time_us": 56,
+        "mode": "dry",
+        "order_id": "okx_sim_d8e5db6c-4244-4b9d-883d-fe104b0b62e1",
+        "quantity": 0.0017022435570081366,
+        "side": "sell",
+        "status": "simulated_fill",
+        "timestamp": 1753510490
+      },
+      "details": [
+        "Signal processed in 0.00s",
+        "Asset: BTC",
+        "Entry price: 117503.7492",
+        "Status: simulated_fill"
+      ]
+    },
+    "Rust Executor Integration": {
+      "passed": true,
+      "signals_sent": 1,
+      "signals_processed": 1,
+      "processing_rate": 100,
+      "details": [
+        "Basic Rust integration working",
+        "Signal processing functional"
+      ]
+    },
+    "End-to-End Workflow": {
+      "passed": true,
+      "test_duration": 5,
+      "signals_detected": 1,
+      "executions_detected": 1,
+      "details": [
+        "End-to-end workflow functional",
+        "Python and Rust components communicating"
+      ]
+    },
+    "Multi-Asset Processing": {
+      "passed": true,
+      "total_assets": 3,
+      "processed_assets": 3,
+      "details": [
+        "Multi-asset support for BTC, ETH, SOL",
+        "Asset diversity functional"
+      ]
+    },
+    "Error Recovery": {
+      "passed": true,
+      "recovery_tests_passed": 2,
+      "recovery_capabilities": [
+        "Invalid JSON handled",
+        "Missing file handled"
+      ],
+      "details": [
+        "Invalid JSON handled",
+        "Missing file handled"
+      ]
+    }
+  },
+  "summary": {
+    "passed_tests": 6,
+    "total_tests": 6,
+    "success_rate": 100.0
+  }
+}

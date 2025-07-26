@@ -1,152 +1,166 @@
+#!/usr/bin/env python3
+"""
+Real Confidence Scoring for HFT System
+ZERO MOCK DATA - Only processes signals from live market feeds
+"""
+
 import torch
-import sys
-if not torch.cuda.is_available() and not (hasattr(torch.backends, 'mps') and torch.backends.mps.is_available()):
-    print("❌ CRITICAL: NO GPU DETECTED - SYSTEM TERMINATED")
-    sys.exit(1)
-
-
 import logging
-import requests
-import time
 from typing import Dict, List
-import torch
 import config
 
-def get_btc_dominance() -> float:
-    try:
-        response = requests.get(
-            "https://api.coingecko.com/api/v3/global", 
-            timeout=3,
-            headers={'User-Agent': 'HFT-System/1.0'}
-        )
-        if response.status_code == 200:
-            data = response.json()
-            btc_dominance = data['data']['market_cap_percentage']['btc']
-            logging.info(f"CoinGecko BTC dominance: {btc_dominance:.1f}%")
-            return float(btc_dominance)
-    except Exception as e:
-        logging.warning(f"BTC dominance API failed: {e}")
-    
-    return 59.3
-
-def softmax_weighted_sum(components: Dict[str, float], weights: Dict[str, float]) -> float:
-    try:
-        component_values = []
-        weight_values = []
-        
-        for key in components.keys():
-            if key in weights:
-                component_values.append(components[key])
-                weight_values.append(weights[key])
-        
-        if not component_values:
-            return 0.7
-        
-        components_tensor = torch.tensor(component_values, dtype=torch.float32, device=config.DEVICE)
-        weights_tensor = torch.tensor(weight_values, dtype=torch.float32, device=config.DEVICE)
-        
-        softmax_weights = torch.nn.functional.softmax(weights_tensor, dim=0)
-        normalized_components = torch.sigmoid(components_tensor)
-        weighted_sum = torch.sum(normalized_components * softmax_weights)
-        
-        return float(weighted_sum)
-        
-    except Exception as e:
-        logging.error(f"Softmax calculation error: {e}")
-        return 0.7
-
 def merge_signals(signals: List[Dict]) -> Dict:
+    """Merge signals from live data sources only"""
     try:
         if not signals:
-            return {"confidence": 0.0, "signals": [], "components": {}}
+            logging.error("❌ NO SIGNALS TO MERGE - Live data required")
+            return {
+                "confidence": 0.0,
+                "signals": [],
+                "error": "NO_LIVE_SIGNALS"
+            }
         
-        btc_dominance = get_btc_dominance()
-        
-        components = {
-            "rsi_drop": 0.6,
-            "entropy_decline_rate": 0.4,
-            "volume_acceleration_ratio": 0.7,
-            "btc_dominance_correlation": 0.3
-        }
-        
+        # Validate all signals are from live sources
+        live_signals = []
         for signal in signals:
             source = signal.get("source", "")
-            confidence = signal.get("confidence", 0)
-            
-            if source == "signal_engine":
-                signal_data = signal.get("signal_data", {})
-                rsi = signal_data.get("rsi", 50)
-                if rsi < 35:
-                    components["rsi_drop"] = min((35 - rsi) / 35, 1.0)
-            
-            elif source == "entropy_meter":
-                entropy = signal.get("entropy", 0)
-                if entropy > 0:
-                    components["entropy_decline_rate"] = min(entropy / 2.0, 0.8)
-            
-            elif source in ["laggard_sniper", "relief_trap"]:
-                signal_data = signal.get("signal_data", {})
-                vol_ratio = signal_data.get("volume_ratio", 1.0)
-                if vol_ratio > 1.0:
-                    components["volume_acceleration_ratio"] = min((vol_ratio - 1.0) / 2.0, 0.9)
+            if source == "real_signal_engine":
+                live_signals.append(signal)
+            else:
+                logging.warning(f"⚠️ Rejecting non-live signal from: {source}")
         
-        if btc_dominance < 50:
-            components["btc_dominance_correlation"] = (50 - btc_dominance) / 50
+        if not live_signals:
+            logging.error("❌ NO LIVE SIGNALS FOUND - All signals rejected")
+            return {
+                "confidence": 0.0,
+                "signals": signals,
+                "error": "NO_LIVE_SIGNALS_VALIDATED"
+            }
         
-        weights = {
-            "rsi_drop": 0.35,
-            "entropy_decline_rate": 0.25,
-            "volume_acceleration_ratio": 0.30,
-            "btc_dominance_correlation": 0.10
-        }
+        # Process only the best live signal
+        best_signal = max(live_signals, key=lambda s: s.get("confidence", 0))
+        best_confidence = best_signal.get("confidence", 0)
         
-        softmax_confidence = softmax_weighted_sum(components, weights)
+        if best_confidence < 0.3:
+            logging.warning(f"⚠️ Best signal confidence too low: {best_confidence:.3f}")
+            return {
+                "confidence": 0.0,
+                "signals": live_signals,
+                "error": "INSUFFICIENT_CONFIDENCE"
+            }
         
-        best_confidence = 0.0
-        best_signal_data = None
+        # Get signal data from the best signal
+        signal_data = best_signal.get("signal_data")
+        if not signal_data:
+            logging.error("❌ No signal data in best signal")
+            return {
+                "confidence": 0.0,
+                "signals": live_signals,
+                "error": "NO_SIGNAL_DATA"
+            }
         
-        for signal in signals:
-            confidence = signal.get("confidence", 0)
-            if confidence > best_confidence:
-                best_confidence = confidence
-                if "signal_data" in signal:
-                    best_signal_data = signal["signal_data"]
-        
-        final_confidence = max(softmax_confidence, best_confidence)
-        
-        if final_confidence < 0.5:
-            final_confidence = 0.72
+        # GPU-accelerated confidence adjustment
+        adjusted_confidence = _adjust_confidence_gpu(best_confidence, signal_data)
         
         result = {
-            "confidence": min(final_confidence, 1.0),
-            "signals": signals,
-            "components": components,
-            "weights": weights,
-            "btc_dominance": btc_dominance,
-            "softmax_confidence": softmax_confidence,
-            "signal_count": len(signals),
-            "active_sources": [s["source"] for s in signals if s.get("confidence", 0) > 0.05],
-            "api_sources": "CoinGecko"
+            "confidence": adjusted_confidence,
+            "signals": live_signals,
+            "best_signal": signal_data,
+            "system_health": best_signal.get("system_health", {}),
+            "data_sources": best_signal.get("data_sources", {}),
+            "signal_count": len(live_signals),
+            "live_data_validated": True,
+            "timestamp": best_signal.get("timestamp", 0)
         }
         
-        if best_signal_data:
-            result["best_signal"] = best_signal_data
+        logging.info(f"🎯 LIVE SIGNAL MERGED: {signal_data['asset']} confidence={adjusted_confidence:.3f}")
         
         return result
         
     except Exception as e:
         logging.error(f"Signal merging error: {e}")
         return {
-            "confidence": 0.72,
+            "confidence": 0.0,
             "signals": signals,
-            "components": {"rsi_drop": 0.6, "volume_acceleration_ratio": 0.7},
-            "btc_dominance": 59.3,
-            "best_signal": {
-                "asset": "BTC",
-                "entry_price": 67500,
-                "stop_loss": 68512.5,
-                "take_profit_1": 66487.5,
-                "confidence": 0.72,
-                "reason": "fallback_signal"
-            }
+            "error": f"MERGE_ERROR: {str(e)}"
         }
+
+def _adjust_confidence_gpu(base_confidence: float, signal_data: Dict) -> float:
+    """Adjust confidence using GPU acceleration and live market conditions"""
+    try:
+        with torch.no_grad():
+            # Convert to tensors for GPU processing
+            confidence_tensor = torch.tensor(base_confidence, device=config.DEVICE)
+            
+            # Adjustment factors based on live market data
+            adjustments = []
+            
+            # RSI factor
+            rsi = signal_data.get("rsi", 50)
+            if rsi < 30:
+                adjustments.append(0.1)  # Boost for oversold
+            elif rsi > 70:
+                adjustments.append(-0.1)  # Reduce for overbought
+            
+            # VWAP deviation factor
+            vwap_dev = signal_data.get("vwap_deviation", 0)
+            if abs(vwap_dev) > 2:
+                adjustments.append(0.05)  # Boost for significant VWAP deviation
+            
+            # Volume anomaly factor
+            if signal_data.get("volume_anomaly", False):
+                adjustments.append(0.08)  # Boost for volume spikes
+            
+            # Price change factor
+            change_24h = signal_data.get("price_change_24h", 0)
+            if change_24h < -5:
+                adjustments.append(0.12)  # Boost for significant declines
+            
+            # Data quality factor
+            history_length = signal_data.get("price_history_length", 0)
+            if history_length >= 50:
+                adjustments.append(0.03)  # Boost for sufficient data
+            elif history_length < 20:
+                adjustments.append(-0.05)  # Reduce for insufficient data
+            
+            # Apply adjustments using GPU
+            if adjustments:
+                adjustment_tensor = torch.tensor(adjustments, device=config.DEVICE)
+                total_adjustment = torch.sum(adjustment_tensor).item()
+                
+                adjusted_confidence = confidence_tensor + total_adjustment
+                adjusted_confidence = torch.clamp(adjusted_confidence, 0.0, 1.0)
+                
+                return adjusted_confidence.item()
+            else:
+                return base_confidence
+            
+    except Exception as e:
+        logging.error(f"GPU confidence adjustment error: {e}")
+        return base_confidence
+
+def validate_live_signal(signal_data: Dict) -> bool:
+    """Validate that signal data comes from live sources"""
+    required_fields = [
+        "asset", "entry_price", "rsi", "vwap", 
+        "data_source", "price_history_length"
+    ]
+    
+    for field in required_fields:
+        if field not in signal_data:
+            logging.warning(f"⚠️ Missing required field in signal: {field}")
+            return False
+    
+    # Validate data source is live
+    data_source = signal_data.get("data_source", "")
+    if data_source not in ["binance", "coinbase"]:
+        logging.warning(f"⚠️ Invalid data source: {data_source}")
+        return False
+    
+    # Validate price history length
+    history_length = signal_data.get("price_history_length", 0)
+    if history_length < 10:
+        logging.warning(f"⚠️ Insufficient price history: {history_length}")
+        return False
+    
+    return True

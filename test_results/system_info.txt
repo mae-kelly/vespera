@@ -1,0 +1,32 @@
+=== HFT SYSTEM INFORMATION ===
+Timestamp: Sat Jul 26 02:14:12 EDT 2025
+
+=== Operating System ===
+Darwin Maeves-MacBook-Air.local 24.5.0 Darwin Kernel Version 24.5.0: Tue Apr 22 19:48:46 PDT 2025; root:xnu-11417.121.6~2/RELEASE_ARM64_T8103 arm64
+
+=== Hardware Information ===
+CPU Info:
+
+Memory Info:
+
+Disk Space:
+Filesystem      Size    Used   Avail Capacity iused ifree %iused  Mounted on
+/dev/disk3s3   228Gi   168Gi    40Gi    81%    2.0M  424M    0%   /System/Volumes/Data
+
+=== Software Versions ===
+Python: Python 3.13.5
+Rust: rustc 1.88.0 (6b00bc388 2025-06-23)
+Cargo: cargo 1.88.0 (873a06493 2025-05-10)
+Git: git version 2.50.1
+
+=== Python Packages ===
+PyTorch: 2.9.0.dev20250725
+MPS: Available
+psutil: 7.0.0
+requests: 2.31.0
+
+=== Environment Variables ===
+MODE: not set
+DISCORD_WEBHOOK_URL: 
+OKX_API_KEY: 
+PATH: /Users/maevekelly/vespera/venv/bin:/Users/maevekelly/.juliaup/bin:/Users/maevekelly/.juliaup/bin:/Users/maevekelly/.juliaup/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/maevekelly/.pyenv/shims:/Users/maevekelly/.pyenv/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Users/maevekelly/.juliaup/bin:/Users/maevekelly/.cargo/bin:/Users/maevekelly/.cursor/extensions/ms-python.debugpy-2025.6.0-darwin-arm64/bundled/scripts/noConfigScripts
