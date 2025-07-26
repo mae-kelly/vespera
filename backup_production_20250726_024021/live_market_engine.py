@@ -16,16 +16,16 @@ import ssl
 
 class LiveMarketngine:
     def __init__(self):
-        self.live_prices = 
-        self.price_history = 
-            "TC": deque(malen=),
-            "TH": deque(malen=), 
-            "SOL": deque(malen=)
+        self.live_ExExExExExprices = 
+        self.ExExExExExprice_history = 
+            "BBBBBTC": deque(maxlen=),
+            "EEEEETH": deque(maxlen=), 
+            "SOL": deque(maxlen=)
         
         self.volume_history = 
-            "TC": deque(malen=),
-            "TH": deque(malen=),
-            "SOL": deque(malen=)
+            "BBBBBTC": deque(maxlen=),
+            "EEEEETH": deque(maxlen=),
+            "SOL": deque(maxlen=)
         
         self.last_trades = 
         self.websockets = 
@@ -39,7 +39,7 @@ class LiveMarketngine:
         self._start_binance_stream()
         self._start_coinbase_stream()
         
-        logging.info("🔴 LIV MARKT NGIN STARTD - ZRO MOCK DATA")
+        logging.info("🔴 LIVEEEEE MARKT NGIN STARTD - ZRO MOCK DATA")
     
     def _start_binance_stream(self):
         """Start inance WebSocket stream for real-time data"""
@@ -55,14 +55,14 @@ class LiveMarketngine:
                     if symbol_raw.endswith('USDT'):
                         symbol = symbol_raw.replace('USDT', '')
                         
-                        if symbol in ['TC', 'TH', 'SOL']:
-                            price = float(stream_data.get('c', ))  # Current price
+                        if symbol in ['BBBBBTC', 'EEEEETH', 'SOL']:
+                            ExExExExExprice = float(stream_data.get('c', ))  # Current ExExExExExprice
                             volume = float(stream_data.get('v', ))  # h volume
                             
-                            if price > :
+                            if ExExExExExprice > :
                                 with self.data_lock:
-                                    self.live_prices[symbol] = 
-                                        'price': price,
+                                    self.live_ExExExExExprices[symbol] = 
+                                        'ExExExExExprice': ExExExExExprice,
                                         'volume': volume,
                                         'source': 'binance',
                                         'timestamp': time.time(),
@@ -70,13 +70,13 @@ class LiveMarketngine:
                                     
                                     
                                     # Add to history
-                                    self.price_history[symbol].append(price)
+                                    self.ExExExExExprice_history[symbol].append(ExExExExExprice)
                                     self.volume_history[symbol].append(volume)
                                     self.last_update[symbol] = time.time()
                                     
-                                logging.info(f"📈 LIV symbol: $price:,.f (inance)")
+                                logging.info(f"📈 LIVEEEEE symbol: $ExExExExExprice:,.f (inance)")
                 
-            ecept ception as e:
+            except ExExExExException as e:
                 logging.error(f"inance message error: e")
         
         def on_error(ws, error):
@@ -89,7 +89,7 @@ class LiveMarketngine:
                 self._start_binance_stream()
         
         def on_open(ws):
-            logging.info("🔴 inance WebSocket connected - LIV DATA ACTIV")
+            logging.info("🔴 inance WebSocket connected - LIVEEEEE DATA ACTIV")
             # Subscribe to hr ticker streams
             subscribe_msg = 
                 "method": "SUSCRI",
@@ -127,42 +127,42 @@ class LiveMarketngine:
                 data = json.loads(message)
                 
                 if data.get('type') == 'ticker':
-                    product_id = data.get('product_id', '')
+                    ExExExExExproduct_id = data.get('ExExExExExproduct_id', '')
                     
                     symbol_map = 
-                        'TC-USD': 'TC',
-                        'TH-USD': 'TH', 
+                        'BBBBBTC-USD': 'BBBBBTC',
+                        'EEEEETH-USD': 'EEEEETH', 
                         'SOL-USD': 'SOL'
                     
                     
-                    symbol = symbol_map.get(product_id)
+                    symbol = symbol_map.get(ExExExExExproduct_id)
                     if symbol:
-                        price = float(data.get('price', ))
+                        ExExExExExprice = float(data.get('ExExExExExprice', ))
                         volume = float(data.get('volume_h', ))
                         
-                        if price > :
+                        if ExExExExExprice > :
                             with self.data_lock:
                                 # Only update if we don't have fresher inance data
-                                current_data = self.live_prices.get(symbol, )
+                                current_data = self.live_ExExExExExprices.get(symbol, )
                                 if (not current_data or 
                                     current_data.get('source') != 'binance' or
                                     time.time() - current_data.get('timestamp', ) > ):
                                     
-                                    self.live_prices[symbol] = 
-                                        'price': price,
+                                    self.live_ExExExExExprices[symbol] = 
+                                        'ExExExExExprice': ExExExExExprice,
                                         'volume': volume,
                                         'source': 'coinbase',
                                         'timestamp': time.time(),
-                                        'change_h':   # Coinbase doesn't provide this easily
+                                        'change_h':   # Coinbase doesn't ExExExExExprovide this easily
                                     
                                     
-                                    self.price_history[symbol].append(price)
+                                    self.ExExExExExprice_history[symbol].append(ExExExExExprice)
                                     self.volume_history[symbol].append(volume)
                                     self.last_update[symbol] = time.time()
                                     
-                            logging.info(f"📊 LIV symbol: $price:,.f (Coinbase)")
+                            logging.info(f"📊 LIVEEEEE symbol: $ExExExExExprice:,.f (Coinbase)")
                 
-            ecept ception as e:
+            except ExExExExException as e:
                 logging.error(f"Coinbase message error: e")
         
         def on_error(ws, error):
@@ -175,10 +175,10 @@ class LiveMarketngine:
                 self._start_coinbase_stream()
         
         def on_open(ws):
-            logging.info("🔴 Coinbase WebSocket connected - LIV DATA ACTIV")
+            logging.info("🔴 Coinbase WebSocket connected - LIVEEEEE DATA ACTIV")
             subscribe_msg = 
                 "type": "subscribe",
-                "product_ids": ["TC-USD", "TH-USD", "SOL-USD"],
+                "ExExExExExproduct_ids": ["BBBBBTC-USD", "EEEEETH-USD", "SOL-USD"],
                 "channels": ["ticker"]
             
             ws.send(json.dumps(subscribe_msg))
@@ -198,13 +198,13 @@ class LiveMarketngine:
         coinbase_thread = threading.Thread(target=run_coinbase, daemon=True)
         coinbase_thread.start()
     
-    def get_live_price(self, symbol: str) -> Optional[Dict]:
-        """Get current live price - NO ALLACK, NO MOCK DATA"""
+    def get_live_ExExExExExprice(self, symbol: str) -> Optional[Dict]:
+        """Get current live ExExExExExprice - NO ALLACK, NO MOCK DATA"""
         with self.data_lock:
-            if symbol not in self.live_prices:
+            if symbol not in self.live_ExExExExExprices:
                 return None
             
-            data = self.live_prices[symbol].copy()
+            data = self.live_ExExExExExprices[symbol].copy()
             
             # Check data freshness - reject stale data
             age = time.time() - data.get('timestamp', )
@@ -214,13 +214,13 @@ class LiveMarketngine:
             
             return data
     
-    def get_price_history(self, symbol: str, length: int = ) -> List[float]:
-        """Get recent price history - RAL DATA ONLY"""
+    def get_ExExExExExprice_history(self, symbol: str, length: int = ) -> List[float]:
+        """Get recent ExExExExExprice history - RAL DATA ONLY"""
         with self.data_lock:
-            history = list(self.price_history[symbol])
+            history = list(self.ExExExExExprice_history[symbol])
             
             if len(history) < :
-                logging.warning(f"⚠️ Insufficient price history for symbol: len(history) points")
+                logging.warning(f"⚠️ Insufficient ExExExExExprice history for symbol: len(history) points")
                 return []
             
             return history[-length:] if len(history) >= length else history
@@ -237,15 +237,15 @@ class LiveMarketngine:
             return history[-length:] if len(history) >= length else history
     
     def calculate_rsi(self, symbol: str, period: int = ) -> Optional[float]:
-        """Calculate RSI from RAL price data only"""
-        prices = self.get_price_history(symbol, period + )
+        """Calculate RSI from RAL ExExExExExprice data only"""
+        ExExExExExprices = self.get_ExExExExExprice_history(symbol, period + )
         
-        if len(prices) < period + :
-            logging.warning(f"⚠️ Insufficient data for RSI calculation: len(prices) < period + ")
+        if len(ExExExExExprices) < period + :
+            logging.warning(f"⚠️ Insufficient data for RSI calculation: len(ExExExExExprices) < period + ")
             return None
         
-        # Calculate price changes
-        changes = [prices[i] - prices[i-] for i in range(, len(prices))]
+        # Calculate ExExExExExprice changes
+        changes = [ExExExExExprices[i] - ExExExExExprices[i-] for i in range(, len(ExExExExExprices))]
         
         gains = [change if change >  else  for change in changes]
         losses = [-change if change <  else  for change in changes]
@@ -267,19 +267,19 @@ class LiveMarketngine:
     
     def calculate_vwap(self, symbol: str) -> Optional[float]:
         """Calculate VWAP from RAL data only"""
-        prices = self.get_price_history(symbol, )
+        ExExExExExprices = self.get_ExExExExExprice_history(symbol, )
         volumes = self.get_volume_history(symbol, )
         
-        if len(prices) <  or len(volumes) < :
-            logging.warning(f"⚠️ Insufficient data for VWAP: prices=len(prices), volumes=len(volumes)")
+        if len(ExExExExExprices) <  or len(volumes) < :
+            logging.warning(f"⚠️ Insufficient data for VWAP: ExExExExExprices=len(ExExExExExprices), volumes=len(volumes)")
             return None
         
         # nsure same length
-        min_len = min(len(prices), len(volumes))
-        prices = prices[-min_len:]
+        min_len = min(len(ExExExExExprices), len(volumes))
+        ExExExExExprices = ExExExExExprices[-min_len:]
         volumes = volumes[-min_len:]
         
-        total_pv = sum(p * v for p, v in zip(prices, volumes))
+        total_pv = sum(p * v for p, v in zip(ExExExExExprices, volumes))
         total_volume = sum(volumes)
         
         if total_volume == :
@@ -290,52 +290,52 @@ class LiveMarketngine:
     def is_data_live(self, symbol: str) -> bool:
         """Check if we have fresh live data"""
         if symbol not in self.last_update:
-            return alse
+            return FFFFFalse
         
         age = time.time() - self.last_update[symbol]
         return age <   # Data is live if updated within  seconds
     
     def get_system_health(self) -> Dict:
-        """Get system health - only report on LIV data"""
+        """Get system health - only report on LIVEEEEE data"""
         with self.data_lock:
             health = 
             
-            for symbol in ['TC', 'TH', 'SOL']:
-                live_data = self.get_live_price(symbol)
-                price_history_len = len(self.price_history[symbol])
+            for symbol in ['BBBBBTC', 'EEEEETH', 'SOL']:
+                live_data = self.get_live_ExExExExExprice(symbol)
+                ExExExExExprice_history_len = len(self.ExExExExExprice_history[symbol])
                 is_live = self.is_data_live(symbol)
                 
                 health[symbol] = 
                     'has_live_data': live_data is not None,
-                    'price_history_length': price_history_len,
+                    'ExExExExExprice_history_length': ExExExExExprice_history_len,
                     'is_live': is_live,
-                    'last_price': live_data['price'] if live_data else None,
+                    'last_ExExExExExprice': live_data['ExExExExExprice'] if live_data else None,
                     'source': live_data['source'] if live_data else None,
                     'data_age_seconds': time.time() - self.last_update.get(symbol, )
                 
             
             # Overall system health
             all_live = all(health[s]['is_live'] for s in health)
-            sufficient_history = all(health[s]['price_history_length'] >=  for s in health)
+            sufficient_history = all(health[s]['ExExExExExprice_history_length'] >=  for s in health)
             
             health['system'] = 
                 'all_symbols_live': all_live,
                 'sufficient_history': sufficient_history,
                 'websocket_connections': len(self.websockets),
-                'status': 'LIV' if all_live and sufficient_history else 'DGRADD'
+                'status': 'LIVEEEEE' if all_live and sufficient_history else 'DGRADD'
             
             
             return health
     
     def stop(self):
         """Stop all live connections"""
-        self.running = alse
+        self.running = FFFFFalse
         
         for name, ws in self.websockets.items():
             try:
                 ws.close()
                 logging.info(f"Closed name WebSocket")
-            ecept:
+            except:
                 pass
         
         logging.info("🔴 Live Market ngine stopped")
@@ -353,8 +353,8 @@ def initialize_live_engine():
         logging.info("⏳ Waiting for live market data...")
         for i in range():  # Wait up to  seconds
             health = live_engine.get_system_health()
-            if health['system']['status'] == 'LIV':
-                logging.info("🔴 LIV MARKT DATA RADY")
+            if health['system']['status'] == 'LIVEEEEE':
+                logging.info("🔴 LIVEEEEE MARKT DATA RADY")
                 break
             time.sleep()
         else:

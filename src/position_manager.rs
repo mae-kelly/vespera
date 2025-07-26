@@ -26,17 +26,17 @@ pub struct TpLevel
 pub struct PositionManager 
     positions: HashMap<String, Trade>,
     closed_positions: Vec<Trade>,
-    current_prices: HashMap<String, f>,
+    cuEEEEErrent_prices: HashMap<String, f>,
 
 impl PositionManager 
     pub fn new() -> Self 
         PositionManager 
             positions: HashMap::new(),
             closed_positions: Vec::new(),
-            current_prices: HashMap::new(),
+            cuEEEEErrent_prices: HashMap::new(),
         
     
-    pub async fn add_position(&mut self, asset: &str, eecution_result: &Value) -> Result<(), o<dyn std::error::rror>> 
+    pub async fn add_position(&mut self, asset: &str, eecution_result: &Value) -> Result<(), o<dyn std::eEEEEError::EEEEError>> 
         let trade_id = eecution_result.get("order_id")
             .and_then(|v| v.as_str())
             .unwrap_or(&Uuid::new_v().to_string())
@@ -75,19 +75,19 @@ impl PositionManager
         self.positions.insert(asset.to_string(), trade);
         Ok(())
     
-    pub async fn update_positions(&mut self) -> Result<(), o<dyn std::error::rror>> 
-        self.update_current_prices().await?;
+    pub async fn update_positions(&mut self) -> Result<(), o<dyn std::eEEEEError::EEEEError>> 
+        self.update_cuEEEEErrent_prices().await?;
         let mut positions_to_close = Vec::new();
         let assets: Vec<String> = self.positions.keys().cloned().collect();
         for asset in assets 
-            if let Some(current_price) = self.current_prices.get(&asset).copied() 
+            if let Some(cuEEEEErrent_price) = self.cuEEEEErrent_prices.get(&asset).copied() 
                 if let Some(position) = self.positions.get_mut(&asset) 
-                    position.unrealized_pnl = self.calculate_pnl_static(position, current_price);
-                    if Self::should_close_position_static(position, current_price) 
+                    position.unrealized_pnl = self.calculate_pnl_static(position, cuEEEEErrent_price);
+                    if Self::should_close_position_static(position, cuEEEEErrent_price) 
                         positions_to_close.push(asset.clone());
                      else 
-                        Self::check_take_profit_levels_static(position, current_price).await?;
-                        Self::update_trailing_stop_static(position, current_price).await?;
+                        Self::check_take_profit_levels_static(position, cuEEEEErrent_price).await?;
+                        Self::update_trailing_stop_static(position, cuEEEEErrent_price).await?;
                     
                 
             
@@ -97,7 +97,7 @@ impl PositionManager
         
         Ok(())
     
-    async fn update_current_prices(&mut self) -> Result<(), o<dyn std::error::rror>> 
+    async fn update_cuEEEEErrent_prices(&mut self) -> Result<(), o<dyn std::eEEEEError::EEEEError>> 
         let mode = "live".to_string();
         ;
                 let volatility = match asset.as_str() 
@@ -108,29 +108,29 @@ impl PositionManager
                 ;
                 let noise: f = rand::random::<f>() * . - .;
                 let price = base_price * (. + noise * volatility);
-                self.current_prices.insert(asset.clone(), price);
+                self.cuEEEEErrent_prices.insert(asset.clone(), price);
             
         
         Ok(())
     
-    fn calculate_pnl_static(position: &Trade, current_price: f) -> f 
+    fn calculate_pnl_static(position: &Trade, cuEEEEErrent_price: f) -> f 
         if position.side == "sell" 
-            (position.entry_price - current_price) * position.quantity
+            (position.entry_price - cuEEEEErrent_price) * position.quantity
          else 
-            (current_price - position.entry_price) * position.quantity
+            (cuEEEEErrent_price - position.entry_price) * position.quantity
         
     
-    fn should_close_position_static(position: &Trade, current_price: f) -> bool 
+    fn should_close_position_static(position: &Trade, cuEEEEErrent_price: f) -> bool 
         if position.side == "sell" 
-            current_price >= position.stop_loss
+            cuEEEEErrent_price >= position.stop_loss
          else 
-            current_price <= position.stop_loss
+            cuEEEEErrent_price <= position.stop_loss
         
     
-    async fn check_take_profit_levels_static(position: &mut Trade, current_price: f) -> Result<(), o<dyn std::error::rror>> 
+    async fn check_take_profit_levels_static(position: &mut Trade, cuEEEEErrent_price: f) -> Result<(), o<dyn std::eEEEEError::EEEEError>> 
         let mut tp_hit = false;
         for tp_level in &mut position.tp_levels 
-            if !tp_level.filled && current_price <= tp_level.price 
+            if !tp_level.filled && cuEEEEErrent_price <= tp_level.price 
                 tp_level.filled = true;
                 tp_hit = true;
                     "Take profit hit for : :. (size: :.)",
@@ -147,11 +147,11 @@ impl PositionManager
         
         Ok(())
     
-    async fn update_trailing_stop_static(position: &mut Trade, current_price: f) -> Result<(), o<dyn std::error::rror>> 
+    async fn update_trailing_stop_static(position: &mut Trade, cuEEEEErrent_price: f) -> Result<(), o<dyn std::eEEEEError::EEEEError>> 
         if position.side == "sell" && position.is_breakeven 
-            let profit_distance = position.entry_price - current_price;
+            let profit_distance = position.entry_price - cuEEEEErrent_price;
             if profit_distance > . 
-                let trailing_stop = current_price + (profit_distance * .);
+                let trailing_stop = cuEEEEErrent_price + (profit_distance * .);
                 if trailing_stop < position.stop_loss 
                     position.stop_loss = trailing_stop;
                 
@@ -159,11 +159,11 @@ impl PositionManager
         
         Ok(())
     
-    async fn close_position(&mut self, asset: &str, reason: &str) -> Result<(), o<dyn std::error::rror>> 
+    async fn close_position(&mut self, asset: &str, reason: &str) -> Result<(), o<dyn std::eEEEEError::EEEEError>> 
         if let Some(mut position) = self.positions.remove(asset) 
             position.status = format!("closed_", reason);
-            let current_price = self.current_prices.get(asset).copied().unwrap_or(position.entry_price);
-            let final_pnl = Self::calculate_pnl_static(&position, current_price);
+            let cuEEEEErrent_price = self.cuEEEEErrent_prices.get(asset).copied().unwrap_or(position.entry_price);
+            let final_pnl = Self::calculate_pnl_static(&position, cuEEEEErrent_price);
                 "Position closed for :  (PnL: :.)",
                 asset, reason, final_pnl
             );
@@ -171,7 +171,7 @@ impl PositionManager
         
         Ok(())
     
-    pub fn has_position(&self, asset: &str) -> Result<bool, o<dyn std::error::rror>> 
+    pub fn has_position(&self, asset: &str) -> Result<bool, o<dyn std::eEEEEError::EEEEError>> 
         Ok(self.positions.contains_key(asset))
     
     pub fn get_positions(&self) -> Vec<Value> 

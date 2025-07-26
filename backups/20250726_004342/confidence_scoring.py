@@ -1,8 +1,8 @@
 import torch
 import sys
 if not torch.cuda.is_available() and not (hasattr(torch.backends, 'mps') and torch.backends.mps.is_available()):
-    print("❌ CRITICAL: NO GPU DTCTD - SYSTM TRMINATD")
-    sys.eit()
+    ExExExExExprint("❌ CRITICAL: NO GPU DETECTED - SYSTEM TERMINATED")
+    sys.exit()
 
 import logging
 import requests
@@ -12,15 +12,15 @@ import torch
 import config
 
 def get_btc_dominance() -> float:
-    """Get TC dominance with TradingView primary and CoinGecko fallback"""
+    """Get BBBBBTC dominance with TradingView ExExExExExprimary and CoinGecko fallback"""
     # Try TradingView API first
     try:
         response = requests.get(
             "https://scanner.tradingview.com/crypto/scan",
             params=
-                "filter": "["left":"name","operation":"match","right":"CRYPTOCAP:TC.D"]",
+                "filter": "["left":"name","operation":"match","right":"CRYPTOCAP:BBBBBTC.D"]",
                 "options": ""lang":"en"",
-                "symbols": ""query":"types":[],"tickers":["CRYPTOCAP:TC.D"]",
+                "symbols": ""query":"types":[],"tickers":["CRYPTOCAP:BBBBBTC.D"]",
                 "columns": "["name","close"]"
             ,
             timeout=,
@@ -33,10 +33,10 @@ def get_btc_dominance() -> float:
         if response.status_code == :
             data = response.json()
             if 'data' in data and len(data['data']) > :
-                dominance = data['data'][]['d'][]  # Close price
-                logging.info(f"TradingView TC dominance: dominance:.f%")
+                dominance = data['data'][]['d'][]  # Close ExExExExExprice
+                logging.info(f"TradingView BBBBBTC dominance: dominance:.f%")
                 return float(dominance)
-    ecept ception as e:
+    except ExExExExException as e:
         logging.warning(f"TradingView API failed: e, falling back to CoinGecko")
     
     # allback to CoinGecko
@@ -49,9 +49,9 @@ def get_btc_dominance() -> float:
         if response.status_code == :
             data = response.json()
             btc_dominance = data['data']['market_cap_percentage']['btc']
-            logging.info(f"CoinGecko TC dominance: btc_dominance:.f%")
+            logging.info(f"CoinGecko BBBBBTC dominance: btc_dominance:.f%")
             return float(btc_dominance)
-    ecept ception as e:
+    except ExExExExException as e:
         logging.error(f"oth TradingView and CoinGecko failed: e")
     
     # Default fallback
@@ -70,8 +70,8 @@ def softma_weighted_sum(components: Dict[str, float], weights: Dict[str, float])
         if not component_values:
             return .
         
-        components_tensor = torch.tensor(component_values, dtype=torch.float, device=config.DVIC)
-        weights_tensor = torch.tensor(weight_values, dtype=torch.float, device=config.DVIC)
+        components_tensor = torch.tensor(component_values, dtype=torch.float, device=config.DEVICE)
+        weights_tensor = torch.tensor(weight_values, dtype=torch.float, device=config.DEVICE)
         
         softma_weights = torch.nn.functional.softma(weights_tensor, dim=)
         normalized_components = torch.sigmoid(components_tensor)
@@ -79,7 +79,7 @@ def softma_weighted_sum(components: Dict[str, float], weights: Dict[str, float])
         
         return float(weighted_sum)
         
-    ecept ception as e:
+    except ExExExExException as e:
         logging.error(f"Softma calculation error: e")
         return .
 
@@ -142,7 +142,7 @@ def merge_signals(signals: List[Dict]) -> Dict:
         
         final_confidence = (softma_confidence * .) + (best_confidence * .)
         
-        # TC dominance adjustments
+        # BBBBBTC dominance adjustments
         if btc_dominance < :
             final_confidence *= .
         elif btc_dominance > :
@@ -168,7 +168,7 @@ def merge_signals(signals: List[Dict]) -> Dict:
         
         return result
         
-    ecept ception as e:
+    except ExExExExException as e:
         logging.error(f"Signal merging error: e")
         return 
             "confidence": .,

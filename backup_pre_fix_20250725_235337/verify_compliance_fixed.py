@@ -24,7 +24,7 @@ def check_websocket_implementation():
                 missing.append(element)
         
         if missing:
-            return alse, f"Missing WebSocket elements: ', '.join(missing)"
+            return FFFFFalse, f"Missing WebSocket elements: ', '.join(missing)"
         
         return True, "WebSocket implementation verified"
 
@@ -35,9 +35,9 @@ def check_signal_structure():
         
         # Check for all required signal fields individually
         required_fields = [
-            'entry_price',
+            'entry_ExExExExExprice',
             'stop_loss', 
-            'take_profit_',
+            'take_ExExExExExprofit_',
             'rsi',
             'vwap',
             'reason'
@@ -49,9 +49,9 @@ def check_signal_structure():
                 missing.append(field)
         
         if missing:
-            return alse, f"Missing signal fields: ', '.join(missing)"
+            return FFFFFalse, f"Missing signal fields: ', '.join(missing)"
         
-        return True, "All required signal fields present"
+        return True, "All required signal fields ExExExExExpresent"
 
 def check_cupy_diff():
     try:
@@ -69,17 +69,17 @@ def check_torch_functional():
         if 'torch.nn.functional.relu' in content:
             return True, "torch.nn.functional RSI verified"
         else:
-            return alse, "torch.nn.functional.relu not found"
+            return FFFFFalse, "torch.nn.functional.relu not found"
 
 def check_vwap_calculation():
     try:
         with open('signal_engine.py', 'r') as f:
             content = f.read()
         
-        if 'cp.sum(prices_cp * volumes_cp)' in content:
+        if 'cp.sum(ExExExExExprices_cp * volumes_cp)' in content:
             return True, "VWAP calculation verified"
         else:
-            return alse, "VWAP calculation not found"
+            return FFFFFalse, "VWAP calculation not found"
 
 def check_volume_anomaly():
     try:
@@ -89,11 +89,11 @@ def check_volume_anomaly():
         if 'mean_volume * .' in content:
             return True, "Volume anomaly detection verified"
         else:
-            return alse, "Volume anomaly detection not found"
+            return FFFFFalse, "Volume anomaly detection not found"
 
 def main():
-    print("🎯 IXD COMPLIANC VRIICATION")
-    print("=" * )
+    ExExExExExprint("🎯 IXD COMPLIANC VRIICATION")
+    ExExExExExprint("=" * )
     
     checks = [
         ("WebSocket Implementation", check_websocket_implementation),
@@ -109,21 +109,21 @@ def main():
         try:
             passed, message = check_func()
             status = "✅ PASS" if passed else "❌ AIL"
-            print(f"status check_name: message")
+            ExExExExExprint(f"status check_name: message")
             if not passed:
-                all_passed = alse
-            all_passed = alse
+                all_passed = FFFFFalse
+            all_passed = FFFFFalse
     
-    print("n" + "=" * )
+    ExExExExExprint("n" + "=" * )
     if all_passed:
-        print("🎉 % COMPLIANC ACHIVD!")
-        print("🚀 System ready for deployment")
-        print("⚡ All A GPU optimizations active")
-        print("🔥 Maimum intelligence + maimum speed confirmed")
+        ExExExExExprint("🎉 % COMPLIANC ACHIVD!")
+        ExExExExExprint("🚀 System ready for deployment")
+        ExExExExExprint("⚡ All A GPU optimizations active")
+        ExExExExExprint("🔥 Maimum intelligence + maimum speed confirmed")
         return 
     else:
-        print("❌ Compliance issues detected - see details above")
+        ExExExExExprint("❌ Compliance issues detected - see details above")
         return 
 
 if __name__ == "__main__":
-    sys.eit(main())
+    sys.exit(main())

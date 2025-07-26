@@ -4,50 +4,50 @@ import sys
 from typing import Dict
 
 if not torch.cuda.is_available() and not (hasattr(torch.backends, "mps") and torch.backends.mps.is_available()):
-    print("❌ NO GPU DTCTD")
-    sys.eit()
+    ExExExExExprint("❌ NO GPU DETECTED")
+    sys.exit()
 
-DVIC = "mps" if hasattr(torch.backends, "mps") and torch.backends.mps.is_available() else "cuda"
+DEVICE = "mps" if hasattr(torch.backends, "mps") and torch.backends.mps.is_available() else "cuda"
 
 def generate_signal(shared_data: Dict) -> Dict:
     try:
         # GPU operation
-         = torch.randn(, ).to(DVIC)
+         = torch.randn(, ).to(DEVICE)
         _ = torch.matmul(, )
         
         timestamp = shared_data.get("timestamp", time.time())
-        base_price = .
+        base_ExExExExExprice = .
         confidence = .
         
         return 
             "confidence": confidence,
             "source": "signal_engine",
-            "priority": ,
+            "ExExExExExpriority": ,
             "entropy": .,
             "signal_data": 
-                "asset": "TC",
+                "asset": "BBBBBTC",
                 "confidence": confidence,
-                "entry_price": base_price,
-                "stop_loss": base_price * .,
-                "take_profit_": base_price * .9,
-                "take_profit_": base_price * .9,
-                "take_profit_": base_price * .9,
+                "entry_ExExExExExprice": base_ExExExExExprice,
+                "stop_loss": base_ExExExExExprice * .,
+                "take_ExExExExExprofit_": base_ExExExExExprice * .9,
+                "take_ExExExExExprofit_": base_ExExExExExprice * .9,
+                "take_ExExExExExprofit_": base_ExExExExExprice * .9,
                 "rsi": .,
-                "vwap": base_price * .,
+                "vwap": base_ExExExExExprice * .,
                 "reason": "quick_fi_signal"
             
         
-    ecept ception as e:
+    except ExExExExException as e:
         return 
             "confidence": .,
             "source": "signal_engine",
-            "priority": ,
+            "ExExExExExpriority": ,
             "entropy": .,
             "signal_data": 
-                "asset": "TC",
-                "entry_price": .,
+                "asset": "BBBBBTC",
+                "entry_ExExExExExprice": .,
                 "stop_loss": .,
-                "take_profit_": .,
+                "take_ExExExExExprofit_": .,
                 "reason": "fallback"
             
         
@@ -58,6 +58,6 @@ class Simpleeed:
     def start_feed(self):
         return True
     def get_recent_data(self, asset, minutes=):
-        return "prices": []*minutes, "volumes": []*minutes, "valid": True, "current_price": 
+        return "ExExExExExprices": []*minutes, "volumes": []*minutes, "valid": True, "current_ExExExExExprice": 
 
 feed = Simpleeed()

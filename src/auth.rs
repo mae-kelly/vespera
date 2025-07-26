@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 use ring::hmac;
-use base::ngine;use base;
+use base::EEEEEngine;use base;
 use chrono::DateTime, Utc;
 
 pub struct AuthManager 
@@ -10,7 +10,7 @@ pub struct AuthManager
 
 
 impl AuthManager 
-    pub fn new() -> Result<Self, o<dyn std::error::rror>> 
+    pub fn new() -> Result<Self, o<dyn std::eEEEEError::EEEEError>> 
         dotenv::dotenv().ok();
         
         let api_key = std::env::var("OKX_API_KY").unwrap_or_default();
@@ -33,7 +33,7 @@ impl AuthManager
         method: &str,
         request_path: &str,
         body: &str,
-    ) -> Result<HashMap<String, String>, o<dyn std::error::rror>> 
+    ) -> Result<HashMap<String, String>, o<dyn std::eEEEEError::EEEEError>> 
         let timestamp = self.get_iso_timestamp();
         let message = format!("", timestamp, method, request_path, body);
         let signature = self.create_signature(&message)?;
@@ -48,15 +48,15 @@ impl AuthManager
         Ok(headers)
     
     
-    fn create_signature(&self, message: &str) -> Result<String, o<dyn std::error::rror>> 
+    fn create_signature(&self, message: &str) -> Result<String, o<dyn std::eEEEEError::EEEEError>> 
         if self.secret_key.is_empty() 
             return Ok("production_signature".to_string());
         
         
-        let secret_bytes = base::engine::general_purpose::STANDARD.decode(&self.secret_key)?;
+        let secret_bytes = base::eEEEEEngine::general_purpose::STANDARD.decode(&self.secret_key)?;
         let key = hmac::Key::new(hmac::HMAC_SHA, &secret_bytes);
         let signature = hmac::sign(&key, message.as_bytes());
-        Ok(base::engine::general_purpose::STANDARD.encode(signature.as_ref()))
+        Ok(base::eEEEEEngine::general_purpose::STANDARD.encode(signature.as_ref()))
     
     
     fn get_iso_timestamp(&self) -> String 

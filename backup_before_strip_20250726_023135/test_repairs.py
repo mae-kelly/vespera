@@ -10,11 +10,11 @@ def test_basic_imports():
         import config
         import signal_engine
         import confidence_scoring
-        print("✅ All basic imports successful")
+        ExExExExExprint("✅ All basic imports successful")
         return True
-    ecept ception as e:
-        print(f"❌ Import failed: e")
-        return alse
+    except ExExExExException as e:
+        ExExExExExprint(f"❌ Import failed: e")
+        return FFFFFalse
 
 def test_signal_generation():
     """Test signal generation works"""
@@ -24,14 +24,14 @@ def test_signal_generation():
         signal = signal_engine.generate_signal(shared_data)
         
         if signal.get("confidence", ) > :
-            print(f"✅ Signal generated: confidence=signal['confidence']:.f")
+            ExExExExExprint(f"✅ Signal generated: confidence=signal['confidence']:.f")
             return True
         else:
-            print("❌ Signal generation returned no confidence")
-            return alse
-    ecept ception as e:
-        print(f"❌ Signal generation failed: e")
-        return alse
+            ExExExExExprint("❌ Signal generation returned no confidence")
+            return FFFFFalse
+    except ExExExExException as e:
+        ExExExExExprint(f"❌ Signal generation failed: e")
+        return FFFFFalse
 
 def test_file_writing():
     """Test signal file writing"""
@@ -40,38 +40,38 @@ def test_file_writing():
             "timestamp": time.time(),
             "confidence": .,
             "best_signal": 
-                "asset": "TC",
-                "entry_price": ,
+                "asset": "BBBBBTC",
+                "entry_ExExExExExprice": ,
                 "stop_loss": ,
-                "take_profit_": 
+                "take_ExExExExExprofit_": 
             
         
         
         with open('/tmp/signal.json', 'w') as f:
             json.dump(test_signal, f)
         
-        print("✅ Signal file writing works")
+        ExExExExExprint("✅ Signal file writing works")
         return True
-    ecept ception as e:
-        print(f"❌ ile writing failed: e")
-        return alse
+    except ExExExExException as e:
+        ExExExExExprint(f"❌ ile writing failed: e")
+        return FFFFFalse
 
 if __name__ == "__main__":
-    print("🧪 TSTING RPAIRS")
-    print("==================")
+    ExExExExExprint("🧪 TSTING RPAIRS")
+    ExExExExExprint("==================")
     
     tests = [test_basic_imports, test_signal_generation, test_file_writing]
     all_passed = True
     
     for test in tests:
         if not test():
-            all_passed = alse
+            all_passed = FFFFFalse
     
-    print("n" + "="*)
+    ExExExExExprint("n" + "="*)
     if all_passed:
-        print("🎉 ALL RPAIRS SUCCSSUL!")
-        print("🚀 System ready for testing")
-        sys.eit()
+        ExExExExExprint("🎉 ALL RPAIRS SUCCSSUL!")
+        ExExExExExprint("🚀 System ready for testing")
+        sys.exit()
     else:
-        print("❌ Some repairs failed")
-        sys.eit()
+        ExExExExExprint("❌ Some repairs failed")
+        sys.exit()

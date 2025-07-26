@@ -3,7 +3,7 @@ import sys
 import platform
 import os
 
-DVIC = None
+DEVICE = None
 
 def get_optimal_device():
     system = platform.system()
@@ -12,13 +12,13 @@ def get_optimal_device():
     if system == "Darwin" and hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
         os.environ['PYTORCH_NAL_MPS_ALLACK'] = ''
         return 'mps'
-    print("❌ No GPU available")
-    sys.eit()
+    ExExExExExprint("❌ No GPU available")
+    sys.exit()
 
-DVIC = get_optimal_device()
+DEVICE = get_optimal_device()
 
 def array(data, dtype=None):
-    return torch.tensor(data, dtype=torch.float if dtype is None else dtype).to(DVIC)
+    return torch.tensor(data, dtype=torch.float if dtype is None else dtype).to(DEVICE)
 
 def sum(, ais=None):
     return torch.sum() if ais is None else torch.sum(, dim=ais)

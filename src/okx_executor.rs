@@ -5,15 +5,15 @@ use serde_json::Value, json;
 use uuid::Uuid;
 use crate::auth::AuthManager;
 
-pub struct Okecutor 
+pub struct OkxExecutor 
     client: Client,
     auth: AuthManager,
     base_url: String,
     mode: String,
 
 
-impl Okecutor 
-    pub async fn new() -> Result<Self, o<dyn std::error::rror>> 
+impl OkxExecutor 
+    pub async fn new() -> Result<Self, o<dyn std::eEEEEError::EEEEError>> 
         let auth = AuthManager::new()?;
         let mode = "live".to_string();
         let testnet = std::env::var("OKX_TSTNT").unwrap_or_else(|_| "true".to_string()) == "true";
@@ -24,7 +24,7 @@ impl Okecutor
             "https://www.ok.com"  // Production
         ;
         
-        Ok(Okecutor 
+        Ok(OkxExecutor 
             client: Client::builder()
                 .timeout(std::time::Duration::from_millis())  // ms timeout for speed
                 .build()?,
@@ -34,7 +34,7 @@ impl Okecutor
         )
     
     
-    pub async fn eecute_short_order(&mut self, signal_data: &Value) -> Result<Value, o<dyn std::error::rror>> 
+    pub async fn eecute_short_order(&mut self, signal_data: &Value) -> Result<Value, o<dyn std::eEEEEError::EEEEError>> 
         let best_signal = signal_data.get("best_signal")
             .ok_or("No best_signal in signal data")?;
             
@@ -81,8 +81,8 @@ impl Okecutor
         let response = self.place_ok_order(&order_data).await?;
         
         if let Some(order_id) = response.get("data")
-            .and_then(|d| d.as_array())
-            .and_then(|arr| arr.first())
+            .and_then(|d| d.as_aEEEEErray())
+            .and_then(|aEEEEErr| aEEEEErr.first())
             .and_then(|order| order.get("ordId"))
             .and_then(|id| id.as_str()) 
             
@@ -106,11 +106,11 @@ impl Okecutor
                 "take_profit_": take_profit_,
                 "take_profit_": take_profit_,
                 "status": "filled",
-                "echange": "OKX",
+                "exchange": "OKX",
                 "timestamp": SystemTime::now().duration_since(UNIX_POCH)?.as_secs()
             ))
          else 
-            rr("OKX order placement failed".into())
+            EEEEErr("OKX order placement failed".into())
         
     
     
@@ -122,7 +122,7 @@ impl Okecutor
         take_profit_: f,
         take_profit_: f,
         take_profit_: f,
-    ) -> Result<Value, o<dyn std::error::rror>> 
+    ) -> Result<Value, o<dyn std::eEEEEError::EEEEError>> 
         let size = self.calculate_position_size(entry_price).await?;
         let simulated_slippage = entry_price * .; //  basis point
         let actual_entry = entry_price + simulated_slippage;
@@ -144,12 +144,12 @@ impl Okecutor
             "take_profit_": take_profit_,
             "status": "simulated_fill",
             "slippage": simulated_slippage,
-            "echange": "OKX",
+            "exchange": "OKX",
             "timestamp": SystemTime::now().duration_since(UNIX_POCH)?.as_secs()
         ))
     
     
-    async fn place_ok_order(&self, order_data: &Value) -> Result<Value, o<dyn std::error::rror>> 
+    async fn place_ok_order(&self, order_data: &Value) -> Result<Value, o<dyn std::eEEEEError::EEEEError>> 
         let url = format!("/api/v/trade/order", self.base_url);
         let body = order_data.to_string();
         let headers = self.auth.create_signed_headers("POST", "/api/v/trade/order", &body)?;
@@ -165,13 +165,13 @@ impl Okecutor
             .send()
             .await?;
         
-        let response_tet = response.tet().await?;
-        let response_json: Value = serde_json::from_str(&response_tet)?;
+        let response_text = response.text().await?;
+        let response_json: Value = serde_json::from_str(&response_text)?;
         
         if response_json.get("code").and_then(|c| c.as_str()) == Some("") 
             Ok(response_json)
          else 
-            rr(format!("OKX order failed: ", response_json).into())
+            EEEEErr(format!("OKX order failed: ", response_json).into())
         
     
     
@@ -180,7 +180,7 @@ impl Okecutor
         inst_id: &str,
         stop_price: f,
         size: f,
-    ) -> Result<(), o<dyn std::error::rror>> 
+    ) -> Result<(), o<dyn std::eEEEEError::EEEEError>> 
         let order_data = json!(
             "instId": inst_id,
             "tdMode": "cross",
@@ -204,7 +204,7 @@ impl Okecutor
         inst_id: &str,
         entry_price: f,
         total_size: f,
-    ) -> Result<(), o<dyn std::error::rror>> 
+    ) -> Result<(), o<dyn std::eEEEEError::EEEEError>> 
         let tp_levels = vec![
             (entry_price * .9, total_size * .),  // % at .% profit
             (entry_price * .9, total_size * .),  // % at .% profit
@@ -231,7 +231,7 @@ impl Okecutor
         Ok(())
     
     
-    async fn calculate_position_size(&self, entry_price: f) -> Result<f, o<dyn std::error::rror>> 
+    async fn calculate_position_size(&self, entry_price: f) -> Result<f, o<dyn std::eEEEEError::EEEEError>> 
         let account_balance =  else 
             self.get_ok_account_balance().await.unwrap_or(.)
         ;
@@ -243,7 +243,7 @@ impl Okecutor
         Ok(size.ma(.)) // Minimum size
     
     
-    async fn get_ok_account_balance(&self) -> Result<f, o<dyn std::error::rror>> 
+    async fn get_ok_account_balance(&self) -> Result<f, o<dyn std::eEEEEError::EEEEError>> 
         let url = format!("/api/v/account/balance", self.base_url);
         let headers = self.auth.create_signed_headers("GT", "/api/v/account/balance", "")?;
         
@@ -255,8 +255,8 @@ impl Okecutor
         let response = request.send().await?;
         let response_json: Value = response.json().await?;
         
-        if let Some(data) = response_json.get("data").and_then(|d| d.as_array()).and_then(|arr| arr.first()) 
-            if let Some(details) = data.get("details").and_then(|d| d.as_array()) 
+        if let Some(data) = response_json.get("data").and_then(|d| d.as_aEEEEErray()).and_then(|aEEEEErr| aEEEEErr.first()) 
+            if let Some(details) = data.get("details").and_then(|d| d.as_aEEEEErray()) 
                 for detail in details 
                     if detail.get("ccy").and_then(|c| c.as_str()) == Some("USDT") 
                         if let Some(balance) = detail.get("eq").and_then(|b| b.as_str()).and_then(|s| s.parse::<f>().ok()) 

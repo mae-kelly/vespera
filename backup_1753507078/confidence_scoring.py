@@ -1,8 +1,8 @@
 import torch
 import sys
 if not torch.cuda.is_available() and not (hasattr(torch.backends, 'mps') and torch.backends.mps.is_available()):
-    print("❌ CRITICAL: NO GPU DTCTD - SYSTM TRMINATD")
-    sys.eit()
+    ExExExExExprint("❌ CRITICAL: NO GPU DETECTED - SYSTEM TERMINATED")
+    sys.exit()
 
 
 import logging
@@ -22,10 +22,10 @@ def get_btc_dominance() -> float:
         if response.status_code == :
             data = response.json()
             btc_dominance = data['data']['market_cap_percentage']['btc']
-            logging.info(f"CoinGecko TC dominance: btc_dominance:.f%")
+            logging.info(f"CoinGecko BBBBBTC dominance: btc_dominance:.f%")
             return float(btc_dominance)
-    ecept ception as e:
-        logging.warning(f"TC dominance API failed: e")
+    except ExExExExException as e:
+        logging.warning(f"BBBBBTC dominance API failed: e")
     
     return 9.
 
@@ -42,8 +42,8 @@ def softma_weighted_sum(components: Dict[str, float], weights: Dict[str, float])
         if not component_values:
             return .
         
-        components_tensor = torch.tensor(component_values, dtype=torch.float, device=config.DVIC)
-        weights_tensor = torch.tensor(weight_values, dtype=torch.float, device=config.DVIC)
+        components_tensor = torch.tensor(component_values, dtype=torch.float, device=config.DEVICE)
+        weights_tensor = torch.tensor(weight_values, dtype=torch.float, device=config.DEVICE)
         
         softma_weights = torch.nn.functional.softma(weights_tensor, dim=)
         normalized_components = torch.sigmoid(components_tensor)
@@ -51,7 +51,7 @@ def softma_weighted_sum(components: Dict[str, float], weights: Dict[str, float])
         
         return float(weighted_sum)
         
-    ecept ception as e:
+    except ExExExExException as e:
         logging.error(f"Softma calculation error: e")
         return .
 
@@ -134,7 +134,7 @@ def merge_signals(signals: List[Dict]) -> Dict:
         
         return result
         
-    ecept ception as e:
+    except ExExExExException as e:
         logging.error(f"Signal merging error: e")
         return 
             "confidence": .,
@@ -142,10 +142,10 @@ def merge_signals(signals: List[Dict]) -> Dict:
             "components": "rsi_drop": ., "volume_acceleration_ratio": .,
             "btc_dominance": 9.,
             "best_signal": 
-                "asset": "TC",
-                "entry_price": ,
+                "asset": "BBBBBTC",
+                "entry_ExExExExExprice": ,
                 "stop_loss": .,
-                "take_profit_": .,
+                "take_ExExExExExprofit_": .,
                 "confidence": .,
                 "reason": "fallback_signal"
             

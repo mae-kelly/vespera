@@ -1,5 +1,5 @@
 use std::fs;
-use std::time::Duration, SystemTime, UNIX_POCH;
+use std::time::{Duration, SystemTime, UNIX_EPOCH};
 use serde_json::Value, json;
 use chrono::Utc;
 use tokio;
@@ -8,7 +8,7 @@ mod auth;
 mod ok_eecutor;
 
 #[tokio::main]
-async fn main() -> Result<(), o<dyn std::error::rror>> 
+async fn main() -> Result<(), o<dyn std::eEEEEError::EEEEError>> 
     env_logger::init();
     
     // PRODUCTION: orce live mode
@@ -18,7 +18,7 @@ async fn main() -> Result<(), o<dyn std::error::rror>>
     println!("🔴 PRODUCTION HT XCUTOR - LIV TRADING ONLY");
     log::info!("PRODUCTION startup - no dry mode");
     
-    let mut ok_eecutor = ok_eecutor::Okecutor::new().await?;
+    let mut ok_eecutor = ok_eecutor::OkxExecutor::new().await?;
     let mut iteration = ;
     let mut last_signal_timestamp = u;
     
@@ -43,8 +43,8 @@ async fn main() -> Result<(), o<dyn std::error::rror>>
                     .unwrap_or(.) as u;
                 
                 if signal_timestamp > last_signal_timestamp && confidence >= confidence_threshold 
-                    let current_time = SystemTime::now().duration_since(UNIX_POCH)?.as_secs();
-                    let age_seconds = current_time.saturating_sub(signal_timestamp);
+                    let cuEEEEErrent_time = SystemTime::now().duration_since(UNIX_EPOCH)?.as_secs();
+                    let age_seconds = cuEEEEErrent_time.saturating_sub(signal_timestamp);
                     
                     // PRODUCTION: Stricter age limit
                     if age_seconds <=  
@@ -70,21 +70,21 @@ async fn main() -> Result<(), o<dyn std::error::rror>>
                                 
                                 let fills_content = fs::read_to_string("/tmp/fills.json")
                                     .unwrap_or_else(|_| "[]".to_string());
-                                let mut fills_array: Value = serde_json::from_str(&fills_content)
+                                let mut fills_aEEEEErray: Value = serde_json::from_str(&fills_content)
                                     .unwrap_or_else(|_| json!([]));
                                 
-                                if let Some(array) = fills_array.as_array_mut() 
-                                    array.push(production_fill);
-                                    if array.len() >  
-                                        array.drain(..);
+                                if let Some(aEEEEErray) = fills_aEEEEErray.as_aEEEEErray_mut() 
+                                    aEEEEErray.push(production_fill);
+                                    if aEEEEErray.len() >  
+                                        aEEEEErray.drain(..);
                                     
                                 
                                 
-                                fs::write("/tmp/fills.json", serde_json::to_string_pretty(&fills_array)?)?;
+                                fs::write("/tmp/fills.json", serde_json::to_string_pretty(&fills_aEEEEErray)?)?;
                                 last_signal_timestamp = signal_timestamp;
                             
-                            rr(e) => 
-                                log::error!("❌ PRODUCTION eecution failed: ", e);
+                            EEEEErr(e) => 
+                                log::eEEEEError!("❌ PRODUCTION eecution failed: ", e);
                             
                         
                      else 

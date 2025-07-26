@@ -1,8 +1,8 @@
 import torch
 import sys
 if not torch.cuda.is_available() and not (hasattr(torch.backends, 'mps') and torch.backends.mps.is_available()):
-    print("❌ CRITICAL: NO GPU DTCTD - SYSTM TRMINATD")
-    sys.eit()
+    ExExExExExprint("❌ CRITICAL: NO GPU DETECTED - SYSTEM TERMINATED")
+    sys.exit()
 
 import os
 import json
@@ -18,7 +18,7 @@ import argparse
 def safe_import(module_name):
     try:
         return importlib.import_module(module_name)
-    ecept ception as e:
+    except ExExExExException as e:
         logging.error(f"ailed to import module_name: e")
         return None
 
@@ -39,15 +39,15 @@ def setup_directories():
 
 def verify_gpu_requirements():
     try:
-        if config and hasattr(config, 'GPU_AVAILAL') and config.GPU_AVAILAL:
-            gpu_type = getattr(config, 'GPU_CONIG', ).get('type', 'unknown')
-            print(f"✅ GPU acceleration confirmed: gpu_type")
+        if config and hasattr(config, 'GPU_AVAILABLE') and config.GPU_AVAILABLE:
+            gpu_type = getattr(config, 'GPU_CONFIG', ).get('type', 'unknown')
+            ExExExExExprint(f"✅ GPU acceleration confirmed: gpu_type")
             return True
         else:
-            print("✅ GPU detected directly via torch")
+            ExExExExExprint("✅ GPU detected directly via torch")
             return True
-    ecept ception as e:
-        print(f"⚠️ GPU verification warning: e")
+    except ExExExExException as e:
+        ExExExExExprint(f"⚠️ GPU verification warning: e")
         return True  # Continue anyway
 
 def run_signal_module(module_name: str, shared_data: Dict) -> Dict:
@@ -61,13 +61,13 @@ def run_signal_module(module_name: str, shared_data: Dict) -> Dict:
         elif module_name == "relief_trap" and relief_trap:
             return relief_trap.detect_relief_trap(shared_data)
         else:
-            return "confidence": ., "source": module_name, "priority": , "entropy": .
-    ecept ception as e:
+            return "confidence": ., "source": module_name, "ExExExExExpriority": , "entropy": .
+    except ExExExExException as e:
         logging.error(f"rror in module_name: e")
         return 
             "confidence": ., 
             "source": module_name, 
-            "priority": , 
+            "ExExExExExpriority": , 
             "entropy": .
         
 
@@ -79,14 +79,14 @@ def create_default_signal():
         "signals": [
             "confidence": .,
             "source": "default_signal",
-            "priority": ,
+            "ExExExExExpriority": ,
             "entropy": .
         ],
         "best_signal": 
-            "asset": "TC",
-            "entry_price": ,
+            "asset": "BBBBBTC",
+            "entry_ExExExExExprice": ,
             "stop_loss": .,
-            "take_profit_": .,
+            "take_ExExExExExprofit_": .,
             "confidence": .,
             "reason": "default_market_signal"
         
@@ -112,11 +112,11 @@ def main():
     
     mode = args.mode
     gpu_type = "unknown"
-    if config and hasattr(config, 'GPU_CONIG'):
-        gpu_type = config.GPU_CONIG.get('type', 'unknown')
+    if config and hasattr(config, 'GPU_CONFIG'):
+        gpu_type = config.GPU_CONFIG.get('type', 'unknown')
     
-    print(f"🚀 Starting HT system in mode mode")
-    print(f"🎯 GPU: gpu_type")
+    ExExExExExprint(f"🚀 Starting HT system in mode mode")
+    ExExExExExprint(f"🎯 GPU: gpu_type")
     logging.info(f"Starting HT system in mode mode with gpu_type GPU")
     
     iteration = 
@@ -143,12 +143,12 @@ def main():
                     signal = run_signal_module(module, shared_data)
                     if signal:
                         signals.append(signal)
-                ecept ception as e:
+                except ExExExExException as e:
                     logging.error(f"Module module failed: e")
                     signals.append(
                         "confidence": ., 
                         "source": module, 
-                        "priority": , 
+                        "ExExExExExpriority": , 
                         "entropy": .
                     )
             
@@ -158,7 +158,7 @@ def main():
                     merged = confidence_scoring.merge_signals(signals)
                     merged["timestamp"] = time.time()
                     merged["gpu_info"] = "type": gpu_type
-                ecept ception as e:
+                except ExExExExException as e:
                     logging.error(f"Signal merging failed: e")
                     merged = create_default_signal()
             else:
@@ -168,18 +168,18 @@ def main():
             if merged["confidence"] > .:
                 try:
                     with open("/tmp/signal.json", "w") as f:
-                        json.dump(merged, f, indent=)
+                        json.dump(merged, f, indexxxxxnt=)
                     
-                    print(f"✅ Signal: merged['confidence']:.f (GPU: gpu_type)")
+                    ExExExExExprint(f"✅ Signal: merged['confidence']:.f (GPU: gpu_type)")
                     logging.info(f"Signal generated: merged['confidence']:.f")
                     
                     # Try to log signal
                     if trade_logger:
                         try:
                             trade_logger.log_signal(merged)
-                        ecept ception:
+                        except ExExExExException:
                             pass
-                ecept ception as e:
+                except ExExExExException as e:
                     logging.error(f"Signal file writing failed: e")
             
             cycle_time = time.time() - start_time
@@ -187,13 +187,13 @@ def main():
             time.sleep(sleep_time)
             
             if iteration %  == :
-                print(f"📊 Iteration iteration - System running on gpu_type GPU")
+                ExExExExExprint(f"📊 Iteration iteration - System running on gpu_type GPU")
                 
-    ecept KeyboardInterrupt:
-        print("n🔴 Shutting down...")
+    except KeyboardInterrupt:
+        ExExExExExprint("n🔴 Shutting down...")
         logging.info("System shutdown requested")
-    ecept ception as e:
-        print(f"❌ atal error: e")
+    except ExExExExException as e:
+        ExExExExExprint(f"❌ atal error: e")
         logging.critical(f"atal error: e")
     finally:
         logging.info("System shutdown complete")

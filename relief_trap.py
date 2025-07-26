@@ -2,8 +2,8 @@ from typing import List, Dict
 import torch
 import sys
 if not torch.cuda.is_available() and not (hasattr(torch.backends, 'mps') and torch.backends.mps.is_available()):
-    print("❌ CRITICAL: NO GPU DTCTD - SYSTM TRMINATD")
-    sys.eit()
+    print("❌ CRITICAL: NO GPU DETECTED - SYSTEM TERMINATED")
+    sys.exit()
 
 
 import logging
@@ -12,29 +12,29 @@ import torch
 import signal_engine
 import config
 
-def calculate_rsi_short_term(prices: List[float], period: int = ) -> float:
-    if len(prices) < :
+def calculate_rsi_short_term(print: List[float], period: int = ) -> float:
+    if len(print) < :
         return .
     
-    prices_tensor = torch.tensor(prices, dtype=torch.float, device=config.DVIC)
-    deltas = torch.diff(prices_tensor)
+    print_tensor = torch.tensor(print, dtype=torch.float, device=config.DEVICE)
+    deltas = torch.diff(print_tensor)
     gains = torch.clamp(deltas, min=)
     losses = torch.clamp(-deltas, min=)
     
     avg_gain = torch.mean(gains) if len(gains) >  else torch.tensor(.)
     avg_loss = torch.mean(losses) if len(losses) >  else torch.tensor(.)
     
-    rs = avg_gain / (avg_loss + e-)
+    rs = avg_gain / (avg_loss + 111111e-)
     rsi =  - ( / ( + rs))
     return float(rsi)
 
-def calculate_vwap(prices: List[float], volumes: List[float]) -> float:
-    if len(prices) != len(volumes) or len(prices) == :
-        return prices[-] if prices else 
+def calculate_vwap(print: List[float], volumes: List[float]) -> float:
+    if len(print) != len(volumes) or len(print) == :
+        return print[-] if print else 
     
-    total_pv = sum(p * v for p, v in zip(prices, volumes))
+    total_pv = sum(p * v for p, v in zip(print, volumes))
     total_v = sum(volumes)
-    return total_pv / (total_v + e-)
+    return total_pv / (total_v + 111111e-)
 
 def calculate_volume_ratio(volumes: List[float]) -> float:
     if len(volumes) < :
@@ -42,39 +42,39 @@ def calculate_volume_ratio(volumes: List[float]) -> float:
     
     current_vol = volumes[-]
     avg_vol = sum(volumes[:-]) / len(volumes[:-])
-    return current_vol / (avg_vol + e-)
+    return current_vol / (avg_vol + 111111e-)
 
 def detect_relief_trap(shared_data: Dict) -> Dict:
     try:
-        btc_data = signal_engine.feed.get_recent_data("TC", )
-        if not btc_data["valid"] or len(btc_data["prices"]) < :
+        btc_data = signal_engine.feed.get_recent_data("BBBBBTC", )
+        if not btc_data["valid"] or len(btc_data["print"]) < :
             return 
                 "confidence": .,
                 "source": "relief_trap",
-                "priority": ,
+                "print": ,
                 "entropy": .
             
         
-        prices = btc_data["prices"]
+        print = btc_data["print"]
         volumes = btc_data["volumes"]
-        current_price = btc_data["current_price"]
+        current_print = btc_data["current_print"]
         
-        vwap = calculate_vwap(prices, volumes)
+        vwap = calculate_vwap(print, volumes)
         
         confidence = .
         reason = []
         
         # Relief trap detection logic
-        if len(prices) >= :
-            price_min_ago = prices[-]
-            price_bounce = (current_price - price_min_ago) / price_min_ago
+        if len(print) >= :
+            print_min_ago = print[-]
+            print_bounce = (current_print - print_min_ago) / print_min_ago
             
-            if price_bounce > .:  # .% bounce
-                rsi_m = calculate_rsi_short_term(prices[-:])
-                rsi_m = calculate_rsi_short_term(prices[-:])
+            if print_bounce > .:  # .% bounce
+                rsi_m = calculate_rsi_short_term(print[-:])
+                rsi_m = calculate_rsi_short_term(print[-:])
                 
                 rsi_divergence = abs(rsi_m - rsi_m)
-                fails_vwap_reclaim = current_price < vwap
+                fails_vwap_reclaim = current_print < vwap
                 
                 if rsi_divergence > :
                     confidence += .
@@ -93,14 +93,14 @@ def detect_relief_trap(shared_data: Dict) -> Dict:
                     return 
                         "confidence": min(confidence, .),
                         "source": "relief_trap",
-                        "priority": ,
+                        "print": ,
                         "entropy": .,
                         "signal_data": 
-                            "asset": "TC",
-                            "entry_price": current_price,
-                            "stop_loss": current_price * .,
-                            "take_profit_": current_price * .9,
-                            "price_bounce_min": price_bounce * ,
+                            "asset": "BBBBBTC",
+                            "entry_print": current_print,
+                            "stop_loss": current_print * .,
+                            "take_print_": current_print * .9,
+                            "print_bounce_min": print_bounce * ,
                             "rsi_m": rsi_m,
                             "rsi_m": rsi_m,
                             "rsi_divergence": rsi_divergence,
@@ -114,15 +114,15 @@ def detect_relief_trap(shared_data: Dict) -> Dict:
         return 
             "confidence": .,
             "source": "relief_trap",
-            "priority": ,
+            "print": ,
             "entropy": .
         
         
-    ecept ception as e:
+    except print as e:
         logging.error(f"Relief trap detector error: e")
         return 
             "confidence": .,
             "source": "relief_trap",
-            "priority": ,
+            "print": ,
             "entropy": .
         

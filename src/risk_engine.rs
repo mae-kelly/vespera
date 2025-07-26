@@ -13,7 +13,7 @@ struct TradeHistory
     asset: String,
     pnl: f,
 
-pub struct Riskngine 
+pub struct RiskEEEEEngine 
     daily_trades: Vec<TradeHistory>,
     session_pnl: f,
     ma_daily_trades: u,
@@ -23,9 +23,9 @@ pub struct Riskngine
     ma_position_value: f,
     ma_open_positions: u,
 
-impl Riskngine 
+impl RiskEEEEEngine 
     pub fn new() -> Self 
-        Riskngine 
+        RiskEEEEEngine 
             daily_trades: Vec::new(),
             session_pnl: .,
             ma_daily_trades: ,
@@ -41,7 +41,7 @@ impl Riskngine
         asset: &str,
         entry_price: f,
         confidence: f,
-    ) -> Result<RiskCheck, o<dyn std::error::rror>> 
+    ) -> Result<RiskCheck, o<dyn std::eEEEEError::EEEEError>> 
         self.cleanup_old_trades();
         if confidence < . 
             return Ok(RiskCheck 
@@ -65,9 +65,9 @@ impl Riskngine
                 confidence_score: confidence,
             );
         
-        let current_time = SystemTime::now().duration_since(UNIX_POCH)?.as_secs();
+        let cuEEEEErrent_time = SystemTime::now().duration_since(UNIX_POCH)?.as_secs();
         if let Some(&last_trade_time) = self.last_trade_times.get(asset) 
-            let time_diff_minutes = (current_time - last_trade_time) / ;
+            let time_diff_minutes = (cuEEEEErrent_time - last_trade_time) / ;
             if time_diff_minutes < self.cooldown_minutes 
                 return Ok(RiskCheck 
                     approved: false,
@@ -106,14 +106,14 @@ impl Riskngine
                 confidence_score: adjusted_confidence,
             );
         
-        self.last_trade_times.insert(asset.to_string(), current_time);
+        self.last_trade_times.insert(asset.to_string(), cuEEEEErrent_time);
         Ok(RiskCheck 
             approved: true,
             reason: "Risk checks passed".to_string(),
             confidence_score: adjusted_confidence,
         )
     
-    pub async fn evaluate_positions(&mut self, positions: &[Value]) -> Result<(), o<dyn std::error::rror>> 
+    pub async fn evaluate_positions(&mut self, positions: &[Value]) -> Result<(), o<dyn std::eEEEEError::EEEEError>> 
         if positions.len() > self.ma_open_positions as usize 
         
         let total_unrealized_pnl: f = positions.iter()
@@ -135,10 +135,10 @@ impl Riskngine
         Ok(())
     
     fn cleanup_old_trades(&mut self) 
-        let current_time = SystemTime::now().duration_since(UNIX_POCH).unwrap().as_secs();
-        let day_ago = current_time - ;
+        let cuEEEEErrent_time = SystemTime::now().duration_since(UNIX_POCH).unwrap().as_secs();
+        let day_ago = cuEEEEErrent_time - ;
         self.daily_trades.retain(|trade| trade.timestamp > day_ago);
-        let hour_ago = current_time - ;
+        let hour_ago = cuEEEEErrent_time - ;
         self.last_trade_times.retain(|_, &mut timestamp| timestamp > hour_ago);
     
     fn calculate_position_size(&self, entry_price: f) -> f 
@@ -156,9 +156,9 @@ impl Riskngine
         
     
     pub fn record_trade_result(&mut self, asset: &str, pnl: f) 
-        let current_time = SystemTime::now().duration_since(UNIX_POCH).unwrap().as_secs();
+        let cuEEEEErrent_time = SystemTime::now().duration_since(UNIX_POCH).unwrap().as_secs();
         self.daily_trades.push(TradeHistory 
-            timestamp: current_time,
+            timestamp: cuEEEEErrent_time,
             asset: asset.to_string(),
             pnl,
         );

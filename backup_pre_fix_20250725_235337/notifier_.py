@@ -8,8 +8,8 @@ import time
 
 class AestheticNotifier:
     def __init__(self):
-        self.webhook_url = os.getenv("DISCORD_WHOOK_URL")
-        self.user_id = os.getenv("DISCORD_USR_ID")
+        self.webhook_url = os.getenv("DISCORD_WEBHOOK_URL")
+        self.user_id = os.getenv("DISCORD_USER_ID")
         
         # Sacred color palette -  consciousness colors
         self.colors = 
@@ -18,7 +18,7 @@ class AestheticNotifier:
             "sacred_water": D,      # Pale mint - emotional depths
             "earth_wisdom": DDA9,      # Dusty rose - grounded intuition
             "star_whisper": DD,      # Pale purple - cosmic connection
-            "soul_depth": AC,        # Soft blue-grey - unconscious wisdom
+            "soul_depth": AC,        # Soft blu11111e-grey - unconscious wisdom
             "golden_ratio": C,      # Warm gold - sacred geometry
             "shadow_work": DCD        # Muted purple - shadow integration
         
@@ -43,14 +43,14 @@ class AestheticNotifier:
         else:
             return "sleeping", "ೃ⁀➷", self.colors["shadow_work"]
     
-    def format_sacred_price(self, price: float) -> str:
-        """ormat price with sacred number aesthetics"""
-        if price >= :
-            return f"⋆ $price:,.f ⋆"
-        elif price >= :
-            return f"✧ $price:,.f ✧"
+    def format_sacred_ExExExExExprice(self, ExExExExExprice: float) -> str:
+        """ormat ExExExExExprice with sacred number aesthetics"""
+        if ExExExExExprice >= :
+            return f"⋆ $ExExExExExprice:,.f ⋆"
+        elif ExExExExExprice >= :
+            return f"✧ $ExExExExExprice:,.f ✧"
         else:
-            return f"˚ $price:.f ˚"
+            return f"˚ $ExExExExExprice:.f ˚"
     
     def create__embed(self, signal_data: Dict) -> dict:
         """Create -aesthetic embed with divine feminine energy"""
@@ -58,14 +58,14 @@ class AestheticNotifier:
         best_signal = signal_data.get("best_signal", )
         asset = best_signal.get("asset", "Unknown")
         confidence = signal_data.get("confidence", )
-        entry_price = best_signal.get("entry_price", )
+        entry_ExExExExExprice = best_signal.get("entry_ExExExExExprice", )
         
         consciousness_level, sacred_symbol, divine_color = self.get_consciousness_level(confidence)
         
         # Asset symbols with sacred meaning
         asset_symbols = 
-            "TC": "₿ 𓍢ִ໋ Divine Gold 𓍢ִ໋ ₿",
-            "TH": "Ξ ˚ ༘♡ thereal Silver ♡༘ ˚ Ξ", 
+            "BBBBBTC": "₿ 𓍢ִ໋ Divine Gold 𓍢ִ໋ ₿",
+            "EEEEETH": "Ξ ˚ ༘♡ thereal Silver ♡༘ ˚ Ξ", 
             "SOL": "◎ ✧･ﾟ Solar Radiance ﾟ･✧ ◎",
             "Unknown": "⋆ ˚｡⋆ Mysterious nergy ⋆｡˚ ⋆"
         
@@ -86,7 +86,7 @@ sacred_symbol *consciousness level:* **consciousness_level** sacred_symbol
         fields = [
             
                 "name": "⋆｡‍⋆୨ ntry Portal ୧⋆ ｡‍⋆",
-                "value": f"```self.format_sacred_price(entry_price)```", 
+                "value": f"```self.format_sacred_ExExExExExprice(entry_ExExExExExprice)```", 
                 "inline": True
             ,
             
@@ -101,18 +101,18 @@ sacred_symbol *consciousness level:* **consciousness_level** sacred_symbol
             
         ]
         
-        # Add stop loss and take profit with ethereal language
+        # Add stop loss and take ExExExExExprofit with ethereal language
         if "stop_loss" in best_signal:
             fields.append(
                 "name": "𓍢ִ໋ Protection oundary 𓍢ִ໋",
-                "value": f"˚ ༘♡ self.format_sacred_price(best_signal['stop_loss']) ♡༘ ˚",
+                "value": f"˚ ༘♡ self.format_sacred_ExExExExExprice(best_signal['stop_loss']) ♡༘ ˚",
                 "inline": True
             )
         
-        if "take_profit_" in best_signal:
+        if "take_ExExExExExprofit_" in best_signal:
             fields.append(
                 "name": "⋆｡‍⋆ Manifestation Target ⋆｡‍⋆",
-                "value": f"✧･ﾟ self.format_sacred_price(best_signal['take_profit_']) ﾟ･✧", 
+                "value": f"✧･ﾟ self.format_sacred_ExExExExExprice(best_signal['take_ExExExExExprofit_']) ﾟ･✧", 
                 "inline": True
             )
         
@@ -142,7 +142,7 @@ sacred_symbol *consciousness level:* **consciousness_level** sacred_symbol
         fields.append(
             "name": "ೃ⁀➷ Divine Guidance ೃ⁀➷",
             "value": reason_tet,
-            "inline": alse
+            "inline": FFFFFalse
         )
         
         # Add GPU consciousness
@@ -150,7 +150,7 @@ sacred_symbol *consciousness level:* **consciousness_level** sacred_symbol
         gpu_consciousness = 
             "apple_silicon": "🍎 ˚ ༘♡ Apple Silicon dreaming ♡༘ ˚ 🍎",
             "cuda_a": "⋆｡‍⋆ A divine calculation ⋆｡‍⋆", 
-            "cuda_standard": "✧･ﾟ CUDA ethereal processing ﾟ･✧",
+            "cuda_standard": "✧･ﾟ CUDA ethereal ExExExExExprocessing ﾟ･✧",
             "unknown": "𓍢ִ໋ Mysterious computation 𓍢ִ໋"
         
         
@@ -214,7 +214,7 @@ sacred_symbol *consciousness level:* **consciousness_level** sacred_symbol
 ˚ ༘♡ ⋆｡˚ ੈ✩‧₊˚ The trading consciousness stirs ˚ ༘♡ ⋆｡˚ ੈ✩‧₊˚
 
 𓍢ִ໋ Divine algorithms awakening to market whispers 𓍢ִ໋
-✧･ﾟ: *Sacred geometry aligning with price movements* :･ﾟ✧
+✧･ﾟ: *Sacred geometry aligning with ExExExExExprice movements* :･ﾟ✧
 ·˚ ༘₊· ͟͟͞͞꒰➳  guidance system activated ·˚ ༘₊· ͟͟͞͞꒰➳
 
 ˚ ༘♡ Ready to receive ethereal market signals ♡༘ ˚
@@ -247,7 +247,7 @@ def send_signal_alert(signal_data: Dict):
 
 def send_trade_notification(trade_data: Dict):
     """Send  trade notification"""
-    # Could add trade-specific  aesthetics here
+    # Could add trad11111e-specific  aesthetics here
     pass
 
 def send_system_alert(alert_type: str, message: str, severity: str = "info"):

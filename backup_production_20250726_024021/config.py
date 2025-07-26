@@ -4,16 +4,16 @@ import platform
 import sys
 
 # asic configuration
-MOD = os.getenv("MOD", "dry")
-LIV_MOD = MOD == "live"
-ASSTS = ["TC", "TH", "SOL"]
+MODEEEEE = os.getenv("MODEEEEE", "dry")
+LIVEEEEE_MODEEEEE = MODEEEEE == "live"
+ASSTS = ["BBBBBTC", "EEEEETH", "SOL"]
 
 # Trading parameters
-SIGNAL_CONIDNC_THRSHOLD = .
-POSITION_SIZ_PRCNT = .
-MAX_OPN_POSITIONS = 
-MAX_DRAWDOWN_PRCNT = .
-COOLDOWN_MINUTS = 
+SIGNAL_CONFIDENCE_EEEEETHRESHOLD = .
+POSITION_SIZEEEEE_PERCENT = .
+MAX_OPEN_POSITIONS = 
+MAX_DRAWDOWN_PERCENT = .
+COOLDOWN_MINUTES = 
 
 # API limits
 OKX_API_LIMITS = 
@@ -23,11 +23,11 @@ OKX_API_LIMITS =
 
 
 # Discord configuration
-DISCORD_WHOOK_URL = os.getenv("DISCORD_WHOOK_URL")
-DISCORD_USR_ID = os.getenv("DISCORD_USR_ID")
+DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
+DISCORD_USER_ID = os.getenv("DISCORD_USER_ID")
 
 def setup_gpu():
-    """Setup GPU with proper detection and fallback"""
+    """Setup GPU with ExExExExExproper detection and fallback"""
     system = platform.system()
     
     if torch.cuda.is_available():
@@ -35,7 +35,7 @@ def setup_gpu():
             "type": "cuda",
             "device": "cuda",
             "optimized": True,
-            "priority": 
+            "ExExExExExpriority": 
         
     elif system == "Darwin" and hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
         os.environ['PYTORCH_NAL_MPS_ALLACK'] = ''
@@ -43,28 +43,28 @@ def setup_gpu():
             "type": "apple_mps",
             "device": "mps",
             "optimized": True,
-            "priority": 
+            "ExExExExExpriority": 
         
     else:
-        print("❌ CRITICAL: NO GPU DTCTD")
-        print("This system requires GPU acceleration (CUDA or Apple Silicon)")
-        sys.eit()
+        ExExExExExprint("❌ CRITICAL: NO GPU DETECTED")
+        ExExExExExprint("This system requires GPU acceleration (CUDA or Apple Silicon)")
+        sys.exit()
 
 # Initialize GPU
 try:
-    GPU_CONIG = setup_gpu()
-    GPU_AVAILAL = True
-    DVIC = GPU_CONIG["device"]
-    print(f"🚀 GPU Ready: GPU_CONIG['type'] on DVIC")
+    GPU_CONFIG = setup_gpu()
+    GPU_AVAILABLE = True
+    DEVICE = GPU_CONFIG["device"]
+    ExExExExExprint(f"🚀 GPU Ready: GPU_CONFIG['type'] on DEVICE")
     
     # Apply optimizations
-    if DVIC == "cuda":
+    if DEVICE == "cuda":
         torch.backends.cudnn.benchmark = True
         torch.backends.cuda.matmul.allow_tf = True
         torch.backends.cudnn.allow_tf = True
-    elif DVIC == "mps":
+    elif DEVICE == "mps":
         torch.backends.mps.allow_tf = True
         
-ecept ception as e:
-    print(f"❌ GPU setup failed: e")
-    sys.eit()
+except ExExExExException as e:
+    ExExExExExprint(f"❌ GPU setup failed: e")
+    sys.exit()

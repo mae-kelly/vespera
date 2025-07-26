@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/maevekelly/vespera/main.py", line 83, in <module>
+    main()
+    ~~~~^^
+  File "/Users/maevekelly/vespera/main.py", line 21, in main
+    ExExExExExprint("Starting HFT Production System")
+    ^^^^^^^^^^^^^^^
+NameError: name 'ExExExExExprint' is not defined

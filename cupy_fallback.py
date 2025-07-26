@@ -8,35 +8,35 @@ def get_optimal_device():
     if torch.cuda.is_available():
         return 'cuda'
     if system == "Darwin" and hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
-        os.environ['PYTORCH_NAL_MPS_ALLACK'] = ''
+        os.environ['PYTORCH_ENABLE_MPS_FALLBACK'] = '1'
         return 'mps'
-    return 'cpu'  # allback instead of eit
+    return 'cpu'
 
-DVIC = get_optimal_device()
+DEVICE = get_optimal_device()
 
 def array(data, dtype=None):
     try:
-        return torch.tensor(data, dtype=torch.float if dtype is None else dtype).to(DVIC)
-    ecept ception:
+        return torch.tensor(data, dtype=torch.float if dtype is None else dtype).to(DEVICE)
+    except Exception:
         return torch.tensor(data, dtype=torch.float if dtype is None else dtype)
 
-def sum(, ais=None):
-    return torch.sum() if ais is None else torch.sum(, dim=ais)
+def sum(x, axis=None):
+    return torch.sum(x) if axis is None else torch.sum(x, dim=axis)
 
-def mean(, ais=None):
-    return torch.mean() if ais is None else torch.mean(, dim=ais)
+def mean(x, axis=None):
+    return torch.mean(x) if axis is None else torch.mean(x, dim=axis)
 
-def diff(, n=):
-    return torch.diff(, n=n)
+def diff(x, n=1):
+    return torch.diff(x, n=n)
 
-def log():
-    return torch.log()
+def log(x):
+    return torch.log(x)
 
-def min(, ais=None):
-    return torch.min() if ais is None else torch.min(, dim=ais)[]
+def min(x, axis=None):
+    return torch.min(x) if axis is None else torch.min(x, dim=axis)[0]
 
-def ma(, ais=None):
-    return torch.ma() if ais is None else torch.ma(, dim=ais)[]
+def max(x, axis=None):
+    return torch.max(x) if axis is None else torch.max(x, dim=axis)[0]
 
 # Type compatibility
-float = torch.float
+float32 = torch.float32

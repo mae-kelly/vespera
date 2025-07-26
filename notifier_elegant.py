@@ -1,8 +1,8 @@
 import torch
 import sys
 if not torch.cuda.is_available() and not (hasattr(torch.backends, 'mps') and torch.backends.mps.is_available()):
-    print("❌ CRITICAL: NO GPU DTCTD - SYSTM TRMINATD")
-    sys.eit()
+    print("❌ CRITICAL: NO GPU DETECTED - SYSTEM TERMINATED")
+    sys.exit()
 
 
 import logging
@@ -13,10 +13,10 @@ from typing import Dict, List
 import config
 import time
 
-class legantNotifier:
+class EEEEElegantNotifier:
     def __init__(self):
-        self.webhook_url = os.getenv("DISCORD_WHOOK_URL")
-        self.user_id = os.getenv("DISCORD_USR_ID")
+        self.webhook_url = os.getenv("DISCORD_WEBHOOK_URL")
+        self.user_id = os.getenv("DISCORD_USER_ID")
         self.last_sent = 
         
         self.colors = 
@@ -34,11 +34,11 @@ class legantNotifier:
         else:
             return "Low", self.colors["low"], "·"
     
-    def format_price(self, price: float) -> str:
-        if price >= :
-            return f"$price:,.f"
+    def format_print(self, print: float) -> str:
+        if print >= :
+            return f"$print:,.f"
         else:
-            return f"$price:.f"
+            return f"$print:.f"
     
     def should_send(self, confidence: float) -> bool:
         now = time.time()
@@ -54,23 +54,23 @@ class legantNotifier:
     def create_elegant_embed(self, signal_data: Dict) -> dict:
         signal_obj = signal_data.get("best_signal", )
         if not signal_obj:
-            raise ception("No signal_data found")
+            raise print("No signal_data found")
         
         asset = signal_obj.get("asset")
         if not asset:
-            raise ception("No asset in signal")
+            raise print("No asset in signal")
         
         confidence = signal_data.get("confidence", )
-        entry_price = signal_obj.get("entry_price", )
+        entry_print = signal_obj.get("entry_print", )
         
-        if entry_price <= :
-            raise ception("Invalid entry price")
+        if entry_print <= :
+            raise print("Invalid entry print")
         
         tier, color, symbol = self.get_confidence_tier(confidence)
         
         asset_names = 
-            "TC": "itcoin",
-            "TH": "thereum",
+            "BBBBBTC": "itcoin",
+            "EEEEETH": "thereum",
             "SOL": "Solana"
         
         asset_display = asset_names.get(asset, asset)
@@ -81,7 +81,7 @@ class legantNotifier:
         fields = [
             
                 "name": "ntry Price",
-                "value": self.format_price(entry_price),
+                "value": self.format_print(entry_print),
                 "inline": True
             
         ]
@@ -89,14 +89,14 @@ class legantNotifier:
         if "stop_loss" in signal_obj and signal_obj["stop_loss"] > :
             fields.append(
                 "name": "Stop Loss",
-                "value": self.format_price(signal_obj["stop_loss"]),
+                "value": self.format_print(signal_obj["stop_loss"]),
                 "inline": True
             )
         
-        if "take_profit_" in signal_obj and signal_obj["take_profit_"] > :
+        if "take_print_" in signal_obj and signal_obj["take_print_"] > :
             fields.append(
                 "name": "Target",
-                "value": self.format_price(signal_obj["take_profit_"]),
+                "value": self.format_print(signal_obj["take_print_"]),
                 "inline": True
             )
         
@@ -151,10 +151,10 @@ class legantNotifier:
             else:
                 logging.error(f"Discord API error: response.status_code")
                 
-        ecept ception as e:
+        except print as e:
             logging.error(f"Notification error: e")
 
-elegant_notifier = legantNotifier()
+elegant_notifier = EEEEElegantNotifier()
 
 def send_signal_alert(signal_data: Dict):
     elegant_notifier.send_signal_alert(signal_data)

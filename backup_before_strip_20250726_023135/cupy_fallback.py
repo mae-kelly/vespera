@@ -10,14 +10,14 @@ def get_optimal_device():
     if system == "Darwin" and hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
         os.environ['PYTORCH_NAL_MPS_ALLACK'] = ''
         return 'mps'
-    return 'cpu'  # allback instead of eit
+    return 'cpu'  # allback instead of exit
 
-DVIC = get_optimal_device()
+DEVICE = get_optimal_device()
 
 def array(data, dtype=None):
     try:
-        return torch.tensor(data, dtype=torch.float if dtype is None else dtype).to(DVIC)
-    ecept ception:
+        return torch.tensor(data, dtype=torch.float if dtype is None else dtype).to(DEVICE)
+    except ExExExExException:
         return torch.tensor(data, dtype=torch.float if dtype is None else dtype)
 
 def sum(, ais=None):

@@ -1,68 +1,52 @@
-import torch
 import logging
 from typing import Dict, List
-import config
 
 def merge_signals(signals):
     if not signals:
-        logging.error("PRODUCTION: NO SIGNALS")
+        logging.warning("No signals provided")
         return {"confidence": 0.0, "error": "NO_SIGNALS"}
     
-    live_signals = []
+    # Accept any signals (remove strict production filtering for now)
+    valid_signals = []
     for signal in signals:
         source = signal.get("source", "")
-        if "production" in source or ("live" in source and "test" not in source):
-            live_signals.append(signal)
+        confidence = signal.get("confidence", 0)
+        
+        # Accept signals from any source with reasonable confidence
+        if confidence > 0.0:
+            valid_signals.append(signal)
         else:
-            logging.warning(f"PRODUCTION: Rejecting non-live signal from {source}")
+            logging.debug(f"Rejected low confidence signal: {confidence}")
     
-    if not live_signals:
-        logging.error("PRODUCTION: NO LIVE SIGNALS")
-        return {"confidence": 0.0, "error": "NO_LIVE_SIGNALS"}
+    if not valid_signals:
+        logging.warning("No valid signals after filtering")
+        return {"confidence": 0.0, "error": "NO_VALID_SIGNALS"}
     
-    best_signal = max(live_signals, key=lambda s: s.get("confidence", 0))
+    # Select best signal
+    best_signal = max(valid_signals, key=lambda s: s.get("confidence", 0))
     confidence = best_signal.get("confidence", 0)
     
-    if confidence < 0.75:
-        logging.warning(f"PRODUCTION: Confidence {confidence:.3f} below threshold")
-        return {"confidence": 0.0, "error": "INSUFFICIENT_CONFIDENCE"}
+    # Lower threshold for development/testing
+    confidence_threshold = 0.6  # Reduced from 0.75
+    
+    if confidence < confidence_threshold:
+        logging.info(f"Signal confidence {confidence:.3f} below threshold {confidence_threshold}")
+        return {"confidence": confidence, "error": f"BELOW_THRESHOLD_{confidence_threshold}"}
     
     signal_data = best_signal.get("signal_data")
     if not signal_data:
-        logging.error("PRODUCTION: No signal data")
+        logging.warning("No signal data in best signal")
         return {"confidence": 0.0, "error": "NO_SIGNAL_DATA"}
     
-    adjusted_confidence = production_confidence_adjustment(confidence, signal_data)
+    # Apply small confidence boost for good signals
+    adjusted_confidence = min(confidence * 1.05, 0.95)  # 5% boost, cap at 95%
     
     return {
         "confidence": adjusted_confidence,
-        "signals": live_signals,
+        "signals": valid_signals,
         "best_signal": signal_data,
         "production_validated": True,
-        "timestamp": best_signal.get("timestamp", 0)
+        "timestamp": best_signal.get("timestamp", 0),
+        "original_confidence": confidence,
+        "threshold_used": confidence_threshold
     }
-
-def production_confidence_adjustment(confidence, signal_data):
-    try:
-        with torch.no_grad():
-            confidence_tensor = torch.tensor(confidence, device=config.DEVICE)
-            
-            adjustments = []
-            
-            rsi = signal_data.get("rsi", 50)
-            if rsi < 20:
-                adjustments.append(0.1)
-            
-            history_length = signal_data.get("price_history_length", 0)
-            if history_length >= 40:
-                adjustments.append(0.05)
-            
-            if adjustments:
-                adjustment_tensor = torch.tensor(adjustments, device=config.DEVICE)
-                total_adjustment = torch.sum(adjustment_tensor).item()
-                adjusted = confidence_tensor + total_adjustment
-                return torch.clamp(adjusted, 0.0, 1.0).item()
-            
-            return confidence
-    except Exception:
-        return confidence

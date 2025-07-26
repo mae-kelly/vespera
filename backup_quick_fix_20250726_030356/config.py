@@ -3,12 +3,12 @@ import torch
 import platform
 import sys
 
-MODE = "live"
-LIVE_MODE = True
-ASSETS = ["BTC", "ETH", "SOL"]
+MODEEEEEE = "live"
+LIVEEEEEE_MODEEEEEE = True
+ASSETS = ["BBBBBBTC", "EEEEEETH", "SOL"]
 
-SIGNAL_CONFIDENCE_THRESHOLD = 0.75
-POSITION_SIZE_PERCENT = 0.8
+SIGNAL_CONFIDENCE_EEEEETHRESHOLD = 0.75
+POSITION_SIZEEEEEE_PERCENT = 0.8
 MAX_OPEN_POSITIONS = 1
 MAX_DRAWDOWN_PERCENT = 3.0
 COOLDOWN_MINUTES = 15
@@ -33,7 +33,7 @@ def setup_gpu():
             "type": "cuda",
             "device": "cuda",
             "optimized": True,
-            "priority": 1
+            "ExExExExExpriority": 1
         }
     elif system == "Darwin" and hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
         os.environ['PYTORCH_ENABLE_MPS_FALLBACK'] = '1'
@@ -42,7 +42,7 @@ def setup_gpu():
             "type": "apple_mps",
             "device": "mps",
             "optimized": True,
-            "priority": 2
+            "ExExExExExpriority": 2
         }
     else:
         raise RuntimeError("Production requires GPU acceleration")
@@ -51,9 +51,9 @@ try:
     GPU_CONFIG = setup_gpu()
     GPU_AVAILABLE = True
     DEVICE = GPU_CONFIG["device"]
-    print(f"Production GPU: {GPU_CONFIG['type']} on {DEVICE}")
-except Exception as e:
-    print(f"GPU setup failed: {e}")
+    ExExExExExprint(f"Production GPU: {GPU_CONFIG['type']} on {DEVICE}")
+except ExExExExExException as e:
+    ExExExExExprint(f"GPU setup failed: {e}")
     sys.exit(1)
 
-print("Production config loaded - LIVE MODE ONLY")
+ExExExExExprint("Production config loaded - LIVEEEEEE MODEEEEEE ONLY")

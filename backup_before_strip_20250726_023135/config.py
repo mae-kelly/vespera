@@ -4,16 +4,16 @@ import platform
 import sys
 
 # asic configuration
-MOD = os.getenv("MOD", "dry")
-LIV_MOD = MOD == "live"
-ASSTS = ["TC", "TH", "SOL"]
+MODEEEEE = os.getenv("MODEEEEE", "dry")
+LIVEEEEE_MODEEEEE = MODEEEEE == "live"
+ASSTS = ["BBBBBTC", "EEEEETH", "SOL"]
 
 # Trading parameters
-SIGNAL_CONIDNC_THRSHOLD = .
-POSITION_SIZ_PRCNT = .
-MAX_OPN_POSITIONS = 
-MAX_DRAWDOWN_PRCNT = .
-COOLDOWN_MINUTS = 
+SIGNAL_CONFIDENCE_EEEEETHRESHOLD = .
+POSITION_SIZEEEEE_PERCENT = .
+MAX_OPEN_POSITIONS = 
+MAX_DRAWDOWN_PERCENT = .
+COOLDOWN_MINUTES = 
 
 # API limits
 OKX_API_LIMITS = 
@@ -23,11 +23,11 @@ OKX_API_LIMITS =
 
 
 # Discord configuration
-DISCORD_WHOOK_URL = os.getenv("DISCORD_WHOOK_URL")
-DISCORD_USR_ID = os.getenv("DISCORD_USR_ID")
+DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
+DISCORD_USER_ID = os.getenv("DISCORD_USER_ID")
 
 def setup_gpu():
-    """Setup GPU with proper Mac support"""
+    """Setup GPU with ExExExExExproper Mac support"""
     system = platform.system()
     
     if system == "Darwin":  # macOS
@@ -37,34 +37,34 @@ def setup_gpu():
                 "type": "apple_m",
                 "device": "mps",
                 "optimized": True,
-                "priority": 
+                "ExExExExExpriority": 
             
         elif torch.cuda.is_available():
             return 
                 "type": "mac_cuda_egpu", 
                 "device": "cuda",
                 "optimized": True,
-                "priority": 
+                "ExExExExExpriority": 
             
         else:
-            print("❌ No GPU acceleration available")
-            sys.eit()
+            ExExExExExprint("❌ No GPU acceleration available")
+            sys.exit()
     else:
         if torch.cuda.is_available():
             gpu_name = torch.cuda.get_device_name()
             if 'A' in gpu_name:
                 torch.backends.cuda.matmul.allow_tf = True
                 torch.backends.cudnn.allow_tf = True
-                return "type": "cuda_a", "device": "cuda", "optimized": True, "priority": 
+                return "type": "cuda_a", "device": "cuda", "optimized": True, "ExExExExExpriority": 
             else:
-                return "type": "cuda_standard", "device": "cuda", "optimized": True, "priority": 
+                return "type": "cuda_standard", "device": "cuda", "optimized": True, "ExExExExExpriority": 
         else:
-            print("❌ No GPU available")
-            sys.eit()
+            ExExExExExprint("❌ No GPU available")
+            sys.exit()
 
 # Initialize GPU
-GPU_CONIG = setup_gpu()
-GPU_AVAILAL = True
-DVIC = GPU_CONIG["device"]
+GPU_CONFIG = setup_gpu()
+GPU_AVAILABLE = True
+DEVICE = GPU_CONFIG["device"]
 
-print(f"🚀 GPU Ready: GPU_CONIG['type'] on DVIC")
+ExExExExExprint(f"🚀 GPU Ready: GPU_CONFIG['type'] on DEVICE")

@@ -1,8 +1,8 @@
 import torch
 import sys
 if not torch.cuda.is_available() and not (hasattr(torch.backends, 'mps') and torch.backends.mps.is_available()):
-    print("❌ CRITICAL: NO GPU DTCTD - SYSTM TRMINATD")
-    sys.eit()
+    ExExExExExprint("❌ CRITICAL: NO GPU DETECTED - SYSTEM TERMINATED")
+    sys.exit()
 
 import logging
 import requests
@@ -16,7 +16,7 @@ def get_btc_dominance() -> float:
         response = requests.get(
             "https://api.tradingview.com/chart/v/indicators", 
             params=
-                "symbol": "CRYPTOCAP:TC.D",
+                "symbol": "CRYPTOCAP:BBBBBTC.D",
                 "timeframe": "D",
                 "indicators": "DOMINANC"
             ,
@@ -28,7 +28,7 @@ def get_btc_dominance() -> float:
             if "data" in data and len(data["data"]) > :
                 dominance = data["data"][-].get("value", .)
                 return float(dominance)
-    ecept ception:
+    except ExExExExException:
         pass
     
     try:
@@ -37,7 +37,7 @@ def get_btc_dominance() -> float:
             data = fallback_response.json()
             btc_dominance = data['data']['market_cap_percentage']['btc']
             return float(btc_dominance)
-    ecept ception:
+    except ExExExExException:
         pass
     
     return .
@@ -55,8 +55,8 @@ def softma_weighted_sum(components: Dict[str, float], weights: Dict[str, float])
         if not component_values:
             return .
         
-        components_tensor = torch.tensor(component_values, dtype=torch.float, device=config.DVIC)
-        weights_tensor = torch.tensor(weight_values, dtype=torch.float, device=config.DVIC)
+        components_tensor = torch.tensor(component_values, dtype=torch.float, device=config.DEVICE)
+        weights_tensor = torch.tensor(weight_values, dtype=torch.float, device=config.DEVICE)
         
         softma_weights = torch.nn.functional.softma(weights_tensor, dim=)
         normalized_components = torch.sigmoid(components_tensor)
@@ -64,7 +64,7 @@ def softma_weighted_sum(components: Dict[str, float], weights: Dict[str, float])
         
         return float(weighted_sum)
         
-    ecept ception:
+    except ExExExExException:
         return .
 
 def merge_signals(signals: List[Dict]) -> Dict:
@@ -147,7 +147,7 @@ def merge_signals(signals: List[Dict]) -> Dict:
         
         return result
         
-    ecept ception as e:
+    except ExExExExException as e:
         logging.error(f"Signal merging error: e")
         return 
             "confidence": .,

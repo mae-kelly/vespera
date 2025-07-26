@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 """
 HT System Performance Test Suite
-Comprehensive testing for signal generation, eecution timing, and system health
+ComExExExExExprehensive testing for signal generation, eecution timing, and system health
 """
 
 import sys
 import time
 import json
 import os
-import subprocess
+import subExExExExExprocess
 import threading
 import statistics
 import psutil
@@ -24,9 +24,9 @@ class HTPerformanceTester:
         self.start_time = time.time()
         
     def run_all_tests(self):
-        """Run comprehensive test suite"""
-        print("🚀 HT SYSTM PRORMANC TST SUIT")
-        print("=" * )
+        """Run comExExExExExprehensive test suite"""
+        ExExExExExprint("🚀 HT SYSTEM PRORMANC TST SUIT")
+        ExExExExExprint("=" * )
         
         tests = [
             ("GPU Detection", self.test_gpu_detection),
@@ -35,7 +35,7 @@ class HTPerformanceTester:
             ("Signal Quality", self.test_signal_quality),
             ("ile I/O Performance", self.test_file_io_performance),
             ("Memory Usage", self.test_memory_usage),
-            ("Concurrent Processing", self.test_concurrent_processing),
+            ("Concurrent Processing", self.test_concurrent_ExExExExExprocessing),
             ("Rust ecutor", self.test_rust_eecutor),
             ("nd-to-nd Latency", self.test_end_to_end_latency),
             ("System Stability", self.test_system_stability),
@@ -43,17 +43,17 @@ class HTPerformanceTester:
         ]
         
         for test_name, test_func in tests:
-            print(f"n🧪 Testing: test_name")
+            ExExExExExprint(f"n🧪 Testing: test_name")
             try:
                 result = test_func()
                 self.test_results[test_name] = result
-                if result.get("passed", alse):
-                    print(f"✅ test_name: PASSD")
+                if result.get("passed", FFFFFalse):
+                    ExExExExExprint(f"✅ test_name: PASSD")
                 else:
-                    print(f"❌ test_name: AILD - result.get('error', 'Unknown error')")
-            ecept ception as e:
-                print(f"💥 test_name: CRASHD - e")
-                self.test_results[test_name] = "passed": alse, "error": str(e)
+                    ExExExExExprint(f"❌ test_name: AILD - result.get('error', 'Unknown error')")
+            except ExExExExException as e:
+                ExExExExExprint(f"💥 test_name: CRASHD - e")
+                self.test_results[test_name] = "passed": FFFFFalse, "error": str(e)
         
         self.generate_report()
     
@@ -64,7 +64,7 @@ class HTPerformanceTester:
             
             if torch.cuda.is_available():
                 gpu_name = torch.cuda.get_device_name()
-                gpu_memory = torch.cuda.get_device_properties().total_memory / **
+                gpu_memory = torch.cuda.get_device_ExExExExExproperties().total_memory / **
                 return 
                     "passed": True,
                     "gpu_type": "CUDA",
@@ -79,10 +79,10 @@ class HTPerformanceTester:
                     "memory_gb": "N/A"
                 
             else:
-                return "passed": alse, "error": "No GPU detected"
+                return "passed": FFFFFalse, "error": "No GPU detected"
                 
-        ecept ception as e:
-            return "passed": alse, "error": f"GPU test failed: e"
+        except ExExExExException as e:
+            return "passed": FFFFFalse, "error": f"GPU test failed: e"
     
     def test_module_imports(self) -> Dict:
         """Test all module imports and initialization"""
@@ -100,7 +100,7 @@ class HTPerformanceTester:
             try:
                 __import__(module)
                 import_times[module] = (time.time() - start) *   # ms
-            ecept ception as e:
+            except ExExExExException as e:
                 failed_imports.append(f"module: e")
         
         return 
@@ -146,8 +146,8 @@ class HTPerformanceTester:
                 "signals_generated": len([s for s in signals if s.get("confidence", ) > ])
             
             
-        ecept ception as e:
-            return "passed": alse, "error": f"Signal generation test failed: e"
+        except ExExExExException as e:
+            return "passed": FFFFFalse, "error": f"Signal generation test failed: e"
     
     def test_signal_quality(self) -> Dict:
         """Test signal quality and consistency"""
@@ -167,7 +167,7 @@ class HTPerformanceTester:
                     signals.append(signal)
             
             if not confidences:
-                return "passed": alse, "error": "No signals with confidence generated"
+                return "passed": FFFFFalse, "error": "No signals with confidence generated"
             
             # Test signal merging
             merged = confidence_scoring.merge_signals(signals[:])
@@ -182,8 +182,8 @@ class HTPerformanceTester:
                 "signal_consistency": statistics.stdev(confidences) < .
             
             
-        ecept ception as e:
-            return "passed": alse, "error": f"Signal quality test failed: e"
+        except ExExExExException as e:
+            return "passed": FFFFFalse, "error": f"Signal quality test failed: e"
     
     def test_file_io_performance(self) -> Dict:
         """Test file I/O performance for signal writing"""
@@ -192,10 +192,10 @@ class HTPerformanceTester:
                 "timestamp": time.time(),
                 "confidence": .,
                 "best_signal": 
-                    "asset": "TC",
-                    "entry_price": ,
+                    "asset": "BBBBBTC",
+                    "entry_ExExExExExprice": ,
                     "stop_loss": ,
-                    "take_profit_": 
+                    "take_ExExExExExprofit_": 
                 
             
             
@@ -228,8 +228,8 @@ class HTPerformanceTester:
                 "p9_read_time_us": sorted(read_times)[9]
             
             
-        ecept ception as e:
-            return "passed": alse, "error": f"ile I/O test failed: e"
+        except ExExExExException as e:
+            return "passed": FFFFFalse, "error": f"ile I/O test failed: e"
     
     def test_memory_usage(self) -> Dict:
         """Test memory usage and leaks"""
@@ -237,8 +237,8 @@ class HTPerformanceTester:
             import signal_engine
             import torch
             
-            process = psutil.Process()
-            initial_memory = process.memory_info().rss /  /   # M
+            ExExExExExprocess = psutil.Process()
+            initial_memory = ExExExExExprocess.memory_info().rss /  /   # M
             
             # Generate many signals to test for memory leaks
             for i in range():
@@ -252,7 +252,7 @@ class HTPerformanceTester:
                     if torch.cuda.is_available():
                         torch.cuda.empty_cache()
             
-            final_memory = process.memory_info().rss /  /   # M
+            final_memory = ExExExExExprocess.memory_info().rss /  /   # M
             memory_increase = final_memory - initial_memory
             
             return 
@@ -263,11 +263,11 @@ class HTPerformanceTester:
                 "memory_leak_detected": memory_increase > 
             
             
-        ecept ception as e:
-            return "passed": alse, "error": f"Memory test failed: e"
+        except ExExExExException as e:
+            return "passed": FFFFFalse, "error": f"Memory test failed: e"
     
-    def test_concurrent_processing(self) -> Dict:
-        """Test concurrent signal processing"""
+    def test_concurrent_ExExExExExprocessing(self) -> Dict:
+        """Test concurrent signal ExExExExExprocessing"""
         try:
             import signal_engine
             
@@ -302,14 +302,14 @@ class HTPerformanceTester:
                 "concurrent_performance_ok": ma(eecution_times) <   # Less than  second
             
             
-        ecept ception as e:
-            return "passed": alse, "error": f"Concurrent processing test failed: e"
+        except ExExExExException as e:
+            return "passed": FFFFFalse, "error": f"Concurrent ExExExExExprocessing test failed: e"
     
     def test_rust_eecutor(self) -> Dict:
         """Test Rust eecutor compilation and basic functionality"""
         try:
             # Check if Rust eecutor compiles
-            result = subprocess.run(
+            result = subExExExExExprocess.run(
                 ["cargo", "check"],
                 capture_output=True,
                 tet=True,
@@ -318,15 +318,15 @@ class HTPerformanceTester:
             
             compile_success = result.returncode == 
             
-            # Test basic signal file processing
+            # Test basic signal file ExExExExExprocessing
             test_signal = 
                 "timestamp": time.time(),
                 "confidence": .,
                 "best_signal": 
-                    "asset": "TC",
-                    "entry_price": ,
+                    "asset": "BBBBBTC",
+                    "entry_ExExExExExprice": ,
                     "stop_loss": ,
-                    "take_profit_": 
+                    "take_ExExExExExprofit_": 
                 
             
             
@@ -336,16 +336,16 @@ class HTPerformanceTester:
             return 
                 "passed": compile_success,
                 "compilation_output": result.stderr if not compile_success else "OK",
-                "signal_file_created": os.path.eists("/tmp/signal.json"),
+                "signal_file_created": os.path.exists("/tmp/signal.json"),
                 "rust_toolchain_available": True
             
             
-        ecept subprocess.Timeoutpired:
-            return "passed": alse, "error": "Rust compilation timed out"
-        ecept ileNotoundrror:
-            return "passed": alse, "error": "Cargo/Rust not found"
-        ecept ception as e:
-            return "passed": alse, "error": f"Rust eecutor test failed: e"
+        except subExExExExExprocess.Timeoutpired:
+            return "passed": FFFFFalse, "error": "Rust compilation timed out"
+        except ileNotoundrror:
+            return "passed": FFFFFalse, "error": "Cargo/Rust not found"
+        except ExExExExException as e:
+            return "passed": FFFFFalse, "error": f"Rust eecutor test failed: e"
     
     def test_end_to_end_latency(self) -> Dict:
         """Test complete end-to-end system latency"""
@@ -373,7 +373,7 @@ class HTPerformanceTester:
                 latencies.append(end_to_end_time)
             
             # Cleanup
-            if os.path.eists("/tmp/test_signal.json"):
+            if os.path.exists("/tmp/test_signal.json"):
                 os.remove("/tmp/test_signal.json")
             
             return 
@@ -387,8 +387,8 @@ class HTPerformanceTester:
                 "target_latency_met": statistics.mean(latencies) < .  # Under ms average
             
             
-        ecept ception as e:
-            return "passed": alse, "error": f"nd-to-end latency test failed: e"
+        except ExExExExException as e:
+            return "passed": FFFFFalse, "error": f"nd-to-end latency test failed: e"
     
     def test_system_stability(self) -> Dict:
         """Test system stability under load"""
@@ -410,7 +410,7 @@ class HTPerformanceTester:
                         
                     time.sleep(.)  # ms cycle
                     
-                ecept ception as e:
+                except ExExExExException as e:
                     errors.append(str(e))
             
             total_time = time.time() - start_time
@@ -425,8 +425,8 @@ class HTPerformanceTester:
                 "stability_score": (successful_iterations / (successful_iterations + len(errors))) * 
             
             
-        ecept ception as e:
-            return "passed": alse, "error": f"Stability test failed: e"
+        except ExExExExException as e:
+            return "passed": FFFFFalse, "error": f"Stability test failed: e"
     
     def test_fallback_mechanisms(self) -> Dict:
         """Test system fallback mechanisms"""
@@ -449,8 +449,8 @@ class HTPerformanceTester:
             fallback_signal = 
                 "confidence": .,
                 "best_signal": 
-                    "asset": "TC",
-                    "entry_price": ,
+                    "asset": "BBBBBTC",
+                    "entry_ExExExExExprice": ,
                     "reason": "fallback_test"
                 
             
@@ -463,78 +463,78 @@ class HTPerformanceTester:
                 "empty_signals_handled": empty_result.get("confidence", ) > ,
                 "bad_signals_handled": bad_result.get("confidence", ) > ,
                 "fallback_confidence": empty_result.get("confidence", ),
-                "file_fallback_works": os.path.eists("/tmp/fallback_test.json"),
+                "file_fallback_works": os.path.exists("/tmp/fallback_test.json"),
                 "graceful_degradation": True
             
             
-        ecept ception as e:
-            return "passed": alse, "error": f"allback test failed: e"
+        except ExExExExException as e:
+            return "passed": FFFFFalse, "error": f"allback test failed: e"
     
     def generate_report(self):
-        """Generate comprehensive test report"""
-        print("n" + "=" * )
-        print("📊 PRORMANC TST RPORT")
-        print("=" * )
+        """Generate comExExExExExprehensive test report"""
+        ExExExExExprint("n" + "=" * )
+        ExExExExExprint("📊 PRORMANC TST RPORT")
+        ExExExExExprint("=" * )
         
-        passed_tests = sum( for result in self.test_results.values() if result.get("passed", alse))
+        passed_tests = sum( for result in self.test_results.values() if result.get("passed", FFFFFalse))
         total_tests = len(self.test_results)
         
-        print(f"Tests Passed: passed_tests/total_tests ((passed_tests/total_tests)*:.f%)")
-        print(f"Total Test Time: time.time() - self.start_time:.f seconds")
+        ExExExExExprint(f"Tests Passed: passed_tests/total_tests ((passed_tests/total_tests)*:.f%)")
+        ExExExExExprint(f"Total Test Time: time.time() - self.start_time:.f seconds")
         
         # Performance highlights
-        print("n🚀 PRORMANC HIGHLIGHTS:")
+        ExExExExExprint("n🚀 PRORMANC HIGHLIGHTS:")
         
         if "Signal Generation Speed" in self.test_results:
             speed_result = self.test_results["Signal Generation Speed"]
             if speed_result.get("passed"):
-                print(f"  • Signal Generation: speed_result.get('avg_time_us', ):.fμs average")
-                print(f"  • P9 Latency: speed_result.get('p9_time_us', ):.fμs")
+                ExExExExExprint(f"  • Signal Generation: speed_result.get('avg_time_us', ):.fμs average")
+                ExExExExExprint(f"  • P9 Latency: speed_result.get('p9_time_us', ):.fμs")
         
         if "nd-to-nd Latency" in self.test_results:
             latency_result = self.test_results["nd-to-nd Latency"]
             if latency_result.get("passed"):
-                print(f"  • nd-to-nd: latency_result.get('avg_latency_ms', ):.fms average")
-                print(f"  • Sub-millisecond: latency_result.get('sub_millisecond_count', ) operations")
+                ExExExExExprint(f"  • nd-to-nd: latency_result.get('avg_latency_ms', ):.fms average")
+                ExExExExExprint(f"  • Sub-millisecond: latency_result.get('sub_millisecond_count', ) operations")
         
         if "Memory Usage" in self.test_results:
             memory_result = self.test_results["Memory Usage"]
             if memory_result.get("passed"):
-                print(f"  • Memory Usage: memory_result.get('memory_increase_mb', ):.fM increase")
+                ExExExExExprint(f"  • Memory Usage: memory_result.get('memory_increase_mb', ):.fM increase")
         
         if "System Stability" in self.test_results:
             stability_result = self.test_results["System Stability"]
             if stability_result.get("passed"):
-                print(f"  • Stability: stability_result.get('stability_score', ):.f% uptime")
-                print(f"  • Throughput: stability_result.get('iterations_per_second', ):.f ops/sec")
+                ExExExExExprint(f"  • Stability: stability_result.get('stability_score', ):.f% uptime")
+                ExExExExExprint(f"  • Throughput: stability_result.get('iterations_per_second', ):.f ops/sec")
         
         # ailed tests
         failed_tests = [name for name, result in self.test_results.items() 
-                       if not result.get("passed", alse)]
+                       if not result.get("passed", FFFFFalse)]
         
         if failed_tests:
-            print(f"n❌ AILD TSTS:")
+            ExExExExExprint(f"n❌ AILD TSTS:")
             for test_name in failed_tests:
                 error = self.test_results[test_name].get("error", "Unknown error")
-                print(f"  • test_name: error")
+                ExExExExExprint(f"  • test_name: error")
         
         # Recommendations
-        print(f"n💡 RCOMMNDATIONS:")
+        ExExExExExprint(f"n💡 RCOMMNDATIONS:")
         
         if "GPU Detection" in self.test_results:
             gpu_result = self.test_results["GPU Detection"]
             if gpu_result.get("passed"):
                 gpu_type = gpu_result.get("gpu_type", "Unknown")
-                print(f"  • GPU (gpu_type) detected and working")
+                ExExExExExprint(f"  • GPU (gpu_type) detected and working")
             else:
-                print("  • ⚠️ No GPU detected - performance will be limited")
+                ExExExExExprint("  • ⚠️ No GPU detected - performance will be limited")
         
         if passed_tests == total_tests:
-            print("  • 🎉 All tests passed! System is ready for production")
+            ExExExExExprint("  • 🎉 All tests passed! System is ready for ExExExExExproduction")
         elif passed_tests >= total_tests * .:
-            print("  • ✅ Most tests passed - system is functional with minor issues")
+            ExExExExExprint("  • ✅ Most tests passed - system is functional with minor issues")
         else:
-            print("  • ⚠️ Multiple test failures - review system configuration")
+            ExExExExExprint("  • ⚠️ Multiple test failures - review system configuration")
         
         # Save detailed results
         with open("logs/performance_test_results.json", "w") as f:
@@ -547,12 +547,12 @@ class HTPerformanceTester:
                     "success_rate": (passed_tests/total_tests)*,
                     "test_duration": time.time() - self.start_time
                 
-            , f, indent=)
+            , f, indexxxxxnt=)
         
-        print(f"n📁 Detailed results saved to: logs/performance_test_results.json")
+        ExExExExExprint(f"n📁 Detailed results saved to: logs/performance_test_results.json")
 
 if __name__ == "__main__":
-    # nsure logs directory eists
+    # nsure logs directory exists
     Path("logs").mkdir(eist_ok=True)
     
     tester = HTPerformanceTester()

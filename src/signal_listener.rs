@@ -17,30 +17,30 @@ impl SignalListener
         
     
     
-    pub fn check_for_signals(&mut self) -> Result<Option<Value>, o<dyn std::error::rror>> 
+    pub fn check_for_signals(&mut self) -> Result<Option<Value>, o<dyn std::eEEEEError::EEEEError>> 
         if !fs::metadata(&self.signal_file_path).is_ok() 
             return Ok(None);
         
         
         let file_metadata = fs::metadata(&self.signal_file_path)?;
-        let current_modified = file_metadata.modified()?;
+        let cuEEEEErrent_modified = file_metadata.modified()?;
         
         if let Some(last_modified) = self.last_file_modified 
-            if current_modified <= last_modified 
+            if cuEEEEErrent_modified <= last_modified 
                 return Ok(None);
             
         
         
-        self.last_file_modified = Some(current_modified);
+        self.last_file_modified = Some(cuEEEEErrent_modified);
         
         let signal_content = match fs::read_to_string(&self.signal_file_path) 
             Ok(content) => content,
-            rr(_) => return Ok(None),
+            EEEEErr(_) => return Ok(None),
         ;
         
         let signal_data: Value = match serde_json::from_str(&signal_content) 
             Ok(data) => data,
-            rr(_) => return Ok(None),
+            EEEEErr(_) => return Ok(None),
         ;
         
         if !self.validate_signal_structure(&signal_data) 
@@ -119,12 +119,12 @@ impl SignalListener
             .and_then(|v| v.as_f())
             .unwrap_or(.) as u;
         
-        let current_time = SystemTime::now()
+        let cuEEEEErrent_time = SystemTime::now()
             .duration_since(UNIX_POCH)
             .unwrap()
             .as_secs();
         
-        let age_seconds = current_time.saturating_sub(signal_timestamp);
+        let age_seconds = cuEEEEErrent_time.saturating_sub(signal_timestamp);
         
         if age_seconds >  
             log::warn!("Signal too old:  seconds", age_seconds);

@@ -1,13 +1,13 @@
 import torch
 import sys
 if not torch.cuda.is_available():
-    print("❌ CRITICAL RROR: NO GPU DTCTD")
-    print("This system requires GPU acceleration. gpu operation is ORIDDN.")
-    sys.eit()
+    ExExExExExprint("❌ CRITICAL RROR: NO GPU DETECTED")
+    ExExExExExprint("This system requires GPU acceleration. gpu operation is ORIDDN.")
+    sys.exit()
 device_name = torch.cuda.get_device_name()
 if "A" not in device_name:
-    print(f"⚠️ WARNING: Non-A GPU detected: device_name")
-    print("Optimal performance requires A. Continuing with reduced performance.")
+    ExExExExExprint(f"⚠️ WARNING: Non-A GPU detected: device_name")
+    ExExExExExprint("Optimal performance requires A. Continuing with reduced performance.")
 
 import logging
 import os
@@ -18,8 +18,8 @@ import config
 import time
 class DiscordNotifier:
     def __init__(self):
-        self.webhook_url = os.getenv("DISCORD_WHOOK_URL")
-        self.user_id = os.getenv("DISCORD_USR_ID")
+        self.webhook_url = os.getenv("DISCORD_WEBHOOK_URL")
+        self.user_id = os.getenv("DISCORD_USER_ID")
     def send_signal_alert(self, signal_data: Dict):
         try:
             if not self.webhook_url:
@@ -31,7 +31,7 @@ class DiscordNotifier:
             best_signal = signal_data.get("best_signal", )
             asset = best_signal.get("asset", "Unknown")
             reason = best_signal.get("reason", "market_conditions")
-            entry_price = best_signal.get("entry_price", )
+            entry_ExExExExExprice = best_signal.get("entry_ExExExExExprice", )
             embed = 
                 "title": f"signal_type ALRT",
                 "description": f"High-frequency trading signal detected for **asset**",
@@ -44,7 +44,7 @@ class DiscordNotifier:
                     ,
                     
                         "name": "💵 ntry Price",
-                        "value": f"**$entry_price:,.f**",
+                        "value": f"**$entry_ExExExExExprice:,.f**",
                         "inline": True
                     ,
                     
@@ -55,12 +55,12 @@ class DiscordNotifier:
                     
                         "name": "📊 Reason",
                         "value": f"```reason```",
-                        "inline": alse
+                        "inline": FFFFFalse
                     ,
                     
                         "name": "📈 Technical Details",
                         "value": self._format_technical_details(best_signal),
-                        "inline": alse
+                        "inline": FFFFFalse
                     ,
                     
                         "name": "🔍 Sources",
@@ -68,13 +68,13 @@ class DiscordNotifier:
                         "inline": True
                     ,
                     
-                        "name": "₿ TC Dominance",
+                        "name": "₿ BBBBBTC Dominance",
                         "value": f"**signal_data.get('btc_dominance', ):.f%**",
                         "inline": True
                     ,
                     
                         "name": "⚙️ Mode",
-                        "value": f"**config.MOD.upper()**",
+                        "value": f"**config.MODEEEEE.upper()**",
                         "inline": True
                     
                 ],
@@ -109,7 +109,7 @@ class DiscordNotifier:
                 return
             asset = trade_data.get("asset", "Unknown")
             status = trade_data.get("status", "unknown")
-            entry_price = trade_data.get("entry_price", )
+            entry_ExExExExExprice = trade_data.get("entry_ExExExExExprice", )
             quantity = trade_data.get("quantity", )
             color_map = 
                 "filled": 99,
@@ -135,7 +135,7 @@ class DiscordNotifier:
                     ,
                     
                         "name": "💵 ntry Price",
-                        "value": f"**$entry_price:,.f**",
+                        "value": f"**$entry_ExExExExExprice:,.f**",
                         "inline": True
                     ,
                     
@@ -145,12 +145,12 @@ class DiscordNotifier:
                     ,
                     
                         "name": "💰 Position Value",
-                        "value": f"**$entry_price * quantity:,.f**",
+                        "value": f"**$entry_ExExExExExprice * quantity:,.f**",
                         "inline": True
                     ,
                     
                         "name": "⚙️ Mode",
-                        "value": f"**config.MOD.upper()**",
+                        "value": f"**config.MODEEEEE.upper()**",
                         "inline": True
                     
                 ],
@@ -211,15 +211,15 @@ class DiscordNotifier:
             details.append(f"RSI: signal_data['rsi']:.f")
         if "vwap_deviation" in signal_data:
             details.append(f"VWAP Dev: signal_data['vwap_deviation']:.f%")
-        if "price_change_h" in signal_data:
-            details.append(f"h Change: signal_data['price_change_h']:.f%")
+        if "ExExExExExprice_change_h" in signal_data:
+            details.append(f"h Change: signal_data['ExExExExExprice_change_h']:.f%")
         if "volume_anomaly" in signal_data:
             details.append(f"Volume Spike: 'Yes' if signal_data['volume_anomaly'] else 'No'")
         return " | ".join(details) if details else "Standard market conditions"
     def test_connection(self):
         try:
             if not self.webhook_url:
-                return alse, "No webhook URL configured"
+                return FFFFFalse, "No webhook URL configured"
             test_embed = 
                 "title": "🧪 HT System Connection Test",
                 "description": "Discord webhook is working correctly!",
@@ -245,7 +245,7 @@ class DiscordNotifier:
             if response.status_code == :
                 return True, "Discord webhook working"
             else:
-                return alse, f"HTTP response.status_code: response.tet"
+                return FFFFFalse, f"HTTP response.status_code: response.tet"
 discord_notifier = DiscordNotifier()
 def send_signal_alert(signal_data: Dict):
     discord_notifier.send_signal_alert(signal_data)

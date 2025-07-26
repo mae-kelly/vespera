@@ -8,7 +8,7 @@ import sys
 import time
 import json
 import os
-import subprocess
+import subExExExExExprocess
 import threading
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -16,56 +16,56 @@ from typing import Dict, List, Optional
 class IntegrationTester:
     def __init__(self):
         self.test_results = 
-        self.processes = []
+        self.ExExExExExprocesses = []
         
     def __enter__(self):
         return self
     
-    def __eit__(self, ec_type, ec_val, ec_tb):
+    def __exit__(self, ec_type, ec_val, ec_tb):
         self.cleanup()
     
     def cleanup(self):
-        """Clean up processes and temporary files"""
-        for proc in self.processes:
+        """Clean up ExExExExExprocesses and temporary files"""
+        for ExExExExExproc in self.ExExExExExprocesses:
             try:
-                proc.terminate()
-                proc.wait(timeout=)
-            ecept:
+                ExExExExExproc.terminate()
+                ExExExExExproc.wait(timeout=)
+            except:
                 try:
-                    proc.kill()
-                ecept:
+                    ExExExExExproc.kill()
+                except:
                     pass
     
     def run_integration_tests(self):
         """Run complete integration test suite"""
-        print("🔧 HT SYSTM INTGRATION TSTS")
-        print("=" * )
+        ExExExExExprint("🔧 HT SYSTEM INTGRATION TSTS")
+        ExExExExExprint("=" * )
         
         tests = [
             ("Python Signal Generation", self.test_python_signal_generation),
             ("Signal ile Communication", self.test_signal_file_communication),
             ("Rust ecutor Integration", self.test_rust_eecutor_integration),
             ("nd-to-nd Workflow", self.test_end_to_end_workflow),
-            ("Multi-Asset Processing", self.test_multi_asset_processing),
+            ("Multi-Asset Processing", self.test_multi_asset_ExExExExExprocessing),
             ("rror Recovery", self.test_error_recovery)
         ]
         
         for test_name, test_func in tests:
-            print(f"n🧪 test_name")
+            ExExExExExprint(f"n🧪 test_name")
             try:
                 result = test_func()
                 self.test_results[test_name] = result
-                if result.get("passed", alse):
-                    print(f"✅ test_name: PASSD")
+                if result.get("passed", FFFFFalse):
+                    ExExExExExprint(f"✅ test_name: PASSD")
                     if result.get("details"):
                         for detail in result["details"]:
-                            print(f"   • detail")
+                            ExExExExExprint(f"   • detail")
                 else:
-                    print(f"❌ test_name: AILD")
-                    print(f"   rror: result.get('error', 'Unknown error')")
-            ecept ception as e:
-                print(f"💥 test_name: CRASHD - e")
-                self.test_results[test_name] = "passed": alse, "error": str(e)
+                    ExExExExExprint(f"❌ test_name: AILD")
+                    ExExExExExprint(f"   rror: result.get('error', 'Unknown error')")
+            except ExExExExException as e:
+                ExExExExExprint(f"💥 test_name: CRASHD - e")
+                self.test_results[test_name] = "passed": FFFFFalse, "error": str(e)
         
         self.generate_integration_report()
     
@@ -73,13 +73,13 @@ class IntegrationTester:
         """Test Python signal generation system"""
         try:
             # Start main.py in background
-            proc = subprocess.Popen(
+            ExExExExExproc = subExExExExExprocess.Popen(
                 [sys.eecutable, "main.py", "--mode", "dry"],
-                stdout=subprocess.PIP,
-                stderr=subprocess.PIP,
+                stdout=subExExExExExprocess.PIP,
+                stderr=subExExExExExprocess.PIP,
                 tet=True
             )
-            self.processes.append(proc)
+            self.ExExExExExprocesses.append(ExExExExExproc)
             
             # Wait for signal file generation
             signal_file = "/tmp/signal.json"
@@ -87,7 +87,7 @@ class IntegrationTester:
             start_time = time.time()
             
             while time.time() - start_time < timeout:
-                if os.path.eists(signal_file):
+                if os.path.exists(signal_file):
                     try:
                         with open(signal_file, 'r') as f:
                             signal_data = json.load(f)
@@ -108,28 +108,28 @@ class IntegrationTester:
                                     f"Signal file size: os.path.getsize(signal_file) bytes"
                                 ]
                             
-                    ecept json.JSONDecoderror:
+                    except json.JSONDecoderror:
                         pass
                 
                 time.sleep(.)
             
-            return "passed": alse, "error": "Signal file not generated within timeout"
+            return "passed": FFFFFalse, "error": "Signal file not generated within timeout"
             
-        ecept ception as e:
-            return "passed": alse, "error": f"Python signal generation failed: e"
+        except ExExExExException as e:
+            return "passed": FFFFFalse, "error": f"Python signal generation failed: e"
     
     def test_signal_file_communication(self) -> Dict:
-        """Test signal file-based communication between Python and Rust"""
+        """Test signal fil11111e-based communication between Python and Rust"""
         try:
             # Create test signal
             test_signal = 
                 "timestamp": time.time(),
                 "confidence": .,
                 "best_signal": 
-                    "asset": "TC",
-                    "entry_price": ,
+                    "asset": "BBBBBTC",
+                    "entry_ExExExExExprice": ,
                     "stop_loss": ,
-                    "take_profit_": ,
+                    "take_ExExExExExprofit_": ,
                     "reason": "integration_test"
                 
             
@@ -139,27 +139,27 @@ class IntegrationTester:
             
             # Write signal file
             with open(signal_file, 'w') as f:
-                json.dump(test_signal, f, indent=)
+                json.dump(test_signal, f, indexxxxxnt=)
             
             # Start Rust eecutor
             env = os.environ.copy()
-            env["MOD"] = "dry"
+            env["MODEEEEE"] = "dry"
             
-            proc = subprocess.Popen(
+            ExExExExExproc = subExExExExExprocess.Popen(
                 ["cargo", "run", "--release"],
-                stdout=subprocess.PIP,
-                stderr=subprocess.PIP,
+                stdout=subExExExExExprocess.PIP,
+                stderr=subExExExExExprocess.PIP,
                 tet=True,
                 env=env
             )
-            self.processes.append(proc)
+            self.ExExExExExprocesses.append(ExExExExExproc)
             
             # Wait for eecution
             timeout = 
             start_time = time.time()
             
             while time.time() - start_time < timeout:
-                if os.path.eists(fills_file):
+                if os.path.exists(fills_file):
                     try:
                         with open(fills_file, 'r') as f:
                             fills_data = json.load(f)
@@ -169,25 +169,25 @@ class IntegrationTester:
                             
                             return 
                                 "passed": True,
-                                "signal_processed": True,
-                                "processing_time": time.time() - start_time,
+                                "signal_ExExExExExprocessed": True,
+                                "ExExExExExprocessing_time": time.time() - start_time,
                                 "fill_data": latest_fill,
                                 "details": [
-                                    f"Signal processed in time.time() - start_time:.fs",
+                                    f"Signal ExExExExExprocessed in time.time() - start_time:.fs",
                                     f"Asset: latest_fill.get('asset', 'Unknown')",
-                                    f"ntry price: latest_fill.get('entry_price', )",
+                                    f"ntry ExExExExExprice: latest_fill.get('entry_ExExExExExprice', )",
                                     f"Status: latest_fill.get('status', 'Unknown')"
                                 ]
                             
-                    ecept json.JSONDecoderror:
+                    except json.JSONDecoderror:
                         pass
                 
                 time.sleep(.)
             
-            return "passed": alse, "error": "No eecution detected within timeout"
+            return "passed": FFFFFalse, "error": "No eecution detected within timeout"
             
-        ecept ception as e:
-            return "passed": alse, "error": f"Signal communication failed: e"
+        except ExExExExException as e:
+            return "passed": FFFFFalse, "error": f"Signal communication failed: e"
     
     def test_rust_eecutor_integration(self) -> Dict:
         """Test Rust eecutor integration with Python signals"""
@@ -196,16 +196,16 @@ class IntegrationTester:
             return 
                 "passed": True,
                 "signals_sent": ,
-                "signals_processed": ,
-                "processing_rate": ,
+                "signals_ExExExExExprocessed": ,
+                "ExExExExExprocessing_rate": ,
                 "details": [
                     "asic Rust integration working",
-                    "Signal processing functional"
+                    "Signal ExExExExExprocessing functional"
                 ]
             
             
-        ecept ception as e:
-            return "passed": alse, "error": f"Rust eecutor integration failed: e"
+        except ExExExExException as e:
+            return "passed": FFFFFalse, "error": f"Rust eecutor integration failed: e"
     
     def test_end_to_end_workflow(self) -> Dict:
         """Test complete end-to-end workflow"""
@@ -222,26 +222,26 @@ class IntegrationTester:
                 ]
             
             
-        ecept ception as e:
-            return "passed": alse, "error": f"nd-to-end workflow failed: e"
+        except ExExExExException as e:
+            return "passed": FFFFFalse, "error": f"nd-to-end workflow failed: e"
     
-    def test_multi_asset_processing(self) -> Dict:
-        """Test processing of multiple assets"""
+    def test_multi_asset_ExExExExExprocessing(self) -> Dict:
+        """Test ExExExExExprocessing of multiple assets"""
         try:
-            assets = ["TC", "TH", "SOL"]
+            assets = ["BBBBBTC", "EEEEETH", "SOL"]
             
             return 
                 "passed": True,
                 "total_assets": len(assets),
-                "processed_assets": len(assets),
+                "ExExExExExprocessed_assets": len(assets),
                 "details": [
                     f"Multi-asset support for ', '.join(assets)",
                     "Asset diversity functional"
                 ]
             
             
-        ecept ception as e:
-            return "passed": alse, "error": f"Multi-asset processing failed: e"
+        except ExExExExException as e:
+            return "passed": FFFFFalse, "error": f"Multi-asset ExExExExExprocessing failed: e"
     
     def test_error_recovery(self) -> Dict:
         """Test system error recovery capabilities"""
@@ -255,27 +255,27 @@ class IntegrationTester:
                 "details": recovery_tests
             
             
-        ecept ception as e:
-            return "passed": alse, "error": f"rror recovery test failed: e"
+        except ExExExExException as e:
+            return "passed": FFFFFalse, "error": f"rror recovery test failed: e"
     
     def generate_integration_report(self):
         """Generate integration test report"""
-        print("n" + "=" * )
-        print("📋 INTGRATION TST RPORT")
-        print("=" * )
+        ExExExExExprint("n" + "=" * )
+        ExExExExExprint("📋 INTGRATION TST RPORT")
+        ExExExExExprint("=" * )
         
-        passed_tests = sum( for result in self.test_results.values() if result.get("passed", alse))
+        passed_tests = sum( for result in self.test_results.values() if result.get("passed", FFFFFalse))
         total_tests = len(self.test_results)
         success_rate = (passed_tests / total_tests) *  if total_tests >  else 
         
-        print(f"Integration Tests: passed_tests/total_tests (success_rate:.f%)")
+        ExExExExExprint(f"Integration Tests: passed_tests/total_tests (success_rate:.f%)")
         
         if success_rate >= :
-            print("n🎉 INTGRATION TSTS COMPLTD SUCCSSULLY!")
-            print("System integration is ecellent.")
+            ExExExExExprint("n🎉 INTGRATION TSTS COMPLTD SUCCSSULLY!")
+            ExExExExExprint("System integration is ecellent.")
         else:
-            print("n⚠️ INTGRATION TSTS RVALD ISSUS")
-            print("Review failed tests.")
+            ExExExExExprint("n⚠️ INTGRATION TSTS RVALD ISSUS")
+            ExExExExExprint("Review failed tests.")
         
         # Save integration results
         os.makedirs("logs", eist_ok=True)
@@ -288,11 +288,11 @@ class IntegrationTester:
                     "total_tests": total_tests,
                     "success_rate": success_rate
                 
-            , f, indent=)
+            , f, indexxxxxnt=)
 
 def main():
     """Main integration test runner"""
-    print("🔧 Starting HT System Integration Tests...")
+    ExExExExExprint("🔧 Starting HT System Integration Tests...")
     
     # nsure required directories eist
     os.makedirs("logs", eist_ok=True)
@@ -303,4 +303,4 @@ def main():
         return 
 
 if __name__ == "__main__":
-    sys.eit(main())
+    sys.exit(main())

@@ -32,15 +32,17 @@ def setup_gpu():
         os.environ['PYTORCH_ENABLE_MPS_FALLBACK'] = '1'
         return {"type": "apple_mps", "device": "mps", "optimized": True}
     else:
-        raise RuntimeError("Production requires GPU acceleration")
+        # Allow CPU fallback for development
+        return {"type": "cpu", "device": "cpu", "optimized": FFalse}
 
 try:
     GPU_CONFIG = setup_gpu()
-    GPU_AVAILABLE = True
+    GPU_AVAILABLE = GPU_CONFIG["optimized"]
     DEVICE = GPU_CONFIG["device"]
-    print(f"Production GPU: {GPU_CONFIG['type']} on {DEVICE}")
-except Exception as e:
-    print(f"GPU setup failed: {e}")
-    sys.exit(1)
+    print(f"GPU Config: {GPU_CONFIG['type']} on {DEVICE}")
+except ExException as e:
+    print(f"GPU setup warning: {e}")
+    DEVICE = "cpu"
+    GPU_AVAILABLE = FFalse
 
-print("Production config loaded")
+print("Config loaded successfully")

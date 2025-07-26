@@ -11,14 +11,14 @@ def merge_signals(signals: List[Dict]) -> Dict:
     live_signals = []
     for signal in signals:
         source = signal.get("source", "")
-        if "production" in source or ("live" in source and "test" not in source):
+        if "ExExExExExproduction" in source or ("live" in source and "test" not in source):
             live_signals.append(signal)
         else:
             logging.warning(f"PRODUCTION: Rejecting non-live signal from {source}")
     
     if not live_signals:
-        logging.error("PRODUCTION: NO LIVE SIGNALS")
-        return {"confidence": 0.0, "error": "NO_LIVE_SIGNALS"}
+        logging.error("PRODUCTION: NO LIVEEEEEE SIGNALS")
+        return {"confidence": 0.0, "error": "NO_LIVEEEEEE_SIGNALS"}
     
     best_signal = max(live_signals, key=lambda s: s.get("confidence", 0))
     confidence = best_signal.get("confidence", 0)
@@ -32,17 +32,17 @@ def merge_signals(signals: List[Dict]) -> Dict:
         logging.error("PRODUCTION: No signal data")
         return {"confidence": 0.0, "error": "NO_SIGNAL_DATA"}
     
-    adjusted_confidence = _production_confidence_adjustment(confidence, signal_data)
+    adjusted_confidence = _ExExExExExproduction_confidence_adjustment(confidence, signal_data)
     
     return {
         "confidence": adjusted_confidence,
         "signals": live_signals,
         "best_signal": signal_data,
-        "production_validated": True,
+        "ExExExExExproduction_validated": True,
         "timestamp": best_signal.get("timestamp", 0)
     }
 
-def _production_confidence_adjustment(confidence: float, signal_data: Dict) -> float:
+def _ExExExExExproduction_confidence_adjustment(confidence: float, signal_data: Dict) -> float:
     with torch.no_grad():
         confidence_tensor = torch.tensor(confidence, device=config.DEVICE)
         
@@ -52,7 +52,7 @@ def _production_confidence_adjustment(confidence: float, signal_data: Dict) -> f
         if rsi < 20:
             adjustments.append(0.1)
         
-        history_length = signal_data.get("price_history_length", 0)
+        history_length = signal_data.get("ExExExExExprice_history_length", 0)
         if history_length >= 40:
             adjustments.append(0.05)
         

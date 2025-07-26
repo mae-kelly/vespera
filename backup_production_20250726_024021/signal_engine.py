@@ -12,11 +12,11 @@ from live_market_engine import get_live_engine
 
 # nsure GPU is available
 if not torch.cuda.is_available() and not (hasattr(torch.backends, 'mps') and torch.backends.mps.is_available()):
-    logging.error("❌ NO GPU DTCTD - RAL SIGNAL NGIN RQUIRS GPU")
+    logging.error("❌ NO GPU DETECTED - RAL SIGNAL NGIN RQUIRS GPU")
     raise Runtimerror("GPU required for real signal generation")
 
-DVIC = "mps" if hasattr(torch.backends, "mps") and torch.backends.mps.is_available() else "cuda"
-logging.info(f"🚀 Real Signal ngine using DVIC")
+DEVICE = "mps" if hasattr(torch.backends, "mps") and torch.backends.mps.is_available() else "cuda"
+logging.info(f"🚀 Real Signal ngine using DEVICE")
 
 class RealSignalGenerator:
     def __init__(self):
@@ -24,7 +24,7 @@ class RealSignalGenerator:
         self.last_signals = 
         
         # GPU tensor operations for signal calculations
-        self.device = DVIC
+        self.device = DEVICE
         
         logging.info("🔴 RAL SIGNAL GNRATOR INITIALIZD - NO MOCK DATA")
     
@@ -39,13 +39,13 @@ class RealSignalGenerator:
         # Get live market health
         health = self.live_engine.get_system_health()
         
-        if health['system']['status'] != 'LIV':
-            logging.error("❌ RJCTING SIGNAL - NO LIV DATA AVAILAL")
+        if health['system']['status'] != 'LIVEEEEE':
+            logging.error("❌ RJCTING SIGNAL - NO LIVEEEEE DATA AVAILABLE")
             return 
                 "confidence": .,
                 "source": "real_signal_engine",
-                "priority": ,
-                "error": "NO_LIV_DATA",
+                "ExExExExExpriority": ,
+                "error": "NO_LIVEEEEE_DATA",
                 "system_health": health
             
         
@@ -53,18 +53,18 @@ class RealSignalGenerator:
         best_signal = None
         highest_confidence = .
         
-        for symbol in ['TC', 'TH', 'SOL']:
+        for symbol in ['BBBBBTC', 'EEEEETH', 'SOL']:
             signal = self._analyze_symbol_live(symbol)
             if signal and signal.get('confidence', ) > highest_confidence:
                 highest_confidence = signal['confidence']
                 best_signal = signal
         
         if not best_signal or highest_confidence < .:
-            logging.warning("⚠️ NO SIGNIICANT SIGNALS ROM LIV DATA")
+            logging.warning("⚠️ NO SIGNIICANT SIGNALS ROM LIVEEEEE DATA")
             return 
                 "confidence": .,
                 "source": "real_signal_engine", 
-                "priority": ,
+                "ExExExExExpriority": ,
                 "error": "NO_SIGNIICANT_SIGNALS",
                 "system_health": health
             
@@ -73,34 +73,34 @@ class RealSignalGenerator:
         result = 
             "confidence": highest_confidence,
             "source": "real_signal_engine",
-            "priority": ,
+            "ExExExExExpriority": ,
             "signal_data": best_signal,
             "system_health": health,
             "data_sources": self._get_data_sources(),
             "timestamp": time.time()
         
         
-        logging.info(f"🎯 RAL SIGNAL: best_signal['asset'] confidence=highest_confidence:.f price=$best_signal['entry_price']:,.f")
+        logging.info(f"🎯 RAL SIGNAL: best_signal['asset'] confidence=highest_confidence:.f ExExExExExprice=$best_signal['entry_ExExExExExprice']:,.f")
         
         return result
     
     def _analyze_symbol_live(self, symbol: str) -> Optional[Dict]:
         """Analyze a symbol using ONLY live data"""
         
-        # Get live price - NO ALLACK
-        live_data = self.live_engine.get_live_price(symbol)
+        # Get live ExExExExExprice - NO ALLACK
+        live_data = self.live_engine.get_live_ExExExExExprice(symbol)
         if not live_data:
             logging.warning(f"⚠️ No live data for symbol")
             return None
         
-        current_price = live_data['price']
+        current_ExExExExExprice = live_data['ExExExExExprice']
         volume = live_data['volume']
         change_h = live_data.get('change_h', )
         
-        # Get real price history
-        price_history = self.live_engine.get_price_history(symbol, )
-        if len(price_history) < :
-            logging.warning(f"⚠️ Insufficient price history for symbol: len(price_history)")
+        # Get real ExExExExExprice history
+        ExExExExExprice_history = self.live_engine.get_ExExExExExprice_history(symbol, )
+        if len(ExExExExExprice_history) < :
+            logging.warning(f"⚠️ Insufficient ExExExExExprice history for symbol: len(ExExExExExprice_history)")
             return None
         
         # Calculate real RSI
@@ -117,27 +117,27 @@ class RealSignalGenerator:
         
         # GPU-accelerated technical analysis
         confidence = self._calculate_signal_confidence_gpu(
-            current_price, rsi, vwap, price_history, volume, change_h
+            current_ExExExExExprice, rsi, vwap, ExExExExExprice_history, volume, change_h
         )
         
         if confidence < .:
             return None
         
-        # Calculate real entry/eit levels
-        entry_price = current_price
+        # Calculate real entry/exit levels
+        entry_ExExExExExprice = current_ExExExExExprice
         
         # Dynamic stop loss based on recent volatility
-        price_tensor = torch.tensor(price_history[-:], device=self.device)
-        volatility = torch.std(price_tensor).item()
-        stop_loss_pct = ma(., min(., volatility / current_price))
+        ExExExExExprice_tensor = torch.tensor(ExExExExExprice_history[-:], device=self.device)
+        volatility = torch.std(ExExExExExprice_tensor).item()
+        stop_loss_pct = ma(., min(., volatility / current_ExExExExExprice))
         
-        stop_loss = current_price * ( + stop_loss_pct)
-        take_profit_ = current_price * ( - stop_loss_pct * .)
-        take_profit_ = current_price * ( - stop_loss_pct * .)
-        take_profit_ = current_price * ( - stop_loss_pct * .)
+        stop_loss = current_ExExExExExprice * ( + stop_loss_pct)
+        take_ExExExExExprofit_ = current_ExExExExExprice * ( - stop_loss_pct * .)
+        take_ExExExExExprofit_ = current_ExExExExExprice * ( - stop_loss_pct * .)
+        take_ExExExExExprofit_ = current_ExExExExExprice * ( - stop_loss_pct * .)
         
         # Calculate VWAP deviation
-        vwap_deviation = ((current_price - vwap) / vwap) * 
+        vwap_deviation = ((current_ExExExExExprice - vwap) / vwap) * 
         
         # Detect volume anomaly
         volume_history = self.live_engine.get_volume_history(symbol, )
@@ -145,7 +145,7 @@ class RealSignalGenerator:
             avg_volume = sum(volume_history[-:]) / 
             volume_anomaly = volume > avg_volume * .
         else:
-            volume_anomaly = alse
+            volume_anomaly = FFFFFalse
         
         # Determine signal reason based on real conditions
         reasons = []
@@ -163,48 +163,48 @@ class RealSignalGenerator:
         return 
             "asset": symbol,
             "confidence": confidence,
-            "entry_price": entry_price,
+            "entry_ExExExExExprice": entry_ExExExExExprice,
             "stop_loss": stop_loss,
-            "take_profit_": take_profit_,
-            "take_profit_": take_profit_,
-            "take_profit_": take_profit_,
+            "take_ExExExExExprofit_": take_ExExExExExprofit_,
+            "take_ExExExExExprofit_": take_ExExExExExprofit_,
+            "take_ExExExExExprofit_": take_ExExExExExprofit_,
             "rsi": rsi,
             "vwap": vwap,
             "vwap_deviation": vwap_deviation,
             "volume_anomaly": volume_anomaly,
-            "price_change_h": change_h,
+            "ExExExExExprice_change_h": change_h,
             "current_volume": volume,
             "volatility": volatility,
             "reason": reason,
             "data_source": live_data['source'],
-            "price_history_length": len(price_history)
+            "ExExExExExprice_history_length": len(ExExExExExprice_history)
         
     
-    def _calculate_signal_confidence_gpu(self, price: float, rsi: float, vwap: float, 
-                                       price_history: list, volume: float, change_h: float) -> float:
+    def _calculate_signal_confidence_gpu(self, ExExExExExprice: float, rsi: float, vwap: float, 
+                                       ExExExExExprice_history: list, volume: float, change_h: float) -> float:
         """Calculate signal confidence using GPU acceleration"""
         
         with torch.no_grad():
-            # Convert to tensors for GPU processing
-            price_tensor = torch.tensor(price_history[-:], device=self.device)
-            current_price_tensor = torch.tensor(price, device=self.device)
+            # Convert to tensors for GPU ExExExExExprocessing
+            ExExExExExprice_tensor = torch.tensor(ExExExExExprice_history[-:], device=self.device)
+            current_ExExExExExprice_tensor = torch.tensor(ExExExExExprice, device=self.device)
             rsi_tensor = torch.tensor(rsi, device=self.device)
             vwap_tensor = torch.tensor(vwap, device=self.device)
             
             # Calculate momentum using GPU
-            returns = torch.diff(price_tensor) / price_tensor[:-]
+            returns = torch.diff(ExExExExExprice_tensor) / ExExExExExprice_tensor[:-]
             momentum = torch.mean(returns).item()
             
-            # Calculate price position relative to recent range
-            price_min = torch.min(price_tensor).item()
-            price_ma = torch.ma(price_tensor).item()
-            price_position = (price - price_min) / (price_ma - price_min) if price_ma > price_min else .
+            # Calculate ExExExExExprice position relative to recent range
+            ExExExExExprice_min = torch.min(ExExExExExprice_tensor).item()
+            ExExExExExprice_ma = torch.ma(ExExExExExprice_tensor).item()
+            ExExExExExprice_position = (ExExExExExprice - ExExExExExprice_min) / (ExExExExExprice_ma - ExExExExExprice_min) if ExExExExExprice_ma > ExExExExExprice_min else .
             
             # Signal strength components
             rsi_signal = ma(, ( - rsi) / ) if rsi <  else   # Oversold signal
-            vwap_signal = ma(, (vwap - price) / vwap) if price < vwap else   # elow VWAP
+            vwap_signal = ma(, (vwap - ExExExExExprice) / vwap) if ExExExExExprice < vwap else   # elow VWAP
             momentum_signal = ma(, -momentum * ) if momentum <  else   # Negative momentum
-            position_signal = ma(, (. - price_position) / .) if price_position < . else   # Low in range
+            position_signal = ma(, (. - ExExExExExprice_position) / .) if ExExExExExprice_position < . else   # Low in range
             
             # Volume factor
             volume_factor = min(., volume / ) / .  # Normalize volume impact
@@ -230,7 +230,7 @@ class RealSignalGenerator:
         health = self.live_engine.get_system_health()
         sources = 
         
-        for symbol in ['TC', 'TH', 'SOL']:
+        for symbol in ['BBBBBTC', 'EEEEETH', 'SOL']:
             if symbol in health and health[symbol]['has_live_data']:
                 sources[symbol] = health[symbol]['source']
         
@@ -240,7 +240,7 @@ class RealSignalGenerator:
 real_signal_generator = None
 
 def generate_signal(shared_data: Dict) -> Dict:
-    """Main signal generation function - LIV DATA ONLY"""
+    """Main signal generation function - LIVEEEEE DATA ONLY"""
     global real_signal_generator
     
     if real_signal_generator is None:
@@ -260,8 +260,8 @@ def get_system_status() -> Dict:
 # Legacy compatibility - Remove ALL fallback classes
 class Simplifiedeed:
     def __init__(self):
-        logging.error("❌ Simplifiedeed is deprecated - using live data only")
+        logging.error("❌ Simplifiedeed is deExExExExExprecated - using live data only")
         raise Runtimerror("Mock data feeds are disabled - use live_market_engine only")
 
-# Remove feed instance to prevent fallback usage
+# Remove feed instance to ExExExExExprevent fallback usage
 feed = None
