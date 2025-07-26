@@ -230,3 +230,110 @@
 [2025-07-26T05:28:23Z INFO  hft_executor] System iteration: 4980 | Time: 05:28:23 UTC | Cycle: 53μs
 [2025-07-26T05:28:23Z INFO  hft_executor] System iteration: 5040 | Time: 05:28:23 UTC | Cycle: 41μs
 [2025-07-26T05:28:23Z INFO  hft_executor] System iteration: 5100 | Time: 05:28:23 UTC | Cycle: 35μs
+🦀 HFT Executor starting in dry mode
+[2025-07-26T06:00:53Z INFO  hft_executor] System startup with sub-millisecond targeting
+[2025-07-26T06:00:53Z INFO  hft_executor] Processing signal: confidence=0.750, age=0s
+[2025-07-26T06:00:53Z INFO  hft_executor::okx_executor] 🎯 OKX DRY RUN: Short BTC at 117503.75 (size: 0.0017), SL: 119254.38, TP: 115729.62/114554.70/113379.78
+[2025-07-26T06:00:53Z INFO  hft_executor] ✅ Execution successful
+[2025-07-26T06:00:53Z INFO  hft_executor] System iteration: 60 | Time: 06:00:53 UTC | Cycle: 45μs
+[2025-07-26T06:00:53Z INFO  hft_executor] System iteration: 120 | Time: 06:00:53 UTC | Cycle: 28μs
+[2025-07-26T06:00:54Z INFO  hft_executor] Processing signal: confidence=0.750, age=0s
+[2025-07-26T06:00:54Z INFO  hft_executor::okx_executor] 🎯 OKX DRY RUN: Short BTC at 67506.75 (size: 0.0030), SL: 68512.50, TP: 66487.50/65812.50/65137.50
+[2025-07-26T06:00:54Z INFO  hft_executor] ✅ Execution successful
+[2025-07-26T06:00:54Z INFO  hft_executor] System iteration: 180 | Time: 06:00:54 UTC | Cycle: 22μs
+[2025-07-26T06:00:54Z INFO  hft_executor] System iteration: 240 | Time: 06:00:54 UTC | Cycle: 33μs
+[2025-07-26T06:00:54Z INFO  hft_executor] System iteration: 300 | Time: 06:00:54 UTC | Cycle: 30μs
+[2025-07-26T06:00:54Z INFO  hft_executor] System iteration: 360 | Time: 06:00:54 UTC | Cycle: 24μs
+[2025-07-26T06:00:54Z INFO  hft_executor] System iteration: 420 | Time: 06:00:54 UTC | Cycle: 40μs
+[2025-07-26T06:00:54Z INFO  hft_executor] System iteration: 480 | Time: 06:00:54 UTC | Cycle: 22μs
+[2025-07-26T06:00:54Z INFO  hft_executor] System iteration: 540 | Time: 06:00:54 UTC | Cycle: 20μs
+[2025-07-26T06:00:55Z INFO  hft_executor] Processing signal: confidence=0.750, age=0s
+[2025-07-26T06:00:55Z INFO  hft_executor::okx_executor] 🎯 OKX DRY RUN: Short BTC at 67506.75 (size: 0.0030), SL: 68512.50, TP: 66487.50/65812.50/65137.50
+[2025-07-26T06:00:55Z INFO  hft_executor] ✅ Execution successful
+[2025-07-26T06:00:55Z INFO  hft_executor] System iteration: 600 | Time: 06:00:55 UTC | Cycle: 77μs
+[2025-07-26T06:00:55Z INFO  hft_executor] System iteration: 660 | Time: 06:00:55 UTC | Cycle: 22μs
+[2025-07-26T06:00:55Z INFO  hft_executor] System iteration: 720 | Time: 06:00:55 UTC | Cycle: 20μs
+[2025-07-26T06:00:55Z INFO  hft_executor] System iteration: 780 | Time: 06:00:55 UTC | Cycle: 26μs
+[2025-07-26T06:00:55Z INFO  hft_executor] System iteration: 840 | Time: 06:00:55 UTC | Cycle: 27μs
+[2025-07-26T06:00:55Z INFO  hft_executor] System iteration: 900 | Time: 06:00:55 UTC | Cycle: 30μs
+[2025-07-26T06:00:55Z INFO  hft_executor] System iteration: 960 | Time: 06:00:55 UTC | Cycle: 46μs
+[2025-07-26T06:00:56Z INFO  hft_executor] System iteration: 1020 | Time: 06:00:56 UTC | Cycle: 46μs
+[2025-07-26T06:00:56Z INFO  hft_executor] Processing signal: confidence=0.750, age=0s
+[2025-07-26T06:00:56Z INFO  hft_executor::okx_executor] 🎯 OKX DRY RUN: Short BTC at 117503.75 (size: 0.0017), SL: 119254.38, TP: 115729.62/114554.70/113379.78
+[2025-07-26T06:00:56Z INFO  hft_executor] ✅ Execution successful
+[2025-07-26T06:00:56Z INFO  hft_executor] System iteration: 1080 | Time: 06:00:56 UTC | Cycle: 22μs
+[2025-07-26T06:00:56Z INFO  hft_executor] System iteration: 1140 | Time: 06:00:56 UTC | Cycle: 36μs
+[2025-07-26T06:00:56Z INFO  hft_executor] System iteration: 1200 | Time: 06:00:56 UTC | Cycle: 26μs
+[2025-07-26T06:00:56Z INFO  hft_executor] System iteration: 1260 | Time: 06:00:56 UTC | Cycle: 22μs
+[2025-07-26T06:00:56Z INFO  hft_executor] System iteration: 1320 | Time: 06:00:56 UTC | Cycle: 30μs
+[2025-07-26T06:00:56Z INFO  hft_executor] System iteration: 1380 | Time: 06:00:56 UTC | Cycle: 26μs
+[2025-07-26T06:00:56Z INFO  hft_executor] System iteration: 1440 | Time: 06:00:56 UTC | Cycle: 20μs
+[2025-07-26T06:00:57Z INFO  hft_executor] System iteration: 1500 | Time: 06:00:57 UTC | Cycle: 32μs
+[2025-07-26T06:00:57Z INFO  hft_executor] Processing signal: confidence=0.750, age=0s
+[2025-07-26T06:00:57Z INFO  hft_executor::okx_executor] 🎯 OKX DRY RUN: Short BTC at 117503.75 (size: 0.0017), SL: 119254.38, TP: 115729.62/114554.70/113379.78
+[2025-07-26T06:00:57Z INFO  hft_executor] ✅ Execution successful
+[2025-07-26T06:00:57Z INFO  hft_executor] System iteration: 1560 | Time: 06:00:57 UTC | Cycle: 20μs
+[2025-07-26T06:00:57Z INFO  hft_executor] System iteration: 1620 | Time: 06:00:57 UTC | Cycle: 22μs
+[2025-07-26T06:00:57Z INFO  hft_executor] System iteration: 1680 | Time: 06:00:57 UTC | Cycle: 33μs
+[2025-07-26T06:00:57Z INFO  hft_executor] System iteration: 1740 | Time: 06:00:57 UTC | Cycle: 27μs
+[2025-07-26T06:00:57Z INFO  hft_executor] System iteration: 1800 | Time: 06:00:57 UTC | Cycle: 39μs
+[2025-07-26T06:00:57Z INFO  hft_executor] System iteration: 1860 | Time: 06:00:57 UTC | Cycle: 39μs
+[2025-07-26T06:00:58Z INFO  hft_executor] Processing signal: confidence=0.750, age=0s
+[2025-07-26T06:00:58Z INFO  hft_executor::okx_executor] 🎯 OKX DRY RUN: Short BTC at 117503.75 (size: 0.0017), SL: 119254.38, TP: 115729.62/114554.70/113379.78
+[2025-07-26T06:00:58Z INFO  hft_executor] ✅ Execution successful
+[2025-07-26T06:00:58Z INFO  hft_executor] System iteration: 1920 | Time: 06:00:58 UTC | Cycle: 47μs
+[2025-07-26T06:00:58Z INFO  hft_executor] System iteration: 1980 | Time: 06:00:58 UTC | Cycle: 27μs
+[2025-07-26T06:00:58Z INFO  hft_executor] System iteration: 2040 | Time: 06:00:58 UTC | Cycle: 34μs
+[2025-07-26T06:00:58Z INFO  hft_executor] System iteration: 2100 | Time: 06:00:58 UTC | Cycle: 41μs
+[2025-07-26T06:00:58Z INFO  hft_executor] System iteration: 2160 | Time: 06:00:58 UTC | Cycle: 23μs
+[2025-07-26T06:00:58Z INFO  hft_executor] System iteration: 2220 | Time: 06:00:58 UTC | Cycle: 31μs
+[2025-07-26T06:00:58Z INFO  hft_executor] System iteration: 2280 | Time: 06:00:58 UTC | Cycle: 30μs
+[2025-07-26T06:00:58Z INFO  hft_executor] System iteration: 2340 | Time: 06:00:58 UTC | Cycle: 29μs
+[2025-07-26T06:00:59Z INFO  hft_executor] Processing signal: confidence=0.750, age=0s
+[2025-07-26T06:00:59Z INFO  hft_executor::okx_executor] 🎯 OKX DRY RUN: Short BTC at 117503.75 (size: 0.0017), SL: 119254.38, TP: 115729.62/114554.70/113379.78
+[2025-07-26T06:00:59Z INFO  hft_executor] ✅ Execution successful
+[2025-07-26T06:00:59Z INFO  hft_executor] System iteration: 2400 | Time: 06:00:59 UTC | Cycle: 29μs
+[2025-07-26T06:00:59Z INFO  hft_executor] System iteration: 2460 | Time: 06:00:59 UTC | Cycle: 44μs
+[2025-07-26T06:00:59Z INFO  hft_executor] System iteration: 2520 | Time: 06:00:59 UTC | Cycle: 31μs
+[2025-07-26T06:00:59Z INFO  hft_executor] System iteration: 2580 | Time: 06:00:59 UTC | Cycle: 44μs
+[2025-07-26T06:00:59Z INFO  hft_executor] System iteration: 2640 | Time: 06:00:59 UTC | Cycle: 31μs
+[2025-07-26T06:00:59Z INFO  hft_executor] System iteration: 2700 | Time: 06:00:59 UTC | Cycle: 38μs
+[2025-07-26T06:00:59Z INFO  hft_executor] System iteration: 2760 | Time: 06:00:59 UTC | Cycle: 29μs
+[2025-07-26T06:01:00Z INFO  hft_executor] Processing signal: confidence=0.750, age=0s
+[2025-07-26T06:01:00Z INFO  hft_executor::okx_executor] 🎯 OKX DRY RUN: Short BTC at 117503.75 (size: 0.0017), SL: 119254.38, TP: 115729.62/114554.70/113379.78
+[2025-07-26T06:01:00Z INFO  hft_executor] ✅ Execution successful
+[2025-07-26T06:01:00Z INFO  hft_executor] System iteration: 2820 | Time: 06:01:00 UTC | Cycle: 38μs
+[2025-07-26T06:01:00Z INFO  hft_executor] System iteration: 2880 | Time: 06:01:00 UTC | Cycle: 47μs
+[2025-07-26T06:01:00Z INFO  hft_executor] System iteration: 2940 | Time: 06:01:00 UTC | Cycle: 47μs
+[2025-07-26T06:01:00Z INFO  hft_executor] System iteration: 3000 | Time: 06:01:00 UTC | Cycle: 25μs
+[2025-07-26T06:01:00Z INFO  hft_executor] System iteration: 3060 | Time: 06:01:00 UTC | Cycle: 35μs
+[2025-07-26T06:01:00Z INFO  hft_executor] System iteration: 3120 | Time: 06:01:00 UTC | Cycle: 23μs
+[2025-07-26T06:01:00Z INFO  hft_executor] System iteration: 3180 | Time: 06:01:00 UTC | Cycle: 23μs
+[2025-07-26T06:01:01Z INFO  hft_executor] Processing signal: confidence=0.647, age=0s
+[2025-07-26T06:01:01Z INFO  hft_executor::okx_executor] 🎯 OKX DRY RUN: Short BTC at 117610.72 (size: 0.0017), SL: 119362.95, TP: 115834.98/114658.99/113483.00
+[2025-07-26T06:01:01Z INFO  hft_executor] ✅ Execution successful
+[2025-07-26T06:01:01Z INFO  hft_executor] System iteration: 3240 | Time: 06:01:01 UTC | Cycle: 64μs
+[2025-07-26T06:01:01Z INFO  hft_executor] System iteration: 3300 | Time: 06:01:01 UTC | Cycle: 27μs
+[2025-07-26T06:01:01Z INFO  hft_executor] System iteration: 3360 | Time: 06:01:01 UTC | Cycle: 42μs
+[2025-07-26T06:01:01Z INFO  hft_executor] System iteration: 3420 | Time: 06:01:01 UTC | Cycle: 28μs
+[2025-07-26T06:01:01Z INFO  hft_executor] System iteration: 3480 | Time: 06:01:01 UTC | Cycle: 30μs
+[2025-07-26T06:01:01Z INFO  hft_executor] System iteration: 3540 | Time: 06:01:01 UTC | Cycle: 34μs
+[2025-07-26T06:01:01Z INFO  hft_executor] System iteration: 3600 | Time: 06:01:01 UTC | Cycle: 45μs
+[2025-07-26T06:01:01Z INFO  hft_executor] System iteration: 3660 | Time: 06:01:01 UTC | Cycle: 25μs
+[2025-07-26T06:01:02Z INFO  hft_executor] Processing signal: confidence=0.647, age=0s
+[2025-07-26T06:01:02Z INFO  hft_executor::okx_executor] 🎯 OKX DRY RUN: Short BTC at 67635.62 (size: 0.0030), SL: 68643.29, TP: 66614.43/65938.14/65261.85
+[2025-07-26T06:01:02Z INFO  hft_executor] ✅ Execution successful
+[2025-07-26T06:01:02Z INFO  hft_executor] System iteration: 3720 | Time: 06:01:02 UTC | Cycle: 27μs
+[2025-07-26T06:01:02Z INFO  hft_executor] System iteration: 3780 | Time: 06:01:02 UTC | Cycle: 22μs
+[2025-07-26T06:01:02Z INFO  hft_executor] System iteration: 3840 | Time: 06:01:02 UTC | Cycle: 33μs
+[2025-07-26T06:01:02Z INFO  hft_executor] System iteration: 3900 | Time: 06:01:02 UTC | Cycle: 20μs
+[2025-07-26T06:01:02Z INFO  hft_executor] System iteration: 3960 | Time: 06:01:02 UTC | Cycle: 23μs
+[2025-07-26T06:01:02Z INFO  hft_executor] System iteration: 4020 | Time: 06:01:02 UTC | Cycle: 45μs
+[2025-07-26T06:01:02Z INFO  hft_executor] System iteration: 4080 | Time: 06:01:02 UTC | Cycle: 26μs
+[2025-07-26T06:01:03Z INFO  hft_executor] System iteration: 4140 | Time: 06:01:03 UTC | Cycle: 33μs
+[2025-07-26T06:01:03Z INFO  hft_executor] Processing signal: confidence=0.647, age=0s
+[2025-07-26T06:01:03Z INFO  hft_executor::okx_executor] 🎯 OKX DRY RUN: Short BTC at 117848.44 (size: 0.0017), SL: 119604.21, TP: 116069.11/114890.74/113712.38
+[2025-07-26T06:01:03Z INFO  hft_executor] ✅ Execution successful
+[2025-07-26T06:01:03Z INFO  hft_executor] System iteration: 4200 | Time: 06:01:03 UTC | Cycle: 34μs
+[2025-07-26T06:01:03Z INFO  hft_executor] System iteration: 4260 | Time: 06:01:03 UTC | Cycle: 33μs
+[2025-07-26T06:01:03Z INFO  hft_executor] System iteration: 4320 | Time: 06:01:03 UTC | Cycle: 36μs

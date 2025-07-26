@@ -1,373 +1,367 @@
-🚀 GPU Ready: apple_m1 on mps
-✅ GPU acceleration confirmed: apple_m1
+🚀 GPU Ready: apple_mps on mps
+✅ GPU acceleration confirmed: apple_mps
 🚀 Starting HFT system in dry mode
-🎯 GPU: apple_m1
-2025-07-26 01:28:10,331 [INFO] Starting HFT system in dry mode with apple_m1 GPU
-2025-07-26 01:28:10,413 [WARNING] CoinGecko failed: API returned 429, using defaults
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:11,439 [INFO] Signal generated: 0.647
-2025-07-26 01:28:11,451 [INFO] Signal logged to CSV: BTC @ 68203.02 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:11,550 [INFO] Signal generated: 0.647
-2025-07-26 01:28:11,562 [INFO] Signal logged to CSV: BTC @ 68272.97 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:11,663 [INFO] Signal generated: 0.647
-2025-07-26 01:28:11,675 [INFO] Signal logged to CSV: BTC @ 68280.46 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:11,779 [INFO] Signal generated: 0.647
-2025-07-26 01:28:11,791 [INFO] Signal logged to CSV: BTC @ 68288.13 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:11,877 [INFO] Signal generated: 0.647
-2025-07-26 01:28:11,888 [INFO] Signal logged to CSV: BTC @ 68295.92 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:11,985 [INFO] Signal generated: 0.647
-2025-07-26 01:28:11,996 [INFO] Signal logged to CSV: BTC @ 68302.49 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:12,102 [INFO] Signal generated: 0.647
-2025-07-26 01:28:12,102 [ERROR] Signal logging error: No columns to parse from file
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:12,188 [INFO] Signal generated: 0.647
-2025-07-26 01:28:12,200 [INFO] Signal logged to CSV: BTC @ 68316.94 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:12,285 [INFO] Signal generated: 0.647
-2025-07-26 01:28:12,296 [INFO] Signal logged to CSV: BTC @ 68323.53 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:12,401 [INFO] Signal generated: 0.647
-2025-07-26 01:28:12,411 [INFO] Signal logged to CSV: BTC @ 68330.05 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:12,512 [INFO] Signal generated: 0.647
-2025-07-26 01:28:12,523 [INFO] Signal logged to CSV: BTC @ 68337.77 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:12,612 [INFO] Signal generated: 0.647
-2025-07-26 01:28:12,625 [INFO] Signal logged to CSV: BTC @ 68345.33 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:12,719 [INFO] Signal generated: 0.647
-2025-07-26 01:28:12,731 [INFO] Signal logged to CSV: BTC @ 68352.20 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:12,828 [INFO] Signal generated: 0.647
-2025-07-26 01:28:12,839 [INFO] Signal logged to CSV: BTC @ 68359.37 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:12,930 [INFO] Signal generated: 0.647
-2025-07-26 01:28:12,942 [INFO] Signal logged to CSV: BTC @ 68366.69 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:13,023 [INFO] Signal generated: 0.647
-2025-07-26 01:28:13,033 [INFO] Signal logged to CSV: BTC @ 68373.61 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:13,137 [INFO] Signal generated: 0.647
-2025-07-26 01:28:13,147 [INFO] Signal logged to CSV: BTC @ 68379.79 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:13,262 [INFO] Signal generated: 0.647
-2025-07-26 01:28:13,272 [INFO] Signal logged to CSV: BTC @ 68387.45 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:13,367 [INFO] Signal generated: 0.647
-2025-07-26 01:28:13,377 [INFO] Signal logged to CSV: BTC @ 68395.93 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:13,465 [INFO] Signal generated: 0.647
-2025-07-26 01:28:13,476 [INFO] Signal logged to CSV: BTC @ 68402.99 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:13,574 [INFO] Signal generated: 0.647
-2025-07-26 01:28:13,585 [INFO] Signal logged to CSV: BTC @ 68409.64 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:13,683 [INFO] Signal generated: 0.647
-2025-07-26 01:28:13,693 [INFO] Signal logged to CSV: BTC @ 68417.00 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:13,790 [INFO] Signal generated: 0.647
-2025-07-26 01:28:13,801 [INFO] Signal logged to CSV: BTC @ 68424.34 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:13,898 [INFO] Signal generated: 0.647
-2025-07-26 01:28:13,910 [INFO] Signal logged to CSV: BTC @ 68431.60 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:13,996 [INFO] Signal generated: 0.647
-2025-07-26 01:28:14,006 [INFO] Signal logged to CSV: BTC @ 68438.96 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:14,107 [INFO] Signal generated: 0.647
-2025-07-26 01:28:14,118 [INFO] Signal logged to CSV: BTC @ 68445.46 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:14,214 [INFO] Signal generated: 0.647
-2025-07-26 01:28:14,224 [INFO] Signal logged to CSV: BTC @ 68452.99 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:14,324 [INFO] Signal generated: 0.647
-2025-07-26 01:28:14,335 [INFO] Signal logged to CSV: BTC @ 68460.18 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:14,437 [INFO] Signal generated: 0.647
-2025-07-26 01:28:14,448 [INFO] Signal logged to CSV: BTC @ 68467.64 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:14,546 [INFO] Signal generated: 0.647
-2025-07-26 01:28:14,556 [INFO] Signal logged to CSV: BTC @ 68475.27 (confidence: 0.647)
-📊 Iteration 30 - System running on apple_m1 GPU
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:14,636 [INFO] Signal generated: 0.647
-2025-07-26 01:28:14,647 [INFO] Signal logged to CSV: BTC @ 68482.60 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:14,754 [INFO] Signal generated: 0.647
-2025-07-26 01:28:14,765 [INFO] Signal logged to CSV: BTC @ 68488.70 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:14,860 [INFO] Signal generated: 0.647
-2025-07-26 01:28:14,870 [INFO] Signal logged to CSV: BTC @ 68496.67 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:14,963 [INFO] Signal generated: 0.647
-2025-07-26 01:28:14,976 [INFO] Signal logged to CSV: BTC @ 68503.76 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:15,085 [INFO] Signal generated: 0.647
-2025-07-26 01:28:15,096 [INFO] Signal logged to CSV: BTC @ 68510.92 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:15,199 [INFO] Signal generated: 0.647
-2025-07-26 01:28:15,212 [INFO] Signal logged to CSV: BTC @ 68519.01 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:15,323 [INFO] Signal generated: 0.647
-2025-07-26 01:28:15,331 [INFO] Signal logged to CSV: BTC @ 68526.82 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:15,460 [INFO] Signal generated: 0.647
-2025-07-26 01:28:15,468 [INFO] Signal logged to CSV: BTC @ 68534.91 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:15,563 [INFO] Signal generated: 0.647
-2025-07-26 01:28:15,571 [INFO] Signal logged to CSV: BTC @ 68544.13 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:15,665 [INFO] Signal generated: 0.647
-2025-07-26 01:28:15,673 [INFO] Signal logged to CSV: BTC @ 68551.05 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:15,768 [INFO] Signal generated: 0.647
-2025-07-26 01:28:15,775 [INFO] Signal logged to CSV: BTC @ 68558.00 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:15,880 [INFO] Signal generated: 0.647
-2025-07-26 01:28:15,889 [INFO] Signal logged to CSV: BTC @ 68564.88 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:15,992 [INFO] Signal generated: 0.647
-2025-07-26 01:28:16,000 [INFO] Signal logged to CSV: BTC @ 68572.52 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:16,098 [INFO] Signal generated: 0.647
-2025-07-26 01:28:16,105 [INFO] Signal logged to CSV: BTC @ 68580.01 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:16,192 [INFO] Signal generated: 0.647
-2025-07-26 01:28:16,200 [INFO] Signal logged to CSV: BTC @ 68587.15 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:16,292 [INFO] Signal generated: 0.647
-2025-07-26 01:28:16,301 [INFO] Signal logged to CSV: BTC @ 68593.53 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:16,392 [INFO] Signal generated: 0.647
-2025-07-26 01:28:16,400 [INFO] Signal logged to CSV: BTC @ 68600.34 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:16,494 [INFO] Signal generated: 0.647
-2025-07-26 01:28:16,501 [INFO] Signal logged to CSV: BTC @ 68607.02 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:16,600 [INFO] Signal generated: 0.647
-2025-07-26 01:28:16,607 [INFO] Signal logged to CSV: BTC @ 68613.88 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:16,693 [INFO] Signal generated: 0.647
-2025-07-26 01:28:16,701 [INFO] Signal logged to CSV: BTC @ 68621.05 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:16,809 [INFO] Signal generated: 0.647
-2025-07-26 01:28:16,817 [INFO] Signal logged to CSV: BTC @ 68627.36 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:16,901 [INFO] Signal generated: 0.647
-2025-07-26 01:28:16,909 [INFO] Signal logged to CSV: BTC @ 68635.20 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:16,998 [INFO] Signal generated: 0.647
-2025-07-26 01:28:17,006 [INFO] Signal logged to CSV: BTC @ 68641.42 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:17,092 [INFO] Signal generated: 0.647
-2025-07-26 01:28:17,097 [INFO] Signal logged to CSV: BTC @ 68647.92 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:17,181 [INFO] Signal generated: 0.647
-2025-07-26 01:28:17,187 [INFO] Signal logged to CSV: BTC @ 68654.08 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:17,284 [INFO] Signal generated: 0.647
-2025-07-26 01:28:17,290 [INFO] Signal logged to CSV: BTC @ 68660.17 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:17,401 [INFO] Signal generated: 0.647
-2025-07-26 01:28:17,405 [INFO] Signal logged to CSV: BTC @ 68667.10 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:17,493 [INFO] Signal generated: 0.647
-2025-07-26 01:28:17,498 [INFO] Signal logged to CSV: BTC @ 68674.85 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:17,591 [INFO] Signal generated: 0.647
-2025-07-26 01:28:17,595 [INFO] Signal logged to CSV: BTC @ 68681.14 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:17,691 [INFO] Signal generated: 0.647
-2025-07-26 01:28:17,696 [INFO] Signal logged to CSV: BTC @ 68687.72 (confidence: 0.647)
-📊 Iteration 60 - System running on apple_m1 GPU
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:17,793 [INFO] Signal generated: 0.647
-2025-07-26 01:28:17,798 [INFO] Signal logged to CSV: BTC @ 68694.52 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:17,900 [INFO] Signal generated: 0.647
-2025-07-26 01:28:17,906 [INFO] Signal logged to CSV: BTC @ 68701.43 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:17,996 [INFO] Signal generated: 0.647
-2025-07-26 01:28:18,002 [INFO] Signal logged to CSV: BTC @ 68708.71 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:18,094 [INFO] Signal generated: 0.647
-2025-07-26 01:28:18,098 [INFO] Signal logged to CSV: BTC @ 68715.18 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:18,188 [INFO] Signal generated: 0.647
-2025-07-26 01:28:18,193 [INFO] Signal logged to CSV: BTC @ 68721.66 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:18,296 [INFO] Signal generated: 0.647
-2025-07-26 01:28:18,300 [INFO] Signal logged to CSV: BTC @ 68728.03 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:18,399 [INFO] Signal generated: 0.647
-2025-07-26 01:28:18,404 [INFO] Signal logged to CSV: BTC @ 68735.31 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:18,517 [INFO] Signal generated: 0.647
-2025-07-26 01:28:18,522 [INFO] Signal logged to CSV: BTC @ 68742.28 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:18,621 [INFO] Signal generated: 0.647
-2025-07-26 01:28:18,626 [INFO] Signal logged to CSV: BTC @ 68750.25 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:18,717 [INFO] Signal generated: 0.647
-2025-07-26 01:28:18,722 [INFO] Signal logged to CSV: BTC @ 68757.29 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:18,812 [INFO] Signal generated: 0.647
-2025-07-26 01:28:18,817 [INFO] Signal logged to CSV: BTC @ 68763.77 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:18,913 [INFO] Signal generated: 0.647
-2025-07-26 01:28:18,919 [INFO] Signal logged to CSV: BTC @ 68770.17 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:19,012 [INFO] Signal generated: 0.647
-2025-07-26 01:28:19,018 [INFO] Signal logged to CSV: BTC @ 68777.09 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:19,115 [INFO] Signal generated: 0.647
-2025-07-26 01:28:19,120 [INFO] Signal logged to CSV: BTC @ 68783.75 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:19,223 [INFO] Signal generated: 0.647
-2025-07-26 01:28:19,227 [INFO] Signal logged to CSV: BTC @ 68790.67 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:19,317 [INFO] Signal generated: 0.647
-2025-07-26 01:28:19,322 [INFO] Signal logged to CSV: BTC @ 68797.85 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:19,415 [INFO] Signal generated: 0.647
-2025-07-26 01:28:19,420 [INFO] Signal logged to CSV: BTC @ 68804.28 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:19,518 [INFO] Signal generated: 0.647
-2025-07-26 01:28:19,523 [INFO] Signal logged to CSV: BTC @ 68810.89 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:19,624 [INFO] Signal generated: 0.647
-2025-07-26 01:28:19,629 [INFO] Signal logged to CSV: BTC @ 68817.85 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:19,730 [INFO] Signal generated: 0.647
-2025-07-26 01:28:19,735 [INFO] Signal logged to CSV: BTC @ 68825.01 (confidence: 0.647)
-✅ Signal: 0.647 (GPU: apple_m1)
-2025-07-26 01:28:19,836 [INFO] Signal generated: 0.647
-2025-07-26 01:28:19,842 [INFO] Signal logged to CSV: BTC @ 68832.17 (confidence: 0.647)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:19,931 [INFO] Signal generated: 0.750
-2025-07-26 01:28:19,937 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:20,026 [INFO] Signal generated: 0.750
-2025-07-26 01:28:20,031 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:20,129 [INFO] Signal generated: 0.750
-2025-07-26 01:28:20,134 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:20,226 [INFO] Signal generated: 0.750
-2025-07-26 01:28:20,231 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:20,324 [INFO] Signal generated: 0.750
-2025-07-26 01:28:20,330 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:20,422 [INFO] Signal generated: 0.750
-2025-07-26 01:28:20,428 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:20,524 [INFO] Signal generated: 0.750
-2025-07-26 01:28:20,530 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:20,639 [INFO] Signal generated: 0.750
-2025-07-26 01:28:20,644 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:20,735 [INFO] Signal generated: 0.750
-2025-07-26 01:28:20,741 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-📊 Iteration 90 - System running on apple_m1 GPU
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:20,844 [INFO] Signal generated: 0.750
-2025-07-26 01:28:20,849 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:20,941 [INFO] Signal generated: 0.750
-2025-07-26 01:28:20,946 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:21,043 [INFO] Signal generated: 0.750
-2025-07-26 01:28:21,047 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:21,145 [INFO] Signal generated: 0.750
-2025-07-26 01:28:21,149 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:21,251 [INFO] Signal generated: 0.750
-2025-07-26 01:28:21,256 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:21,359 [INFO] Signal generated: 0.750
-2025-07-26 01:28:21,364 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:21,458 [INFO] Signal generated: 0.750
-2025-07-26 01:28:21,464 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:21,554 [INFO] Signal generated: 0.750
-2025-07-26 01:28:21,555 [ERROR] Signal logging error: No columns to parse from file
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:21,646 [INFO] Signal generated: 0.750
-2025-07-26 01:28:21,651 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:21,752 [INFO] Signal generated: 0.750
-2025-07-26 01:28:21,757 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:21,865 [INFO] Signal generated: 0.750
-2025-07-26 01:28:21,869 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:21,975 [INFO] Signal generated: 0.750
-2025-07-26 01:28:21,980 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:22,076 [INFO] Signal generated: 0.750
-2025-07-26 01:28:22,081 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:22,181 [INFO] Signal generated: 0.750
-2025-07-26 01:28:22,185 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:22,273 [INFO] Signal generated: 0.750
-2025-07-26 01:28:22,277 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:22,368 [INFO] Signal generated: 0.750
-2025-07-26 01:28:22,373 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:22,485 [INFO] Signal generated: 0.750
-2025-07-26 01:28:22,489 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:22,588 [INFO] Signal generated: 0.750
-2025-07-26 01:28:22,592 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:22,680 [INFO] Signal generated: 0.750
-2025-07-26 01:28:22,685 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:22,770 [INFO] Signal generated: 0.750
-2025-07-26 01:28:22,774 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:22,879 [INFO] Signal generated: 0.750
-2025-07-26 01:28:22,884 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:22,983 [INFO] Signal generated: 0.750
-2025-07-26 01:28:22,986 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:23,084 [INFO] Signal generated: 0.750
-2025-07-26 01:28:23,089 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:23,200 [INFO] Signal generated: 0.750
-2025-07-26 01:28:23,206 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:23,303 [INFO] Signal generated: 0.750
-2025-07-26 01:28:23,304 [ERROR] Signal logging error: No columns to parse from file
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:23,405 [INFO] Signal generated: 0.750
-2025-07-26 01:28:23,411 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:23,516 [INFO] Signal generated: 0.750
-2025-07-26 01:28:23,522 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:23,631 [INFO] Signal generated: 0.750
-2025-07-26 01:28:23,635 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:23,719 [INFO] Signal generated: 0.750
-2025-07-26 01:28:23,724 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:23,823 [INFO] Signal generated: 0.750
-2025-07-26 01:28:23,828 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
-📊 Iteration 120 - System running on apple_m1 GPU
-✅ Signal: 0.750 (GPU: apple_m1)
-2025-07-26 01:28:23,928 [INFO] Signal generated: 0.750
-2025-07-26 01:28:23,934 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+🎯 GPU: apple_mps
+2025-07-26 02:00:51,723 [INFO] Starting HFT system in dry mode with apple_mps GPU
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:52,224 [INFO] Signal generated: 0.750
+2025-07-26 02:00:52,228 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:52,319 [INFO] Signal generated: 0.750
+2025-07-26 02:00:52,322 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:52,423 [INFO] Signal generated: 0.750
+2025-07-26 02:00:52,426 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:52,517 [INFO] Signal generated: 0.750
+2025-07-26 02:00:52,520 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:52,609 [INFO] Signal generated: 0.750
+2025-07-26 02:00:52,612 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:52,701 [INFO] Signal generated: 0.750
+2025-07-26 02:00:52,704 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:52,799 [INFO] Signal generated: 0.750
+2025-07-26 02:00:52,802 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:52,888 [INFO] Signal generated: 0.750
+2025-07-26 02:00:52,891 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:52,979 [INFO] Signal generated: 0.750
+2025-07-26 02:00:52,982 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:53,066 [INFO] Signal generated: 0.750
+2025-07-26 02:00:53,066 [ERROR] Signal logging error: No columns to parse from file
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:53,189 [INFO] Signal generated: 0.750
+2025-07-26 02:00:53,192 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:53,281 [INFO] Signal generated: 0.750
+2025-07-26 02:00:53,284 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:53,370 [INFO] Signal generated: 0.750
+2025-07-26 02:00:53,373 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:53,468 [INFO] Signal generated: 0.750
+2025-07-26 02:00:53,471 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:53,575 [INFO] Signal generated: 0.750
+2025-07-26 02:00:53,578 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:53,672 [INFO] Signal generated: 0.750
+2025-07-26 02:00:53,675 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:53,755 [INFO] Signal generated: 0.750
+2025-07-26 02:00:53,758 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:53,842 [INFO] Signal generated: 0.750
+2025-07-26 02:00:53,844 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:53,932 [INFO] Signal generated: 0.750
+2025-07-26 02:00:53,935 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:54,024 [INFO] Signal generated: 0.750
+2025-07-26 02:00:54,027 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:54,117 [INFO] Signal generated: 0.750
+2025-07-26 02:00:54,120 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:54,208 [INFO] Signal generated: 0.750
+2025-07-26 02:00:54,211 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:54,314 [INFO] Signal generated: 0.750
+2025-07-26 02:00:54,317 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:54,403 [INFO] Signal generated: 0.750
+2025-07-26 02:00:54,406 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:54,499 [INFO] Signal generated: 0.750
+2025-07-26 02:00:54,502 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:54,597 [INFO] Signal generated: 0.750
+2025-07-26 02:00:54,600 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:54,689 [INFO] Signal generated: 0.750
+2025-07-26 02:00:54,693 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:54,792 [INFO] Signal generated: 0.750
+2025-07-26 02:00:54,795 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:54,888 [INFO] Signal generated: 0.750
+2025-07-26 02:00:54,891 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:54,990 [INFO] Signal generated: 0.750
+2025-07-26 02:00:54,993 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+📊 Iteration 30 - System running on apple_mps GPU
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:55,093 [INFO] Signal generated: 0.750
+2025-07-26 02:00:55,097 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:55,193 [INFO] Signal generated: 0.750
+2025-07-26 02:00:55,196 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:55,289 [INFO] Signal generated: 0.750
+2025-07-26 02:00:55,293 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:55,393 [INFO] Signal generated: 0.750
+2025-07-26 02:00:55,396 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:55,482 [INFO] Signal generated: 0.750
+2025-07-26 02:00:55,485 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:55,569 [INFO] Signal generated: 0.750
+2025-07-26 02:00:55,572 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:55,676 [INFO] Signal generated: 0.750
+2025-07-26 02:00:55,679 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:55,775 [INFO] Signal generated: 0.750
+2025-07-26 02:00:55,776 [ERROR] Signal logging error: No columns to parse from file
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:55,870 [INFO] Signal generated: 0.750
+2025-07-26 02:00:55,873 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:55,968 [INFO] Signal generated: 0.750
+2025-07-26 02:00:55,971 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:56,075 [INFO] Signal generated: 0.750
+2025-07-26 02:00:56,079 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:56,181 [INFO] Signal generated: 0.750
+2025-07-26 02:00:56,181 [ERROR] Signal logging error: No columns to parse from file
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:56,273 [INFO] Signal generated: 0.750
+2025-07-26 02:00:56,277 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:56,365 [INFO] Signal generated: 0.750
+2025-07-26 02:00:56,369 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:56,456 [INFO] Signal generated: 0.750
+2025-07-26 02:00:56,459 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:56,550 [INFO] Signal generated: 0.750
+2025-07-26 02:00:56,553 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:56,653 [INFO] Signal generated: 0.750
+2025-07-26 02:00:56,656 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:56,735 [INFO] Signal generated: 0.750
+2025-07-26 02:00:56,738 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:56,828 [INFO] Signal generated: 0.750
+2025-07-26 02:00:56,831 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:56,915 [INFO] Signal generated: 0.750
+2025-07-26 02:00:56,918 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:57,014 [INFO] Signal generated: 0.750
+2025-07-26 02:00:57,017 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:57,108 [INFO] Signal generated: 0.750
+2025-07-26 02:00:57,112 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:57,203 [INFO] Signal generated: 0.750
+2025-07-26 02:00:57,207 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:57,293 [INFO] Signal generated: 0.750
+2025-07-26 02:00:57,297 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:57,388 [INFO] Signal generated: 0.750
+2025-07-26 02:00:57,391 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:57,484 [INFO] Signal generated: 0.750
+2025-07-26 02:00:57,487 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:57,571 [INFO] Signal generated: 0.750
+2025-07-26 02:00:57,574 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:57,663 [INFO] Signal generated: 0.750
+2025-07-26 02:00:57,665 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+2025-07-26 02:00:57,796 [INFO] CoinGecko BTC dominance: 59.3%
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:57,799 [INFO] Signal generated: 0.750
+2025-07-26 02:00:57,802 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+2025-07-26 02:00:57,926 [INFO] CoinGecko BTC dominance: 59.3%
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:57,929 [INFO] Signal generated: 0.750
+2025-07-26 02:00:57,932 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+📊 Iteration 60 - System running on apple_mps GPU
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:58,028 [INFO] Signal generated: 0.750
+2025-07-26 02:00:58,030 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:58,117 [INFO] Signal generated: 0.750
+2025-07-26 02:00:58,119 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:58,204 [INFO] Signal generated: 0.750
+2025-07-26 02:00:58,206 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:58,289 [INFO] Signal generated: 0.750
+2025-07-26 02:00:58,291 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:58,377 [INFO] Signal generated: 0.750
+2025-07-26 02:00:58,379 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:58,466 [INFO] Signal generated: 0.750
+2025-07-26 02:00:58,469 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:58,572 [INFO] Signal generated: 0.750
+2025-07-26 02:00:58,574 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:58,664 [INFO] Signal generated: 0.750
+2025-07-26 02:00:58,666 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:58,753 [INFO] Signal generated: 0.750
+2025-07-26 02:00:58,755 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:58,853 [INFO] Signal generated: 0.750
+2025-07-26 02:00:58,855 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:58,958 [INFO] Signal generated: 0.750
+2025-07-26 02:00:58,960 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:59,049 [INFO] Signal generated: 0.750
+2025-07-26 02:00:59,051 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:59,136 [INFO] Signal generated: 0.750
+2025-07-26 02:00:59,138 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:59,226 [INFO] Signal generated: 0.750
+2025-07-26 02:00:59,227 [ERROR] Signal logging error: No columns to parse from file
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:59,322 [INFO] Signal generated: 0.750
+2025-07-26 02:00:59,324 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:59,419 [INFO] Signal generated: 0.750
+2025-07-26 02:00:59,421 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:59,518 [INFO] Signal generated: 0.750
+2025-07-26 02:00:59,521 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:59,612 [INFO] Signal generated: 0.750
+2025-07-26 02:00:59,614 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:59,700 [INFO] Signal generated: 0.750
+2025-07-26 02:00:59,702 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:59,791 [INFO] Signal generated: 0.750
+2025-07-26 02:00:59,793 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:59,890 [INFO] Signal generated: 0.750
+2025-07-26 02:00:59,893 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:00:59,973 [INFO] Signal generated: 0.750
+2025-07-26 02:00:59,975 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:00,077 [INFO] Signal generated: 0.750
+2025-07-26 02:01:00,079 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:00,170 [INFO] Signal generated: 0.750
+2025-07-26 02:01:00,173 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:00,270 [INFO] Signal generated: 0.750
+2025-07-26 02:01:00,272 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:00,360 [INFO] Signal generated: 0.750
+2025-07-26 02:01:00,362 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:00,460 [INFO] Signal generated: 0.750
+2025-07-26 02:01:00,465 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:00,555 [INFO] Signal generated: 0.750
+2025-07-26 02:01:00,558 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:00,637 [INFO] Signal generated: 0.750
+2025-07-26 02:01:00,639 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:00,728 [INFO] Signal generated: 0.750
+2025-07-26 02:01:00,731 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+📊 Iteration 90 - System running on apple_mps GPU
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:00,819 [INFO] Signal generated: 0.750
+2025-07-26 02:01:00,821 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:00,912 [INFO] Signal generated: 0.750
+2025-07-26 02:01:00,914 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:01,006 [INFO] Signal generated: 0.750
+2025-07-26 02:01:01,009 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:01,102 [INFO] Signal generated: 0.750
+2025-07-26 02:01:01,104 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:01,194 [INFO] Signal generated: 0.750
+2025-07-26 02:01:01,197 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:01,288 [INFO] Signal generated: 0.750
+2025-07-26 02:01:01,290 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:01,383 [INFO] Signal generated: 0.750
+2025-07-26 02:01:01,386 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:01,472 [INFO] Signal generated: 0.750
+2025-07-26 02:01:01,474 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:01,564 [INFO] Signal generated: 0.750
+2025-07-26 02:01:01,567 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:01,663 [INFO] Signal generated: 0.750
+2025-07-26 02:01:01,665 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:01,749 [INFO] Signal generated: 0.750
+2025-07-26 02:01:01,751 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:01,840 [INFO] Signal generated: 0.750
+2025-07-26 02:01:01,843 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:01,945 [INFO] Signal generated: 0.750
+2025-07-26 02:01:01,947 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:02,028 [INFO] Signal generated: 0.750
+2025-07-26 02:01:02,030 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:02,116 [INFO] Signal generated: 0.750
+2025-07-26 02:01:02,119 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:02,215 [INFO] Signal generated: 0.750
+2025-07-26 02:01:02,218 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:02,305 [INFO] Signal generated: 0.750
+2025-07-26 02:01:02,307 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:02,388 [INFO] Signal generated: 0.750
+2025-07-26 02:01:02,390 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:02,479 [INFO] Signal generated: 0.750
+2025-07-26 02:01:02,481 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:02,573 [INFO] Signal generated: 0.750
+2025-07-26 02:01:02,576 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:02,663 [INFO] Signal generated: 0.750
+2025-07-26 02:01:02,666 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:02,756 [INFO] Signal generated: 0.750
+2025-07-26 02:01:02,758 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:02,840 [INFO] Signal generated: 0.750
+2025-07-26 02:01:02,843 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:02,930 [INFO] Signal generated: 0.750
+2025-07-26 02:01:02,932 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:03,027 [INFO] Signal generated: 0.750
+2025-07-26 02:01:03,030 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:03,122 [INFO] Signal generated: 0.750
+2025-07-26 02:01:03,125 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:03,210 [INFO] Signal generated: 0.750
+2025-07-26 02:01:03,213 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:03,303 [INFO] Signal generated: 0.750
+2025-07-26 02:01:03,306 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)
+✅ Signal: 0.750 (GPU: apple_mps)
+2025-07-26 02:01:03,391 [INFO] Signal generated: 0.750
+2025-07-26 02:01:03,394 [INFO] Signal logged to CSV: BTC @ 67500.00 (confidence: 0.750)

@@ -27,40 +27,28 @@ DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
 DISCORD_USER_ID = os.getenv("DISCORD_USER_ID")
 
 def setup_gpu():
-    """Setup GPU with proper detection"""
+    """Setup GPU with proper detection and fallback"""
     system = platform.system()
     
-    if system == "Darwin":  # macOS
-        if hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
-            os.environ['PYTORCH_ENABLE_MPS_FALLBACK'] = '1'
-            return {
-                "type": "apple_m1",
-                "device": "mps",
-                "optimized": True,
-                "priority": 3
-            }
-        elif torch.cuda.is_available():
-            return {
-                "type": "mac_cuda_egpu", 
-                "device": "cuda",
-                "optimized": True,
-                "priority": 2
-            }
-        else:
-            print("❌ No GPU acceleration available")
-            sys.exit(1)
+    if torch.cuda.is_available():
+        return {
+            "type": "cuda",
+            "device": "cuda",
+            "optimized": True,
+            "priority": 1
+        }
+    elif system == "Darwin" and hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
+        os.environ['PYTORCH_ENABLE_MPS_FALLBACK'] = '1'
+        return {
+            "type": "apple_mps",
+            "device": "mps",
+            "optimized": True,
+            "priority": 2
+        }
     else:
-        if torch.cuda.is_available():
-            gpu_name = torch.cuda.get_device_name(0)
-            if 'A100' in gpu_name:
-                torch.backends.cuda.matmul.allow_tf32 = True
-                torch.backends.cudnn.allow_tf32 = True
-                return {"type": "cuda_a100", "device": "cuda", "optimized": True, "priority": 1}
-            else:
-                return {"type": "cuda_standard", "device": "cuda", "optimized": True, "priority": 3}
-        else:
-            print("❌ No GPU available")
-            sys.exit(1)
+        print("❌ CRITICAL: NO GPU DETECTED")
+        print("This system requires GPU acceleration (CUDA or Apple Silicon)")
+        sys.exit(1)
 
 # Initialize GPU
 try:
@@ -68,17 +56,15 @@ try:
     GPU_AVAILABLE = True
     DEVICE = GPU_CONFIG["device"]
     print(f"🚀 GPU Ready: {GPU_CONFIG['type']} on {DEVICE}")
+    
+    # Apply optimizations
+    if DEVICE == "cuda":
+        torch.backends.cudnn.benchmark = True
+        torch.backends.cuda.matmul.allow_tf32 = True
+        torch.backends.cudnn.allow_tf32 = True
+    elif DEVICE == "mps":
+        torch.backends.mps.allow_tf32 = True
+        
 except Exception as e:
-    print(f"⚠️ GPU setup warning: {e}")
-    GPU_CONFIG = {"type": "fallback", "device": "cpu", "optimized": False, "priority": 99}
-    GPU_AVAILABLE = False
-    DEVICE = "cpu"
-
-# GPU Memory Optimization
-if GPU_AVAILABLE and GPU_CONFIG["type"] == "cuda_a100":
-    torch.backends.cuda.matmul.allow_tf32 = True
-    torch.backends.cudnn.allow_tf32 = True
-    torch.backends.cudnn.benchmark = True
-    torch.cuda.empty_cache()
-elif GPU_AVAILABLE and GPU_CONFIG["type"] == "apple_m1":
-    torch.backends.mps.allow_tf32 = True
+    print(f"❌ GPU setup failed: {e}")
+    sys.exit(1)
