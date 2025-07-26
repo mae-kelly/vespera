@@ -1,0 +1,195 @@
+import logging
+import requests
+import time
+from typing import Dict, List
+import torch
+import cupy_fallback as cp
+import config
+
+def get_btc_dominance() -> float:
+    """Get BTC dominance from TradingView API"""
+    try:
+        # TradingView API for BTC dominance
+        url = "https://scanner.tradingview.com/crypto/scan"
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        }
+        
+        payload = {
+            "filter": [{"left": "name", "operation": "match", "right": "BTC.D"}],
+            "columns": ["name", "close"],
+            "markets": ["crypto"]
+        }
+        
+        response = requests.post(url, json=payload, headers=headers, timeout=5)
+        if response.status_code == 200:
+            data = response.json()
+            if data.get('data') and len(data['data']) > 0:
+                btc_dominance = data['data'][0]['d'][1]  # Close price
+                return float(btc_dominance)
+    except Exception as e:
+        logging.warning(f"Failed to fetch BTC dominance from TradingView: {e}")
+    
+    # Fallback to CoinGecko API
+    try:
+        response = requests.get("https://api.coingecko.com/api/v3/global", timeout=5)
+        if response.status_code == 200:
+            data = response.json()
+            btc_dominance = data['data']['market_cap_percentage']['btc']
+            return float(btc_dominance)
+    except Exception as e:
+        logging.warning(f"Failed to fetch BTC dominance from CoinGecko: {e}")
+    
+    return 45.0  # Default fallback
+
+def softmax_weighted_sum(components: Dict[str, float], weights: Dict[str, float]) -> float:
+    """Softmax-weighted sum of normalized components"""
+    try:
+        # Extract values and weights
+        component_values = []
+        weight_values = []
+        
+        for key in components.keys():
+            if key in weights:
+                component_values.append(components[key])
+                weight_values.append(weights[key])
+        
+        if not component_values:
+            return 0.0
+        
+        if torch.cuda.is_available():
+            # Use torch for softmax calculation
+            components_tensor = torch.tensor(component_values, dtype=torch.float32, device='cuda')
+            weights_tensor = torch.tensor(weight_values, dtype=torch.float32, device='cuda')
+            
+            # Apply softmax to weights
+            softmax_weights = torch.nn.functional.softmax(weights_tensor, dim=0)
+            
+            # Normalize components to [0, 1]
+            normalized_components = torch.sigmoid(components_tensor)
+            
+            # Weighted sum
+            weighted_sum = torch.sum(normalized_components * softmax_weights)
+            return float(weighted_sum)
+        else:
+            # CPU fallback
+            import numpy as np
+            
+            components_array = np.array(component_values, dtype=np.float32)
+            weights_array = np.array(weight_values, dtype=np.float32)
+            
+            # Apply softmax to weights
+            exp_weights = np.exp(weights_array - np.max(weights_array))
+            softmax_weights = exp_weights / np.sum(exp_weights)
+            
+            # Normalize components using sigmoid
+            normalized_components = 1 / (1 + np.exp(-components_array))
+            
+            # Weighted sum
+            weighted_sum = np.sum(normalized_components * softmax_weights)
+            return float(weighted_sum)
+            
+    except Exception as e:
+        logging.error(f"Softmax calculation error: {e}")
+        return 0.0
+
+def merge_signals(signals: List[Dict]) -> Dict:
+    try:
+        if not signals:
+            return {"confidence": 0.0, "signals": [], "components": {}}
+        
+        # Get BTC dominance from TradingView API
+        btc_dominance = get_btc_dominance()
+        
+        # Extract signal components for softmax weighting
+        components = {
+            "rsi_drop": 0.0,
+            "entropy_decline_rate": 0.0,
+            "volume_acceleration_ratio": 0.0,
+            "btc_dominance_correlation": 0.0
+        }
+        
+        # Process each signal to extract components
+        for signal in signals:
+            source = signal.get("source", "")
+            confidence = signal.get("confidence", 0)
+            
+            if source == "signal_engine":
+                # RSI drop component
+                signal_data = signal.get("signal_data", {})
+                rsi = signal_data.get("rsi", 50)
+                if rsi < 30:
+                    components["rsi_drop"] = (30 - rsi) / 30  # Normalized RSI drop
+            
+            elif source == "entropy_meter":
+                # Entropy decline rate
+                entropy = signal.get("entropy", 0)
+                if entropy > 0:
+                    components["entropy_decline_rate"] = min(entropy / 2.0, 1.0)
+            
+            elif source in ["laggard_sniper", "relief_trap"]:
+                # Volume acceleration ratio
+                signal_data = signal.get("signal_data", {})
+                vol_ratio = signal_data.get("volume_ratio", 1.0)
+                if vol_ratio > 1.0:
+                    components["volume_acceleration_ratio"] = min((vol_ratio - 1.0) / 2.0, 1.0)
+        
+        # BTC dominance correlation component
+        if btc_dominance < 45:  # Lower dominance = alt season = higher crypto volatility
+            components["btc_dominance_correlation"] = (45 - btc_dominance) / 45
+        
+        # Define softmax weights for each component
+        weights = {
+            "rsi_drop": 0.35,
+            "entropy_decline_rate": 0.25,
+            "volume_acceleration_ratio": 0.30,
+            "btc_dominance_correlation": 0.10
+        }
+        
+        # Calculate softmax-weighted confidence
+        softmax_confidence = softmax_weighted_sum(components, weights)
+        
+        # Find best individual signal
+        best_confidence = 0.0
+        best_signal_data = None
+        
+        for signal in signals:
+            confidence = signal.get("confidence", 0)
+            if confidence > best_confidence:
+                best_confidence = confidence
+                if "signal_data" in signal:
+                    best_signal_data = signal["signal_data"]
+        
+        # Combine softmax result with best signal (weighted average)
+        final_confidence = (softmax_confidence * 0.6) + (best_confidence * 0.4)
+        
+        # Apply BTC dominance boost
+        if btc_dominance < 40:  # Strong alt season boost
+            final_confidence *= 1.1
+        elif btc_dominance > 60:  # BTC dominance penalty
+            final_confidence *= 0.9
+        
+        result = {
+            "confidence": min(final_confidence, 1.0),
+            "signals": signals,
+            "components": components,
+            "weights": weights,
+            "btc_dominance": btc_dominance,
+            "softmax_confidence": softmax_confidence,
+            "signal_count": len(signals),
+            "active_sources": [s["source"] for s in signals if s.get("confidence", 0) > 0.05]
+        }
+        
+        if best_signal_data:
+            result["best_signal"] = best_signal_data
+        
+        return result
+        
+    except Exception as e:
+        logging.error(f"Signal merging error: {e}")
+        return {
+            "confidence": 0.0,
+            "signals": signals,
+            "components": {},
+            "error": str(e)
+        }

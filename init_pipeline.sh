@@ -12,35 +12,36 @@ echo "🚀 Initializing HFT Crypto Shorting System in $MODE mode"
 
 cleanup() {
     echo "🔴 Shutting down system..."
-    kill $PYTHON_PID 2>/dev/null || true
-    kill $RUST_PID 2>/dev/null || true
-    wait
+    if [[ -n "$PYTHON_PID" ]]; then
+        kill $PYTHON_PID 2>/dev/null || true
+    fi
+    if [[ -n "$RUST_PID" ]]; then
+        kill $RUST_PID 2>/dev/null || true
+    fi
+    wait 2>/dev/null || true
     echo "✅ System shutdown complete"
 }
 
 trap cleanup EXIT INT TERM
 
-if command -v pip3 &> /dev/null; then
-    pip3 install -q torch torchvision cupy-cuda12x requests websocket-client pandas > /dev/null 2>&1
-elif command -v pip &> /dev/null; then
-    pip install -q torch torchvision cupy-cuda12x requests websocket-client pandas > /dev/null 2>&1
-fi
-
-if command -v cargo &> /dev/null; then
-    cargo build --release --quiet 2>/dev/null || echo "⚠️ Rust build failed, continuing..."
-fi
+export MODE=$MODE
+export PYTHONPATH="$PWD:$PYTHONPATH"
+export PYTHONUNBUFFERED=1
 
 echo "🧠 Starting Python cognition layer..."
-MODE=$MODE python3 main.py --mode=$MODE >> $LOG_FILE 2>&1 &
+python3 main.py --mode=$MODE >> $LOG_FILE 2>&1 &
 PYTHON_PID=$!
 
 sleep 3
 
-if ! ps -p $PYTHON_PID > /dev/null; then
+if ! ps -p $PYTHON_PID > /dev/null 2>&1; then
     echo "❌ Python cognition layer failed to start"
-    tail -10 $LOG_FILE
+    echo "📄 Last 10 lines of log:"
+    tail -10 $LOG_FILE 2>/dev/null || echo "No log file found"
     exit 1
 fi
+
+echo "✅ Python layer started (PID: $PYTHON_PID)"
 
 if [[ -f "./target/release/hft_executor" ]]; then
     echo "⚙️ Starting Rust execution layer..."
@@ -49,33 +50,16 @@ if [[ -f "./target/release/hft_executor" ]]; then
     
     sleep 2
     
-    if ! ps -p $RUST_PID > /dev/null; then
+    if ! ps -p $RUST_PID > /dev/null 2>&1; then
         echo "❌ Rust execution layer failed to start"
         tail -10 $LOG_FILE
         exit 1
     fi
+    echo "✅ Rust layer started (PID: $RUST_PID)"
 else
     echo "⚠️ Rust executor not found, running Python-only mode"
     RUST_PID=""
 fi
-
-check_system_health() {
-    if ! ps -p $PYTHON_PID > /dev/null; then
-        echo "❌ Python cognition layer crashed"
-        return 1
-    fi
-    
-    if [[ -n "$RUST_PID" ]] && ! ps -p $RUST_PID > /dev/null; then
-        echo "❌ Rust execution layer crashed"
-        return 1
-    fi
-    
-    if [ ! -f "/tmp/signal.json" ] && [ $SECONDS -gt 60 ]; then
-        echo "⚠️ No signals generated yet (${SECONDS}s elapsed)"
-    fi
-    
-    return 0
-}
 
 echo "✅ System components started"
 echo "📊 Python PID: $PYTHON_PID"
@@ -86,30 +70,34 @@ echo "📄 Logs: $LOG_FILE"
 echo ""
 echo "🚀 System Live"
 echo ""
+echo "Press Ctrl+C to stop..."
 
 HEALTH_CHECK_INTERVAL=30
 LAST_HEALTH_CHECK=0
+SECONDS=0
 
 while true; do
-    CURRENT_TIME=$SECONDS
-    
-    if [ $((CURRENT_TIME - LAST_HEALTH_CHECK)) -ge $HEALTH_CHECK_INTERVAL ]; then
-        if ! check_system_health; then
-            echo "💀 System health check failed"
-            exit 1
-        fi
-        LAST_HEALTH_CHECK=$CURRENT_TIME
+    if ! ps -p $PYTHON_PID > /dev/null 2>&1; then
+        echo "💀 Python layer crashed"
+        exit 1
     fi
     
-    if [ $((CURRENT_TIME % 300)) -eq 0 ]; then
-        echo "⏱️ System uptime: ${CURRENT_TIME}s | Mode: $MODE"
+    if [[ -n "$RUST_PID" ]] && ! ps -p $RUST_PID > /dev/null 2>&1; then
+        echo "💀 Rust layer crashed"
+        exit 1
+    fi
+    
+    if [[ $((SECONDS % 300)) -eq 0 ]] && [[ $SECONDS -gt 0 ]]; then
+        echo "⏱️ System uptime: ${SECONDS}s | Mode: $MODE"
         
-        if [ -f "/tmp/signal.json" ]; then
+        if [[ -f "/tmp/signal.json" ]]; then
             echo "📡 Signal file exists"
+        else
+            echo "📡 Waiting for signals..."
         fi
         
-        if [ -f "/tmp/fills.json" ]; then
-            FILL_COUNT=$(cat /tmp/fills.json 2>/dev/null | grep -o '"timestamp"' | wc -l || echo "0")
+        if [[ -f "/tmp/fills.json" ]]; then
+            FILL_COUNT=$(grep -o '"timestamp"' /tmp/fills.json 2>/dev/null | wc -l || echo "0")
             echo "📋 Total fills: $FILL_COUNT"
         fi
         
