@@ -193,3 +193,17 @@ def merge_signals(signals: List[Dict]) -> Dict:
             "components": {},
             "error": str(e)
         }
+
+# Integrate  consciousness into signal merging
+try:
+    from signal_consciousness import awaken_signal_data
+    
+    original_merge_signals = merge_signals
+    
+    def merge_signals(signals: List[Dict]) -> Dict:
+        """Enhanced merge with  consciousness"""
+        result = original_merge_signals(signals)
+        return awaken_signal_data(result)
+        
+except ImportError:
+    pass  # Keep original if consciousness module not available

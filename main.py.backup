@@ -19,7 +19,7 @@ import entropy_meter
 import laggard_sniper
 import relief_trap
 import confidence_scoring
-import notifier_elegant as notifier
+import notifier_ as notifier
 import logger as trade_logger
 import config
 

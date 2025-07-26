@@ -23,121 +23,35 @@ OKX_API_LIMITS = {
 DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
 DISCORD_USER_ID = os.getenv("DISCORD_USER_ID")
 
-def detect_mac_gpu_capabilities():
-    """Exhaustive Mac GPU detection - M1/M2/M3 priority"""
-    system = platform.system()
-    if system != "Darwin":
-        return None
-    
-    gpu_info = {
-        "has_metal": False,
-        "has_discrete_gpu": False,
-        "gpu_names": [],
-        "memory_gb": 0,
-        "metal_family": None,
-        "architecture": platform.machine(),
-        "apple_silicon": False
-    }
-    
-    # Priority 1: Detect Apple Silicon first
-    try:
-        result = subprocess.run(['sysctl', '-n', 'machdep.cpu.brand_string'], 
-                              capture_output=True, text=True, timeout=5)
-        if result.returncode == 0:
-            cpu_info = result.stdout.strip()
-            print(f"🔍 CPU Detection: {cpu_info}")
-            
-            if 'Apple' in cpu_info and any(chip in cpu_info for chip in ['M1', 'M2', 'M3', 'M4']):
-                gpu_info["apple_silicon"] = True
-                gpu_info["has_metal"] = True
-                gpu_info["metal_family"] = "Apple Silicon"
-                
-                # Extract chip type
-                for chip in ['M1', 'M2', 'M3', 'M4']:
-                    if chip in cpu_info:
-                        gpu_info["gpu_names"].append(f"Apple {chip} GPU")
-                        print(f"🚀 APPLE SILICON DETECTED: {chip}")
-                        break
-    except:
-        pass
-    
-    # Priority 2: System profiler GPU scan
-    try:
-        result = subprocess.run(['system_profiler', 'SPDisplaysDataType'], 
-                              capture_output=True, text=True, timeout=10)
-        if result.returncode == 0:
-            output = result.stdout
-            print(f"🔍 Hardware Scan Results:")
-            
-            if 'Metal' in output:
-                gpu_info["has_metal"] = True
-                print("✅ Metal support confirmed")
-                
-            # Look for GPU names
-            lines = output.split('\n')
-            for line in lines:
-                if 'Chipset Model:' in line:
-                    gpu_name = line.split(':')[-1].strip()
-                    if gpu_name and gpu_name not in gpu_info["gpu_names"]:
-                        gpu_info["gpu_names"].append(gpu_name)
-                        print(f"✅ GPU Found: {gpu_name}")
-                        
-                if any(keyword in line for keyword in ['Metal Family:', 'Metal GPUFamily']):
-                    print(f"✅ Metal Family: {line.strip()}")
-                    
-                if 'VRAM' in line or 'Graphics Memory' in line:
-                    try:
-                        memory_str = line.split(':')[-1].strip()
-                        if 'GB' in memory_str:
-                            memory_val = float(memory_str.replace('GB', '').strip())
-                            gpu_info["memory_gb"] = max(gpu_info["memory_gb"], memory_val)
-                    except:
-                        pass
-    except:
-        pass
-    
-    return gpu_info
-
-def setup_gpu_acceleration():
-    """HIERARCHICAL GPU DETECTION: M1/M2/M3 → CUDA → CPU"""
+def setup_mandatory_gpu_acceleration():
+    """MANDATORY GPU HIERARCHY: A100 → M1 → Other GPU → FAIL"""
     system = platform.system()
     machine = platform.machine()
     
-    print(f"🔍 HIERARCHICAL GPU DETECTION")
+    print(f"🎯 MANDATORY GPU DETECTION")
     print(f"System: {system} {machine}")
     print(f"PyTorch version: {torch.__version__}")
     
     # PRIORITY 1: A100 GPUs (HIGHEST PERFORMANCE)
-    print("\n🚀 PRIORITY 1: A100 GPU DETECTION")
-    print("=" * 40)
+    print("\n🏆 PRIORITY 1: A100 GPU DETECTION")
+    print("=" * 50)
     
     if torch.cuda.is_available():
         try:
             device_name = torch.cuda.get_device_name(0)
             print(f"✅ CUDA GPU found: {device_name}")
             
-            # Check if it's an A100 first (highest priority)
             if "A100" in device_name:
                 print("🏆 A100 DETECTED - MAXIMUM PERFORMANCE MODE")
                 test_tensor = torch.randn(100, device='cuda')
                 result = torch.sum(test_tensor)
-                print(f"✅ A100 GPU test: {result:.3f}")
+                print(f"✅ A100 GPU validated: {result:.3f}")
                 
                 # Enable A100 optimizations
                 torch.backends.cuda.matmul.allow_tf32 = True
                 torch.backends.cudnn.allow_tf32 = True
                 torch.backends.cudnn.benchmark = True
                 torch.cuda.empty_cache()
-                
-                # Setup CuPy for A100
-                try:
-                    import cupy as cp
-                    cp.cuda.Device(0).use()
-                    mempool = cp.get_default_memory_pool()
-                    mempool.set_limit(size=2**33)  # 8GB limit
-                    print("✅ A100 CuPy optimization enabled")
-                except:
-                    print("ℹ️ CuPy optimization skipped")
                 
                 return {
                     "type": "cuda_a100",
@@ -147,72 +61,73 @@ def setup_gpu_acceleration():
                     "priority": 1
                 }
         except Exception as e:
-            print(f"⚠️ A100 test failed: {e}")
+            print(f"⚠️ A100 validation failed: {e}")
     else:
         print("❌ No CUDA GPUs available")
     
-    # PRIORITY 2: APPLE SILICON (M1/M2/M3/M4) - STRONG SECOND CHOICE
+    # PRIORITY 2: APPLE SILICON (M1/M2/M3/M4)
     if system == "Darwin":
         print("\n🍎 PRIORITY 2: APPLE SILICON DETECTION")
-        print("=" * 40)
+        print("=" * 50)
         
-        gpu_info = detect_mac_gpu_capabilities()
-        
-        if gpu_info and gpu_info["apple_silicon"]:
-            print(f"✅ Apple Silicon confirmed: {gpu_info['gpu_names']}")
-            
-            # Test MPS (Metal Performance Shaders)
-            if hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
-                try:
-                    print("🧪 Testing Apple Silicon GPU...")
-                    test_tensor = torch.randn(100, device='mps')
-                    result = torch.sum(test_tensor)
-                    print(f"✅ APPLE SILICON GPU ACTIVE: {result:.3f}")
+        try:
+            cpu_info = subprocess.run(['sysctl', '-n', 'machdep.cpu.brand_string'], 
+                                    capture_output=True, text=True, timeout=5)
+            if cpu_info.returncode == 0:
+                cpu_brand = cpu_info.stdout.strip()
+                print(f"CPU: {cpu_brand}")
+                
+                if any(chip in cpu_brand for chip in ['M1', 'M2', 'M3', 'M4']):
+                    print(f"✅ Apple Silicon confirmed: {cpu_brand}")
                     
-                    return {
-                        "type": "apple_silicon",
-                        "device": "mps",
-                        "optimized": True,
-                        "gpu_info": gpu_info,
-                        "priority": 2
-                    }
-                except Exception as e:
-                    print(f"⚠️ Apple Silicon GPU test failed: {e}")
-                    # Try with fallback
-                    try:
-                        os.environ['PYTORCH_ENABLE_MPS_FALLBACK'] = '1'
-                        test_tensor = torch.randn(10, device='mps')
-                        result = torch.sum(test_tensor)
-                        print(f"✅ Apple Silicon GPU with fallback: {result:.3f}")
-                        return {
-                            "type": "apple_silicon_fallback",
-                            "device": "mps", 
-                            "optimized": True, 
-                            "gpu_info": gpu_info,
-                            "priority": 2
-                        }
-                    except:
-                        print("❌ Apple Silicon GPU fallback failed")
-            else:
-                print("❌ MPS not available for Apple Silicon")
-        
-        # Check for discrete GPUs on Mac
-        if gpu_info and gpu_info["has_discrete_gpu"]:
-            print("\n🔍 Checking for discrete GPU on Mac...")
+                    if hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
+                        try:
+                            print("🧪 Testing Apple Silicon GPU...")
+                            test_tensor = torch.randn(100, device='mps')
+                            result = torch.sum(test_tensor)
+                            print(f"✅ APPLE SILICON GPU ACTIVE: {result:.3f}")
+                            
+                            return {
+                                "type": "apple_silicon",
+                                "device": "mps",
+                                "optimized": True,
+                                "gpu_info": {"name": cpu_brand, "apple_silicon": True},
+                                "priority": 2
+                            }
+                        except Exception as e:
+                            print(f"⚠️ Apple Silicon GPU test failed: {e}")
+                            # Try with fallback
+                            try:
+                                os.environ['PYTORCH_ENABLE_MPS_FALLBACK'] = '1'
+                                test_tensor = torch.randn(10, device='mps')
+                                result = torch.sum(test_tensor)
+                                print(f"✅ Apple Silicon GPU with fallback: {result:.3f}")
+                                return {
+                                    "type": "apple_silicon_fallback",
+                                    "device": "mps", 
+                                    "optimized": True, 
+                                    "gpu_info": {"name": cpu_brand, "apple_silicon": True},
+                                    "priority": 2
+                                }
+                            except Exception as e2:
+                                print(f"❌ Apple Silicon GPU fallback failed: {e2}")
+                    else:
+                        print("❌ MPS not available for Apple Silicon")
+        except Exception as e:
+            print(f"❌ Apple Silicon detection failed: {e}")
     
-    # PRIORITY 3: OTHER CUDA GPUs (Non-A100)
+    # PRIORITY 3: OTHER CUDA GPUs
     print("\n⚡ PRIORITY 3: OTHER CUDA GPU DETECTION")
-    print("=" * 40)
+    print("=" * 50)
     
     if torch.cuda.is_available():
         try:
             device_name = torch.cuda.get_device_name(0)
             print(f"✅ Other CUDA GPU found: {device_name}")
             
-            # Test other CUDA GPUs (non-A100)
             test_tensor = torch.randn(10, device='cuda')
             result = torch.sum(test_tensor)
-            print(f"✅ CUDA GPU test: {result:.3f}")
+            print(f"✅ CUDA GPU validated: {result:.3f}")
             
             torch.backends.cudnn.benchmark = True
             return {
@@ -223,38 +138,45 @@ def setup_gpu_acceleration():
                 "priority": 3
             }
         except Exception as e:
-            print(f"❌ Other CUDA test failed: {e}")
-    else:
-        print("❌ No other CUDA GPUs available")
+            print(f"❌ CUDA GPU validation failed: {e}")
     
-    # PRIORITY 4: OTHER MAC GPUS (Intel, AMD)
-    if system == "Darwin" and gpu_info and gpu_info["has_metal"]:
-        print("\n🔍 PRIORITY 4: OTHER MAC GPU DETECTION")
-        print("=" * 40)
-        
-        if gpu_info["has_discrete_gpu"]:
-            print("✅ Discrete GPU detected on Mac")
+    # PRIORITY 4: AMD ROCm (experimental)
+    print("\n🔴 PRIORITY 4: AMD GPU DETECTION")
+    print("=" * 50)
+    
+    try:
+        # Check for ROCm
+        rocm_result = subprocess.run(['rocm-smi', '--showproductname'], 
+                                   capture_output=True, text=True, timeout=5)
+        if rocm_result.returncode == 0 and rocm_result.stdout.strip():
+            print(f"✅ AMD GPU detected: {rocm_result.stdout.strip()}")
             return {
-                "type": "mac_discrete",
-                "device": "cpu",  # May need CPU fallback for some discrete GPUs
+                "type": "amd_rocm",
+                "device": "cuda",  # ROCm can use CUDA-like interface
                 "optimized": False,
-                "gpu_info": gpu_info,
+                "gpu_info": {"name": rocm_result.stdout.strip()},
                 "priority": 4
             }
+    except:
+        pass
     
-    # PRIORITY 5: CPU FALLBACK (ABSOLUTE LAST RESORT)
-    print("\n💻 PRIORITY 5: CPU FALLBACK")
-    print("=" * 40)
-    print("⚠️ No GPU acceleration available - using CPU")
-    print("💡 Consider upgrading PyTorch or checking GPU drivers")
-    
-    return {
-        "type": "cpu_fallback",
-        "device": "cpu",
-        "optimized": False,
-        "gpu_info": None,
-        "priority": 5
-    }
+    # COMPLETE FAILURE - NO CPU FALLBACK ALLOWED
+    print("\n❌ CRITICAL SYSTEM FAILURE")
+    print("=" * 50)
+    print("🚨 NO GPU ACCELERATION DETECTED")
+    print("")
+    print("MANDATORY GPU REQUIREMENTS:")
+    print("  🏆 NVIDIA A100 (Preferred)")
+    print("  🍎 Apple Silicon M1/M2/M3/M4")
+    print("  ⚡ Other NVIDIA GPUs with CUDA")
+    print("  🔴 AMD GPUs with ROCm")
+    print("")
+    print("SYSTEM REQUIREMENTS NOT MET")
+    print("This Stanford PhD-level system requires GPU acceleration.")
+    print("CPU fallback is NOT ALLOWED.")
+    print("")
+    print("Please install appropriate GPU drivers and try again.")
+    sys.exit(1)
 
 def validate_config():
     errors = []
@@ -273,11 +195,10 @@ def validate_config():
     
     return errors
 
-# Initialize GPU with proper hierarchy
-GPU_CONFIG = setup_gpu_acceleration()
-GPU_AVAILABLE = GPU_CONFIG["optimized"]
+# Initialize MANDATORY GPU 
+GPU_CONFIG = setup_mandatory_gpu_acceleration()
+GPU_AVAILABLE = True  # Always true since we exit if no GPU
 DEVICE = GPU_CONFIG["device"]
-MAC_GPU_INFO = GPU_CONFIG.get("gpu_info")
 
 # Validate configuration
 config_errors = validate_config()
@@ -286,27 +207,25 @@ if config_errors:
     for error in config_errors:
         print(f"   - {error}")
     print("❌ Fix configuration before starting system!")
+    sys.exit(1)
 else:
-    print(f"\n✅ FINAL GPU CONFIG:")
+    print(f"\n✅ MANDATORY GPU CONFIGURATION:")
     print(f"   Type: {GPU_CONFIG['type']}")
     print(f"   Device: {DEVICE}")
-    print(f"   Optimized: {GPU_AVAILABLE}")
     print(f"   Priority: {GPU_CONFIG.get('priority', 'Unknown')}")
     
-    if MAC_GPU_INFO and MAC_GPU_INFO.get("gpu_names"):
-        print(f"   GPU: {', '.join(MAC_GPU_INFO['gpu_names'])}")
+    if GPU_CONFIG.get("gpu_info", {}).get("name"):
+        print(f"   GPU: {GPU_CONFIG['gpu_info']['name']}")
     
     print(f"   Assets: {ASSETS}")
     print(f"   Mode: {MODE}")
     
-    # Show hierarchy used
-    if GPU_CONFIG["priority"] == 1:
-        print("🏆 USING A100 GPU (Maximum Performance)")
-    elif GPU_CONFIG["priority"] == 2:
-        print("🍎 USING APPLE SILICON GPU (Strong Second Choice)")
-    elif GPU_CONFIG["priority"] == 3:
-        print("⚡ USING OTHER CUDA GPU (Third Priority)")
-    elif GPU_CONFIG["priority"] == 4:
-        print("🔍 USING OTHER MAC GPU (Fourth Priority)")
-    else:
-        print("💻 USING CPU FALLBACK (Last Resort)")
+    # Show priority hierarchy
+    priority_messages = {
+        1: "🏆 USING A100 GPU (Maximum Performance)",
+        2: "🍎 USING APPLE SILICON GPU (Excellent Performance)", 
+        3: "⚡ USING NVIDIA GPU (Good Performance)",
+        4: "🔴 USING AMD GPU (Basic Performance)"
+    }
+    print(f"\n{priority_messages.get(GPU_CONFIG['priority'], '❓ Unknown GPU Type')}")
+    print(f"✅ System ready for Stanford PhD-level performance")

@@ -2,6 +2,7 @@ import torch
 import warnings
 import platform
 import os
+import sys
 
 warnings.filterwarnings("ignore", category=UserWarning)
 
@@ -13,89 +14,100 @@ os.environ['PYTORCH_MPS_HIGH_WATERMARK_RATIO'] = '0.0'
 DEVICE = None
 
 def get_optimal_device():
-    """AGGRESSIVE M1 GPU DETECTION - FORCE MPS USAGE"""
+    """MANDATORY GPU DETECTION - NO CPU FALLBACK ALLOWED"""
     system = platform.system()
     machine = platform.machine()
     
-    print(f"🔍 CuPy Fallback: FORCING M1 GPU on {system} {machine}")
+    print(f"🔍 MANDATORY GPU Detection on {system} {machine}")
     
-    # PRIORITY 1: FORCE Apple Silicon MPS (Your M1 IS available!)
-    if system == "Darwin" and machine == "arm64":
-        print("🍎 M1 Mac detected - FORCING MPS activation...")
-        
-        # Try multiple MPS activation methods
-        try:
-            # Method 1: Direct MPS test
-            if hasattr(torch.backends, 'mps'):
-                print("✅ MPS backend exists")
-                if torch.backends.mps.is_available():
-                    print("✅ MPS reports available")
-                else:
-                    print("⚠️ MPS reports unavailable - FORCING anyway")
-                
-                # FORCE MPS regardless of is_available() result
-                test_tensor = torch.randn(5, device='mps')
-                result = torch.sum(test_tensor)
-                print(f"🎉 FORCED MPS SUCCESS! Test result: {result}")
-                return 'mps'
-                    
-        except Exception as e:
-            print(f"⚠️ MPS Method 1 failed: {e}")
-            
-            # Method 2: Force with environment override
-            try:
-                print("🔧 Trying MPS with environment override...")
-                os.environ['PYTORCH_ENABLE_MPS_FALLBACK'] = '1'
-                test_tensor = torch.randn(3, device='mps')
-                result = torch.sum(test_tensor)
-                print(f"🎉 FORCED MPS WITH OVERRIDE SUCCESS! Test result: {result}")
-                return 'mps'
-            except Exception as e2:
-                print(f"⚠️ MPS Method 2 failed: {e2}")
-                
-                # Method 3: Force create MPS device manually
-                try:
-                    print("🔧 Trying manual MPS device creation...")
-                    mps_device = torch.device('mps')
-                    test_tensor = torch.tensor([1.0, 2.0], device=mps_device)
-                    result = torch.sum(test_tensor)
-                    print(f"🎉 MANUAL MPS SUCCESS! Test result: {result}")
-                    return 'mps'
-                except Exception as e3:
-                    print(f"⚠️ Manual MPS failed: {e3}")
-    
-    # PRIORITY 2: A100 GPUs (if somehow available)
+    # PRIORITY 1: A100 GPUs (HIGHEST PERFORMANCE)
     if torch.cuda.is_available():
         try:
             device_name = torch.cuda.get_device_name(0)
             if "A100" in device_name:
                 test_tensor = torch.randn(10, device='cuda')
-                _ = torch.sum(test_tensor)
-                print("🏆 A100 GPU selected")
+                result = torch.sum(test_tensor)
+                print(f"🏆 A100 GPU ACTIVATED: {device_name}")
+                
+                # Enable A100 optimizations
+                torch.backends.cuda.matmul.allow_tf32 = True
+                torch.backends.cudnn.allow_tf32 = True
+                torch.backends.cudnn.benchmark = True
+                torch.cuda.empty_cache()
+                
                 return 'cuda'
         except Exception as e:
             print(f"⚠️ A100 test failed: {e}")
     
-    # PRIORITY 3: Other CUDA GPUs
+    # PRIORITY 2: Apple Silicon M1/M2/M3/M4
+    if system == "Darwin" and machine == "arm64":
+        try:
+            cpu_info = os.popen("sysctl -n machdep.cpu.brand_string").read().strip()
+            if any(chip in cpu_info for chip in ['M1', 'M2', 'M3', 'M4']):
+                print(f"🍎 APPLE SILICON DETECTED: {cpu_info}")
+                
+                # Force MPS activation
+                if hasattr(torch.backends, 'mps'):
+                    try:
+                        test_tensor = torch.randn(5, device='mps')
+                        result = torch.sum(test_tensor)
+                        print(f"🎉 MPS ACTIVATED SUCCESSFULLY: {result}")
+                        return 'mps'
+                    except Exception as e:
+                        print(f"❌ MPS activation failed: {e}")
+                        # Try environment override
+                        os.environ['PYTORCH_ENABLE_MPS_FALLBACK'] = '1'
+                        try:
+                            test_tensor = torch.randn(3, device='mps')
+                            result = torch.sum(test_tensor)
+                            print(f"🎉 MPS FORCED ACTIVATION: {result}")
+                            return 'mps'
+                        except Exception as e2:
+                            print(f"❌ MPS force failed: {e2}")
+        except Exception as e:
+            print(f"❌ Apple Silicon detection failed: {e}")
+    
+    # PRIORITY 3: Other NVIDIA GPUs
     if torch.cuda.is_available():
         try:
-            test_tensor = torch.randn(5, device='cuda')
-            _ = torch.sum(test_tensor)
             device_name = torch.cuda.get_device_name(0)
-            print(f"⚡ Other CUDA GPU selected ({device_name})")
+            test_tensor = torch.randn(5, device='cuda')
+            result = torch.sum(test_tensor)
+            print(f"⚡ NVIDIA GPU ACTIVATED: {device_name}")
+            torch.backends.cudnn.benchmark = True
             return 'cuda'
         except Exception as e:
-            print(f"⚠️ Other CUDA test failed: {e}")
+            print(f"❌ NVIDIA GPU test failed: {e}")
     
-    # PRIORITY 4: CPU Fallback (This shouldn't happen on M1!)
-    print("💻 WARNING: Falling back to CPU on M1 Mac (this is suboptimal!)")
-    return 'cpu'
+    # PRIORITY 4: AMD ROCm (if available)
+    try:
+        import torch_directml
+        test_tensor = torch.randn(5, device='dml')
+        result = torch.sum(test_tensor)
+        print(f"🔴 AMD GPU ACTIVATED via DirectML")
+        return 'dml'
+    except:
+        pass
+    
+    # ABSOLUTE FAILURE - NO CPU FALLBACK
+    print("❌ CRITICAL SYSTEM FAILURE: NO GPU DETECTED")
+    print("=" * 60)
+    print("MANDATORY GPU REQUIREMENTS NOT MET")
+    print("This system requires GPU acceleration. Available options:")
+    print("  🏆 NVIDIA A100 (Preferred)")
+    print("  🍎 Apple Silicon M1/M2/M3/M4")
+    print("  ⚡ Other NVIDIA GPUs with CUDA")
+    print("  🔴 AMD GPUs with ROCm")
+    print("")
+    print("Please install appropriate GPU drivers and try again.")
+    print("CPU fallback is NOT ALLOWED for this Stanford PhD-level system.")
+    sys.exit(1)
 
 # Initialize DEVICE at module level
 DEVICE = get_optimal_device()
 
 def array(data, dtype=None):
-    """Create tensor on optimal device with error handling"""
+    """Create tensor on optimal device - MANDATORY GPU"""
     global DEVICE
     try:
         if isinstance(data, (list, tuple)):
@@ -103,29 +115,28 @@ def array(data, dtype=None):
         else:
             tensor_data = torch.as_tensor(data, dtype=torch.float32 if dtype is None else dtype)
         
-        if DEVICE != 'cpu':
-            try:
-                return tensor_data.to(DEVICE)
-            except Exception as e:
-                print(f"⚠️ {DEVICE} failed: {e}, falling back to CPU")
-                DEVICE = 'cpu'
-                return tensor_data
-        return tensor_data
+        # MANDATORY GPU - no CPU fallback
+        return tensor_data.to(DEVICE)
     except Exception as e:
-        print(f"⚠️ Array creation failed: {e}")
-        return torch.tensor([0.0], dtype=torch.float32)
+        print(f"❌ CRITICAL: GPU tensor creation failed: {e}")
+        print("System requires GPU acceleration. Cannot continue.")
+        sys.exit(1)
 
 def zeros(shape, dtype=torch.float32):
+    """Create zeros tensor on GPU - MANDATORY"""
     try:
         return torch.zeros(shape, dtype=dtype, device=DEVICE)
-    except:
-        return torch.zeros(shape, dtype=dtype, device='cpu')
+    except Exception as e:
+        print(f"❌ CRITICAL: GPU zeros creation failed: {e}")
+        sys.exit(1)
 
 def ones(shape, dtype=torch.float32):
+    """Create ones tensor on GPU - MANDATORY"""
     try:
         return torch.ones(shape, dtype=dtype, device=DEVICE)
-    except:
-        return torch.ones(shape, dtype=dtype, device='cpu')
+    except Exception as e:
+        print(f"❌ CRITICAL: GPU ones creation failed: {e}")
+        sys.exit(1)
 
 def log(x):
     return torch.log(x)
@@ -174,11 +185,9 @@ class RandomModule:
                 return torch.normal(mean, std, size=(1,), device=DEVICE).item()
             else:
                 return torch.normal(mean, std, size=size, device=DEVICE)
-        except:
-            if size is None:
-                return torch.normal(mean, std, size=(1,), device='cpu').item()
-            else:
-                return torch.normal(mean, std, size=size, device='cpu')
+        except Exception as e:
+            print(f"❌ CRITICAL: GPU random generation failed: {e}")
+            sys.exit(1)
     
     @staticmethod
     def exponential(scale=1.0, size=None):
@@ -187,30 +196,22 @@ class RandomModule:
                 return torch.exponential(torch.tensor([scale], device=DEVICE)).item()
             else:
                 return torch.exponential(torch.full(size, scale, device=DEVICE))
-        except:
-            if size is None:
-                return torch.exponential(torch.tensor([scale], device='cpu')).item()
-            else:
-                return torch.exponential(torch.full(size, scale, device='cpu'))
+        except Exception as e:
+            print(f"❌ CRITICAL: GPU exponential generation failed: {e}")
+            sys.exit(1)
 
 random = RandomModule()
 
 def get_default_memory_pool():
-    class SmartMemoryPool:
+    class MandatoryGPUMemoryPool:
         def set_limit(self, size):
             pass
         def free_all_blocks(self):
             if DEVICE == 'cuda':
-                try:
-                    torch.cuda.empty_cache()
-                except:
-                    pass
+                torch.cuda.empty_cache()
             elif DEVICE == 'mps':
-                try:
-                    torch.mps.empty_cache()
-                except:
-                    pass
-    return SmartMemoryPool()
+                torch.mps.empty_cache()
+    return MandatoryGPUMemoryPool()
 
 class cuda:
     class Device:
@@ -219,10 +220,7 @@ class cuda:
         
         def use(self):
             if DEVICE == 'cuda':
-                try:
-                    torch.cuda.set_device(self.device_id)
-                except:
-                    pass
+                torch.cuda.set_device(self.device_id)
 
 def fuse():
     def decorator(func):
@@ -230,9 +228,10 @@ def fuse():
     return decorator
 
 device_names = {
-    'cuda': 'CUDA GPU',
-    'mps': f'Apple M1 Metal GPU (FORCED ACTIVATION)',
-    'cpu': 'CPU (Fallback - Not Optimal for M1)'
+    'cuda': 'CUDA GPU (Mandatory)',
+    'mps': 'Apple Silicon Metal GPU (Mandatory)', 
+    'dml': 'DirectML GPU (Mandatory)'
 }
 
-print(f"🚀 FORCED M1 GPU SELECTION: {device_names.get(DEVICE, DEVICE)}")
+print(f"🚀 MANDATORY GPU ACTIVATED: {device_names.get(DEVICE, DEVICE)}")
+print(f"✅ System will use {DEVICE} for all computations")
