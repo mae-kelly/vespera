@@ -90,7 +90,7 @@ def main():
     gpu_available = verify_gpu_requirements()
     
     config.MODE = args.mode
-    print(f"🚀 Starting Stanford PhD HFT system in {config.MODE} mode")
+    print(f"🚀 Starting HFT system in {config.MODE} mode")
     print(f"🎯 GPU: {config.GPU_CONFIG['type']} (Priority {config.GPU_CONFIG['priority']})")
     logging.info(f"Starting HFT system in {config.MODE} mode with {config.GPU_CONFIG['type']} GPU")
     

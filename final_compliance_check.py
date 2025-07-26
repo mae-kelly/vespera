@@ -94,7 +94,7 @@ def check_discord_integration():
         return False, ["notifier_elegant.py not readable"]
 
 def main_test():
-    print("🎓 STANFORD PhD SYSTEM COMPLIANCE VERIFICATION")
+    print("SYSTEM COMPLIANCE VERIFICATION")
     print("=" * 50)
     
     tests = [
@@ -127,7 +127,7 @@ def main_test():
     if all_passed:
         print("🎉 100% COMPLIANCE ACHIEVED!")
         print("🚀 System ready for A100 deployment")
-        print("⚡ Stanford PhD-level requirements met")
+        print("⚡ Requirements met")
         return 0
     else:
         failed_tests = [name for name, passed, _ in results if not passed]

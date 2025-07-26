@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Performance validation for Stanford PhD system
+Performance validation for system
 Tests all critical performance requirements
 """
 
@@ -94,7 +94,7 @@ def test_signal_structure():
         return False, str(e)
 
 def main_test():
-    print("🎓 STANFORD PhD SYSTEM PERFORMANCE VALIDATION")
+    print("🎓 SYSTEM PERFORMANCE VALIDATION")
     print("=" * 50)
     
     tests = [
@@ -125,7 +125,7 @@ def main_test():
     if all_passed:
         print("🏆 ALL PERFORMANCE TESTS PASSED!")
         print("🚀 System ready for A100 deployment")
-        print("⚡ Stanford PhD-level performance confirmed")
+        print("⚡ Performance confirmed")
         return 0
     else:
         failed_tests = [name for name, passed, _ in results if not passed]

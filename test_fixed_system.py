@@ -55,7 +55,7 @@ def test_tradingview_api():
         return False, f"TradingView API test failed: {e}"
 
 def main():
-    print("🧪 TESTING FIXED STANFORD SYSTEM")
+    print("🧪 TESTING FIXED SYSTEM")
     print("=" * 40)
     
     tests = [

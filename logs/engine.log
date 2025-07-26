@@ -1,6 +1,6 @@
 🚀 GPU Ready: apple_m1 on mps
 ✅ GPU acceleration confirmed: apple_m1
-🚀 Starting Stanford PhD HFT system in dry mode
+🚀 Starting HFT system in dry mode
 🎯 GPU: apple_m1 (Priority 3)
 2025-07-26 00:32:13,891 [INFO] Starting HFT system in dry mode with apple_m1 GPU
 2025-07-26 00:32:13,892 [INFO] Initializing market data (attempt 1/5)
