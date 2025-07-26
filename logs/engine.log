@@ -693,3 +693,144 @@
 2025-07-26 00:08:48,237 [INFO] High-quality signal generated: 0.567
 2025-07-26 00:08:48,241 [INFO] Signal logged to CSV: BTC @ 117499.90 (confidence: 0.567)
 2025-07-26 00:08:49,057 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+🚀 GPU Ready: apple_m1 on mps
+✅ GPU acceleration confirmed: apple_m1
+🚀 Starting Stanford PhD HFT system in dry mode
+🎯 GPU: apple_m1 (Priority 3)
+2025-07-26 00:22:13,659 [INFO] Starting HFT system in dry mode with apple_m1 GPU
+2025-07-26 00:22:13,659 [INFO] Initializing market data (attempt 1/5)
+2025-07-26 00:22:13,659 [ERROR] Entropy meter error: Feed not initialized for BTC
+2025-07-26 00:22:13,659 [ERROR] Laggard sniper error: Feed not initialized for BTC
+2025-07-26 00:22:13,659 [ERROR] Relief trap detector error: Feed not initialized for BTC
+2025-07-26 00:22:13,773 [INFO] ✅ Real market data loaded: BTC=$117,545.00
+2025-07-26 00:22:14,625 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+2025-07-26 00:22:14,767 [INFO] CoinGecko BTC dominance: 59.4%
+✅ Signal: 0.400 (GPU: apple_m1)
+2025-07-26 00:22:14,791 [INFO] High-quality signal generated: 0.400
+2025-07-26 00:22:15,154 [INFO] Signal sent: BTC 40.0%
+2025-07-26 00:22:15,170 [INFO] Signal logged to CSV: BTC @ 117545.00 (confidence: 0.400)
+2025-07-26 00:22:15,392 [INFO] Websocket connected
+2025-07-26 00:22:15,392 [INFO] ✅ WebSocket connection opened to OKX
+2025-07-26 00:22:15,392 [INFO] 🔔 Subscribed to real-time market data
+🦀 HFT Executor starting in dry mode
+[2025-07-26T04:22:15Z INFO  hft_executor] System startup with sub-millisecond targeting
+2025-07-26 00:22:15,600 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+[2025-07-26T04:22:15Z INFO  hft_executor] System iteration: 60 | Time: 04:22:15 UTC | Cycle: 84μs
+2025-07-26 00:22:15,736 [INFO] CoinGecko BTC dominance: 59.4%
+✅ Signal: 0.400 (GPU: apple_m1)
+2025-07-26 00:22:15,740 [INFO] High-quality signal generated: 0.400
+2025-07-26 00:22:15,744 [INFO] Signal logged to CSV: BTC @ 117545.00 (confidence: 0.400)
+[2025-07-26T04:22:15Z INFO  hft_executor] System iteration: 120 | Time: 04:22:15 UTC | Cycle: 151μs
+2025-07-26 00:22:16,007 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+[2025-07-26T04:22:16Z INFO  hft_executor] System iteration: 180 | Time: 04:22:16 UTC | Cycle: 43μs
+2025-07-26 00:22:16,139 [INFO] CoinGecko BTC dominance: 59.4%
+✅ Signal: 0.557 (GPU: apple_m1)
+2025-07-26 00:22:16,143 [INFO] High-quality signal generated: 0.557
+2025-07-26 00:22:16,147 [INFO] Signal logged to CSV: ETH @ 3745.12 (confidence: 0.557)
+[2025-07-26T04:22:16Z INFO  hft_executor] System iteration: 240 | Time: 04:22:16 UTC | Cycle: 71μs
+[2025-07-26T04:22:16Z INFO  hft_executor] System iteration: 300 | Time: 04:22:16 UTC | Cycle: 187μs
+[2025-07-26T04:22:16Z INFO  hft_executor] System iteration: 360 | Time: 04:22:16 UTC | Cycle: 63μs
+2025-07-26 00:22:16,481 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+[2025-07-26T04:22:16Z INFO  hft_executor] System iteration: 420 | Time: 04:22:16 UTC | Cycle: 222μs
+2025-07-26 00:22:16,627 [INFO] CoinGecko BTC dominance: 59.4%
+✅ Signal: 0.558 (GPU: apple_m1)
+2025-07-26 00:22:16,630 [INFO] High-quality signal generated: 0.558
+2025-07-26 00:22:16,635 [INFO] Signal logged to CSV: ETH @ 3745.12 (confidence: 0.558)
+[2025-07-26T04:22:16Z INFO  hft_executor] System iteration: 480 | Time: 04:22:16 UTC | Cycle: 175μs
+[2025-07-26T04:22:16Z INFO  hft_executor] System iteration: 540 | Time: 04:22:16 UTC | Cycle: 169μs
+[2025-07-26T04:22:17Z INFO  hft_executor] System iteration: 600 | Time: 04:22:17 UTC | Cycle: 213μs
+2025-07-26 00:22:17,135 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+[2025-07-26T04:22:17Z INFO  hft_executor] System iteration: 660 | Time: 04:22:17 UTC | Cycle: 76μs
+✅ Signal: 0.562 (GPU: apple_m1)
+2025-07-26 00:22:17,227 [INFO] High-quality signal generated: 0.562
+2025-07-26 00:22:17,232 [INFO] Signal logged to CSV: ETH @ 3745.12 (confidence: 0.562)
+[2025-07-26T04:22:17Z INFO  hft_executor] System iteration: 720 | Time: 04:22:17 UTC | Cycle: 186μs
+2025-07-26 00:22:17,477 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+[2025-07-26T04:22:17Z INFO  hft_executor] System iteration: 780 | Time: 04:22:17 UTC | Cycle: 45μs
+✅ Signal: 0.569 (GPU: apple_m1)
+2025-07-26 00:22:17,571 [INFO] High-quality signal generated: 0.569
+2025-07-26 00:22:17,575 [INFO] Signal logged to CSV: ETH @ 3745.12 (confidence: 0.569)
+[2025-07-26T04:22:17Z INFO  hft_executor] System iteration: 840 | Time: 04:22:17 UTC | Cycle: 67μs
+[2025-07-26T04:22:17Z INFO  hft_executor] System iteration: 900 | Time: 04:22:17 UTC | Cycle: 48μs
+2025-07-26 00:22:17,814 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+✅ Signal: 0.572 (GPU: apple_m1)
+2025-07-26 00:22:17,897 [INFO] High-quality signal generated: 0.572
+2025-07-26 00:22:17,899 [INFO] Signal logged to CSV: ETH @ 3745.12 (confidence: 0.572)
+[2025-07-26T04:22:17Z INFO  hft_executor] System iteration: 960 | Time: 04:22:17 UTC | Cycle: 52μs
+[2025-07-26T04:22:18Z INFO  hft_executor] System iteration: 1020 | Time: 04:22:18 UTC | Cycle: 178μs
+2025-07-26 00:22:18,175 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+[2025-07-26T04:22:18Z INFO  hft_executor] System iteration: 1080 | Time: 04:22:18 UTC | Cycle: 69μs
+✅ Signal: 0.574 (GPU: apple_m1)
+2025-07-26 00:22:18,267 [INFO] High-quality signal generated: 0.574
+2025-07-26 00:22:18,271 [INFO] Signal logged to CSV: ETH @ 3745.12 (confidence: 0.574)
+[2025-07-26T04:22:18Z INFO  hft_executor] System iteration: 1140 | Time: 04:22:18 UTC | Cycle: 139μs
+[2025-07-26T04:22:18Z INFO  hft_executor] System iteration: 1200 | Time: 04:22:18 UTC | Cycle: 98μs
+2025-07-26 00:22:18,525 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+✅ Signal: 0.566 (GPU: apple_m1)
+2025-07-26 00:22:18,626 [INFO] High-quality signal generated: 0.566
+2025-07-26 00:22:18,630 [INFO] Signal logged to CSV: SOL @ 186.16 (confidence: 0.566)
+[2025-07-26T04:22:18Z INFO  hft_executor] System iteration: 1260 | Time: 04:22:18 UTC | Cycle: 72μs
+[2025-07-26T04:22:18Z INFO  hft_executor] System iteration: 1320 | Time: 04:22:18 UTC | Cycle: 118μs
+2025-07-26 00:22:18,906 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+[2025-07-26T04:22:18Z INFO  hft_executor] System iteration: 1380 | Time: 04:22:18 UTC | Cycle: 61μs
+✅ Signal: 0.566 (GPU: apple_m1)
+2025-07-26 00:22:19,004 [INFO] High-quality signal generated: 0.566
+2025-07-26 00:22:19,008 [INFO] Signal logged to CSV: SOL @ 186.16 (confidence: 0.566)
+[2025-07-26T04:22:19Z INFO  hft_executor] System iteration: 1440 | Time: 04:22:19 UTC | Cycle: 141μs
+[2025-07-26T04:22:19Z INFO  hft_executor] System iteration: 1500 | Time: 04:22:19 UTC | Cycle: 179μs
+2025-07-26 00:22:19,335 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+[2025-07-26T04:22:19Z INFO  hft_executor] System iteration: 1560 | Time: 04:22:19 UTC | Cycle: 60μs
+✅ Signal: 0.573 (GPU: apple_m1)
+2025-07-26 00:22:19,425 [INFO] High-quality signal generated: 0.573
+2025-07-26 00:22:19,429 [INFO] Signal logged to CSV: SOL @ 186.16 (confidence: 0.573)
+[2025-07-26T04:22:19Z INFO  hft_executor] System iteration: 1620 | Time: 04:22:19 UTC | Cycle: 88μs
+[2025-07-26T04:22:19Z INFO  hft_executor] System iteration: 1680 | Time: 04:22:19 UTC | Cycle: 95μs
+2025-07-26 00:22:19,717 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+✅ Signal: 0.578 (GPU: apple_m1)
+2025-07-26 00:22:19,819 [INFO] High-quality signal generated: 0.578
+2025-07-26 00:22:19,824 [INFO] Signal logged to CSV: SOL @ 186.16 (confidence: 0.578)
+[2025-07-26T04:22:19Z INFO  hft_executor] System iteration: 1740 | Time: 04:22:19 UTC | Cycle: 78μs
+[2025-07-26T04:22:19Z INFO  hft_executor] System iteration: 1800 | Time: 04:22:19 UTC | Cycle: 250μs
+2025-07-26 00:22:20,069 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+[2025-07-26T04:22:20Z INFO  hft_executor] System iteration: 1860 | Time: 04:22:20 UTC | Cycle: 91μs
+✅ Signal: 0.460 (GPU: apple_m1)
+2025-07-26 00:22:20,162 [INFO] High-quality signal generated: 0.460
+2025-07-26 00:22:20,167 [INFO] Signal logged to CSV: ETH @ 3745.19 (confidence: 0.460)
+[2025-07-26T04:22:20Z INFO  hft_executor] System iteration: 1920 | Time: 04:22:20 UTC | Cycle: 158μs
+[2025-07-26T04:22:20Z INFO  hft_executor] System iteration: 1980 | Time: 04:22:20 UTC | Cycle: 43μs
+2025-07-26 00:22:20,593 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+[2025-07-26T04:22:20Z INFO  hft_executor] System iteration: 2040 | Time: 04:22:20 UTC | Cycle: 65μs
+✅ Signal: 0.460 (GPU: apple_m1)
+2025-07-26 00:22:20,680 [INFO] High-quality signal generated: 0.460
+2025-07-26 00:22:20,684 [INFO] Signal logged to CSV: ETH @ 3745.19 (confidence: 0.460)
+[2025-07-26T04:22:20Z INFO  hft_executor] System iteration: 2100 | Time: 04:22:20 UTC | Cycle: 68μs
+[2025-07-26T04:22:20Z INFO  hft_executor] System iteration: 2160 | Time: 04:22:20 UTC | Cycle: 115μs
+2025-07-26 00:22:20,935 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+✅ Signal: 0.460 (GPU: apple_m1)
+2025-07-26 00:22:21,035 [INFO] High-quality signal generated: 0.460
+2025-07-26 00:22:21,037 [INFO] Signal logged to CSV: ETH @ 3745.19 (confidence: 0.460)
+[2025-07-26T04:22:21Z INFO  hft_executor] System iteration: 2220 | Time: 04:22:21 UTC | Cycle: 28μs
+[2025-07-26T04:22:21Z INFO  hft_executor] System iteration: 2280 | Time: 04:22:21 UTC | Cycle: 53μs
+[2025-07-26T04:22:21Z INFO  hft_executor] System iteration: 2340 | Time: 04:22:21 UTC | Cycle: 85μs
+2025-07-26 00:22:21,341 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+✅ Signal: 0.460 (GPU: apple_m1)
+2025-07-26 00:22:21,440 [INFO] High-quality signal generated: 0.460
+2025-07-26 00:22:21,445 [INFO] Signal logged to CSV: ETH @ 3745.19 (confidence: 0.460)
+[2025-07-26T04:22:21Z INFO  hft_executor] System iteration: 2400 | Time: 04:22:21 UTC | Cycle: 58μs
+[2025-07-26T04:22:21Z INFO  hft_executor] System iteration: 2460 | Time: 04:22:21 UTC | Cycle: 48μs
+[2025-07-26T04:22:21Z INFO  hft_executor] System iteration: 2520 | Time: 04:22:21 UTC | Cycle: 96μs
+2025-07-26 00:22:21,871 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+[2025-07-26T04:22:21Z INFO  hft_executor] System iteration: 2580 | Time: 04:22:21 UTC | Cycle: 53μs
+✅ Signal: 0.460 (GPU: apple_m1)
+2025-07-26 00:22:21,975 [INFO] High-quality signal generated: 0.460
+2025-07-26 00:22:21,980 [INFO] Signal logged to CSV: ETH @ 3745.19 (confidence: 0.460)
+[2025-07-26T04:22:22Z INFO  hft_executor] System iteration: 2640 | Time: 04:22:22 UTC | Cycle: 157μs
+[2025-07-26T04:22:22Z INFO  hft_executor] System iteration: 2700 | Time: 04:22:22 UTC | Cycle: 48μs
+2025-07-26 00:22:22,240 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+✅ Signal: 0.460 (GPU: apple_m1)
+2025-07-26 00:22:22,327 [INFO] High-quality signal generated: 0.460
+2025-07-26 00:22:22,331 [INFO] Signal logged to CSV: ETH @ 3745.19 (confidence: 0.460)
+[2025-07-26T04:22:22Z INFO  hft_executor] System iteration: 2760 | Time: 04:22:22 UTC | Cycle: 49μs
+[2025-07-26T04:22:22Z INFO  hft_executor] System iteration: 2820 | Time: 04:22:22 UTC | Cycle: 51μs
+2025-07-26 00:22:22,646 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+[2025-07-26T04:22:22Z INFO  hft_executor] System iteration: 2880 | Time: 04:22:22 UTC | Cycle: 40μs

@@ -68,3 +68,12 @@ GPU_AVAILABLE = True
 DEVICE = GPU_CONFIG["device"]
 
 print(f"🚀 GPU Ready: {GPU_CONFIG['type']} on {DEVICE}")
+
+# GPU Memory Optimization (add to config.py)
+if GPU_CONFIG["type"] == "cuda_a100":
+    torch.backends.cuda.matmul.allow_tf32 = True
+    torch.backends.cudnn.allow_tf32 = True
+    torch.backends.cudnn.benchmark = True
+    torch.cuda.empty_cache()
+elif GPU_CONFIG["type"] == "apple_m1":
+    torch.backends.mps.allow_tf32 = True

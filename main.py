@@ -217,7 +217,7 @@ def main():
                     error_count += 1
             
             cycle_time = time.time() - start_time
-            sleep_time = max(0, 1.0 - cycle_time)
+            sleep_time = max(0, 0.001 - cycle_time)  # Target 1ms cycles
             time.sleep(sleep_time)
             
             if iteration % 30 == 0:
@@ -234,3 +234,32 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# Performance tracking additions
+performance_metrics = {
+    "signals_processed": 0,
+    "avg_latency_ms": 0,
+    "websocket_status": "disconnected",
+    "api_sources_healthy": False
+}
+
+def update_performance_metrics(cycle_time, signal_data):
+    global performance_metrics
+    performance_metrics["signals_processed"] += 1
+    performance_metrics["avg_latency_ms"] = cycle_time * 1000
+    
+    if "best_signal" in signal_data:
+        performance_metrics["websocket_status"] = "connected" if signal_data["best_signal"].get("websocket_connected") else "disconnected"
+    
+    if "api_sources" in signal_data:
+        performance_metrics["api_sources_healthy"] = signal_data["api_sources"].get("tradingview_available", False)
+
+# Add this to the main loop after line 150
+try:
+    update_performance_metrics(cycle_time, merged)
+    
+    # Log performance every 100 iterations
+    if iteration % 100 == 0:
+        logging.info(f"Performance: {performance_metrics}")
+except Exception as e:
+    logging.error(f"Performance tracking error: {e}")

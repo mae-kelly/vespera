@@ -13,6 +13,14 @@ from collections import deque
 import requests
 import websocket
 import config
+
+# GPU optimization for speed
+if config.DEVICE == 'cuda':
+    torch.cuda.empty_cache()
+    torch.backends.cudnn.benchmark = True
+elif config.DEVICE == 'mps':
+    torch.backends.mps.allow_tf32 = True
+
 try:
     if config.DEVICE == 'cuda':
         import cupy as cp
@@ -44,7 +52,7 @@ class PriceDataFeed:
                 logging.info(f"Initializing market data (attempt {attempt + 1}/{max_attempts})")
                 response = requests.get(
                     "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_vol=true",
-                    timeout=15,
+                    timeout=3,
                     headers={'User-Agent': 'HFT-System/1.0'}
                 )
                 
@@ -108,9 +116,9 @@ class PriceDataFeed:
             self.ws_connected = False
         
         def on_open(ws):
-            logging.info("WebSocket connection opened")
+            logging.info("✅ WebSocket connection opened to OKX")
             self.ws_connected = True
-            # Subscribe to OKX tickers
+            # Subscribe to real OKX tickers
             subscribe_msg = {
                 "op": "subscribe",
                 "args": [
@@ -120,6 +128,7 @@ class PriceDataFeed:
                 ]
             }
             ws.send(json.dumps(subscribe_msg))
+            logging.info("🔔 Subscribed to real-time market data")
         
         def on_close(ws, close_status_code, close_msg):
             logging.info("WebSocket connection closed")
@@ -156,7 +165,8 @@ class PriceDataFeed:
             "volumes": volumes[-minutes:] if len(volumes) > minutes else volumes,
             "valid": True,
             "current_price": self.current_prices[asset],
-            "current_volume": volumes[-1] if volumes else 0
+            "current_volume": volumes[-1] if volumes else 0,
+            "websocket_connected": self.ws_connected
         }
 
 feed = PriceDataFeed()
@@ -174,7 +184,7 @@ def calculate_rsi_torch(prices: List[float], period: int = 14) -> float:
                 return 50.0 + (recent_change * 1000)  # Neutral zone
         return 50.0
     
-    prices_tensor = torch.tensor(prices, dtype=torch.float32, device=config.DEVICE)
+    prices_tensor = torch.tensor(prices, dtype=torch.float16, device=config.DEVICE)
     deltas = torch.diff(prices_tensor)
     gains = torch.nn.functional.relu(deltas)
     losses = torch.nn.functional.relu(-deltas)
@@ -216,7 +226,7 @@ def detect_volume_anomaly(volumes: List[float]) -> bool:
 def generate_signal(shared_data: Dict) -> Dict:
     if not feed.initialized:
         feed.start_feed()
-        time.sleep(2)
+        time.sleep(0.1)  # Reduced initialization delay
     
     if not feed.initialized:
         raise Exception("Feed initialization failed")

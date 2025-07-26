@@ -1,3 +1,4 @@
+#!/bin/bash
 set -e
 MODE=${1:-dry}
 LOG_DIR="logs"

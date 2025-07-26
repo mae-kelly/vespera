@@ -532,3 +532,90 @@
 2025-07-26 00:08:48,237 [INFO] High-quality signal generated: 0.567
 2025-07-26 00:08:48,241 [INFO] Signal logged to CSV: BTC @ 117499.90 (confidence: 0.567)
 2025-07-26 00:08:49,057 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+2025-07-26 00:20:41,212 [INFO] Starting HFT system in dry mode with apple_m1 GPU
+2025-07-26 00:20:41,213 [INFO] Initializing market data (attempt 1/5)
+2025-07-26 00:20:41,213 [ERROR] Entropy meter error: Feed not initialized for BTC
+2025-07-26 00:20:41,213 [ERROR] Laggard sniper error: Feed not initialized for BTC
+2025-07-26 00:20:41,213 [ERROR] Relief trap detector error: Feed not initialized for BTC
+2025-07-26 00:20:41,344 [INFO] ✅ Real market data loaded: BTC=$117,549.00
+2025-07-26 00:20:43,005 [INFO] Websocket connected
+2025-07-26 00:20:43,006 [INFO] ✅ WebSocket connection opened to OKX
+2025-07-26 00:20:43,006 [INFO] 🔔 Subscribed to real-time market data
+2025-07-26 00:20:43,856 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+2025-07-26 00:20:44,003 [INFO] CoinGecko BTC dominance: 59.4%
+2025-07-26 00:20:44,030 [INFO] High-quality signal generated: 0.558
+2025-07-26 00:20:44,368 [INFO] Signal sent: BTC 55.8%
+2025-07-26 00:20:44,378 [INFO] Signal logged to CSV: BTC @ 117525.90 (confidence: 0.558)
+2025-07-26 00:20:44,706 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+2025-07-26 00:20:44,829 [INFO] CoinGecko BTC dominance: 59.4%
+2025-07-26 00:20:44,833 [INFO] High-quality signal generated: 0.564
+2025-07-26 00:20:44,837 [INFO] Signal logged to CSV: BTC @ 117525.90 (confidence: 0.564)
+2025-07-26 00:22:13,659 [INFO] Starting HFT system in dry mode with apple_m1 GPU
+2025-07-26 00:22:13,659 [INFO] Initializing market data (attempt 1/5)
+2025-07-26 00:22:13,659 [ERROR] Entropy meter error: Feed not initialized for BTC
+2025-07-26 00:22:13,659 [ERROR] Laggard sniper error: Feed not initialized for BTC
+2025-07-26 00:22:13,659 [ERROR] Relief trap detector error: Feed not initialized for BTC
+2025-07-26 00:22:13,773 [INFO] ✅ Real market data loaded: BTC=$117,545.00
+2025-07-26 00:22:14,625 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+2025-07-26 00:22:14,767 [INFO] CoinGecko BTC dominance: 59.4%
+2025-07-26 00:22:14,791 [INFO] High-quality signal generated: 0.400
+2025-07-26 00:22:15,154 [INFO] Signal sent: BTC 40.0%
+2025-07-26 00:22:15,170 [INFO] Signal logged to CSV: BTC @ 117545.00 (confidence: 0.400)
+2025-07-26 00:22:15,392 [INFO] Websocket connected
+2025-07-26 00:22:15,392 [INFO] ✅ WebSocket connection opened to OKX
+2025-07-26 00:22:15,392 [INFO] 🔔 Subscribed to real-time market data
+2025-07-26 00:22:15,600 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+2025-07-26 00:22:15,736 [INFO] CoinGecko BTC dominance: 59.4%
+2025-07-26 00:22:15,740 [INFO] High-quality signal generated: 0.400
+2025-07-26 00:22:15,744 [INFO] Signal logged to CSV: BTC @ 117545.00 (confidence: 0.400)
+2025-07-26 00:22:16,007 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+2025-07-26 00:22:16,139 [INFO] CoinGecko BTC dominance: 59.4%
+2025-07-26 00:22:16,143 [INFO] High-quality signal generated: 0.557
+2025-07-26 00:22:16,147 [INFO] Signal logged to CSV: ETH @ 3745.12 (confidence: 0.557)
+2025-07-26 00:22:16,481 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+2025-07-26 00:22:16,627 [INFO] CoinGecko BTC dominance: 59.4%
+2025-07-26 00:22:16,630 [INFO] High-quality signal generated: 0.558
+2025-07-26 00:22:16,635 [INFO] Signal logged to CSV: ETH @ 3745.12 (confidence: 0.558)
+2025-07-26 00:22:17,135 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+2025-07-26 00:22:17,227 [INFO] High-quality signal generated: 0.562
+2025-07-26 00:22:17,232 [INFO] Signal logged to CSV: ETH @ 3745.12 (confidence: 0.562)
+2025-07-26 00:22:17,477 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+2025-07-26 00:22:17,571 [INFO] High-quality signal generated: 0.569
+2025-07-26 00:22:17,575 [INFO] Signal logged to CSV: ETH @ 3745.12 (confidence: 0.569)
+2025-07-26 00:22:17,814 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+2025-07-26 00:22:17,897 [INFO] High-quality signal generated: 0.572
+2025-07-26 00:22:17,899 [INFO] Signal logged to CSV: ETH @ 3745.12 (confidence: 0.572)
+2025-07-26 00:22:18,175 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+2025-07-26 00:22:18,267 [INFO] High-quality signal generated: 0.574
+2025-07-26 00:22:18,271 [INFO] Signal logged to CSV: ETH @ 3745.12 (confidence: 0.574)
+2025-07-26 00:22:18,525 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+2025-07-26 00:22:18,626 [INFO] High-quality signal generated: 0.566
+2025-07-26 00:22:18,630 [INFO] Signal logged to CSV: SOL @ 186.16 (confidence: 0.566)
+2025-07-26 00:22:18,906 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+2025-07-26 00:22:19,004 [INFO] High-quality signal generated: 0.566
+2025-07-26 00:22:19,008 [INFO] Signal logged to CSV: SOL @ 186.16 (confidence: 0.566)
+2025-07-26 00:22:19,335 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+2025-07-26 00:22:19,425 [INFO] High-quality signal generated: 0.573
+2025-07-26 00:22:19,429 [INFO] Signal logged to CSV: SOL @ 186.16 (confidence: 0.573)
+2025-07-26 00:22:19,717 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+2025-07-26 00:22:19,819 [INFO] High-quality signal generated: 0.578
+2025-07-26 00:22:19,824 [INFO] Signal logged to CSV: SOL @ 186.16 (confidence: 0.578)
+2025-07-26 00:22:20,069 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+2025-07-26 00:22:20,162 [INFO] High-quality signal generated: 0.460
+2025-07-26 00:22:20,167 [INFO] Signal logged to CSV: ETH @ 3745.19 (confidence: 0.460)
+2025-07-26 00:22:20,593 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+2025-07-26 00:22:20,680 [INFO] High-quality signal generated: 0.460
+2025-07-26 00:22:20,684 [INFO] Signal logged to CSV: ETH @ 3745.19 (confidence: 0.460)
+2025-07-26 00:22:20,935 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+2025-07-26 00:22:21,035 [INFO] High-quality signal generated: 0.460
+2025-07-26 00:22:21,037 [INFO] Signal logged to CSV: ETH @ 3745.19 (confidence: 0.460)
+2025-07-26 00:22:21,341 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+2025-07-26 00:22:21,440 [INFO] High-quality signal generated: 0.460
+2025-07-26 00:22:21,445 [INFO] Signal logged to CSV: ETH @ 3745.19 (confidence: 0.460)
+2025-07-26 00:22:21,871 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+2025-07-26 00:22:21,975 [INFO] High-quality signal generated: 0.460
+2025-07-26 00:22:21,980 [INFO] Signal logged to CSV: ETH @ 3745.19 (confidence: 0.460)
+2025-07-26 00:22:22,240 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
+2025-07-26 00:22:22,327 [INFO] High-quality signal generated: 0.460
+2025-07-26 00:22:22,331 [INFO] Signal logged to CSV: ETH @ 3745.19 (confidence: 0.460)
+2025-07-26 00:22:22,646 [WARNING] TradingView API failed: list index out of range, falling back to CoinGecko
