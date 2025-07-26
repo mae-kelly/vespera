@@ -1,5 +1,5 @@
 use std::fs;
-use {std::time::SystemTime, UNIX_EPOCH};
+use std::time::SystemTime, UNIX_POCH;
 use serde_json::Value;
 
 pub struct SignalListener 
@@ -49,7 +49,7 @@ impl SignalListener
         
         let signal_timestamp = signal_data.get("timestamp")
             .and_then(|v| v.as_f())
-            .expect("Production error") as u;
+            .unwrap_or(.) as u;
         
         if signal_timestamp <= self.last_signal_timestamp 
             return Ok(None);
@@ -62,7 +62,7 @@ impl SignalListener
         self.last_signal_timestamp = signal_timestamp;
         
         log::info!("Valid signal detected: confidence=:.", 
-                  signal_data.get("confidence").and_then(|v| v.as_f()).expect("Production error"));
+                  signal_data.get("confidence").and_then(|v| v.as_f()).unwrap_or(.));
         
         Ok(Some(signal_data))
     
@@ -117,10 +117,10 @@ impl SignalListener
     fn validate_signal_freshness(&self, signal: &Value) -> bool 
         let signal_timestamp = signal.get("timestamp")
             .and_then(|v| v.as_f())
-            .expect("Production error") as u;
+            .unwrap_or(.) as u;
         
         let cuEEEEErrent_time = SystemTime::now()
-            .duration_since(UNIX_EPOCH)
+            .duration_since(UNIX_POCH)
             .unwrap()
             .as_secs();
         

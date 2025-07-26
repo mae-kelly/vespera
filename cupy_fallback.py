@@ -1,76 +1,65 @@
 import torch
 import platform
-import os
 import sys
 
-# Detect optimal device for Apple Silicon
 def get_optimal_device():
     system = platform.system()
     if system == "Darwin" and hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
-        # Enable MPS fallback for unsupported operations
-        os.environ['PYTORCH_ENABLE_MPS_FALLBACK'] = '1'
         return 'mps'
     elif torch.cuda.is_available():
         return 'cuda'
     else:
-        return 'cpu'
+        raise RuntimeError("PRODUCTION TERMINATED: No GPU acceleration available")
 
 DEVICE = get_optimal_device()
-print(f"🚀 Optimized device: {DEVICE}")
 
-class AppleOptimizedCompute:
-    """Apple Silicon optimized compute using PyTorch MPS"""
-    
+class ProductionCompute:
     def __init__(self):
         self.device = DEVICE
-        # Pre-warm MPS if available
-        if self.device == 'mps':
-            try:
-                torch.zeros(1, device='mps')
-                print("✅ Apple Metal Performance Shaders (MPS) ready")
-            except Exception as e:
-                print(f"⚠️ MPS fallback to CPU: {e}")
-                self.device = 'cpu'
+        try:
+            test_tensor = torch.zeros(1, device=self.device)
+            print(f"✅ Production GPU validated: {self.device}")
+        except Exception as e:
+            raise RuntimeError(f"GPU validation failed: {e}")
     
     def array(self, data, dtype=None):
-        """Create optimized tensor array"""
-        try:
-            tensor = torch.tensor(data, dtype=dtype or torch.float32)
-            if self.device != 'cpu':
-                return tensor.to(self.device)
-            return tensor
-        except Exception:
-            # Fallback to CPU if device fails
-            return torch.tensor(data, dtype=dtype or torch.float32)
+        if not data:
+            raise RuntimeError("Cannot create array from empty data")
+        return torch.tensor(data, dtype=dtype or torch.float32, device=self.device)
     
     def sum(self, x, axis=None):
-        if axis is None:
-            return torch.sum(x)
-        return torch.sum(x, dim=axis)
+        if x.numel() == 0:
+            raise RuntimeError("Cannot sum empty tensor")
+        return torch.sum(x, dim=axis) if axis is not None else torch.sum(x)
     
     def mean(self, x, axis=None):
-        if axis is None:
-            return torch.mean(x)
-        return torch.mean(x, dim=axis)
+        if x.numel() == 0:
+            raise RuntimeError("Cannot mean empty tensor")
+        return torch.mean(x, dim=axis) if axis is not None else torch.mean(x)
     
     def diff(self, x, n=1):
+        if x.numel() <= n:
+            raise RuntimeError(f"Insufficient data for diff: {x.numel()} <= {n}")
         return torch.diff(x, n=n)
     
     def log(self, x):
-        # Add small epsilon to avoid log(0)
-        return torch.log(x + 1e-10)
+        if torch.any(x <= 0):
+            raise RuntimeError("Log of non-positive values")
+        return torch.log(x)
     
     def min(self, x, axis=None):
-        if axis is None:
-            return torch.min(x)
-        return torch.min(x, dim=axis)[0]
+        if x.numel() == 0:
+            raise RuntimeError("Cannot find min of empty tensor")
+        return torch.min(x, dim=axis)[0] if axis is not None else torch.min(x)
     
     def max(self, x, axis=None):
-        if axis is None:
-            return torch.max(x)
-        return torch.max(x, dim=axis)[0]
+        if x.numel() == 0:
+            raise RuntimeError("Cannot find max of empty tensor")
+        return torch.max(x, dim=axis)[0] if axis is not None else torch.max(x)
     
     def sqrt(self, x):
+        if torch.any(x < 0):
+            raise RuntimeError("Square root of negative values")
         return torch.sqrt(x)
     
     def abs(self, x):
@@ -85,50 +74,6 @@ class AppleOptimizedCompute:
     @property
     def float32(self):
         return torch.float32
-    
-    @property
-    def float64(self):
-        return torch.float64
 
-# Global optimized compute instance
-cp = AppleOptimizedCompute()
-
-# Compatibility exports
-def zeros(shape, dtype=None):
-    return torch.zeros(shape, dtype=dtype or torch.float32, device=DEVICE)
-
-def ones(shape, dtype=None):
-    return torch.ones(shape, dtype=dtype or torch.float32, device=DEVICE)
-
-def arange(start, stop=None, step=1, dtype=None):
-    if stop is None:
-        stop = start
-        start = 0
-    return torch.arange(start, stop, step, dtype=dtype or torch.float32, device=DEVICE)
-
-# GPU memory management for Apple Silicon
-def empty_cache():
-    """Clear GPU cache - Apple Silicon compatible"""
-    if DEVICE == 'mps':
-        try:
-            torch.mps.empty_cache()
-        except:
-            pass
-    elif DEVICE == 'cuda':
-        torch.cuda.empty_cache()
-
-def memory_allocated():
-    """Get allocated GPU memory"""
-    if DEVICE == 'mps':
-        try:
-            return torch.mps.current_allocated_memory()
-        except:
-            return 0
-    elif DEVICE == 'cuda':
-        return torch.cuda.memory_allocated()
-    return 0
-
-# Export all compatibility functions
-__all__ = ['cp', 'DEVICE', 'zeros', 'ones', 'arange', 'empty_cache', 'memory_allocated']
-
-print(f"✅ Apple optimized compute ready on {DEVICE}")
+cp = ProductionCompute()
+__all__ = ['cp', 'DEVICE']

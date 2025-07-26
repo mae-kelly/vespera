@@ -1,6 +1,6 @@
 use std::fs;
-use std::time::{Duration, SystemTime, UNIX_EPOCH};
-use serde_json::{Value, json};
+use {std::time::{Duration, SystemTime, UNIX_EPOCH}};
+use {serde_json::{Value, json}};
 use chrono::Utc;
 use tokio;
 
@@ -11,12 +11,13 @@ mod okx_executor;
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     env_logger::init();
     
-    // PRODUCTION: Force live mode
     std::env::set_var("MODE", "live");
-    let confidence_threshold = 0.75; // Higher threshold for production
+    std::env::set_var("OKX_TESTNET", "false");
+    
+    let confidence_threshold = 0.75;
     
     println!("🔴 PRODUCTION HFT EXECUTOR - LIVE TRADING ONLY");
-    log::info!("PRODUCTION startup - no dry mode");
+    log::info!("PRODUCTION MODE ACTIVE");
     
     let mut okx_executor = okx_executor::OkxExecutor::new().await?;
     let mut iteration = 0;
@@ -28,31 +29,53 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         
         if let Ok(signal_content) = fs::read_to_string("/tmp/signal.json") {
             if let Ok(signal_data) = serde_json::from_str::<Value>(&signal_content) {
-                let confidence = signal_data.get("confidence")
-                    .and_then(|v| v.as_f64())
-                    .unwrap_or(0.0);
                 
-                // PRODUCTION: Verify it's a production signal
-                if !signal_data.get("production_validated").and_then(|v| v.as_bool()).unwrap_or(false) {
+                let production_validated = signal_data.get("production_validated")
+                    .and_then(|v| v.as_bool());
+                
+                if production_validated != Some(true) {
                     log::warn!("❌ PRODUCTION: Non-validated signal rejected");
+                    continue;
+                }
+                
+                let confidence = signal_data.get("confidence")
+                    .and_then(|v| v.as_f64());
+                
+                let confidence = match confidence {
+                    Some(c) => c,
+                    None => {
+                        log::error!("❌ PRODUCTION: Signal missing confidence");
+                        continue;
+                    }
+                };
+                
+                if confidence < confidence_threshold {
+                    log::debug!("Signal below production threshold: {:.3}", confidence);
                     continue;
                 }
                 
                 let signal_timestamp = signal_data.get("timestamp")
                     .and_then(|v| v.as_f64())
-                    .unwrap_or(0.0) as u64;
+                    .map(|t| t as u64);
                 
-                if signal_timestamp > last_signal_timestamp && confidence >= confidence_threshold {
+                let signal_timestamp = match signal_timestamp {
+                    Some(t) => t,
+                    None => {
+                        log::error!("❌ PRODUCTION: Signal missing timestamp");
+                        continue;
+                    }
+                };
+                
+                if signal_timestamp > last_signal_timestamp {
                     let current_time = SystemTime::now().duration_since(UNIX_EPOCH)?.as_secs();
                     let age_seconds = current_time.saturating_sub(signal_timestamp);
                     
-                    // PRODUCTION: Stricter age limit
-                    if age_seconds <= 15 {
-                        log::info!("🔴 PRODUCTION execution: confidence={:.3}, age={}s", confidence, age_seconds);
+                    if age_seconds <= 10 {
+                        log::info!("🔴 EXECUTING PRODUCTION TRADE: confidence={:.3}, age={}s", confidence, age_seconds);
                         
                         match okx_executor.execute_short_order(&signal_data).await {
                             Ok(fill_data) => {
-                                log::info!("✅ PRODUCTION execution successful");
+                                log::info!("✅ PRODUCTION EXECUTION SUCCESSFUL");
                                 
                                 let production_fill = json!({
                                     "timestamp": Utc::now().timestamp(),
@@ -64,19 +87,19 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                                     "mode": "PRODUCTION",
                                     "status": fill_data.get("status"),
                                     "order_id": fill_data.get("order_id"),
-                                    "execution_time_us": loop_start.elapsed().unwrap_or(Duration::from_secs(0)).as_micros(),
+                                    "execution_time_us": loop_start.elapsed()?.as_micros(),
                                     "validated": true
                                 });
                                 
                                 let fills_content = fs::read_to_string("/tmp/fills.json")
-                                    .unwrap_or_else(|_| "[]".to_string());
+                                    .expect("Production error")?;
                                 let mut fills_array: Value = serde_json::from_str(&fills_content)
-                                    .unwrap_or_else(|_| json!([]));
+                                    .expect("Production error")?;
                                 
                                 if let Some(array) = fills_array.as_array_mut() {
                                     array.push(production_fill);
-                                    if array.len() > 100 {
-                                        array.drain(0..50);
+                                    if array.len() > 1000 {
+                                        array.drain(0..500);
                                     }
                                 }
                                 
@@ -84,29 +107,25 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                                 last_signal_timestamp = signal_timestamp;
                             }
                             Err(e) => {
-                                log::error!("❌ PRODUCTION execution failed: {}", e);
+                                log::error!("❌ PRODUCTION EXECUTION FAILED: {}", e);
+                                return Err(e);
                             }
                         }
                     } else {
                         log::warn!("❌ PRODUCTION: Signal too old ({}s)", age_seconds);
                     }
-                } else {
-                    log::debug!("Signal below production threshold: {:.3}", confidence);
                 }
             }
         }
         
-        if iteration % 100 == 0 {
-            let execution_time = loop_start.elapsed().unwrap_or(Duration::from_secs(0));
-            log::info!("🔴 PRODUCTION iteration: {} | UTC: {} | Cycle: {}μs", 
+        if iteration % 1000 == 0 {
+            log::info!("🔴 PRODUCTION iteration: {} | UTC: {}", 
                       iteration, 
-                      Utc::now().format("%H:%M:%S"),
-                      execution_time.as_micros());
+                      Utc::now().format("%H:%M:%S"));
         }
         
-        // High-frequency execution timing
-        let execution_time = loop_start.elapsed().unwrap_or(Duration::from_secs(0));
-        let target_cycle = Duration::from_micros(10000); // 10ms target cycle
+        let execution_time = loop_start.elapsed()?;
+        let target_cycle = Duration::from_millis(5);
         let sleep_duration = target_cycle.saturating_sub(execution_time);
         
         if sleep_duration > Duration::from_nanos(1) {

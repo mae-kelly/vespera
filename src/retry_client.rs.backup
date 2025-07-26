@@ -1,7 +1,7 @@
 use std::time::Duration;
 use reqwest::Response;
-use {backoff::{ExponentialBackoff, backoff::Backoff}};
-use {tokio_retry::strategy::{ExponentialBackoff as RetryBackoff, jitter}};
+use backoff::{ExponentialBackoff, backoff::Backoff};
+use tokio_retry::strategy::{ExponentialBackoff as RetryBackoff, jitter};
 use tokio_retry::Retry;
 
 pub struct RetryableClient {

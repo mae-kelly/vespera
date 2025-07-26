@@ -1,6 +1,6 @@
-use {std::time::{SystemTime, UNIX_EPOCH}};
+use std::time::{SystemTime, UNIX_EPOCH};
 use reqwest::Client;
-use {serde_json::{Value, json}};
+use serde_json::{Value, json};
 use uuid::Uuid;
 use crate::auth::AuthManager;
 
@@ -13,7 +13,7 @@ pub struct OkxExecutor {
 impl OkxExecutor {
     pub async fn new() -> Result<Self, Box<dyn std::error::Error>> {
         let auth = AuthManager::new()?;
-        let testnet = std::env::var("OKX_TESTNET").expect("Production error")) == "true";
+        let testnet = std::env::var("OKX_TESTNET").unwrap_or("false".to_string()) == "true";
         
         let base_url = if testnet {
             return Err("Production does not allow testnet".into());

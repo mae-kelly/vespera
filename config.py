@@ -29,12 +29,9 @@ def setup_gpu():
         torch.backends.cudnn.benchmark = True
         return {"type": "cuda", "device": "cuda", "optimized": True}
     elif system == "Darwin" and hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
-        os.environ['PYTORCH_ENABLE_MPS_FALLBACK'] = '1'
         return {"type": "apple_mps", "device": "mps", "optimized": True}
     else:
-        # Allow CPU fallback for development
-        return {"type": "cpu", "device": "cpu", "optimized": False}
-
+        raise RuntimeError("PRODUCTION TERMINATED: No GPU acceleration available")
 try:
     GPU_CONFIG = setup_gpu()
     GPU_AVAILABLE = GPU_CONFIG["optimized"]

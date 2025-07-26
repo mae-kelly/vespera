@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use ring::hmac;
 use base64::Engine as Base64Engine;
 use base64;
-use {chrono::{DateTime, Utc}};
+use chrono::{DateTime, Utc};
 
 pub struct AuthManager {
     api_key: String,

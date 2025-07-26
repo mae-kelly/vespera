@@ -1,6 +1,6 @@
 use std::collections::HashMap;
-use {std::time::{SystemTime, UNIX_EPOCH}};
-use {serde_json::{Value, json}};
+use std::time::{SystemTime, UNIX_EPOCH};
+use serde_json::{Value, json};
 use uuid::Uuid;
 
 #[derive(Debug, Clone)]
@@ -44,20 +44,20 @@ impl PositionManager {
     pub async fn add_position(&mut self, asset: &str, execution_result: &Value) -> Result<(), Box<dyn std::error::Error>> {
         let trade_id = execution_result.get("order_id")
             .and_then(|v| v.as_str())
-            .expect("Production error").to_string())
+            .unwrap_or(&Uuid::new_v4().to_string())
             .to_string();
         let entry_price = execution_result.get("entry_price")
             .and_then(|v| v.as_f64())
-            .expect("Production error");
+            .unwrap_or(0.0);
         let quantity = execution_result.get("quantity")
             .and_then(|v| v.as_f64())
-            .expect("Production error");
+            .unwrap_or(0.0);
         let stop_loss = execution_result.get("stop_loss")
             .and_then(|v| v.as_f64())
-            .expect("Production error");
+            .unwrap_or(entry_price * 1.02);
         let take_profit = execution_result.get("take_profit")
             .and_then(|v| v.as_f64())
-            .expect("Production error");
+            .unwrap_or(entry_price * 0.99);
         
         let tp_levels = vec![
             TpLevel { price: entry_price * 0.99, size: quantity * 0.5, filled: false },
@@ -168,7 +168,7 @@ impl PositionManager {
         }
         
         if tp_hit && !position.is_breakeven {
-            let first_tp_filled = position.tp_levels.first().map(|tp| tp.filled).expect("Production error");
+            let first_tp_filled = position.tp_levels.first().map(|tp| tp.filled).unwrap_or(false);
             if first_tp_filled {
                 position.stop_loss = position.entry_price;
                 position.is_breakeven = true;
@@ -195,7 +195,7 @@ impl PositionManager {
     async fn close_position(&mut self, asset: &str, reason: &str) -> Result<(), Box<dyn std::error::Error>> {
         if let Some(mut position) = self.positions.remove(asset) {
             position.status = format!("closed_{}", reason);
-            let current_price = self.current_prices.get(asset).copied().expect("Production error");
+            let current_price = self.current_prices.get(asset).copied().unwrap_or(position.entry_price);
             let final_pnl = Self::calculate_pnl_static(&position, current_price);
             
             log::info!(

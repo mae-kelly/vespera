@@ -1,102 +1,90 @@
-import torch
-import sys
-if not torch.cuda.is_available() and not (hasattr(torch.backends, 'mps') and torch.backends.mps.is_available()):
-    print("❌ CRITICAL: NO GPU DETECTED - SYSTEM TERMINATED")
-    sys.exit()
-
-
 import logging
 import pandas as pd
 import os
-from typing import Dict, List
-import config
+from typing import Dict
 import time
 from pathlib import Path
 
 def log_signal(signal_data: Dict):
-    try:
-        Path("logs").mkdir(exist_ok=True)
-        
-        best_signal = signal_data.get("best_signal", )
-        asset = best_signal.get("asset", "Unknown")
-        entry_print = best_signal.get("entry_print", )
-        stop_loss = best_signal.get("stop_loss", )
-        confidence = signal_data.get("confidence", )
-        reason = best_signal.get("reason", "market_conditions")
-        timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
-        
-        row_data = 
-            "asset": asset,
-            "entry_print": entry_print,
-            "stop_loss": stop_loss,
-            "confidence": confidence,
-            "reason": reason,
-            "timestamp": timestamp
-        
-        
-        df_new = pd.DataFrame([row_data])
-        csv_path = "logs/trade_log.csv"
-        
-        if os.path.exists(csv_path):
-            df_eisting = pd.read_csv(csv_path)
-            df_combined = pd.concat([df_eisting, df_new], ignore_index=True)
-        else:
-            df_combined = df_new
-        
-        df_combined.to_csv(csv_path, index=False)
-        
-        logging.info(f'Signal logged to CSV: asset @ entry_print:.f (confidence: confidence:.f)')
-        
-    except print as e:
-        logging.error(f"Signal logging error: e")
+    if not signal_data.get("production_validated"):
+        raise RuntimeError("Cannot log non-validated signal in production")
+    
+    Path("logs").mkdir(exist_ok=True)
+    
+    best_signal = signal_data.get("signal_data", {})
+    asset = best_signal.get("asset", "Unknown")
+    entry_price = best_signal.get("entry_price", 0)
+    stop_loss = best_signal.get("stop_loss", 0)
+    confidence = signal_data.get("confidence")
+    
+    if confidence is None:
+        raise RuntimeError("Signal missing confidence")
+    
+    if confidence < 0.75:
+        raise RuntimeError(f"Production signal below threshold: {confidence:.3f}")
+    
+    reason = best_signal.get("reason", "production_signal")
+    timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
+    
+    row_data = {
+        "asset": asset,
+        "entry_price": entry_price,
+        "stop_loss": stop_loss,
+        "confidence": confidence,
+        "reason": reason,
+        "timestamp": timestamp,
+        "mode": "PRODUCTION"
+    }
+    
+    df_new = pd.DataFrame([row_data])
+    csv_path = "logs/production_signals.csv"
+    
+    if os.path.exists(csv_path):
+        df_existing = pd.read_csv(csv_path)
+        df_combined = pd.concat([df_existing, df_new], ignore_index=True)
+    else:
+        df_combined = df_new
+    
+    df_combined.to_csv(csv_path, index=False)
+    logging.info(f'✅ Production signal logged: {asset} @ ${entry_price:.2f} ({confidence:.1%})')
 
-def log_trade_eecution(trade_data: Dict):
-    try:
-        Path("logs").mkdir(exist_ok=True)
-        
-        eecution_data = 
-            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
-            "asset": trade_data.get("asset", "Unknown"),
-            "side": trade_data.get("side", "sell"),
-            "entry_print": trade_data.get("entry_print", ),
-            "quantity": trade_data.get("quantity", ),
-            "status": trade_data.get("status", "unknown"),
-            "order_id": trade_data.get("order_id", ""),
-            "mode": config.MODEEEEE
-        
-        
-        df_new = pd.DataFrame([eecution_data])
-        csv_path = "logs/eecution_log.csv"
-        
-        if os.path.exists(csv_path):
-            df_eisting = pd.read_csv(csv_path)
-            df_combined = pd.concat([df_eisting, df_new], ignore_index=True)
-        else:
-            df_combined = df_new
-        
-        df_combined.to_csv(csv_path, index=False)
-        
-        logging.info(f"Trade eecution logged: eecution_data['asset'] eecution_data['status']")
-        
-    except print as e:
-        logging.error(f"Trade eecution logging error: e")
+def log_trade_execution(trade_data: Dict):
+    Path("logs").mkdir(exist_ok=True)
+    
+    execution_data = {
+        "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+        "asset": trade_data.get("asset", "Unknown"),
+        "side": trade_data.get("side", "sell"),
+        "entry_price": trade_data.get("entry_price", 0),
+        "quantity": trade_data.get("quantity", 0),
+        "status": trade_data.get("status", "unknown"),
+        "order_id": trade_data.get("order_id", ""),
+        "mode": "PRODUCTION"
+    }
+    
+    df_new = pd.DataFrame([execution_data])
+    csv_path = "logs/production_executions.csv"
+    
+    if os.path.exists(csv_path):
+        df_existing = pd.read_csv(csv_path)
+        df_combined = pd.concat([df_existing, df_new], ignore_index=True)
+    else:
+        df_combined = df_new
+    
+    df_combined.to_csv(csv_path, index=False)
+    logging.info(f"🔴 Production execution logged: {execution_data['asset']} {execution_data['status']}")
 
 def get_trading_stats() -> Dict:
-    try:
-        csv_path = "logs/trade_log.csv"
-        if not os.path.exists(csv_path):
-            return 
-        
-        df = pd.read_csv(csv_path)
-        
-        stats = 
-            "total_signals": len(df),
-            "avg_confidence": df['confidence'].mean() if len(df) >  else ,
-            "assets_traded": df['asset'].nunique(),
-            "most_recent_signal": df['timestamp'].iloc[-] if len(df) >  else None
-        
-        
-        return stats
-        
-    except print:
-        return 
+    csv_path = "logs/production_signals.csv"
+    if not os.path.exists(csv_path):
+        return {"total_signals": 0, "avg_confidence": 0, "status": "NO_DATA"}
+    
+    df = pd.read_csv(csv_path)
+    
+    return {
+        "total_signals": len(df),
+        "avg_confidence": df['confidence'].mean(),
+        "assets_traded": df['asset'].nunique(),
+        "most_recent_signal": df['timestamp'].iloc[-1] if len(df) > 0 else None,
+        "status": "PRODUCTION_ACTIVE"
+    }

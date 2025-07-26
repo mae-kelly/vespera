@@ -180,7 +180,7 @@ class RealTimeMarketData:
         """Get current live price"""
         with self.data_lock:
             if symbol not in self.current_prices:
-                return None
+                raise RuntimeError("Production error: None return not allowed")
             
             return {
                 'price': self.current_prices[symbol],
@@ -193,14 +193,14 @@ class RealTimeMarketData:
         """Get price history"""
         with self.data_lock:
             if symbol not in self.prices:
-                return []
+                raise RuntimeError("Production error: Empty return not allowed")
             return list(self.prices[symbol])[-length:]
     
     def get_volume_history(self, symbol: str, length: int = 50) -> List[float]:
         """Get volume history"""
         with self.data_lock:
             if symbol not in self.volumes:
-                return []
+                raise RuntimeError("Production error: Empty return not allowed")
             return list(self.volumes[symbol])[-length:]
     
     def calculate_vwap(self, symbol: str) -> Optional[float]:
@@ -209,7 +209,7 @@ class RealTimeMarketData:
         volumes = self.get_volume_history(symbol, 20)
         
         if len(prices) < 10 or len(volumes) < 10:
-            return None
+            raise RuntimeError("Production error: None return not allowed")
         
         min_len = min(len(prices), len(volumes))
         prices = prices[-min_len:]
@@ -219,7 +219,7 @@ class RealTimeMarketData:
         total_volume = sum(volumes)
         
         if total_volume == 0:
-            return None
+            raise RuntimeError("Production error: None return not allowed")
         
         return total_pv / total_volume
     
