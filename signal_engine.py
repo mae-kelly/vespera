@@ -6,9 +6,9 @@ if not torch.cuda.is_available() and not (hasattr(torch.backends, 'mps') and tor
 
 import time
 import logging
-from typing import Dict, List
 import json
 import threading
+from typing import Dict, List
 from collections import deque
 import requests
 import websocket
@@ -85,8 +85,51 @@ class PriceDataFeed:
                     raise Exception(f"Market data initialization FAILED")
     
     def _start_websocket_connection(self):
-        # WebSocket connection logic here
-        pass
+        def on_message(ws, message):
+            try:
+                data = json.loads(message)
+                if isinstance(data, list) and len(data) > 0:
+                    tick = data[0]
+                    symbol_map = {"BTCUSDT": "BTC", "ETHUSDT": "ETH", "SOLUSDT": "SOL"}
+                    symbol = symbol_map.get(tick.get("s", ""))
+                    if symbol and "c" in tick:
+                        price = float(tick["c"])
+                        volume = float(tick.get("v", 0))
+                        self.current_prices[symbol] = price
+                        self.prices[symbol].append(price)
+                        self.volumes[symbol].append(volume)
+            except Exception as e:
+                logging.error(f"WebSocket message error: {e}")
+        
+        def on_error(ws, error):
+            logging.error(f"WebSocket error: {error}")
+        
+        def on_open(ws):
+            logging.info("WebSocket connection opened")
+            subscribe_msg = {
+                "method": "SUBSCRIBE",
+                "params": ["btcusdt@ticker", "ethusdt@ticker", "solusdt@ticker"],
+                "id": 1
+            }
+            ws.send(json.dumps(subscribe_msg))
+        
+        def on_close(ws, close_status_code, close_msg):
+            logging.info("WebSocket connection closed")
+        
+        while self.running:
+            try:
+                self.ws_connection = websocket.WebSocketApp(
+                    "wss://stream.binance.com:9443/ws/btcusdt@ticker",
+                    on_open=on_open,
+                    on_message=on_message,
+                    on_error=on_error,
+                    on_close=on_close
+                )
+                self.ws_connection.run_forever()
+            except Exception as e:
+                logging.error(f"WebSocket connection failed: {e}")
+                if self.running:
+                    time.sleep(5)
     
     def get_recent_data(self, asset: str, minutes: int = 60) -> Dict:
         if not self.initialized:

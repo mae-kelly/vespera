@@ -13,13 +13,33 @@ import config
 
 def get_btc_dominance() -> float:
     try:
-        response = requests.get("https://api.coingecko.com/api/v3/global", timeout=5)
+        response = requests.get(
+            "https://api.tradingview.com/chart/v1/indicators", 
+            params={
+                "symbol": "CRYPTOCAP:BTC.D",
+                "timeframe": "1D",
+                "indicators": "DOMINANCE"
+            },
+            timeout=5,
+            headers={'User-Agent': 'HFT-System/1.0'}
+        )
         if response.status_code == 200:
             data = response.json()
+            if "data" in data and len(data["data"]) > 0:
+                dominance = data["data"][-1].get("value", 45.0)
+                return float(dominance)
+    except Exception:
+        pass
+    
+    try:
+        fallback_response = requests.get("https://api.coingecko.com/api/v3/global", timeout=5)
+        if fallback_response.status_code == 200:
+            data = fallback_response.json()
             btc_dominance = data['data']['market_cap_percentage']['btc']
             return float(btc_dominance)
     except Exception:
         pass
+    
     return 45.0
 
 def softmax_weighted_sum(components: Dict[str, float], weights: Dict[str, float]) -> float:
