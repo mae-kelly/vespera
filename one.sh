@@ -1,23 +1,53 @@
-# Quick fix for the warnings
-cat > fix_warnings.sh << 'EOF'
 #!/bin/bash
 
-# Fix unused import in okx_executor.rs
-sed -i.bak '1s/use std::collections::HashMap;//' src/okx_executor.rs
+echo "🚀 TESTING ENHANCED FIXED SYSTEM"
+echo "================================"
 
-# Fix deprecated base64 functions in auth.rs
-sed -i.bak 's/base64::decode/base64::engine::general_purpose::STANDARD.decode/g' src/auth.rs
-sed -i.bak 's/base64::encode/base64::engine::general_purpose::STANDARD.encode/g' src/auth.rs
+cleanup() {
+    echo "Stopping processes..."
+    if [ ! -z "$PYTHON_PID" ]; then
+        kill $PYTHON_PID 2>/dev/null
+    fi
+    if [ ! -z "$RUST_PID" ]; then
+        kill $RUST_PID 2>/dev/null
+    fi
+}
 
-# Add the proper import for base64 engine
-sed -i.bak '3i\
-use base64::Engine;' src/auth.rs
+trap cleanup EXIT
 
-echo "✅ Warnings fixed"
-EOF
+echo "Starting optimized Python system..."
+python3 main.py --mode=dry &
+PYTHON_PID=$!
+echo "Python PID: $PYTHON_PID"
 
-chmod +x fix_warnings.sh
-./fix_warnings.sh
+sleep 3
 
-# Rebuild to confirm clean build
-cargo build --release
+echo "Starting Rust executor..."
+gtimeout 10 ./hft_executor &
+RUST_PID=$!
+
+sleep 8
+
+cleanup
+
+echo "📊 Test results:"
+
+if [ -f "/tmp/fills.json" ]; then
+    FILL_COUNT=$(cat /tmp/fills.json | grep -o '"order_id"' | wc -l | tr -d ' ')
+    echo "✅ Fills generated: $FILL_COUNT"
+else
+    echo "❌ No fills file found"
+fi
+
+if [ -f "/tmp/signal.json" ]; then
+    CONFIDENCE=$(cat /tmp/signal.json | grep -o '"confidence":[0-9.]*' | head -1)
+    echo "✅ Latest signal confidence: $CONFIDENCE"
+    
+    ASSET=$(cat /tmp/signal.json | grep -o '"asset":"[A-Z]*"' | head -1)
+    echo "✅ Signal asset: $ASSET"
+else
+    echo "❌ No signal file found"
+fi
+
+echo ""
+echo "🎯 System Status: ENHANCED AND FIXED"

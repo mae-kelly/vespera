@@ -1,4 +1,3 @@
-from typing import List, Dict
 import torch
 import sys
 if not torch.cuda.is_available() and not (hasattr(torch.backends, 'mps') and torch.backends.mps.is_available()):

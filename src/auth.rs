@@ -64,7 +64,4 @@ impl AuthManager {
         now.format("%Y-%m-%dT%H:%M:%S%.3fZ").to_string()
     }
     
-    pub fn is_configured(&self) -> bool {
-        !self.api_key.is_empty() && !self.secret_key.is_empty() && !self.passphrase.is_empty()
-    }
 }
