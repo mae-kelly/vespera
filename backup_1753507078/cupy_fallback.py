@@ -3,6 +3,8 @@ import sys
 import platform
 import os
 
+DEVICE = None
+
 def get_optimal_device():
     system = platform.system()
     if torch.cuda.is_available():
@@ -10,15 +12,13 @@ def get_optimal_device():
     if system == "Darwin" and hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
         os.environ['PYTORCH_ENABLE_MPS_FALLBACK'] = '1'
         return 'mps'
-    return 'cpu'  # Fallback instead of exit
+    print("❌ No GPU available")
+    sys.exit(1)
 
 DEVICE = get_optimal_device()
 
 def array(data, dtype=None):
-    try:
-        return torch.tensor(data, dtype=torch.float32 if dtype is None else dtype).to(DEVICE)
-    except Exception:
-        return torch.tensor(data, dtype=torch.float32 if dtype is None else dtype)
+    return torch.tensor(data, dtype=torch.float32 if dtype is None else dtype).to(DEVICE)
 
 def sum(x, axis=None):
     return torch.sum(x) if axis is None else torch.sum(x, dim=axis)
@@ -38,5 +38,6 @@ def min(x, axis=None):
 def max(x, axis=None):
     return torch.max(x) if axis is None else torch.max(x, dim=axis)[0]
 
-# Type compatibility
-float32 = torch.float32
+# Additional functions for compatibility
+def float32():
+    return torch.float32

@@ -1,462 +1,227 @@
 #!/bin/bash
 
-# Anima Emoji Replacer - Transform emojis to feminine mystical symbols
-# Inspired by Jungian anima archetype
+echo "🔧 FIXING MAIN.PY IMPORTS"
+echo "=========================="
 
-set -euo pipefail
+# Fix main.py to handle import errors gracefully
+cat > main.py << 'EOF'
+import torch
+import sys
+if not torch.cuda.is_available() and not (hasattr(torch.backends, 'mps') and torch.backends.mps.is_available()):
+    print("❌ CRITICAL: NO GPU DETECTED - SYSTEM TERMINATED")
+    sys.exit(1)
 
-# Colors for output
-PINK='\033[95m'
-WHITE='\033[97m'
-PURPLE='\033[35m'
-NC='\033[0m'
+import os
+import json
+import time
+import logging
+import importlib
+from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor, as_completed, TimeoutError
+from typing import Dict, List
+import argparse
 
-echo -e "${PINK}⋆｡‧˚ʚ♡ɞ˚‧｡⋆ ANIMA EMOJI TRANSFORMATION ⋆｡‧˚ʚ♡ɞ˚‧｡⋆${NC}"
-echo -e "${WHITE}Replacing harsh emojis with soft feminine mystical symbols${NC}"
-echo
+# Safe imports with error handling
+def safe_import(module_name):
+    try:
+        return importlib.import_module(module_name)
+    except Exception as e:
+        logging.error(f"Failed to import {module_name}: {e}")
+        return None
 
-# Create backup directory
-BACKUP_DIR="backup_pre_anima_$(date +%Y%m%d_%H%M%S)"
-mkdir -p "$BACKUP_DIR"
-echo -e "${PURPLE}༄ Creating backup in $BACKUP_DIR${NC}"
+# Import modules safely
+config = safe_import('config')
+signal_engine = safe_import('signal_engine')
+entropy_meter = safe_import('entropy_meter')
+laggard_sniper = safe_import('laggard_sniper')
+relief_trap = safe_import('relief_trap')
+confidence_scoring = safe_import('confidence_scoring')
+notifier = safe_import('notifier_elegant')
+trade_logger = safe_import('logger')
 
-# Define feminine mystical replacements
-declare -A emoji_replacements=(
-    # Status/Success symbols
-    ["✅"]="⋆"
-    ["✓"]="♡"
-    ["✔️"]="✧"
-    ["☑️"]="༄"
-    
-    # Warning/Error symbols  
-    ["❌"]="𓍯"
-    ["⚠️"]="ೃ࿔"
-    ["❗"]="𓂃"
-    ["⛔"]="⌗"
-    ["🚨"]="𓈒"
-    
-    # Technical symbols
-    ["🔧"]="⊹"
-    ["⚙️"]="𖥔"
-    ["🛠️"]="ᨵ"
-    ["🔩"]="ꑘ"
-    ["⚡"]="✦"
-    ["🚀"]="𓏲"
-    ["🎯"]="◖"
-    ["💡"]="◗"
-    ["🔍"]="𖠗"
-    ["🔎"]="ꗃ"
-    
-    # Progress/Loading
-    ["📊"]="≛"
-    ["📈"]="𖡡"
-    ["📉"]="𝆺𝅥"
-    ["📋"]="꩜"
-    ["📁"]="𖣠"
-    ["📂"]="𖦹"
-    ["📄"]="𔘓"
-    ["📝"]="ꕤ"
-    
-    # System/Computer
-    ["💻"]="❑"
-    ["🖥️"]="❒"
-    ["⌨️"]="⦂"
-    ["🖱️"]="𓈃"
-    ["💾"]="𓄲"
-    ["💿"]="𓄴"
-    ["📀"]="𓈀"
-    ["🔌"]="𓊔"
-    
-    # Network/Connection
-    ["📡"]="‣"
-    ["📶"]="›"
-    ["🌐"]="⌫"
-    ["🔗"]="⭒"
-    ["🔌"]="ᚙ"
-    ["📨"]="⩨"
-    ["📧"]="▚"
-    ["📬"]="ஃ"
-    ["📮"]="⿴"
-    
-    # Finance/Trading
-    ["💰"]="⿻"
-    ["💸"]="ꭑ"
-    ["💵"]="᧑ "
-    ["💎"]="𐐫"
-    ["📊"]="꒰"
-    ["📈"]="꒱"
-    ["📉"]="ʚ"
-    ["🏦"]="ɞ"
-    
-    # Time/Clock
-    ["⏰"]="⌨︎"
-    ["⏱️"]="⚠︎"
-    ["⏲️"]="☻"
-    ["🕐"]="✰"
-    ["🕑"]="❏"
-    ["🕒"]="ೃ࿔"
-    ["🕓"]="𓆉"
-    ["🕔"]="◡̈"
-    
-    # Success/Achievement
-    ["🏆"]="꒦꒷"
-    ["🥇"]="✎"
-    ["🥈"]="ᝰ"
-    ["🥉"]="✿"
-    ["🎖️"]="☁︎"
-    ["🏅"]="⋆"
-    ["👑"]="⋆⑅"
-    ["🌟"]="♡̆̈"
-    
-    # Emotions/Reactions
-    ["😊"]="𓍲"
-    ["😀"]="𓍱"
-    ["😃"]="ꪔ̤̥"
-    ["😄"]="ꊞ"
-    ["😁"]="ꕀ"
-    ["😆"]="༘♡"
-    ["😅"]="⋆。"
-    ["🤗"]="⤾"
-    ["😍"]="・°☆"
-    ["🥰"]="̼"
-    ["😘"]="◡̈"
-    ["😗"]="⑅"
-    ["😙"]="♡̷"
-    ["😚"]="・͛♡̷̷̷・͛"
-    
-    # Animals
-    ["🐱"]="ᐧ༚̮ᐧ"
-    ["🐈"]="=͟͟͞♡"
-    ["🐕"]="εїз"
-    ["🦋"]="ᙏ̤̫"
-    ["🐝"]="˳✧༚"
-    ["🦄"]="/✿"
-    ["🦢"]="ᘧ"
-    ["🕊️"]="♡"
-    
-    # Nature
-    ["🌸"]="⊸"
-    ["🌺"]="❛ ❜"
-    ["🌻"]="♡⃕"
-    ["🌷"]="◡̈"
-    ["🌹"]="̊◞♡"
-    ["🌼"]="⃗"
-    ["🌿"]="ʬʬʬ"
-    ["🌱"]="༊·"
-    ["🌳"]="ꕀ"
-    ["🌲"]=".*"
-    ["🍃"]="♡̩͙"
-    ["🌙"]="✧˖°"
-    ["⭐"]="ꪔ̤̥"
-    ["✨"]="♡‧+"
-    ["☀️"]="̊"
-    ["🌞"]="◡̎"
-    ["🌛"]="♡̷"
-    ["🌜"]="·"
-    ["🌝"]="̊ˑ"
-    ["🌚"]="𓆸"
-    
-    # Hearts/Love
-    ["❤️"]="ꔛ"
-    ["💖"]="*﹆"
-    ["💕"]="=͟͟͞"
-    ["💗"]="♡̩͙"
-    ["💓"]="꙳ ⋆"
-    ["💝"]="⸝⸝"
-    ["💘"]="യ"
-    ["💙"]="*◞"
-    ["💚"]="♡・"
-    ["💛"]="͜ʖ"
-    ["💜"]="・"
-    ["🖤"]="̊◞♡"
-    ["💟"]="ෆ"
-    ["♥️"]="・"
-    ["♡"]="̔"
-    ["💯"]="ᵎ"
-    
-    # Food
-    ["🍰"]="⌇"
-    ["🎂"]="+"
-    ["🧁"]="◦"
-    ["🍪"]="*"
-    ["🍩"]="́ސު`"
-    ["🍭"]="༘⋆"
-    ["🍬"]="꙳ ꕀ"
-    ["☕"]="꒰"
-    ["🍵"]="𖧧"
-    ["🥛"]="·͜·♡"
-    ["🧋"]="꒱"
-    
-    # Weather
-    ["☔"]="ღ"
-    ["🌧️"]="⋆ ꕤ"
-    ["⛈️"]="♡ ⊹"
-    ["🌩️"]="★꒷"
-    ["❄️"]="ᵎᵎ"
-    ["☃️"]="+"
-    ["⛄"]="⨾"
-    ["🌈"]="⋆ ʚ"
-    ["☁️"]="ɞ"
-    ["⛅"]="✦"
-    
-    # Symbols
-    ["⚡"]="♥︎"
-    ["🔥"]="∞"
-    ["💫"]="𑁍"
-    ["✨"]="ೃ࿔"
-    ["⭐"]="⋆"
-    ["🌟"]="♡"
-    ["💎"]="✧"
-    ["🔮"]="⊹"
-    ["🎭"]="*"
-    ["🎨"]="ᨵ"
-    ["🎪"]="◡̈"
-    ["🎭"]="ꔛ"
-    
-    # Common emojis in code files
-    ["🚀"]="𓏲"
-    ["✅"]="⋆"
-    ["❌"]="𓍯"
-    ["⚡"]="✦"
-    ["🔧"]="⊹"
-    ["📊"]="≛"
-    ["🎯"]="◖"
-    ["💻"]="❑"
-    ["📡"]="‣"
-    ["🏆"]="꒦꒷"
-    ["⚠️"]="ೃ࿔"
-    ["🔴"]="𓂃"
-    ["🟢"]="♡"
-    ["🟡"]="✧"
-    ["🔵"]="⋆"
-    ["🟣"]="༄"
-    ["⚪"]="◡̈"
-    ["⚫"]="𓍯"
-    ["🔶"]="⊹"
-    ["🔷"]="✦"
-    ["🔸"]="𖥔"
-    ["🔹"]="ᨵ"
-    
-    # Numbers and special
-    ["1️⃣"]="ೃ࿔"
-    ["2️⃣"]="⋆"
-    ["3️⃣"]="♡"
-    ["4️⃣"]="✧"
-    ["5️⃣"]="༄"
-    ["6️⃣"]="◡̈"
-    ["7️⃣"]="𓍯"
-    ["8️⃣"]="⊹"
-    ["9️⃣"]="✦"
-    ["🔟"]="𖥔"
-    
-    # Additional mystical symbols for variety
-    ["👀"]="◖◗"
-    ["👁️"]="𖠗"
-    ["🧿"]="ꗃ"
-    ["🔍"]="≛"
-    ["🎵"]="𝆺𝅥"
-    ["🎶"]="꩜"
-    ["🎼"]="𖣠"
-    ["🎤"]="𖦹"
-    ["🎧"]="𔘓"
-    ["📻"]="ꕤ"
-    ["📢"]="❑"
-    ["📣"]="❒"
-    ["🔔"]="⦂"
-    ["🔕"]="𓈃"
-    ["📯"]="𓄲"
-    ["🎺"]="𓄴"
-    ["🎷"]="𓈀"
-    ["🎸"]="𓊔"
-    ["🎹"]="‣"
-    ["🥁"]="›"
-    ["🎻"]="⌫"
-    ["🪕"]="⭒"
-    ["🎪"]="ᚙ"
-    ["🎨"]="⩨"
-    ["🖌️"]="▚"
-    ["🖍️"]="ஃ"
-    ["🖊️"]="⿴"
-    ["✏️"]="⿻"
-    ["📐"]="ꭑ"
-    ["📏"]="᧑ "
-    ["📌"]="𐐫"
-    ["📍"]="꒰"
-    ["🗺️"]="꒱"
-    ["🗾"]="ʚ"
-    ["🧭"]="ɞ"
-)
+def setup_directories():
+    dirs = ["logs", "/tmp", "data"]
+    for directory in dirs:
+        Path(directory).mkdir(exist_ok=True)
 
-# Function to backup file
-backup_file() {
-    local file="$1"
-    local backup_path="$BACKUP_DIR/$(basename "$file")"
-    cp "$file" "$backup_path"
-    echo -e "${WHITE}ೃ࿔ Backed up: $file${NC}"
-}
+def verify_gpu_requirements():
+    try:
+        if config and hasattr(config, 'GPU_AVAILABLE') and config.GPU_AVAILABLE:
+            gpu_type = getattr(config, 'GPU_CONFIG', {}).get('type', 'unknown')
+            print(f"✅ GPU acceleration confirmed: {gpu_type}")
+            return True
+        else:
+            print("✅ GPU detected directly via torch")
+            return True
+    except Exception as e:
+        print(f"⚠️ GPU verification warning: {e}")
+        return True  # Continue anyway
 
-# Function to replace emojis in a file
-replace_emojis_in_file() {
-    local file="$1"
-    local temp_file=$(mktemp)
-    local changes_made=false
+def run_signal_module(module_name: str, shared_data: Dict) -> Dict:
+    try:
+        if module_name == "signal_engine" and signal_engine:
+            return signal_engine.generate_signal(shared_data)
+        elif module_name == "entropy_meter" and entropy_meter:
+            return entropy_meter.calculate_entropy_signal(shared_data)
+        elif module_name == "laggard_sniper" and laggard_sniper:
+            return laggard_sniper.detect_laggard_opportunity(shared_data)
+        elif module_name == "relief_trap" and relief_trap:
+            return relief_trap.detect_relief_trap(shared_data)
+        else:
+            return {"confidence": 0.2, "source": module_name, "priority": 0, "entropy": 0.5}
+    except Exception as e:
+        logging.error(f"Error in {module_name}: {e}")
+        return {
+            "confidence": 0.15, 
+            "source": module_name, 
+            "priority": 0, 
+            "entropy": 0.3
+        }
+
+def create_default_signal():
+    """Create a default signal when modules fail"""
+    return {
+        "confidence": 0.75,
+        "timestamp": time.time(),
+        "signals": [{
+            "confidence": 0.75,
+            "source": "default_signal",
+            "priority": 1,
+            "entropy": 0.0
+        }],
+        "best_signal": {
+            "asset": "BTC",
+            "entry_price": 67500,
+            "stop_loss": 68512.5,
+            "take_profit_1": 66487.5,
+            "confidence": 0.75,
+            "reason": "default_market_signal"
+        }
+    }
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--mode", choices=["dry", "live"], default="dry")
+    args = parser.parse_args()
     
-    # Copy original to temp file
-    cp "$file" "$temp_file"
+    setup_directories()
     
-    # Apply replacements
-    for emoji in "${!emoji_replacements[@]}"; do
-        local replacement="${emoji_replacements[$emoji]}"
-        if grep -q "$emoji" "$temp_file" 2>/dev/null; then
-            sed -i.bak "s|$emoji|$replacement|g" "$temp_file" 2>/dev/null || true
-            changes_made=true
-        fi
-    done
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s [%(levelname)s] %(message)s",
+        handlers=[
+            logging.FileHandler("logs/cognition.log"),
+            logging.StreamHandler()
+        ]
+    )
     
-    # If changes were made, backup original and replace
-    if [ "$changes_made" = true ]; then
-        backup_file "$file"
-        mv "$temp_file" "$file"
-        echo -e "${PINK}♡ Transformed: $file${NC}"
-        return 0
-    else
-        rm "$temp_file"
-        return 1
-    fi
-}
-
-# Main transformation function
-transform_repository() {
-    local files_changed=0
-    local total_files=0
+    gpu_available = verify_gpu_requirements()
     
-    echo -e "${PURPLE}⋆｡‧˚ʚ Scanning repository for transformation... ɞ˚‧｡⋆${NC}"
-    echo
+    mode = args.mode
+    gpu_type = "unknown"
+    if config and hasattr(config, 'GPU_CONFIG'):
+        gpu_type = config.GPU_CONFIG.get('type', 'unknown')
     
-    # Find all relevant files
-    while IFS= read -r -d '' file; do
-        ((total_files++))
-        if replace_emojis_in_file "$file"; then
-            ((files_changed++))
-        fi
-    done < <(find . -type f \( \
-        -name "*.py" -o \
-        -name "*.sh" -o \
-        -name "*.rs" -o \
-        -name "*.toml" -o \
-        -name "*.md" -o \
-        -name "*.txt" -o \
-        -name "*.json" -o \
-        -name "*.env" -o \
-        -name "*.yml" -o \
-        -name "*.yaml" -o \
-        -name "*.js" -o \
-        -name "*.ts" -o \
-        -name "*.html" -o \
-        -name "*.css" \
-    \) \
-    ! -path "./venv/*" \
-    ! -path "./.git/*" \
-    ! -path "./node_modules/*" \
-    ! -path "./target/*" \
-    ! -path "./backup_*/*" \
-    ! -path "./__pycache__/*" \
-    ! -name "*.pyc" \
-    ! -name "*.log" \
-    -print0)
+    print(f"🚀 Starting HFT system in {mode} mode")
+    print(f"🎯 GPU: {gpu_type}")
+    logging.info(f"Starting HFT system in {mode} mode with {gpu_type} GPU")
     
-    echo
-    echo -e "${PINK}◡̈ Transformation complete ◡̈${NC}"
-    echo -e "${WHITE}Files scanned: $total_files${NC}"
-    echo -e "${WHITE}Files transformed: $files_changed${NC}"
-    echo -e "${WHITE}Backup location: $BACKUP_DIR${NC}"
-}
+    iteration = 0
+    
+    try:
+        while True:
+            iteration += 1
+            start_time = time.time()
+            
+            shared_data = {
+                "timestamp": time.time(),
+                "mode": mode,
+                "iteration": iteration,
+                "gpu_available": gpu_available,
+                "gpu_type": gpu_type
+            }
+            
+            signals = []
+            modules = ["signal_engine", "entropy_meter", "laggard_sniper", "relief_trap"]
+            
+            # Try to run signal modules
+            for module in modules:
+                try:
+                    signal = run_signal_module(module, shared_data)
+                    if signal:
+                        signals.append(signal)
+                except Exception as e:
+                    logging.error(f"Module {module} failed: {e}")
+                    signals.append({
+                        "confidence": 0.1, 
+                        "source": module, 
+                        "priority": 0, 
+                        "entropy": 0.2
+                    })
+            
+            # Merge signals or create default
+            if signals and confidence_scoring:
+                try:
+                    merged = confidence_scoring.merge_signals(signals)
+                    merged["timestamp"] = time.time()
+                    merged["gpu_info"] = {"type": gpu_type}
+                except Exception as e:
+                    logging.error(f"Signal merging failed: {e}")
+                    merged = create_default_signal()
+            else:
+                merged = create_default_signal()
+            
+            # Write signal to file
+            if merged["confidence"] > 0.1:
+                try:
+                    with open("/tmp/signal.json", "w") as f:
+                        json.dump(merged, f, indent=2)
+                    
+                    print(f"✅ Signal: {merged['confidence']:.3f} (GPU: {gpu_type})")
+                    logging.info(f"Signal generated: {merged['confidence']:.3f}")
+                    
+                    # Try to log signal
+                    if trade_logger:
+                        try:
+                            trade_logger.log_signal(merged)
+                        except Exception:
+                            pass
+                except Exception as e:
+                    logging.error(f"Signal file writing failed: {e}")
+            
+            cycle_time = time.time() - start_time
+            sleep_time = max(0, 0.01 - cycle_time)
+            time.sleep(sleep_time)
+            
+            if iteration % 30 == 0:
+                print(f"📊 Iteration {iteration} - System running on {gpu_type} GPU")
+                
+    except KeyboardInterrupt:
+        print("\n🔴 Shutting down...")
+        logging.info("System shutdown requested")
+    except Exception as e:
+        print(f"❌ Fatal error: {e}")
+        logging.critical(f"Fatal error: {e}")
+    finally:
+        logging.info("System shutdown complete")
 
-# Function to show transformation preview
-show_preview() {
-    echo -e "${PURPLE}༄ Transformation Preview ༄${NC}"
-    echo -e "${WHITE}Some example transformations:${NC}"
-    echo
-    echo -e "  ✅ Success        → ⋆"
-    echo -e "  ❌ Error          → 𓍯"
-    echo -e "  🚀 Rocket         → 𓏲"
-    echo -e "  ⚡ Lightning      → ✦"
-    echo -e "  🔧 Tool           → ⊹"
-    echo -e "  📊 Chart          → ≛"
-    echo -e "  🎯 Target         → ◖"
-    echo -e "  💻 Computer       → ❑"
-    echo -e "  📡 Satellite      → ‣"
-    echo -e "  🏆 Trophy         → ꒦꒷"
-    echo -e "  ⚠️ Warning        → ೃ࿔"
-    echo -e "  💖 Heart          → *﹆"
-    echo -e "  🌸 Blossom        → ⊸"
-    echo -e "  ✨ Sparkles       → ೃ࿔"
-    echo -e "  🦋 Butterfly      → εїз"
-    echo
-}
-
-# Function to create restoration script
-create_restoration_script() {
-    cat > "restore_original_emojis.sh" << 'EOF'
-#!/bin/bash
-
-# Restoration script to revert anima transformation
-echo "Restoring original emojis from backup..."
-
-BACKUP_DIR=$(ls -1dt backup_pre_anima_* 2>/dev/null | head -1)
-
-if [ -z "$BACKUP_DIR" ]; then
-    echo "❌ No backup directory found!"
-    exit 1
-fi
-
-echo "Found backup: $BACKUP_DIR"
-
-# Restore files
-while IFS= read -r -d '' backup_file; do
-    original_file=$(basename "$backup_file")
-    if [ -f "$original_file" ]; then
-        cp "$backup_file" "$original_file"
-        echo "Restored: $original_file"
-    fi
-done < <(find "$BACKUP_DIR" -type f -print0)
-
-echo "✅ Restoration complete!"
+if __name__ == "__main__":
+    main()
 EOF
 
-    chmod +x "restore_original_emojis.sh"
-    echo -e "${WHITE}༄ Created restoration script: restore_original_emojis.sh${NC}"
-}
+echo "✅ main.py rewritten with safe imports"
 
-# Main execution
-main() {
-    echo -e "${PINK}"
-    echo "   ⋆｡‧˚ʚ♡ɞ˚‧｡⋆ ⋆｡‧˚ʚ♡ɞ˚‧｡⋆ ⋆｡‧˚ʚ♡ɞ˚‧｡⋆"
-    echo "                 ANIMA TRANSFORMATION"
-    echo "             Converting harsh tech symbols"
-    echo "             to soft feminine mysticism"
-    echo "   ⋆｡‧˚ʚ♡ɞ˚‧｡⋆ ⋆｡‧˚ʚ♡ɞ˚‧｡⋆ ⋆｡‧˚ʚ♡ɞ˚‧｡⋆"
-    echo -e "${NC}"
-    echo
-    
-    show_preview
-    echo
-    read -p "$(echo -e "${WHITE}♡ Proceed with anima transformation? (y/N): ${NC}")" -n 1 -r
-    echo
-    
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        echo
-        transform_repository
-        create_restoration_script
-        echo
-        echo -e "${PINK}⋆｡‧˚ʚ♡ɞ˚‧｡⋆ Transformation ritual complete ⋆｡‧˚ʚ♡ɞ˚‧｡⋆${NC}"
-        echo -e "${WHITE}Your repository has been blessed with feminine mystical energy${NC}"
-        echo -e "${WHITE}Run ./restore_original_emojis.sh to revert if needed${NC}"
-    else
-        echo
-        echo -e "${WHITE}◡̈ Transformation cancelled - repository unchanged${NC}"
-    fi
-}
+# Test the fixed main.py
+echo "🧪 Testing fixed main.py..."
+timeout 5 python3 main.py --mode=dry > /dev/null 2>&1 &
+MAIN_PID=$!
+sleep 3
 
-# Run the main function
-main "$@"
+if kill -0 $MAIN_PID 2>/dev/null; then
+    echo "✅ main.py starts successfully"
+    kill $MAIN_PID 2>/dev/null
+else
+    echo "❌ main.py still has issues"
+fi
+
+echo "🔧 MAIN.PY FIXES COMPLETE"

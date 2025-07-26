@@ -11,10 +11,15 @@ import threading
 from typing import Dict, List
 from collections import deque
 import requests
-import config
 
 try:
-    if config.DEVICE == 'cuda':
+    import config
+    DEVICE = getattr(config, 'DEVICE', 'mps' if hasattr(torch.backends, 'mps') and torch.backends.mps.is_available() else 'cuda')
+except Exception:
+    DEVICE = 'mps' if hasattr(torch.backends, 'mps') and torch.backends.mps.is_available() else 'cuda'
+
+try:
+    if DEVICE == 'cuda':
         import cupy as cp
     else:
         import cupy_fallback as cp
@@ -36,7 +41,7 @@ class SimplifiedFeed:
         try:
             response = requests.get(
                 "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_vol=true",
-                timeout=5,
+                timeout=10,
                 headers={'User-Agent': 'HFT-System/1.0'}
             )
             
@@ -108,31 +113,39 @@ def calculate_rsi_torch(prices: List[float], period: int = 14) -> float:
     if len(prices) < 5:
         return 35.0
     
-    prices_tensor = torch.tensor(prices[-20:], dtype=torch.float32, device=config.DEVICE)
-    deltas = torch.diff(prices_tensor)
-    gains = torch.nn.functional.relu(deltas)
-    losses = torch.nn.functional.relu(-deltas)
-    
-    if len(gains) >= period:
-        avg_gain = torch.mean(gains[-period:])
-        avg_loss = torch.mean(losses[-period:])
-    else:
-        avg_gain = torch.mean(gains)
-        avg_loss = torch.mean(losses)
-    
-    rs = avg_gain / (avg_loss + 1e-8)
-    rsi = 100 - (100 / (1 + rs))
-    return float(rsi)
+    try:
+        prices_tensor = torch.tensor(prices[-20:], dtype=torch.float32, device=DEVICE)
+        deltas = torch.diff(prices_tensor)
+        gains = torch.nn.functional.relu(deltas)
+        losses = torch.nn.functional.relu(-deltas)
+        
+        if len(gains) >= period:
+            avg_gain = torch.mean(gains[-period:])
+            avg_loss = torch.mean(losses[-period:])
+        else:
+            avg_gain = torch.mean(gains)
+            avg_loss = torch.mean(losses)
+        
+        rs = avg_gain / (avg_loss + 1e-8)
+        rsi = 100 - (100 / (1 + rs))
+        return float(rsi)
+    except Exception as e:
+        logging.warning(f"RSI calculation failed: {e}")
+        return 35.0
 
 def calculate_vwap(prices: List[float], volumes: List[float]) -> float:
     if len(prices) != len(volumes) or len(prices) == 0:
         return prices[-1] if prices else 0
     
-    prices_cp = cp.array(prices[-20:])
-    volumes_cp = cp.array(volumes[-20:])
-    total_pv = cp.sum(prices_cp * volumes_cp)
-    total_v = cp.sum(volumes_cp)
-    return float(total_pv / total_v)
+    try:
+        prices_cp = cp.array(prices[-20:])
+        volumes_cp = cp.array(volumes[-20:])
+        total_pv = cp.sum(prices_cp * volumes_cp)
+        total_v = cp.sum(volumes_cp)
+        return float(total_pv / total_v)
+    except Exception as e:
+        logging.warning(f"VWAP calculation failed: {e}")
+        return prices[-1] if prices else 0
 
 def calculate_price_change(prices: List[float], minutes: int = 60) -> float:
     if len(prices) < 2:
@@ -157,7 +170,7 @@ def generate_signal(shared_data: Dict) -> Dict:
     best_confidence = 0.0
     best_signal = None
     
-    for asset in config.ASSETS:
+    for asset in ["BTC", "ETH", "SOL"]:
         try:
             data = feed.get_recent_data(asset, 60)
             

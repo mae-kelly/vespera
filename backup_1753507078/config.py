@@ -27,7 +27,7 @@ DISCORD_WEBHOOK_URL = os.getenv("DISCORD_WEBHOOK_URL")
 DISCORD_USER_ID = os.getenv("DISCORD_USER_ID")
 
 def setup_gpu():
-    """Setup GPU with proper detection"""
+    """Setup GPU with proper Mac support"""
     system = platform.system()
     
     if system == "Darwin":  # macOS
@@ -63,22 +63,17 @@ def setup_gpu():
             sys.exit(1)
 
 # Initialize GPU
-try:
-    GPU_CONFIG = setup_gpu()
-    GPU_AVAILABLE = True
-    DEVICE = GPU_CONFIG["device"]
-    print(f"🚀 GPU Ready: {GPU_CONFIG['type']} on {DEVICE}")
-except Exception as e:
-    print(f"⚠️ GPU setup warning: {e}")
-    GPU_CONFIG = {"type": "fallback", "device": "cpu", "optimized": False, "priority": 99}
-    GPU_AVAILABLE = False
-    DEVICE = "cpu"
+GPU_CONFIG = setup_gpu()
+GPU_AVAILABLE = True
+DEVICE = GPU_CONFIG["device"]
+
+print(f"🚀 GPU Ready: {GPU_CONFIG['type']} on {DEVICE}")
 
 # GPU Memory Optimization
-if GPU_AVAILABLE and GPU_CONFIG["type"] == "cuda_a100":
+if GPU_CONFIG["type"] == "cuda_a100":
     torch.backends.cuda.matmul.allow_tf32 = True
     torch.backends.cudnn.allow_tf32 = True
     torch.backends.cudnn.benchmark = True
     torch.cuda.empty_cache()
-elif GPU_AVAILABLE and GPU_CONFIG["type"] == "apple_m1":
+elif GPU_CONFIG["type"] == "apple_m1":
     torch.backends.mps.allow_tf32 = True
