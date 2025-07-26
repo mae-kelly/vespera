@@ -1,0 +1,21 @@
+[package]
+name = "hft_executor"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "hft_executor"
+path = "src/main.rs"
+
+[dependencies]
+tokio = { version = "1.0", features = ["macros", "rt-multi-thread", "time", "fs"] }
+serde_json = "1.0"
+chrono = { version = "0.4", features = ["serde"] }
+log = "0.4"
+env_logger = "0.10"
+uuid = { version = "1.0", features = ["v4"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1

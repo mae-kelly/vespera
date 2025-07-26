@@ -1,0 +1,5 @@
+websocket-client==1.6.4
+requests==2.31.0
+python-socketio==5.9.0
+websockets==12.0
+aiohttp==3.9.1

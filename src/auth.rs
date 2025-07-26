@@ -1,6 +1,6 @@
 use std::collections::HashMap;
 use ring::hmac;
-use base64;
+use base64::Engine;use base64;
 use chrono::{DateTime, Utc};
 
 pub struct AuthManager {
@@ -53,10 +53,10 @@ impl AuthManager {
             return Ok("simulation_signature".to_string());
         }
         
-        let secret_bytes = base64::decode(&self.secret_key)?;
+        let secret_bytes = base64::engine::general_purpose::STANDARD.decode(&self.secret_key)?;
         let key = hmac::Key::new(hmac::HMAC_SHA256, &secret_bytes);
         let signature = hmac::sign(&key, message.as_bytes());
-        Ok(base64::encode(signature.as_ref()))
+        Ok(base64::engine::general_purpose::STANDARD.encode(signature.as_ref()))
     }
     
     fn get_iso8601_timestamp(&self) -> String {

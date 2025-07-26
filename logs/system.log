@@ -1,0 +1,16 @@
+[2025-07-26 00:32:10] 🔍 Checking system prerequisites...
+[2025-07-26 00:32:12] ✅ All prerequisites satisfied
+[2025-07-26 00:32:12] ⚙️ Setting up environment...
+[2025-07-26 00:32:12] ✅ Environment variables loaded
+[2025-07-26 00:32:12] ✅ Environment configured for dry mode
+[2025-07-26 00:32:12] 🧠 Starting Python cognition layer...
+[2025-07-26 00:32:15] ✅ Python cognition layer running (PID: 18808)
+[2025-07-26 00:32:15] 🚀 System Live - Full startup complete
+[2025-07-26 00:32:15] 📊 Monitoring logs: tail -f logs/*.log
+[2025-07-26 00:32:15] 🦀 Starting Rust execution layer in foreground...
+[2025-07-26 00:32:15] ⚡ Sub-millisecond execution targeting enabled
+[2025-07-26 00:34:59] 🔴 Shutdown signal received
+[2025-07-26 00:34:59] Stopping Python cognition layer (PID: 18808)
+[2025-07-26 00:34:59] ✅ System shutdown complete
+[2025-07-26 00:34:59] 🔴 Shutdown signal received
+[2025-07-26 00:34:59] ✅ System shutdown complete
