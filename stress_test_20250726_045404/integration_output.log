@@ -1,0 +1,20 @@
+Testing end-to-end integration...
+GPU Config: apple_mps on mps
+Config loaded successfully
+✅ Using real market data feeds
+  Signal generated: confidence 0.000
+🚀 Optimized device: mps
+✅ Apple Metal Performance Shaders (MPS) ready
+✅ Apple optimized compute ready on mps
+  Confidence scoring: 0.000
+  Signal written to file
+  Signal loaded from file: confidence 0.000
+  Market data engine: WARMING_UP
+
+Integration Test Summary:
+  Signal Generation: ❌
+  Confidence Scoring: ❌
+  File Operations: ✅
+  Market Data: WARMING_UP
+
+FINAL_RESULT: {"signal_generation": false, "confidence_scoring": false, "file_operations": true, "market_data_status": "WARMING_UP", "overall_success": true}

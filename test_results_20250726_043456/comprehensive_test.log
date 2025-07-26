@@ -1,0 +1,26 @@
+[0;35m🚀 HFT SYSTEM COMPREHENSIVE FUNCTIONAL TEST SUITE[0m
+[0;35m=================================================[0m
+Start Time: Sat Jul 26 04:34:56 EDT 2025
+Test Directory: test_results_20250726_043456
+
+[0;36m📋 PHASE 1: ENVIRONMENT VALIDATION[0m
+[0;34m🧪 Testing: Python Environment[0m
+[0;32m✅ PASS: Python 3.13.5 available[0m
+[0;34m🧪 Testing: Rust Environment[0m
+[0;32m✅ PASS: Rust 1.88.0 available[0m
+[0;34m🧪 Testing: Required Dependencies[0m
+[0;32m✅ PASS: git available[0m
+[0;32m✅ PASS: jq available[0m
+[0;32m✅ PASS: curl available[0m
+
+[0;36m🔥 PHASE 2: STRICT GPU VALIDATION[0m
+[0;34m🧪 Testing: GPU Hierarchy Detection[0m
+[0;34m🔍 GPU Detection Results:[0m
+   Tier: M1_METAL
+   Device: Apple M1 (Metal Performance Shaders)
+   Qualification: GOOD
+   Reason: Apple Silicon detected: Apple M1
+[0;32m✅ PASS: Apple Silicon detected - RECOMMENDED for HFT trading[0m
+[0;32m✅ PASS: GPU performance benchmark: 632.6239109039307ms (ACCEPTABLE)[0m
+[1;33m   ⚠️  Performance tier: ACCEPTABLE - Monitor performance closely[0m
+[0;34m🧪 Testing: GPU Configuration Validation[0m

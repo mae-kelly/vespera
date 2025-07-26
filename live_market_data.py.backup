@@ -14,7 +14,6 @@ class RealTimeMarketData:
         self.current_prices = {}
         self.running = True
         self.data_lock = threading.Lock()
-        self.last_update = {}  # Track last update times
         
         # Start WebSocket feeds
         self._start_binance_websocket()
@@ -41,7 +40,6 @@ class RealTimeMarketData:
                             self.prices[asset].append(price)
                             self.volumes[asset].append(volume)
                             self.current_prices[asset] = price
-                            self.last_update[asset] = time.time()
             except Exception as e:
                 logging.error(f"Binance WebSocket error: {e}")
         
@@ -81,7 +79,6 @@ class RealTimeMarketData:
                                 self.prices[asset].append(price)
                                 self.volumes[asset].append(volume)
                                 self.current_prices[asset] = price
-                                self.last_update[asset] = time.time()
             except Exception as e:
                 logging.error(f"Coinbase WebSocket error: {e}")
         
@@ -138,90 +135,6 @@ class RealTimeMarketData:
         rs = avg_gain / avg_loss
         rsi = 100 - (100 / (1 + rs))
         return rsi
-    
-    def get_system_health(self) -> Dict:
-        """Get system health status - REQUIRED METHOD"""
-        with self.data_lock:
-            current_time = time.time()
-            health_data = {}
-            
-            # Check each asset
-            for asset in ['BTC', 'ETH', 'SOL']:
-                last_update = self.last_update.get(asset, 0)
-                age = current_time - last_update
-                has_data = len(self.prices[asset]) > 0
-                is_fresh = age < 60  # Fresh if updated within 60 seconds
-                
-                health_data[asset] = {
-                    'has_data': has_data,
-                    'data_age_seconds': age,
-                    'is_fresh': is_fresh,
-                    'price_count': len(self.prices[asset]),
-                    'current_price': self.current_prices.get(asset, 0)
-                }
-            
-            # Overall system status
-            all_fresh = all(health_data[asset]['is_fresh'] for asset in health_data)
-            sufficient_data = all(health_data[asset]['price_count'] >= 10 for asset in health_data)
-            
-            system_status = 'LIVE' if all_fresh and sufficient_data else 'WARMING_UP'
-            
-            return {
-                'system': {
-                    'status': system_status,
-                    'all_symbols_live': all_fresh,
-                    'sufficient_history': sufficient_data,
-                    'timestamp': current_time
-                },
-                'assets': health_data
-            }
-    
-    def get_live_price(self, symbol: str) -> Optional[Dict]:
-        """Get current live price"""
-        with self.data_lock:
-            if symbol not in self.current_prices:
-                return None
-            
-            return {
-                'price': self.current_prices[symbol],
-                'volume': self.volumes[symbol][-1] if self.volumes[symbol] else 0,
-                'source': 'live_websocket',
-                'timestamp': self.last_update.get(symbol, time.time())
-            }
-    
-    def get_price_history(self, symbol: str, length: int = 50) -> List[float]:
-        """Get price history"""
-        with self.data_lock:
-            if symbol not in self.prices:
-                return []
-            return list(self.prices[symbol])[-length:]
-    
-    def get_volume_history(self, symbol: str, length: int = 50) -> List[float]:
-        """Get volume history"""
-        with self.data_lock:
-            if symbol not in self.volumes:
-                return []
-            return list(self.volumes[symbol])[-length:]
-    
-    def calculate_vwap(self, symbol: str) -> Optional[float]:
-        """Calculate VWAP"""
-        prices = self.get_price_history(symbol, 20)
-        volumes = self.get_volume_history(symbol, 20)
-        
-        if len(prices) < 10 or len(volumes) < 10:
-            return None
-        
-        min_len = min(len(prices), len(volumes))
-        prices = prices[-min_len:]
-        volumes = volumes[-min_len:]
-        
-        total_pv = sum(p * v for p, v in zip(prices, volumes))
-        total_volume = sum(volumes)
-        
-        if total_volume == 0:
-            return None
-        
-        return total_pv / total_volume
     
     def stop(self):
         self.running = False

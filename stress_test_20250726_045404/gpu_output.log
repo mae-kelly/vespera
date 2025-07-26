@@ -1,0 +1,21 @@
+GPU Config: apple_mps on mps
+Config loaded successfully
+Testing GPU on device: mps
+  GPU operation 1: OK (result: 1000.000)
+  GPU operation 2: OK (result: 1000.000)
+  GPU operation 3: OK (result: 1000.000)
+  GPU operation 4: OK (result: 1000.000)
+  GPU operation 5: OK (result: 1000.000)
+  GPU operation 6: OK (result: 1000.000)
+  GPU operation 7: OK (result: 1000.000)
+  GPU operation 8: OK (result: 1000.000)
+  GPU operation 9: OK (result: 1000.000)
+  GPU operation 10: OK (result: 1000.000)
+
+GPU Test Summary:
+  Device: mps
+  Operations completed: 10/10
+  Total time: 373.6ms
+  Average per operation: 37.4ms
+
+FINAL_RESULT: {"device": "mps", "operations_completed": 10, "total_operations": 10, "total_time_ms": 373.64, "avg_time_per_op": 37.36, "errors": []}
