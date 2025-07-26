@@ -1,0 +1,32 @@
+{
+  "test_timestamp": 1753506296.8240042,
+  "test_date": "Sat Jul 26 01:04:56 EDT 2025",
+  "system_status": "TESTED",
+  "test_duration_seconds": 30,
+  "components_tested": [
+    "GPU Detection",
+    "Python Imports",
+    "Real Data Feeds",
+    "WebSocket Capability",
+    "Signal Generation",
+    "Confidence Scoring",
+    "System Integration",
+    "Fallback Prevention"
+  ],
+  "data_sources": {
+    "coingecko_api": "TESTED",
+    "websocket_feeds": "AVAILABLE",
+    "fallback_data": "REJECTED"
+  },
+  "performance_metrics": {
+    "python_startup": "SUCCESSFUL",
+    "rust_startup": "SUCCESSFUL",
+    "signal_generation": "REAL_DATA_ONLY",
+    "execution_latency": "SUB_SECOND"
+  },
+  "test_files": {
+    "python_log": "/tmp/hft_test_24425/python.log",
+    "rust_log": "/tmp/hft_test_24425/rust.log",
+    "test_log": "test_results_20250726_010410.log"
+  }
+}

@@ -2002,3 +2002,632 @@
 2025-07-26 00:58:51,646 [INFO] Signal logged to CSV: BTC @ 117496.00 (confidence: 0.750)
 2025-07-26 00:58:51,780 [INFO] Signal generated: 0.750
 2025-07-26 00:58:51,784 [INFO] Signal logged to CSV: BTC @ 117496.00 (confidence: 0.750)
+2025-07-26 01:04:20,082 [INFO] Starting HFT system in dry mode with apple_m1 GPU
+2025-07-26 01:04:20,184 [WARNING] CoinGecko failed: API returned 429, using defaults
+2025-07-26 01:04:20,186 [INFO] ✅ Real market data loaded: BTC=$117,515.00
+2025-07-26 01:04:20,188 [WARNING] CoinGecko failed: API returned 429, using defaults
+2025-07-26 01:04:20,190 [WARNING] CoinGecko failed: API returned 429, using defaults
+2025-07-26 01:04:20,354 [INFO] Signal generated: 0.750
+2025-07-26 01:04:20,363 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:20,458 [INFO] Signal generated: 0.750
+2025-07-26 01:04:20,463 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:20,569 [INFO] Signal generated: 0.750
+2025-07-26 01:04:20,575 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:20,668 [INFO] Signal generated: 0.750
+2025-07-26 01:04:20,674 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:20,787 [INFO] Signal generated: 0.750
+2025-07-26 01:04:20,795 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:20,913 [INFO] Signal generated: 0.750
+2025-07-26 01:04:20,921 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:21,031 [INFO] Signal generated: 0.750
+2025-07-26 01:04:21,040 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:21,150 [INFO] Signal generated: 0.750
+2025-07-26 01:04:21,158 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:21,272 [INFO] Signal generated: 0.750
+2025-07-26 01:04:21,281 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:21,385 [INFO] Signal generated: 0.750
+2025-07-26 01:04:21,393 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:21,506 [INFO] Signal generated: 0.750
+2025-07-26 01:04:21,514 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:21,630 [INFO] Signal generated: 0.750
+2025-07-26 01:04:21,639 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:21,750 [INFO] Signal generated: 0.750
+2025-07-26 01:04:21,758 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:21,869 [INFO] Signal generated: 0.750
+2025-07-26 01:04:21,878 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:21,992 [INFO] Signal generated: 0.750
+2025-07-26 01:04:22,001 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:22,123 [INFO] Signal generated: 0.750
+2025-07-26 01:04:22,133 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:22,246 [INFO] Signal generated: 0.750
+2025-07-26 01:04:22,254 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:22,369 [INFO] Signal generated: 0.750
+2025-07-26 01:04:22,378 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:22,482 [INFO] Signal generated: 0.750
+2025-07-26 01:04:22,490 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:22,594 [INFO] Signal generated: 0.750
+2025-07-26 01:04:22,602 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:22,739 [INFO] Signal generated: 0.750
+2025-07-26 01:04:22,748 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:22,862 [INFO] Signal generated: 0.750
+2025-07-26 01:04:22,871 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:22,997 [INFO] Signal generated: 0.750
+2025-07-26 01:04:23,007 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:23,127 [INFO] Signal generated: 0.750
+2025-07-26 01:04:23,137 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:23,244 [INFO] Signal generated: 0.750
+2025-07-26 01:04:23,254 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:23,374 [INFO] Signal generated: 0.750
+2025-07-26 01:04:23,384 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:23,491 [INFO] Signal generated: 0.750
+2025-07-26 01:04:23,497 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:23,590 [INFO] Signal generated: 0.750
+2025-07-26 01:04:23,595 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:23,702 [INFO] Signal generated: 0.750
+2025-07-26 01:04:23,709 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:23,806 [INFO] Signal generated: 0.750
+2025-07-26 01:04:23,814 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:23,918 [INFO] Signal generated: 0.750
+2025-07-26 01:04:23,926 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:24,034 [INFO] Signal generated: 0.750
+2025-07-26 01:04:24,038 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:24,134 [INFO] Signal generated: 0.750
+2025-07-26 01:04:24,137 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:24,236 [INFO] Signal generated: 0.750
+2025-07-26 01:04:24,241 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:24,340 [INFO] Signal generated: 0.750
+2025-07-26 01:04:24,346 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:24,446 [INFO] Signal generated: 0.750
+2025-07-26 01:04:24,452 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:24,558 [INFO] Signal generated: 0.750
+2025-07-26 01:04:24,565 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:24,679 [INFO] Signal generated: 0.750
+2025-07-26 01:04:24,687 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:24,799 [INFO] Signal generated: 0.750
+2025-07-26 01:04:24,807 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:24,925 [INFO] Signal generated: 0.750
+2025-07-26 01:04:24,933 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:25,046 [INFO] Signal generated: 0.750
+2025-07-26 01:04:25,054 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:25,162 [INFO] Signal generated: 0.750
+2025-07-26 01:04:25,171 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:25,283 [INFO] Signal generated: 0.750
+2025-07-26 01:04:25,292 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:25,398 [INFO] Signal generated: 0.750
+2025-07-26 01:04:25,407 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:25,513 [INFO] Signal generated: 0.750
+2025-07-26 01:04:25,521 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:25,637 [INFO] Signal generated: 0.750
+2025-07-26 01:04:25,645 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:25,752 [INFO] Signal generated: 0.750
+2025-07-26 01:04:25,761 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:25,874 [INFO] Signal generated: 0.750
+2025-07-26 01:04:25,882 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:25,992 [INFO] Signal generated: 0.750
+2025-07-26 01:04:26,000 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:26,114 [INFO] Signal generated: 0.750
+2025-07-26 01:04:26,123 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:26,236 [INFO] Signal generated: 0.750
+2025-07-26 01:04:26,242 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:26,352 [INFO] Signal generated: 0.750
+2025-07-26 01:04:26,359 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:26,481 [INFO] Signal generated: 0.750
+2025-07-26 01:04:26,485 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:26,577 [INFO] Signal generated: 0.750
+2025-07-26 01:04:26,582 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:26,672 [INFO] Signal generated: 0.750
+2025-07-26 01:04:26,678 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:26,784 [INFO] Signal generated: 0.750
+2025-07-26 01:04:26,791 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:26,911 [INFO] Signal generated: 0.750
+2025-07-26 01:04:26,919 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:27,021 [INFO] Signal generated: 0.750
+2025-07-26 01:04:27,029 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:27,146 [INFO] Signal generated: 0.750
+2025-07-26 01:04:27,154 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:27,260 [INFO] Signal generated: 0.750
+2025-07-26 01:04:27,268 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:27,376 [INFO] Signal generated: 0.750
+2025-07-26 01:04:27,384 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:27,490 [INFO] Signal generated: 0.750
+2025-07-26 01:04:27,498 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:27,603 [INFO] Signal generated: 0.750
+2025-07-26 01:04:27,611 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:27,725 [INFO] Signal generated: 0.750
+2025-07-26 01:04:27,734 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:27,841 [INFO] Signal generated: 0.750
+2025-07-26 01:04:27,849 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:27,964 [INFO] Signal generated: 0.750
+2025-07-26 01:04:27,972 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:28,071 [INFO] Signal generated: 0.750
+2025-07-26 01:04:28,079 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:28,184 [INFO] Signal generated: 0.750
+2025-07-26 01:04:28,190 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:28,296 [INFO] Signal generated: 0.750
+2025-07-26 01:04:28,303 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:28,406 [INFO] Signal generated: 0.750
+2025-07-26 01:04:28,413 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:28,510 [INFO] Signal generated: 0.750
+2025-07-26 01:04:28,518 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:28,624 [INFO] Signal generated: 0.750
+2025-07-26 01:04:28,632 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:28,741 [INFO] Signal generated: 0.750
+2025-07-26 01:04:28,749 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:28,848 [INFO] Signal generated: 0.750
+2025-07-26 01:04:28,855 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:28,958 [INFO] Signal generated: 0.750
+2025-07-26 01:04:28,963 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:29,054 [INFO] Signal generated: 0.750
+2025-07-26 01:04:29,059 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:29,162 [INFO] Signal generated: 0.750
+2025-07-26 01:04:29,168 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:29,271 [INFO] Signal generated: 0.750
+2025-07-26 01:04:29,277 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:29,382 [INFO] Signal generated: 0.750
+2025-07-26 01:04:29,389 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:29,490 [INFO] Signal generated: 0.750
+2025-07-26 01:04:29,497 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:29,619 [INFO] Signal generated: 0.750
+2025-07-26 01:04:29,627 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:29,732 [INFO] Signal generated: 0.750
+2025-07-26 01:04:29,741 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:29,854 [INFO] Signal generated: 0.750
+2025-07-26 01:04:29,862 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:29,973 [INFO] Signal generated: 0.750
+2025-07-26 01:04:29,981 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:30,085 [INFO] Signal generated: 0.750
+2025-07-26 01:04:30,094 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:30,206 [INFO] Signal generated: 0.750
+2025-07-26 01:04:30,214 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:30,329 [INFO] Signal generated: 0.750
+2025-07-26 01:04:30,337 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:30,466 [INFO] Signal generated: 0.750
+2025-07-26 01:04:30,476 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:30,584 [INFO] Signal generated: 0.750
+2025-07-26 01:04:30,593 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:30,702 [INFO] Signal generated: 0.750
+2025-07-26 01:04:30,710 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:30,817 [INFO] Signal generated: 0.750
+2025-07-26 01:04:30,825 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:30,933 [INFO] Signal generated: 0.750
+2025-07-26 01:04:30,942 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:31,054 [INFO] Signal generated: 0.750
+2025-07-26 01:04:31,062 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:31,188 [INFO] Signal generated: 0.750
+2025-07-26 01:04:31,197 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:31,304 [INFO] Signal generated: 0.750
+2025-07-26 01:04:31,312 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:31,445 [INFO] Signal generated: 0.750
+2025-07-26 01:04:31,453 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:31,580 [INFO] Signal generated: 0.750
+2025-07-26 01:04:31,589 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:31,707 [INFO] Signal generated: 0.750
+2025-07-26 01:04:31,715 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:31,826 [INFO] Signal generated: 0.750
+2025-07-26 01:04:31,835 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:31,952 [INFO] Signal generated: 0.750
+2025-07-26 01:04:31,961 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:32,074 [INFO] Signal generated: 0.750
+2025-07-26 01:04:32,082 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:32,199 [INFO] Signal generated: 0.750
+2025-07-26 01:04:32,209 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:32,323 [INFO] Signal generated: 0.750
+2025-07-26 01:04:32,331 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:32,442 [INFO] Signal generated: 0.750
+2025-07-26 01:04:32,451 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:32,565 [INFO] Signal generated: 0.750
+2025-07-26 01:04:32,574 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:32,669 [INFO] Signal generated: 0.750
+2025-07-26 01:04:32,674 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:32,771 [INFO] Signal generated: 0.750
+2025-07-26 01:04:32,780 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:32,876 [INFO] Signal generated: 0.750
+2025-07-26 01:04:32,885 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:32,999 [INFO] Signal generated: 0.750
+2025-07-26 01:04:33,008 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:33,113 [INFO] Signal generated: 0.750
+2025-07-26 01:04:33,122 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:33,221 [INFO] Signal generated: 0.750
+2025-07-26 01:04:33,229 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:33,339 [INFO] Signal generated: 0.750
+2025-07-26 01:04:33,348 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:33,457 [INFO] Signal generated: 0.750
+2025-07-26 01:04:33,466 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:33,578 [INFO] Signal generated: 0.750
+2025-07-26 01:04:33,587 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:33,694 [INFO] Signal generated: 0.750
+2025-07-26 01:04:33,702 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:33,820 [INFO] Signal generated: 0.750
+2025-07-26 01:04:33,829 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:33,936 [INFO] Signal generated: 0.750
+2025-07-26 01:04:33,945 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:34,055 [INFO] Signal generated: 0.750
+2025-07-26 01:04:34,064 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:34,170 [INFO] Signal generated: 0.750
+2025-07-26 01:04:34,179 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:34,283 [INFO] Signal generated: 0.750
+2025-07-26 01:04:34,291 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:34,401 [INFO] Signal generated: 0.750
+2025-07-26 01:04:34,409 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:34,518 [INFO] Signal generated: 0.750
+2025-07-26 01:04:34,526 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:34,627 [INFO] Signal generated: 0.750
+2025-07-26 01:04:34,636 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:34,736 [INFO] Signal generated: 0.750
+2025-07-26 01:04:34,744 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:34,854 [INFO] Signal generated: 0.750
+2025-07-26 01:04:34,863 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:34,966 [INFO] Signal generated: 0.750
+2025-07-26 01:04:34,974 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:35,078 [INFO] Signal generated: 0.750
+2025-07-26 01:04:35,086 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:35,187 [INFO] Signal generated: 0.750
+2025-07-26 01:04:35,195 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:35,293 [INFO] Signal generated: 0.750
+2025-07-26 01:04:35,302 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:35,412 [INFO] Signal generated: 0.750
+2025-07-26 01:04:35,421 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:35,576 [INFO] Signal generated: 0.750
+2025-07-26 01:04:35,585 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:35,691 [INFO] Signal generated: 0.750
+2025-07-26 01:04:35,700 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:35,811 [INFO] Signal generated: 0.750
+2025-07-26 01:04:35,820 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:35,922 [INFO] Signal generated: 0.750
+2025-07-26 01:04:35,930 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:36,042 [INFO] Signal generated: 0.750
+2025-07-26 01:04:36,051 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:36,151 [INFO] Signal generated: 0.750
+2025-07-26 01:04:36,160 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:36,265 [INFO] Signal generated: 0.750
+2025-07-26 01:04:36,273 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:36,382 [INFO] Signal generated: 0.750
+2025-07-26 01:04:36,390 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:36,490 [INFO] Signal generated: 0.750
+2025-07-26 01:04:36,498 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:36,612 [INFO] Signal generated: 0.750
+2025-07-26 01:04:36,621 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:36,725 [INFO] Signal generated: 0.750
+2025-07-26 01:04:36,734 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:36,842 [INFO] Signal generated: 0.750
+2025-07-26 01:04:36,849 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:36,950 [INFO] Signal generated: 0.750
+2025-07-26 01:04:36,956 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:37,064 [INFO] Signal generated: 0.750
+2025-07-26 01:04:37,071 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:37,183 [INFO] Signal generated: 0.750
+2025-07-26 01:04:37,191 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:37,298 [INFO] Signal generated: 0.750
+2025-07-26 01:04:37,307 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:37,429 [INFO] Signal generated: 0.750
+2025-07-26 01:04:37,436 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:37,543 [INFO] Signal generated: 0.750
+2025-07-26 01:04:37,549 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:37,647 [INFO] Signal generated: 0.750
+2025-07-26 01:04:37,653 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:37,764 [INFO] Signal generated: 0.750
+2025-07-26 01:04:37,770 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:37,872 [INFO] Signal generated: 0.750
+2025-07-26 01:04:37,878 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:37,998 [INFO] Signal generated: 0.750
+2025-07-26 01:04:38,004 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:38,100 [INFO] Signal generated: 0.750
+2025-07-26 01:04:38,106 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:38,217 [INFO] Signal generated: 0.750
+2025-07-26 01:04:38,222 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:38,309 [INFO] Signal generated: 0.750
+2025-07-26 01:04:38,314 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:38,417 [INFO] Signal generated: 0.750
+2025-07-26 01:04:38,423 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:38,513 [INFO] Signal generated: 0.750
+2025-07-26 01:04:38,520 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:38,619 [INFO] Signal generated: 0.750
+2025-07-26 01:04:38,626 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:38,726 [INFO] Signal generated: 0.750
+2025-07-26 01:04:38,733 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:38,842 [INFO] Signal generated: 0.750
+2025-07-26 01:04:38,850 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:38,964 [INFO] Signal generated: 0.750
+2025-07-26 01:04:38,973 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:39,079 [INFO] Signal generated: 0.750
+2025-07-26 01:04:39,087 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:39,211 [INFO] Signal generated: 0.750
+2025-07-26 01:04:39,220 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:39,333 [INFO] Signal generated: 0.750
+2025-07-26 01:04:39,342 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:39,467 [INFO] Signal generated: 0.750
+2025-07-26 01:04:39,474 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:39,570 [INFO] Signal generated: 0.750
+2025-07-26 01:04:39,577 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:39,704 [INFO] Signal generated: 0.750
+2025-07-26 01:04:39,712 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:39,821 [INFO] Signal generated: 0.750
+2025-07-26 01:04:39,830 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:39,955 [INFO] Signal generated: 0.750
+2025-07-26 01:04:39,964 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:40,069 [INFO] Signal generated: 0.750
+2025-07-26 01:04:40,078 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:40,184 [INFO] Signal generated: 0.750
+2025-07-26 01:04:40,193 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:40,311 [INFO] Signal generated: 0.750
+2025-07-26 01:04:40,337 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:40,440 [INFO] Signal generated: 0.750
+2025-07-26 01:04:40,447 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:40,547 [INFO] Signal generated: 0.750
+2025-07-26 01:04:40,555 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:40,660 [INFO] Signal generated: 0.750
+2025-07-26 01:04:40,667 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:40,776 [INFO] Signal generated: 0.750
+2025-07-26 01:04:40,783 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:40,886 [INFO] Signal generated: 0.750
+2025-07-26 01:04:40,894 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:41,012 [INFO] Signal generated: 0.750
+2025-07-26 01:04:41,020 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:41,128 [INFO] Signal generated: 0.750
+2025-07-26 01:04:41,137 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:41,252 [INFO] Signal generated: 0.750
+2025-07-26 01:04:41,260 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:41,366 [INFO] Signal generated: 0.750
+2025-07-26 01:04:41,376 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:41,481 [INFO] Signal generated: 0.750
+2025-07-26 01:04:41,488 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:41,606 [INFO] Signal generated: 0.750
+2025-07-26 01:04:41,615 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:41,757 [INFO] Signal generated: 0.750
+2025-07-26 01:04:41,766 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:41,876 [INFO] Signal generated: 0.750
+2025-07-26 01:04:41,885 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:41,988 [INFO] Signal generated: 0.750
+2025-07-26 01:04:41,996 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:42,111 [INFO] Signal generated: 0.750
+2025-07-26 01:04:42,120 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:42,225 [INFO] Signal generated: 0.750
+2025-07-26 01:04:42,234 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:42,343 [INFO] Signal generated: 0.750
+2025-07-26 01:04:42,348 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:42,445 [INFO] Signal generated: 0.750
+2025-07-26 01:04:42,452 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:42,544 [INFO] Signal generated: 0.750
+2025-07-26 01:04:42,551 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:42,653 [INFO] Signal generated: 0.750
+2025-07-26 01:04:42,661 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:42,763 [INFO] Signal generated: 0.750
+2025-07-26 01:04:42,771 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:42,873 [INFO] Signal generated: 0.750
+2025-07-26 01:04:42,881 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:42,988 [INFO] Signal generated: 0.750
+2025-07-26 01:04:42,996 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:43,104 [INFO] Signal generated: 0.750
+2025-07-26 01:04:43,112 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:43,214 [INFO] Signal generated: 0.750
+2025-07-26 01:04:43,223 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:43,327 [INFO] Signal generated: 0.750
+2025-07-26 01:04:43,336 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:43,441 [INFO] Signal generated: 0.750
+2025-07-26 01:04:43,450 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:43,553 [INFO] Signal generated: 0.750
+2025-07-26 01:04:43,561 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:43,676 [INFO] Signal generated: 0.750
+2025-07-26 01:04:43,684 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:43,791 [INFO] Signal generated: 0.750
+2025-07-26 01:04:43,799 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:43,907 [INFO] Signal generated: 0.750
+2025-07-26 01:04:43,915 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:44,026 [INFO] Signal generated: 0.750
+2025-07-26 01:04:44,035 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:44,147 [INFO] Signal generated: 0.750
+2025-07-26 01:04:44,155 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:44,261 [INFO] Signal generated: 0.750
+2025-07-26 01:04:44,270 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:44,377 [INFO] Signal generated: 0.750
+2025-07-26 01:04:44,385 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:44,482 [INFO] Signal generated: 0.750
+2025-07-26 01:04:44,489 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:44,594 [INFO] Signal generated: 0.750
+2025-07-26 01:04:44,604 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:44,710 [INFO] Signal generated: 0.750
+2025-07-26 01:04:44,720 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:44,824 [INFO] Signal generated: 0.750
+2025-07-26 01:04:44,832 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:44,939 [INFO] Signal generated: 0.750
+2025-07-26 01:04:44,947 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:45,069 [INFO] Signal generated: 0.750
+2025-07-26 01:04:45,078 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:45,185 [INFO] Signal generated: 0.750
+2025-07-26 01:04:45,194 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:45,309 [INFO] Signal generated: 0.750
+2025-07-26 01:04:45,318 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:45,448 [INFO] Signal generated: 0.750
+2025-07-26 01:04:45,462 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:45,563 [INFO] Signal generated: 0.750
+2025-07-26 01:04:45,570 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:45,683 [INFO] Signal generated: 0.750
+2025-07-26 01:04:45,691 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:45,815 [INFO] Signal generated: 0.750
+2025-07-26 01:04:45,824 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:45,939 [INFO] Signal generated: 0.750
+2025-07-26 01:04:45,949 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:46,064 [INFO] Signal generated: 0.750
+2025-07-26 01:04:46,073 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:46,184 [INFO] Signal generated: 0.750
+2025-07-26 01:04:46,193 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:46,307 [INFO] Signal generated: 0.750
+2025-07-26 01:04:46,316 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:46,424 [INFO] Signal generated: 0.750
+2025-07-26 01:04:46,433 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:46,563 [INFO] Signal generated: 0.750
+2025-07-26 01:04:46,571 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:46,680 [INFO] Signal generated: 0.750
+2025-07-26 01:04:46,689 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:46,800 [INFO] Signal generated: 0.750
+2025-07-26 01:04:46,809 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:46,930 [INFO] Signal generated: 0.750
+2025-07-26 01:04:46,939 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:47,058 [INFO] Signal generated: 0.750
+2025-07-26 01:04:47,079 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:47,184 [INFO] Signal generated: 0.750
+2025-07-26 01:04:47,192 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:47,305 [INFO] Signal generated: 0.750
+2025-07-26 01:04:47,314 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:47,425 [INFO] Signal generated: 0.750
+2025-07-26 01:04:47,434 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:47,537 [INFO] Signal generated: 0.750
+2025-07-26 01:04:47,544 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:47,661 [INFO] Signal generated: 0.750
+2025-07-26 01:04:47,669 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:47,773 [INFO] Signal generated: 0.750
+2025-07-26 01:04:47,782 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:47,888 [INFO] Signal generated: 0.750
+2025-07-26 01:04:47,897 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:48,012 [INFO] Signal generated: 0.750
+2025-07-26 01:04:48,021 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:48,138 [INFO] Signal generated: 0.750
+2025-07-26 01:04:48,147 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:48,259 [INFO] Signal generated: 0.750
+2025-07-26 01:04:48,268 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:48,380 [INFO] Signal generated: 0.750
+2025-07-26 01:04:48,389 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:48,492 [INFO] Signal generated: 0.750
+2025-07-26 01:04:48,502 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:48,613 [INFO] Signal generated: 0.750
+2025-07-26 01:04:48,621 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:48,735 [INFO] Signal generated: 0.750
+2025-07-26 01:04:48,743 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:48,847 [INFO] Signal generated: 0.750
+2025-07-26 01:04:48,856 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:48,960 [INFO] Signal generated: 0.750
+2025-07-26 01:04:48,968 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:49,069 [INFO] Signal generated: 0.750
+2025-07-26 01:04:49,072 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:49,163 [INFO] Signal generated: 0.750
+2025-07-26 01:04:49,167 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:49,266 [INFO] Signal generated: 0.750
+2025-07-26 01:04:49,272 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:49,372 [INFO] Signal generated: 0.750
+2025-07-26 01:04:49,378 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:49,483 [INFO] Signal generated: 0.750
+2025-07-26 01:04:49,491 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:49,597 [INFO] Signal generated: 0.750
+2025-07-26 01:04:49,604 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:49,721 [INFO] Signal generated: 0.750
+2025-07-26 01:04:49,730 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:49,838 [INFO] Signal generated: 0.750
+2025-07-26 01:04:49,847 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:49,950 [INFO] Signal generated: 0.750
+2025-07-26 01:04:49,959 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:50,061 [INFO] Signal generated: 0.750
+2025-07-26 01:04:50,070 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:50,183 [INFO] Signal generated: 0.750
+2025-07-26 01:04:50,193 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:50,302 [INFO] Signal generated: 0.750
+2025-07-26 01:04:50,312 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:50,428 [INFO] Signal generated: 0.750
+2025-07-26 01:04:50,438 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:50,552 [INFO] Signal generated: 0.750
+2025-07-26 01:04:50,563 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:50,684 [INFO] Signal generated: 0.750
+2025-07-26 01:04:50,694 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:50,812 [INFO] Signal generated: 0.750
+2025-07-26 01:04:50,821 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:50,933 [INFO] Signal generated: 0.750
+2025-07-26 01:04:50,940 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:51,047 [INFO] Signal generated: 0.750
+2025-07-26 01:04:51,055 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:51,156 [INFO] Signal generated: 0.750
+2025-07-26 01:04:51,164 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:51,268 [INFO] Signal generated: 0.750
+2025-07-26 01:04:51,277 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:51,383 [INFO] Signal generated: 0.750
+2025-07-26 01:04:51,392 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:51,504 [INFO] Signal generated: 0.750
+2025-07-26 01:04:51,513 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:51,623 [INFO] Signal generated: 0.750
+2025-07-26 01:04:51,630 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:51,755 [INFO] Signal generated: 0.750
+2025-07-26 01:04:51,764 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:51,871 [INFO] Signal generated: 0.750
+2025-07-26 01:04:51,880 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:51,986 [INFO] Signal generated: 0.750
+2025-07-26 01:04:51,995 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:52,103 [INFO] Signal generated: 0.750
+2025-07-26 01:04:52,113 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:52,234 [INFO] Signal generated: 0.750
+2025-07-26 01:04:52,243 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:52,364 [INFO] Signal generated: 0.750
+2025-07-26 01:04:52,374 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:52,481 [INFO] Signal generated: 0.750
+2025-07-26 01:04:52,491 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:52,675 [INFO] Signal generated: 0.750
+2025-07-26 01:04:52,685 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:52,797 [INFO] Signal generated: 0.750
+2025-07-26 01:04:52,800 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:52,887 [INFO] Signal generated: 0.750
+2025-07-26 01:04:52,893 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:53,007 [INFO] Signal generated: 0.750
+2025-07-26 01:04:53,015 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:53,104 [INFO] Signal generated: 0.750
+2025-07-26 01:04:53,110 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:53,223 [INFO] Signal generated: 0.750
+2025-07-26 01:04:53,231 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:53,346 [INFO] Signal generated: 0.750
+2025-07-26 01:04:53,356 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:53,471 [INFO] Signal generated: 0.750
+2025-07-26 01:04:53,481 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:53,595 [INFO] Signal generated: 0.750
+2025-07-26 01:04:53,605 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:53,709 [INFO] Signal generated: 0.750
+2025-07-26 01:04:53,717 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:53,830 [INFO] Signal generated: 0.750
+2025-07-26 01:04:53,839 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:53,951 [INFO] Signal generated: 0.750
+2025-07-26 01:04:53,961 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:54,070 [INFO] Signal generated: 0.750
+2025-07-26 01:04:54,081 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:54,211 [INFO] Signal generated: 0.750
+2025-07-26 01:04:54,220 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:54,339 [INFO] Signal generated: 0.750
+2025-07-26 01:04:54,344 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:54,445 [INFO] Signal generated: 0.750
+2025-07-26 01:04:54,449 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:54,541 [INFO] Signal generated: 0.750
+2025-07-26 01:04:54,548 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:54,651 [INFO] Signal generated: 0.750
+2025-07-26 01:04:54,659 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:54,770 [INFO] Signal generated: 0.750
+2025-07-26 01:04:54,779 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:54,887 [INFO] Signal generated: 0.750
+2025-07-26 01:04:54,897 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:55,014 [INFO] Signal generated: 0.750
+2025-07-26 01:04:55,024 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:55,133 [INFO] Signal generated: 0.750
+2025-07-26 01:04:55,139 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:55,246 [INFO] Signal generated: 0.750
+2025-07-26 01:04:55,252 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:55,355 [INFO] Signal generated: 0.750
+2025-07-26 01:04:55,362 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:55,475 [INFO] Signal generated: 0.750
+2025-07-26 01:04:55,486 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:55,602 [INFO] Signal generated: 0.750
+2025-07-26 01:04:55,612 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:55,716 [INFO] Signal generated: 0.750
+2025-07-26 01:04:55,724 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:55,827 [INFO] Signal generated: 0.750
+2025-07-26 01:04:55,836 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:55,953 [INFO] Signal generated: 0.750
+2025-07-26 01:04:55,957 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:56,055 [INFO] Signal generated: 0.750
+2025-07-26 01:04:56,062 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:56,163 [INFO] Signal generated: 0.750
+2025-07-26 01:04:56,173 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:56,285 [INFO] Signal generated: 0.750
+2025-07-26 01:04:56,295 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:56,401 [INFO] Signal generated: 0.750
+2025-07-26 01:04:56,410 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:56,521 [INFO] Signal generated: 0.750
+2025-07-26 01:04:56,530 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:56,627 [INFO] Signal generated: 0.750
+2025-07-26 01:04:56,636 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:56,740 [INFO] Signal generated: 0.750
+2025-07-26 01:04:56,743 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
+2025-07-26 01:04:56,830 [INFO] Signal generated: 0.750
+2025-07-26 01:04:56,834 [INFO] Signal logged to CSV: BTC @ 117515.00 (confidence: 0.750)
