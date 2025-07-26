@@ -11,11 +11,12 @@ mod okx_executor;
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     env_logger::init();
     
-    let mode = std::env::var("MODE").unwrap_or_else(|_| "dry".to_string());
-    let confidence_threshold = 0.3;
+    // PRODUCTION: Force live mode
+    std::env::set_var("MODE", "live");
+    let confidence_threshold = 0.6; // Higher threshold for production
     
-    println!("🦀 HFT Executor starting in {} mode", mode);
-    log::info!("System startup with sub-millisecond targeting");
+    println!("🔴 PRODUCTION HFT EXECUTOR - LIVE TRADING ONLY");
+    log::info!("PRODUCTION startup - no dry mode");
     
     let mut okx_executor = okx_executor::OkxExecutor::new().await?;
     let mut iteration = 0;
@@ -31,6 +32,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                     .and_then(|v| v.as_f64())
                     .unwrap_or(0.0);
                 
+                // PRODUCTION: Verify it's a production signal
+                if !signal_data.get("production_validated").and_then(|v| v.as_bool()).unwrap_or(false) {
+                    log::warn!("❌ PRODUCTION: Non-validated signal rejected");
+                    continue;
+                }
+                
                 let signal_timestamp = signal_data.get("timestamp")
                     .and_then(|v| v.as_f64())
                     .unwrap_or(0.0) as u64;
@@ -39,24 +46,26 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                     let current_time = SystemTime::now().duration_since(UNIX_EPOCH)?.as_secs();
                     let age_seconds = current_time.saturating_sub(signal_timestamp);
                     
-                    if age_seconds <= 30 {
-                        log::info!("Processing signal: confidence={:.3}, age={}s", confidence, age_seconds);
+                    // PRODUCTION: Stricter age limit
+                    if age_seconds <= 5 {
+                        log::info!("🔴 PRODUCTION execution: confidence={:.3}, age={}s", confidence, age_seconds);
                         
                         match okx_executor.execute_short_order(&signal_data).await {
                             Ok(fill_data) => {
-                                log::info!("✅ Execution successful");
+                                log::info!("✅ PRODUCTION execution successful");
                                 
-                                let enhanced_fill = json!({
+                                let production_fill = json!({
                                     "timestamp": Utc::now().timestamp(),
                                     "asset": fill_data.get("asset"),
                                     "side": "sell",
                                     "entry_price": fill_data.get("entry_price"),
                                     "quantity": fill_data.get("quantity"),
                                     "confidence": confidence,
-                                    "mode": mode.clone(),
+                                    "mode": "PRODUCTION",
                                     "status": fill_data.get("status"),
                                     "order_id": fill_data.get("order_id"),
-                                    "execution_time_us": loop_start.elapsed().unwrap_or(Duration::from_secs(0)).as_micros()
+                                    "execution_time_us": loop_start.elapsed().unwrap_or(Duration::from_secs(0)).as_micros(),
+                                    "validated": true
                                 });
                                 
                                 let fills_content = fs::read_to_string("/tmp/fills.json")
@@ -65,9 +74,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                                     .unwrap_or_else(|_| json!([]));
                                 
                                 if let Some(array) = fills_array.as_array_mut() {
-                                    array.push(enhanced_fill);
-                                    if array.len() > 100 {
-                                        array.drain(0..50);
+                                    array.push(production_fill);
+                                    if array.len() > 1000 {
+                                        array.drain(0..500);
                                     }
                                 }
                                 
@@ -75,24 +84,28 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                                 last_signal_timestamp = signal_timestamp;
                             }
                             Err(e) => {
-                                log::error!("❌ Execution failed: {}", e);
+                                log::error!("❌ PRODUCTION execution failed: {}", e);
                             }
                         }
+                    } else {
+                        log::warn!("❌ PRODUCTION: Signal too old ({}s)", age_seconds);
                     }
+                } else {
+                    log::debug!("Signal below production threshold: {:.3}", confidence);
                 }
             }
         }
         
-        if iteration % 60 == 0 {
+        if iteration % 30 == 0 {
             let execution_time = loop_start.elapsed().unwrap_or(Duration::from_secs(0));
-            log::info!("System iteration: {} | Time: {} UTC | Cycle: {}μs", 
+            log::info!("🔴 PRODUCTION iteration: {} | UTC: {} | Cycle: {}μs", 
                       iteration, 
                       Utc::now().format("%H:%M:%S"),
                       execution_time.as_micros());
         }
         
         let execution_time = loop_start.elapsed().unwrap_or(Duration::from_secs(0));
-        let target_cycle = Duration::from_micros(1000);
+        let target_cycle = Duration::from_micros(500);
         let sleep_duration = target_cycle.saturating_sub(execution_time);
         
         if sleep_duration > Duration::from_nanos(0) {

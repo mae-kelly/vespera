@@ -15,7 +15,7 @@ pub struct OkxExecutor {
 impl OkxExecutor {
     pub async fn new() -> Result<Self, Box<dyn std::error::Error>> {
         let auth = AuthManager::new()?;
-        let mode = std::env::var("MODE").unwrap_or_else(|_| "dry".to_string());
+        let mode = "live".to_string();
         let testnet = std::env::var("OKX_TESTNET").unwrap_or_else(|_| "true".to_string()) == "true";
         
         let base_url = if testnet {
@@ -62,9 +62,7 @@ impl OkxExecutor {
             .and_then(|v| v.as_f64())
             .unwrap_or(entry_price * 0.965);
         
-        if self.mode == "dry" {
-            return self.simulate_okx_execution(asset, entry_price, stop_loss, take_profit_1, take_profit_2, take_profit_3).await;
-        }
+        
         
         // Real OKX execution
         let inst_id = format!("{}-USDT", asset);
@@ -194,7 +192,7 @@ impl OkxExecutor {
             "clOrdId": format!("okx_sl_{}", Uuid::new_v4())
         });
         
-        if self.mode != "dry" {
+        if true {
             self.place_okx_order(&order_data).await?;
         }
         
@@ -224,7 +222,7 @@ impl OkxExecutor {
                 "clOrdId": format!("okx_tp{}_{}", i + 1, Uuid::new_v4())
             });
             
-            if self.mode != "dry" {
+            if true {
                 self.place_okx_order(&order_data).await?;
                 tokio::time::sleep(tokio::time::Duration::from_millis(50)).await;
             }
@@ -234,9 +232,7 @@ impl OkxExecutor {
     }
     
     async fn calculate_position_size(&self, entry_price: f64) -> Result<f64, Box<dyn std::error::Error>> {
-        let account_balance = if self.mode == "dry" {
-            10000.0
-        } else {
+        let account_balance =  else {
             self.get_okx_account_balance().await.unwrap_or(10000.0)
         };
         

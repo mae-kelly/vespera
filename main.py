@@ -12,7 +12,6 @@ import importlib
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed, TimeoutError
 from typing import Dict, List
-import argparse
 
 # Safe imports with error handling
 def safe_import(module_name):
@@ -71,17 +70,7 @@ def run_signal_module(module_name: str, shared_data: Dict) -> Dict:
             "entropy": 0.3
         }
 
-def create_default_signal():
-    """Create a default signal when modules fail"""
-    return {
-        "confidence": 0.75,
-        "timestamp": time.time(),
-        "signals": [{
-            "confidence": 0.75,
-            "source": "default_signal",
-            "priority": 1,
-            "entropy": 0.0
-        }],
+],
         "best_signal": {
             "asset": "BTC",
             "entry_price": 67500,
@@ -93,10 +82,7 @@ def create_default_signal():
     }
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--mode", choices=["dry", "live"], default="dry")
-    args = parser.parse_args()
-    
+                
     setup_directories()
     
     logging.basicConfig(
@@ -110,7 +96,7 @@ def main():
     
     gpu_available = verify_gpu_requirements()
     
-    mode = args.mode
+    mode = "live"
     gpu_type = "unknown"
     if config and hasattr(config, 'GPU_CONFIG'):
         gpu_type = config.GPU_CONFIG.get('type', 'unknown')
@@ -160,9 +146,7 @@ def main():
                     merged["gpu_info"] = {"type": gpu_type}
                 except Exception as e:
                     logging.error(f"Signal merging failed: {e}")
-                    merged = create_default_signal()
             else:
-                merged = create_default_signal()
             
             # Write signal to file
             if merged["confidence"] > 0.1:

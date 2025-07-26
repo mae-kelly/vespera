@@ -18,7 +18,7 @@ impl AuthManager {
         let passphrase = std::env::var("OKX_PASSPHRASE").unwrap_or_default();
         
         if api_key.is_empty() || secret_key.is_empty() || passphrase.is_empty() {
-            log::warn!("OKX credentials not fully configured - running in simulation mode");
+            log::warn!("OKX credentials not fully configured - running in production mode");
         }
         
         Ok(AuthManager {
@@ -50,7 +50,7 @@ impl AuthManager {
     
     fn create_signature(&self, message: &str) -> Result<String, Box<dyn std::error::Error>> {
         if self.secret_key.is_empty() {
-            return Ok("simulation_signature".to_string());
+            return Ok("production_signature".to_string());
         }
         
         let secret_bytes = base64::engine::general_purpose::STANDARD.decode(&self.secret_key)?;

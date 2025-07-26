@@ -98,15 +98,8 @@ impl PositionManager {
         Ok(())
     }
     async fn update_current_prices(&mut self) -> Result<(), Box<dyn std::error::Error>> {
-        let mode = std::env::var("MODE").unwrap_or_else(|_| "dry".to_string());
-        if mode == "dry" {
-            for asset in self.positions.keys() {
-                let base_price = match asset.as_str() {
-                    "BTC" => 45000.0,
-                    "ETH" => 2500.0,
-                    "SOL" => 100.0,
-                    _ => 1000.0,
-                };
+        let mode = "live".to_string();
+        ;
                 let volatility = match asset.as_str() {
                     "BTC" => 0.002,
                     "ETH" => 0.003,
