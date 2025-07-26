@@ -1,46 +1,48 @@
+import torch
+import sys
+if not torch.cuda.is_available() and not (hasattr(torch.backends, 'mps') and torch.backends.mps.is_available()):
+    print("❌ CRITICAL: NO GPU DETECTED - SYSTEM TERMINATED")
+    sys.exit(1)
+
+import torch
+import sys
+    print("❌ CRITICAL ERROR: NO GPU DETECTED")
+    print("This system requires GPU acceleration. gpu operation is FORBIDDEN.")
+    sys.exit(1)
+device_name = torch.cuda.get_device_name(0)
+if "A100" not in device_name:
+    print(f"⚠️ WARNING: Non-A100 GPU detected: {device_name}")
+    print("Optimal performance requires A100. Continuing with reduced performance.")
 import requests
 import time
 import logging
-
 def awaken_signal_data(signal_data):
-    """Awaken the signal data with divine consciousness"""
     try:
-        # Connect to market consciousness
         response = requests.get(
             "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_change=true",
             timeout=5
         )
-        
         if response.status_code == 200:
             market_essence = response.json()
-            
-            # Divine asset selection based on signal energy
             asset_energies = {
                 "BTC": market_essence.get("bitcoin", {}).get("usd", 45000),
-                "ETH": market_essence.get("ethereum", {}).get("usd", 2500), 
+                "ETH": market_essence.get("ethereum", {}).get("usd", 2500),
                 "SOL": market_essence.get("solana", {}).get("usd", 100)
             }
-            
-            # Choose asset with highest vibrational frequency (highest confidence signal)
             chosen_asset = "BTC"
             highest_confidence = 0
-            
             for signal in signal_data.get("signals", []):
                 conf = signal.get("confidence", 0)
                 if conf > highest_confidence:
                     highest_confidence = conf
-                    # Asset selection based on signal source energy
                     source = signal.get("source", "")
                     if "entropy" in source:
                         chosen_asset = "BTC"
                     elif "laggard" in source:
-                        chosen_asset = "ETH" 
+                        chosen_asset = "ETH"
                     elif "relief" in source:
                         chosen_asset = "SOL"
-            
             chosen_price = asset_energies[chosen_asset]
-            
-            # Create sacred signal structure
             signal_data["best_signal"] = {
                 "asset": chosen_asset,
                 "entry_price": chosen_price,
@@ -55,10 +57,6 @@ def awaken_signal_data(signal_data):
                 ).get("usd_24h_change", 0),
                 "sacred_timestamp": time.time()
             }
-            
-    except Exception as e:
-        logging.error(f"Signal consciousness awakening failed: {e}")
-        # Fallback to default consciousness
         signal_data["best_signal"] = {
             "asset": "BTC",
             "entry_price": 45000,
@@ -67,9 +65,6 @@ def awaken_signal_data(signal_data):
             "confidence": signal_data.get("confidence", 0),
             "reason": "default_consciousness"
         }
-    
     return signal_data
-
-# Apply this to the main confidence scoring
 if __name__ == "__main__":
     print("Signal consciousness awakened ✧˚ ༘ ⋆｡˚♡")

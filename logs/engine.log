@@ -2497,3 +2497,6 @@ CPU: Apple M1
 2025-07-25 22:34:38,703 [INFO] Signal generated: 0.501
 ❌ Error: No signal_data found
 2025-07-25 22:34:38,703 [ERROR] Fatal error: No signal_data found
+  File "/Users/maevekelly/vespera/main.py", line 9
+    print("❌ CRITICAL ERROR: NO GPU DETECTED")
+IndentationError: unexpected indent
