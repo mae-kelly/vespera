@@ -1683,3 +1683,25 @@
 2025-07-25 22:34:36,266 [INFO] REAL data loaded: BTC=$117,618.00, ETH=$3,750.12, SOL=$185.75
 2025-07-25 22:34:38,703 [INFO] Signal generated: 0.501
 2025-07-25 22:34:38,703 [ERROR] Fatal error: No signal_data found
+2025-07-25 23:29:44,843 [INFO] Starting HFT system in dry mode with apple_m1 GPU
+2025-07-25 23:29:44,843 [INFO] Initializing market data (attempt 1/5)
+2025-07-25 23:29:44,843 [ERROR] Entropy meter error: Feed not initialized for BTC
+2025-07-25 23:29:44,843 [ERROR] Laggard sniper error: Feed not initialized for BTC
+2025-07-25 23:29:44,843 [ERROR] Relief trap detector error: Feed not initialized for BTC
+2025-07-25 23:29:45,143 [INFO] ✅ Real market data loaded: BTC=$117,548.00
+2025-07-25 23:29:47,610 [INFO] Signal generated: 0.400
+2025-07-25 23:29:47,855 [INFO] Signal sent: BTC 40.0%
+2025-07-25 23:29:47,876 [INFO] Signal logged to CSV: BTC @ 117548.00 (confidence: 0.400)
+2025-07-25 23:29:48,061 [INFO] Signal generated: 0.400
+2025-07-25 23:29:48,066 [INFO] Signal logged to CSV: BTC @ 117548.00 (confidence: 0.400)
+2025-07-25 23:29:49,040 [INFO] Signal generated: 0.400
+2025-07-25 23:29:49,052 [INFO] Signal logged to CSV: BTC @ 117548.00 (confidence: 0.400)
+2025-07-25 23:29:50,056 [INFO] Signal generated: 0.400
+2025-07-25 23:29:50,067 [INFO] Signal logged to CSV: BTC @ 117548.00 (confidence: 0.400)
+2025-07-25 23:29:50,999 [INFO] Signal generated: 0.400
+2025-07-25 23:29:51,010 [INFO] Signal logged to CSV: BTC @ 117548.00 (confidence: 0.400)
+2025-07-25 23:29:52,013 [INFO] Signal generated: 0.400
+2025-07-25 23:29:52,026 [INFO] Signal logged to CSV: BTC @ 117548.00 (confidence: 0.400)
+2025-07-25 23:29:53,011 [INFO] Signal generated: 0.400
+2025-07-25 23:29:53,022 [INFO] Signal logged to CSV: BTC @ 117548.00 (confidence: 0.400)
+2025-07-25 23:29:53,736 [INFO] System shutdown
