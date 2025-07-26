@@ -1,6 +1,6 @@
-use {std::time::{SystemTime, UNIX_EPOCH}};
+use std::time::{SystemTime, UNIX_EPOCH};
 use reqwest::Client;
-use {serde_json::{Value, json}};
+use serde_json::{Value, json};
 use uuid::Uuid;
 use crate::auth::AuthManager;
 
@@ -13,17 +13,18 @@ pub struct OkxExecutor {
 impl OkxExecutor {
     pub async fn new() -> Result<Self, Box<dyn std::error::Error>> {
         let auth = AuthManager::new()?;
-        let testnet = std::env::var("OKX_TESTNET").expect("Production error")) == "true";
+        let testnet = std::env::var("OKX_TESTNET")
+            .map_err(|_| "OKX_TESTNET environment variable required")?;
         
-        let base_url = if testnet {
+        if testnet == "true" {
             return Err("Production does not allow testnet".into());
-        } else {
-            "https://www.okx.com"
-        };
+        }
+        
+        let base_url = "https://www.okx.com";
         
         Ok(OkxExecutor {
             client: Client::builder()
-                .timeout(std::time::Duration::from_millis(2000))
+                .timeout(std::time::Duration::from_millis(5000))
                 .build()?,
             auth,
             base_url: base_url.to_string(),
@@ -46,22 +47,9 @@ impl OkxExecutor {
             return Err("PRODUCTION ERROR: Invalid entry price".into());
         }
         
-        let stop_loss = best_signal.get("stop_loss")
-            .and_then(|v| v.as_f64());
-        let stop_loss = match stop_loss {
-            Some(sl) if sl > 0.0 => sl,
-            _ => return Err("PRODUCTION ERROR: Invalid stop loss".into()),
-        };
-        
-        let take_profit_1 = best_signal.get("take_profit_1")
-            .and_then(|v| v.as_f64());
-        let take_profit_1 = match take_profit_1 {
-            Some(tp) if tp > 0.0 => tp,
-            _ => return Err("PRODUCTION ERROR: Invalid take profit".into()),
-        };
-        
+        let account_balance = self.get_okx_account_balance().await?;
         let inst_id = format!("{}-USDT", asset);
-        let size = self.calculate_position_size(entry_price).await?;
+        let size = self.calculate_position_size(entry_price, account_balance)?;
         
         let order_data = json!({
             "instId": inst_id,
@@ -81,8 +69,9 @@ impl OkxExecutor {
             .and_then(|id| id.as_str())
             .ok_or("PRODUCTION ERROR: Order placement failed")?;
         
-        tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
+        tokio::time::sleep(tokio::time::Duration::from_millis(200)).await;
         
+        let stop_loss = entry_price * 1.015;
         self.place_okx_stop_loss(&inst_id, stop_loss, size).await?;
         self.place_okx_take_profit_ladder(&inst_id, entry_price, size).await?;
         
@@ -93,7 +82,7 @@ impl OkxExecutor {
             "quantity": size,
             "entry_price": entry_price,
             "stop_loss": stop_loss,
-            "take_profit_1": take_profit_1,
+            "take_profit_1": entry_price * 0.99,
             "status": "filled",
             "exchange": "OKX",
             "timestamp": SystemTime::now().duration_since(UNIX_EPOCH)?.as_secs()
@@ -161,20 +150,23 @@ impl OkxExecutor {
             });
             
             self.place_okx_order(&order_data).await?;
-            tokio::time::sleep(tokio::time::Duration::from_millis(50)).await;
+            tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
         }
         
         Ok(())
     }
     
-    async fn calculate_position_size(&self, entry_price: f64) -> Result<f64, Box<dyn std::error::Error>> {
-        let account_balance = self.get_okx_account_balance().await?;
-        let position_percent = 0.008;
+    fn calculate_position_size(&self, entry_price: f64, account_balance: f64) -> Result<f64, Box<dyn std::error::Error>> {
+        let position_percent = 0.005;
         let position_value = account_balance * position_percent;
         let size = position_value / entry_price;
         
         if size < 0.001 {
             return Err("Position size too small".into());
+        }
+        
+        if position_value > 20000.0 {
+            return Err("Position value exceeds maximum limit".into());
         }
         
         Ok(size)
@@ -190,6 +182,11 @@ impl OkxExecutor {
         }
         
         let response = request.send().await?;
+        
+        if !response.status().is_success() {
+            return Err(format!("Account balance request failed: {}", response.status()).into());
+        }
+        
         let response_json: Value = response.json().await?;
         
         if let Some(data) = response_json.get("data").and_then(|d| d.as_array()).and_then(|arr| arr.first()) {
@@ -198,6 +195,9 @@ impl OkxExecutor {
                     if detail.get("ccy").and_then(|c| c.as_str()) == Some("USDT") {
                         if let Some(balance_str) = detail.get("eq").and_then(|b| b.as_str()) {
                             if let Ok(balance) = balance_str.parse::<f64>() {
+                                if balance < 1000.0 {
+                                    return Err("Insufficient account balance for trading".into());
+                                }
                                 return Ok(balance);
                             }
                         }
@@ -206,6 +206,6 @@ impl OkxExecutor {
             }
         }
         
-        Err("Cannot retrieve account balance".into())
+        Err("Cannot retrieve valid account balance".into())
     }
 }

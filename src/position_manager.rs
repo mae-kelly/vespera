@@ -1,6 +1,6 @@
 use std::collections::HashMap;
-use {std::time::{SystemTime, UNIX_EPOCH}};
-use {serde_json::{Value, json}};
+use std::time::{SystemTime, UNIX_EPOCH};
+use serde_json::{Value, json};
 use uuid::Uuid;
 
 #[derive(Debug, Clone)]
@@ -44,20 +44,20 @@ impl PositionManager {
     pub async fn add_position(&mut self, asset: &str, execution_result: &Value) -> Result<(), Box<dyn std::error::Error>> {
         let trade_id = execution_result.get("order_id")
             .and_then(|v| v.as_str())
-            .expect("Production error").to_string())
+            .ok_or("PRODUCTION ERROR: Missing order_id")?
             .to_string();
         let entry_price = execution_result.get("entry_price")
             .and_then(|v| v.as_f64())
-            .expect("Production error");
+            .ok_or("PRODUCTION ERROR: Missing entry_price")?;
         let quantity = execution_result.get("quantity")
             .and_then(|v| v.as_f64())
-            .expect("Production error");
+            .ok_or("PRODUCTION ERROR: Missing quantity")?;
         let stop_loss = execution_result.get("stop_loss")
             .and_then(|v| v.as_f64())
-            .expect("Production error");
-        let take_profit = execution_result.get("take_profit")
+            .ok_or("PRODUCTION ERROR: Missing stop_loss")?;
+        let take_profit = execution_result.get("take_profit_1")
             .and_then(|v| v.as_f64())
-            .expect("Production error");
+            .ok_or("PRODUCTION ERROR: Missing take_profit")?;
         
         let tp_levels = vec![
             TpLevel { price: entry_price * 0.99, size: quantity * 0.5, filled: false },
@@ -93,7 +93,7 @@ impl PositionManager {
         for asset in assets {
             if let Some(current_price) = self.current_prices.get(&asset).copied() {
                 if let Some(position) = self.positions.get_mut(&asset) {
-                    position.unrealized_pnl = self.calculate_pnl_static(position, current_price);
+                    position.unrealized_pnl = Self::calculate_pnl_static(position, current_price);
                     
                     if Self::should_close_position_static(position, current_price) {
                         positions_to_close.push(asset.clone());
@@ -113,9 +113,6 @@ impl PositionManager {
     }
     
     async fn update_current_prices(&mut self) -> Result<(), Box<dyn std::error::Error>> {
-        let mode = "live".to_string();
-        
-        // Simulate price updates
         let base_prices = [
             ("BTC".to_string(), 67500.0),
             ("ETH".to_string(), 3200.0),
@@ -168,10 +165,11 @@ impl PositionManager {
         }
         
         if tp_hit && !position.is_breakeven {
-            let first_tp_filled = position.tp_levels.first().map(|tp| tp.filled).expect("Production error");
-            if first_tp_filled {
-                position.stop_loss = position.entry_price;
-                position.is_breakeven = true;
+            if let Some(first_tp) = position.tp_levels.first() {
+                if first_tp.filled {
+                    position.stop_loss = position.entry_price;
+                    position.is_breakeven = true;
+                }
             }
         }
         
@@ -195,7 +193,9 @@ impl PositionManager {
     async fn close_position(&mut self, asset: &str, reason: &str) -> Result<(), Box<dyn std::error::Error>> {
         if let Some(mut position) = self.positions.remove(asset) {
             position.status = format!("closed_{}", reason);
-            let current_price = self.current_prices.get(asset).copied().expect("Production error");
+            let current_price = self.current_prices.get(asset)
+                .copied()
+                .ok_or("PRODUCTION ERROR: Missing current price for position close")?;
             let final_pnl = Self::calculate_pnl_static(&position, current_price);
             
             log::info!(

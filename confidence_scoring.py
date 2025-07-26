@@ -2,7 +2,8 @@ import torch
 import numpy as np
 import logging
 from typing import Dict, List
-import cupy_fallback as cp
+
+DEVICE = torch.device("mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu")
 
 def softmax_weighted_scoring(signals: List[Dict]) -> Dict:
     if not signals:
@@ -33,11 +34,11 @@ def softmax_weighted_scoring(signals: List[Dict]) -> Dict:
     if not signal_data:
         raise RuntimeError("No valid signals after filtering")
     
-    confidences = torch.tensor([s["confidence"] for s in signal_data], device=cp.DEVICE)
-    rsi_drops = torch.tensor([s["rsi_drop"] for s in signal_data], device=cp.DEVICE)
-    entropies = torch.tensor([s["entropy"] for s in signal_data], device=cp.DEVICE)
-    volume_accel = torch.tensor([s["volume_acceleration"] for s in signal_data], device=cp.DEVICE)
-    btc_dom = torch.tensor([s["btc_dominance"] for s in signal_data], device=cp.DEVICE)
+    confidences = torch.tensor([s["confidence"] for s in signal_data], device=DEVICE)
+    rsi_drops = torch.tensor([s["rsi_drop"] for s in signal_data], device=DEVICE)
+    entropies = torch.tensor([s["entropy"] for s in signal_data], device=DEVICE)
+    volume_accel = torch.tensor([s["volume_acceleration"] for s in signal_data], device=DEVICE)
+    btc_dom = torch.tensor([s["btc_dominance"] for s in signal_data], device=DEVICE)
     
     norm_rsi = torch.clamp(rsi_drops / 50.0, 0, 1)
     norm_entropy = torch.clamp(1.0 - entropies, 0, 1)
@@ -45,7 +46,7 @@ def softmax_weighted_scoring(signals: List[Dict]) -> Dict:
     norm_btc_dom = torch.clamp(btc_dom, 0, 1)
     
     features = torch.stack([confidences, norm_rsi, norm_entropy, norm_volume, norm_btc_dom], dim=1)
-    feature_weights = torch.tensor([0.5, 0.25, 0.15, 0.08, 0.02], device=cp.DEVICE)
+    feature_weights = torch.tensor([0.5, 0.25, 0.15, 0.08, 0.02], device=DEVICE)
     
     weighted_scores = torch.matmul(features, feature_weights)
     signal_weights = torch.softmax(weighted_scores, dim=0)

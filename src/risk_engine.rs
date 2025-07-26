@@ -1,5 +1,5 @@
 use std::collections::HashMap;
-use {std::time::{SystemTime, UNIX_EPOCH, Duration}};
+use std::time::{SystemTime, UNIX_EPOCH};
 use serde_json::Value;
 
 #[derive(Debug, Clone)]
@@ -132,9 +132,13 @@ impl RiskEngine {
             log::warn!("Too many open positions: {} > {}", positions.len(), self.max_open_positions);
         }
         
-        let total_unrealized_pnl: f64 = positions.iter()
-            .map(|p| p.get("unrealized_pnl").and_then(|v| v.as_f64()).expect("Production error"))
-            .sum();
+        let mut total_unrealized_pnl = 0.0;
+        for position in positions {
+            let pnl = position.get("unrealized_pnl")
+                .and_then(|v| v.as_f64())
+                .ok_or("PRODUCTION ERROR: Missing unrealized_pnl")?;
+            total_unrealized_pnl += pnl;
+        }
         
         self.session_pnl = total_unrealized_pnl;
         
@@ -143,13 +147,19 @@ impl RiskEngine {
         }
         
         for position in positions {
-            let unrealized_pnl = position.get("unrealized_pnl").and_then(|v| v.as_f64()).expect("Production error");
-            let entry_price = position.get("entry_price").and_then(|v| v.as_f64()).expect("Production error");
+            let unrealized_pnl = position.get("unrealized_pnl")
+                .and_then(|v| v.as_f64())
+                .ok_or("PRODUCTION ERROR: Missing unrealized_pnl")?;
+            let entry_price = position.get("entry_price")
+                .and_then(|v| v.as_f64())
+                .ok_or("PRODUCTION ERROR: Missing entry_price")?;
             
             if entry_price > 0.0 {
                 let pnl_percent = (unrealized_pnl / entry_price) * 100.0;
                 if pnl_percent < -5.0 {
-                    let asset = position.get("asset").and_then(|v| v.as_str()).expect("Production error");
+                    let asset = position.get("asset")
+                        .and_then(|v| v.as_str())
+                        .ok_or("PRODUCTION ERROR: Missing asset")?;
                     log::warn!("Large loss detected for {}: {:.1}%", asset, pnl_percent);
                 }
             }
@@ -194,16 +204,5 @@ impl RiskEngine {
         
         log::info!("Trade recorded for {}: PnL {:.2}, Session PnL: {:.2}", 
                   asset, pnl, self.session_pnl);
-    }
-    
-    pub fn get_risk_metrics(&self) -> Value {
-        serde_json::json!({
-            "daily_trade_count": self.daily_trades.len(),
-            "max_daily_trades": self.max_daily_trades,
-            "session_pnl": self.session_pnl,
-            "max_drawdown_percent": self.max_drawdown_percent,
-            "active_cooldowns": self.last_trade_times.len(),
-            "cooldown_minutes": self.cooldown_minutes
-        })
     }
 }
