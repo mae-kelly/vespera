@@ -5,76 +5,42 @@ import os
 
 warnings.filterwarnings("ignore", category=UserWarning)
 
-# FORCE MPS ENVIRONMENT VARIABLES
-os.environ['PYTORCH_ENABLE_MPS_FALLBACK'] = '1'
-os.environ['PYTORCH_MPS_HIGH_WATERMARK_RATIO'] = '0.0'
-
-# Declare DEVICE as global at module level
-DEVICE = None
-
 def get_optimal_device():
-    """AGGRESSIVE M1 GPU DETECTION - FORCE MPS USAGE"""
+    """HIERARCHICAL DEVICE SELECTION: A100 → Apple Silicon → Other CUDA → CPU"""
     system = platform.system()
     machine = platform.machine()
     
-    print(f"🔍 CuPy Fallback: FORCING M1 GPU on {system} {machine}")
+    print(f"🔍 CuPy Fallback: Detecting optimal device on {system} {machine}")
     
-    # PRIORITY 1: FORCE Apple Silicon MPS (Your M1 IS available!)
-    if system == "Darwin" and machine == "arm64":
-        print("🍎 M1 Mac detected - FORCING MPS activation...")
-        
-        # Try multiple MPS activation methods
-        try:
-            # Method 1: Direct MPS test
-            if hasattr(torch.backends, 'mps'):
-                print("✅ MPS backend exists")
-                if torch.backends.mps.is_available():
-                    print("✅ MPS reports available")
-                else:
-                    print("⚠️ MPS reports unavailable - FORCING anyway")
-                
-                # FORCE MPS regardless of is_available() result
-                test_tensor = torch.randn(5, device='mps')
-                result = torch.sum(test_tensor)
-                print(f"🎉 FORCED MPS SUCCESS! Test result: {result}")
-                return 'mps'
-                    
-        except Exception as e:
-            print(f"⚠️ MPS Method 1 failed: {e}")
-            
-            # Method 2: Force with environment override
-            try:
-                print("🔧 Trying MPS with environment override...")
-                os.environ['PYTORCH_ENABLE_MPS_FALLBACK'] = '1'
-                test_tensor = torch.randn(3, device='mps')
-                result = torch.sum(test_tensor)
-                print(f"🎉 FORCED MPS WITH OVERRIDE SUCCESS! Test result: {result}")
-                return 'mps'
-            except Exception as e2:
-                print(f"⚠️ MPS Method 2 failed: {e2}")
-                
-                # Method 3: Force create MPS device manually
-                try:
-                    print("🔧 Trying manual MPS device creation...")
-                    mps_device = torch.device('mps')
-                    test_tensor = torch.tensor([1.0, 2.0], device=mps_device)
-                    result = torch.sum(test_tensor)
-                    print(f"🎉 MANUAL MPS SUCCESS! Test result: {result}")
-                    return 'mps'
-                except Exception as e3:
-                    print(f"⚠️ Manual MPS failed: {e3}")
-    
-    # PRIORITY 2: A100 GPUs (if somehow available)
+    # PRIORITY 1: A100 GPUs (Maximum Performance)
     if torch.cuda.is_available():
         try:
             device_name = torch.cuda.get_device_name(0)
             if "A100" in device_name:
                 test_tensor = torch.randn(10, device='cuda')
                 _ = torch.sum(test_tensor)
-                print("🏆 A100 GPU selected")
+                print("🏆 PRIORITY 1: A100 GPU selected (Maximum Performance)")
                 return 'cuda'
         except Exception as e:
             print(f"⚠️ A100 test failed: {e}")
+    
+    # PRIORITY 2: Apple Silicon (M1/M2/M3/M4)
+    if system == "Darwin" and machine == "arm64":
+        if hasattr(torch.backends, 'mps') and torch.backends.mps.is_available():
+            try:
+                test_tensor = torch.randn(5, device='mps')
+                _ = torch.sum(test_tensor)
+                print("🍎 PRIORITY 2: Apple Silicon GPU selected")
+                return 'mps'
+            except Exception as e:
+                try:
+                    os.environ['PYTORCH_ENABLE_MPS_FALLBACK'] = '1'
+                    test_tensor = torch.randn(3, device='mps')
+                    _ = torch.sum(test_tensor)
+                    print("🍎 PRIORITY 2: Apple Silicon GPU (with fallback)")
+                    return 'mps'
+                except:
+                    print(f"⚠️ Apple Silicon test failed: {e}")
     
     # PRIORITY 3: Other CUDA GPUs
     if torch.cuda.is_available():
@@ -82,21 +48,19 @@ def get_optimal_device():
             test_tensor = torch.randn(5, device='cuda')
             _ = torch.sum(test_tensor)
             device_name = torch.cuda.get_device_name(0)
-            print(f"⚡ Other CUDA GPU selected ({device_name})")
+            print(f"⚡ PRIORITY 3: Other CUDA GPU selected ({device_name})")
             return 'cuda'
         except Exception as e:
             print(f"⚠️ Other CUDA test failed: {e}")
     
-    # PRIORITY 4: CPU Fallback (This shouldn't happen on M1!)
-    print("💻 WARNING: Falling back to CPU on M1 Mac (this is suboptimal!)")
+    # PRIORITY 4: CPU Fallback
+    print("💻 PRIORITY 4: CPU fallback selected")
     return 'cpu'
 
-# Initialize DEVICE at module level
 DEVICE = get_optimal_device()
 
 def array(data, dtype=None):
     """Create tensor on optimal device with error handling"""
-    global DEVICE
     try:
         if isinstance(data, (list, tuple)):
             tensor_data = torch.tensor(data, dtype=torch.float32 if dtype is None else dtype)
@@ -106,13 +70,13 @@ def array(data, dtype=None):
         if DEVICE != 'cpu':
             try:
                 return tensor_data.to(DEVICE)
-            except Exception as e:
-                print(f"⚠️ {DEVICE} failed: {e}, falling back to CPU")
+            except:
+                global DEVICE
+                print(f"⚠️ {DEVICE} failed, falling back to CPU")
                 DEVICE = 'cpu'
                 return tensor_data
         return tensor_data
     except Exception as e:
-        print(f"⚠️ Array creation failed: {e}")
         return torch.tensor([0.0], dtype=torch.float32)
 
 def zeros(shape, dtype=torch.float32):
@@ -231,8 +195,8 @@ def fuse():
 
 device_names = {
     'cuda': 'CUDA GPU',
-    'mps': f'Apple M1 Metal GPU (FORCED ACTIVATION)',
-    'cpu': 'CPU (Fallback - Not Optimal for M1)'
+    'mps': f'Apple {"Silicon" if platform.machine() == "arm64" else "Intel"} Metal GPU',
+    'cpu': 'CPU'
 }
 
-print(f"🚀 FORCED M1 GPU SELECTION: {device_names.get(DEVICE, DEVICE)}")
+print(f"✅ Hierarchical device selection: {device_names.get(DEVICE, DEVICE)}")
