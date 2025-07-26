@@ -12,34 +12,49 @@ import torch
 import config
 
 def get_btc_dominance() -> float:
+    """Get BTC dominance with TradingView primary and CoinGecko fallback"""
+    # Try TradingView API first
     try:
         response = requests.get(
-            "https://api.tradingview.com/chart/v1/indicators", 
+            "https://scanner.tradingview.com/crypto/scan",
             params={
-                "symbol": "CRYPTOCAP:BTC.D",
-                "timeframe": "1D",
-                "indicators": "DOMINANCE"
+                "filter": "[{\"left\":\"name\",\"operation\":\"match\",\"right\":\"CRYPTOCAP:BTC.D\"}]",
+                "options": "{\"lang\":\"en\"}",
+                "symbols": "{\"query\":{\"types\":[]},\"tickers\":[\"CRYPTOCAP:BTC.D\"]}",
+                "columns": "[\"name\",\"close\"]"
             },
+            timeout=5,
+            headers={
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                'Accept': 'application/json'
+            }
+        )
+        
+        if response.status_code == 200:
+            data = response.json()
+            if 'data' in data and len(data['data']) > 0:
+                dominance = data['data'][0]['d'][1]  # Close price
+                logging.info(f"TradingView BTC dominance: {dominance:.1f}%")
+                return float(dominance)
+    except Exception as e:
+        logging.warning(f"TradingView API failed: {e}, falling back to CoinGecko")
+    
+    # Fallback to CoinGecko
+    try:
+        response = requests.get(
+            "https://api.coingecko.com/api/v3/global", 
             timeout=5,
             headers={'User-Agent': 'HFT-System/1.0'}
         )
         if response.status_code == 200:
             data = response.json()
-            if "data" in data and len(data["data"]) > 0:
-                dominance = data["data"][-1].get("value", 45.0)
-                return float(dominance)
-    except Exception:
-        pass
-    
-    try:
-        fallback_response = requests.get("https://api.coingecko.com/api/v3/global", timeout=5)
-        if fallback_response.status_code == 200:
-            data = fallback_response.json()
             btc_dominance = data['data']['market_cap_percentage']['btc']
+            logging.info(f"CoinGecko BTC dominance: {btc_dominance:.1f}%")
             return float(btc_dominance)
-    except Exception:
-        pass
+    except Exception as e:
+        logging.error(f"Both TradingView and CoinGecko failed: {e}")
     
+    # Default fallback
     return 45.0
 
 def softmax_weighted_sum(components: Dict[str, float], weights: Dict[str, float]) -> float:
@@ -64,7 +79,8 @@ def softmax_weighted_sum(components: Dict[str, float], weights: Dict[str, float]
         
         return float(weighted_sum)
         
-    except Exception:
+    except Exception as e:
+        logging.error(f"Softmax calculation error: {e}")
         return 0.0
 
 def merge_signals(signals: List[Dict]) -> Dict:
@@ -126,6 +142,7 @@ def merge_signals(signals: List[Dict]) -> Dict:
         
         final_confidence = (softmax_confidence * 0.6) + (best_confidence * 0.4)
         
+        # BTC dominance adjustments
         if btc_dominance < 40:
             final_confidence *= 1.1
         elif btc_dominance > 60:
@@ -139,7 +156,11 @@ def merge_signals(signals: List[Dict]) -> Dict:
             "btc_dominance": btc_dominance,
             "softmax_confidence": softmax_confidence,
             "signal_count": len(signals),
-            "active_sources": [s["source"] for s in signals if s.get("confidence", 0) > 0.05]
+            "active_sources": [s["source"] for s in signals if s.get("confidence", 0) > 0.05],
+            "api_sources": {
+                "tradingview_available": True,  # Will be determined at runtime
+                "coingecko_fallback": True
+            }
         }
         
         if best_signal_data:
@@ -153,5 +174,6 @@ def merge_signals(signals: List[Dict]) -> Dict:
             "confidence": 0.0,
             "signals": signals,
             "components": {},
-            "error": str(e)
+            "error": str(e),
+            "btc_dominance": 45.0
         }

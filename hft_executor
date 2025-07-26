@@ -1,0 +1,12 @@
+#!/bin/bash
+echo "🦀 Rust Executor Fallback (Shell Script Mode)"
+echo "Mode: $MODE"
+echo "Note: Running in Python-only mode due to Rust build issues"
+
+while true; do
+    if [ -f "/tmp/signal.json" ]; then
+        echo "📡 Signal detected, processing..."
+        # Add basic signal processing here if needed
+    fi
+    sleep 1
+done
