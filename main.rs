@@ -256,3 +256,13 @@ async fn log_system_status(
     
     Ok(())
 }
+async fn export_rust_metrics(data_feed: &DataFeed) -> Result<(), Box<dyn std::error::Error>> {
+    data_feed.export_performance_metrics().await?;
+    Ok(())
+}
+
+if iteration % 50 == 0 {
+    if let Err(e) = export_rust_metrics(&data_feed).await {
+        log::error!("Failed to export Rust metrics: {}", e);
+    }
+}

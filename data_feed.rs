@@ -185,3 +185,38 @@ impl DataFeed {
         log::info!("Real data feed stopped");
     }
 }
+
+impl DataFeed {
+    pub async fn get_connection_health(&self) -> Result<Value, Box<dyn std::error::Error + Send + Sync>> {
+        let current_time = SystemTime::now().duration_since(UNIX_EPOCH)?.as_secs();
+        let mut last_update = 0;
+        
+        if let Some(tick) = self.tick_data.lock().unwrap().get("BTC") {
+            last_update = tick.timestamp;
+        }
+        
+        let health_status = if current_time - last_update < 30 {
+            "healthy"
+        } else {
+            "degraded"
+        };
+        
+        Ok(serde_json::json!({
+            "status": health_status,
+            "last_update": last_update,
+            "current_time": current_time,
+            "latency_seconds": current_time - last_update
+        }))
+    }
+    
+    pub async fn export_performance_metrics(&self) -> Result<(), Box<dyn std::error::Error + Send + Sync>> {
+        let metrics = serde_json::json!({
+            "total_ticks": self.tick_data.lock().unwrap().len(),
+            "active_symbols": self.tick_data.lock().unwrap().keys().collect::<Vec<_>>(),
+            "timestamp": SystemTime::now().duration_since(UNIX_EPOCH)?.as_secs()
+        });
+        
+        std::fs::write("/tmp/rust_metrics.json", serde_json::to_string_pretty(&metrics)?)?;
+        Ok(())
+    }
+}
